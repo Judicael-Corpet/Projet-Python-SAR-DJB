@@ -1,4 +1,4 @@
-import pygame # pour comprendre comment fonctionne pygame : https://zestedesavoir.com/tutoriels/pdf/846/pygame-pour-les-zesteurs.pdf
+import pygame # pour  comprendre comment fonctionne pygame : https://zestedesavoir.com/tutoriels/pdf/846/pygame-pour-les-zesteurs.pdf
 import random
 
 from unit import *
@@ -11,7 +11,7 @@ class Game:
     ...
     Attributs
     ---------
-    screen: pygame.Surface
+    screen: pygame.Surface 
         La surface de la fenêtre du jeu.
     player_units : list[Unit]
         La liste des unités du joueur.
