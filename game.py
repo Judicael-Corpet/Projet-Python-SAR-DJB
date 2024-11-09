@@ -1,4 +1,4 @@
-import pygame
+import pygame # pour comprendre comment fonctionne pygame : https://zestedesavoir.com/tutoriels/pdf/846/pygame-pour-les-zesteurs.pdf
 import random
 
 from unit import *
