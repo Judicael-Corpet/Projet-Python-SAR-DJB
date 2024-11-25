@@ -78,12 +78,32 @@ class Unit:
         """Attaque une unité cible."""
         if abs(self.x - target.x) <= 1 and abs(self.y - target.y) <= 1:
             target.health -= self.attack_power
+<<<<<<< Updated upstream
+=======
+    
+    def soigner(self, target) :
+        """soigner une unité ciblée"""
+        if abs(self.x - target.x) <= 1 and abs(self.y - target.y) <= 1:
+            target.health = self.health_max
+
+    #def casser_mur(self, position) :
+        #if position == position_obstacle :
+            
+
+
+>>>>>>> Stashed changes
 
     def draw(self, screen):
-        """Affiche l'unité sur l'écran."""
+        """Affiche l'unité sur l'écran.
         color = BLUE if self.team == 'player' else RED
         if self.is_selected:
             pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
                              self.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
         pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
-                           2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
+                           2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)"""
+        if self.team == 'player':
+            self.sprite_sheet=pygame.image.load('Marvel.png') 
+            self.image=self.get_image(self.x,self.y) # get image in this coordinate
+            self.image=pygame.transform.scale(self.image,(32,32))
+            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1])

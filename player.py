@@ -14,9 +14,15 @@ class Player(pygame.sprite.Sprite):
         self.position=[x,y]
         
         
+<<<<<<< Updated upstream
         # add the player      
         self.sprite_sheet=pygame.image.load('4_fantastic.png') 
         self.image=self.get_image(0,0) # get image in this coordinate
+=======
+        # add the player     
+        self.sprite_sheet=pygame.image.load('Marvel.png') 
+        self.image=self.get_image(self.x,self.y) # get image in this coordinate
+>>>>>>> Stashed changes
         self.image=pygame.transform.scale(self.image,(32,32))
         self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
         self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
