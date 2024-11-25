@@ -16,9 +16,3 @@ class SoundManager :
             self.sounds[name].play()
         else:
             print(f"Son {name} introuvable.")
-
-
-"""
-sound_manager = SoundManager()
-sound_manager.bruit('Blop')
-"""
