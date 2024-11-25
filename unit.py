@@ -29,6 +29,7 @@ class Unit:
         La santé de l'unité.
     attack_power : int
         La puissance d'attaque de l'unité.
+    defense : int
     team : str
         L'équipe de l'unité ('player' ou 'enemy').
     is_selected : bool
@@ -44,7 +45,7 @@ class Unit:
         Dessine l'unité sur la grille.
     """
 
-    def __init__(self, x, y, health, attack_power, team):
+    def __init__(self, x, y, health, attack_power, defense, team):
         """
         Construit une unité avec une position, une santé, une puissance d'attaque et une équipe.
 
@@ -66,7 +67,9 @@ class Unit:
         self.health = health
         self.attack_power = attack_power
         self.team = team  # 'player' ou 'enemy'
+        self.defense = defense
         self.is_selected = False
+
 
     def move(self, dx, dy):
         """Déplace l'unité de dx, dy."""
