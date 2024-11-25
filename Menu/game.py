@@ -2,7 +2,7 @@ import pygame
 from menu import *
 from sound import *
 
-fond = pygame.image.load('Fond_ecran.png')
+fond = pygame.image.load('Menu\Fond_ecran.png')
 
 class Game():
     def __init__(self):
@@ -22,10 +22,12 @@ class Game():
 
         # gerer le son
         self.sound_manager = SoundManager()
-        # arriere plan
-        #self.window.blit(fond, (0,0))
-        #pygame.display.flip()
-
+        self.Volume = Volume(self)
+        """
+        #timer
+        self.start_timer=3000 # ms
+        self.reset_time=0
+        """
     def game_loop(self):
         while self.playing:
             self.check_events()
@@ -33,7 +35,12 @@ class Game():
                 self.playing= False
             self.display.fill(self.BLACK)
             self.draw_text_white('Thanks for Playing', 20, self.DISPLAY_W/2, self.DISPLAY_H/2)
-            self.window.blit(fond, (0,0))   #fond self.game.display
+            self.window.blit(fond, (0,0))  
+            # Wait avec la musique
+            """
+            self.game.sound_manager.bruit('Boule_feu')
+            pygame.mixer.music.stop
+            """
             pygame.display.update()
             self.reset_keys()
 
