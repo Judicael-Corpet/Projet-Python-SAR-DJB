@@ -2,7 +2,7 @@ import pygame
 from sound import SoundManager
 from game import *
 
-fond = pygame.image.load('Fond_ecran.png')
+fond = pygame.image.load('Menu\Fond_ecran.png')
 
 class Menu():
     def __init__(self, game):
@@ -78,11 +78,11 @@ class MainMenu(Menu):
             if self.state == 'Start':
                 self.cursor_rect.midtop = (self.optionsx + self.offset, self.optionsy + 50)
                 self.state = 'Options'
-                self.game.sound_manager.bruit('Boule_feu')
+                self.game.sound_manager.bruit('Blop')
             elif self.state == 'Options':
                 self.cursor_rect.midtop = (self.creditsx + self.offset, self.creditsy + 70)
                 self.state = 'Credits'
-                self.game.sound_manager.bruit('Boule_feu')
+                self.game.sound_manager.bruit('Blop')
             elif self.state == 'Credits':
                 self.cursor_rect.midtop = (self.startx + self.offset, self.starty + 30)
                 self.state = 'Start'
@@ -111,6 +111,57 @@ class MainMenu(Menu):
             elif self.state == 'Credits':
                 self.game.curr_menu = self.game.credits
             self.run_display = False
+
+
+class Volume(Menu):
+    def __init__(self, game):
+        Menu.__init__(self, game)
+        self.state = "Yes"
+        self.startx, self.starty = self.mid_w, self.mid_h + 30
+        self.optionsx, self.optionsy = self.mid_w, self.mid_h + 50
+
+    def display_menu(self):
+        self.run_display = True
+        while self.run_display:
+            self.game.check_events()
+            self.check_input()
+            self.game.display.blit(fond, (0, 0))
+
+            self.game.draw_text_black('Volume', 100, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 10)
+            self.game.draw_text_black('Volume', 100, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 10)
+            self.game.draw_text_black('Volume', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 13)
+            self.game.draw_text_black('Volume', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 7)
+            self.game.draw_text_white('Volume', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 10)
+
+            self.game.draw_text_black("Yes", 30, self.startx + 1, self.starty + 20)
+            self.game.draw_text_black("Yes", 30, self.startx - 1, self.starty + 20)
+            self.game.draw_text_black("Yes", 30, self.startx, self.starty + 21)
+            self.game.draw_text_black("Yes", 30, self.startx, self.starty + 19)
+            self.game.draw_text_white("Yes", 30, self.startx, self.starty + 20)
+
+            self.game.draw_text_black("No", 30, self.optionsx + 1, self.optionsy + 40)
+            self.game.draw_text_black("No", 30, self.optionsx - 1, self.optionsy + 40)
+            self.game.draw_text_black("No", 30, self.optionsx, self.optionsy + 39)
+            self.game.draw_text_black("No", 30, self.optionsx, self.optionsy + 41)
+            self.game.draw_text_white("No", 30, self.optionsx, self.optionsy + 40)
+
+            self.draw_cursor()
+            self.blit_screen()
+    """
+    def check_input(self):
+        if self.game.BACK_KEY:
+            self.game.curr_menu = self.game.main_menu
+            self.run_display = False
+        elif self.game.UP_KEY or self.game.DOWN_KEY:
+            if self.state == 'Volume':
+                self.state = 'Back'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 10)
+            elif self.state == 'Back':
+                self.state = 'Volume'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.volx + self.offset, self.voly + 10)
+    """
 
 class OptionsMenu(Menu):
     def __init__(self, game):
@@ -164,7 +215,11 @@ class OptionsMenu(Menu):
                 self.cursor_rect.midtop = (self.volx + self.offset, self.voly + 10)
         elif self.game.START_KEY:
             # TO-DO: Create a Volume Menu
-            pass
+            if self.state == 'Volume':
+                self.game.curr_menu = self.game.Volume
+            elif self.state == 'Back':
+                self.game.curr_menu = self.game.main_menu
+
 
 class CreditsMenu(Menu):
     def __init__(self, game):
