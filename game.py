@@ -1,6 +1,8 @@
 import pygame # pour  comprendre comment fonctionne pygame : https://zestedesavoir.com/tutoriels/pdf/846/pygame-pour-les-zesteurs.pdf
 import random
 
+import pytmx
+import pyscroll
 from unit import *
 
 
@@ -22,18 +24,21 @@ class Game:
     def __init__(self, screen):
         """
         Construit le jeu avec la surface de la fenêtre.
-
         Paramètres
         ----------
         screen : pygame.Surface
             La surface de la fenêtre du jeu.
         """
         self.screen = screen
-        self.player_units = [Unit(0, 0, 10, 2, 'player'),
-                             Unit(1, 0, 10, 2, 'player')]
+        self.player_units = [Unit(0, 0, 10,1, 2, 'player'),
+                             Unit(1, 0, 10,1, 2, 'player')]
 
-        self.enemy_units = [Unit(6, 6, 8, 1, 'enemy'),
-                            Unit(7, 6, 8, 1, 'enemy')]
+        self.enemy_units = [Unit(6, 6, 8,1, 1, 'enemy'),
+                            Unit(7, 6, 8,1, 1, 'enemy')]
+        
+    
+        
+        
 
     def handle_player_turn(self):
         """Tour du joueur"""
@@ -113,6 +118,16 @@ class Game:
 
         # Rafraîchit l'écran
         pygame.display.flip()
+        
+#     def flip_display(self):
+        
+#          # upload the map
+#         tmx_data = pytmx.util_pygame.load_pygame('map.tmx')  # load the tiled map
+#         map_data = pyscroll.data.TiledMapData(tmx_data)  # data of the map
+#         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.window.get_size())  # all layer
+#         # draw layer
+#         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=2)
+#         self.group2 = pygame.sprite.Group()  # map pas inlcu pour pouvoir gerer player et map 
 
 
 def main():
