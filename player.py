@@ -25,10 +25,10 @@ class Player(pygame.sprite.Sprite):
         
         
         # add the player 1 team 1    
-        self.sprite_sheet=pygame.image.load('Marvel.png') 
-        self.image=self.get_image(95,0) # get image in this coordinate
-        self.image=pygame.transform.scale(self.image,(32,32))
-        self.image.set_colorkey([255,255,255]) # to remove the withe color of the background
+        self.sprite_sheet=pygame.image.load('4_fantastic.png') 
+        self.image=self.get_image(0,192) # get image in this coordinate
+        self.image=pygame.transform.scale(self.image,(64,64))
+        self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
         self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
         
         # add the player 2 team 1
@@ -46,36 +46,34 @@ class Player(pygame.sprite.Sprite):
         
     #--------------------- functions ----------------------------  
     
-    
-     
     def move_x(self, n_case):  # move player on x-axis
         
-        new_x=self.position[0]+n_case*32
-        if new_x >=0 and new_x<40*32: # pour ne pas aller en dehors de la map
+        new_x=self.position[0]+n_case*64
+        if new_x >=0 and new_x<40*64: # pour ne pas aller en dehors de la map
             self.position[0] = new_x
             self.rect.x = self.position[0]  # Update the rectangle's x-coordinate
 
     def move_y(self, n_case):  # move player on y-axis
-        new_y=self.position[1]+ n_case*32
-        if new_y>=0 and new_y<25*32:
+        new_y=self.position[1]+ n_case*64
+        if new_y>=0 and new_y<25*64: # limite
             self.position[1] = new_y
             self.rect.y = self.position[1]  # Update the rectangle's y-coordinate
-        
+
     def green_case(self,window,position_x,position_y):
         self.green=[] # reinitialisation a chaque appel du tableau
-        offsets=[(-32,0),(32,0),(0,-32),(0,32),(32,32),(-32,-32),(-32,32),(32,-32)] # gauche, droite, bas, haut, type :List de TUPLE
+        offsets=[(-64,0),(64,0),(0,-64),(0,64),(64,64),(-64,-64),(-64,64),(64,-64)] # gauche, droite, bas, haut, type :List de TUPLE
         for dx,dy in offsets:
             green_x=position_x +dx
             green_y=position_y+dy
             
             # verifier si green est dans la map et pas en dehors comme pour move_x et move_y
-            if green_x >=0 and green_x<40*32 and green_y>=0 and green_y<25*32:
+            if green_x >=0 and green_x<40*64 and green_y>=0 and green_y<25*64:
                 self.green.append((green_x,green_y))
         
         for i in self.green:
-            pygame.draw.rect(window,(0,155,0),(i[0],i[1],32,32)) # case verte
+            pygame.draw.rect(window,(0,155,0),(i[0],i[1],64,64)) # case verte
             
-            pygame.draw.rect(window, (0, 200, 0), (i[0], i[1], 32, 32), 2)  # bords
+            pygame.draw.rect(window, (0, 200, 0), (i[0], i[1], 64, 64), 2)  # bords
 
         
 

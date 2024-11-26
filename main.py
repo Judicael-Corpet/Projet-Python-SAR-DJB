@@ -12,7 +12,7 @@ from player import Player
 
 class Game: 
     
-    
+    #test de branche Dan
     
     
     def __init__(self):
@@ -28,7 +28,7 @@ class Game:
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=2)
         self.group2 = pygame.sprite.Group()  # map pas inlcu pour pouvoir gerer player et map 
         
-        # Player 1 equipe 1
+        # Player 1 
         self.player_x, self.player_y = 0, 0  # spawn player 1 
         self.size = [42, 52]  # size player
         self.player = Player(self.player_x, self.player_y, self.size) # IMPORTANT 
@@ -45,9 +45,7 @@ class Game:
         
        
         #timer
-        self.start_timer=90000 # ms
-        self.reset_time=0
-    
+        
         self.fin_tour=False
         self.entrain_de_jouer=False
         self.old_position=(self.player_position_x,self.player_position_y)
@@ -77,6 +75,7 @@ class Game:
                 # Déplacements du joueur
                 if event.type == pygame.KEYDOWN:  # Appui sur une touche
                     if event.key == pygame.K_RIGHT:  # Droite
+                        
                         self.player.move_x(1)  # Déplacement de 32 pixels
                         self.entrain_de_jouer=True
                     elif event.key == pygame.K_LEFT:  # Gauche
