@@ -103,32 +103,25 @@ class Game:
                     self.player_units.remove(target)
 
     def flip_display(self):
-        """Affiche le jeu."""
+        """Affiche la carte et les éléments du jeu."""
+        # Chargement des données de la carte
+        tmx_data = pytmx.util_pygame.load_pygame('map/map.tmx')
+        map_data = pyscroll.data.TiledMapData(tmx_data)
+        
+        # Rendu de la carte
+        map_layer = pyscroll.BufferedRenderer(map_data, self.screen.get_size())
+        map_layer.zoom = 1  # Ajustez si nécessaire
 
-        # Affiche la grille
-        self.screen.fill(BLACK)
-        for x in range(0, WIDTH, CELL_SIZE):
-            for y in range(0, HEIGHT, CELL_SIZE):
-                rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
-                pygame.draw.rect(self.screen, WHITE, rect, 1)
+        # Groupe Pyscroll pour les sprites et la carte
+        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=5)
 
-        # Affiche les unités
-        for unit in self.player_units + self.enemy_units:
-            unit.draw(self.screen)
+        # Ajoutez les sprites des unités/players
+            #for unit in self.player_units + self.enemy_units:
+                #unit.draw(self.screen)
 
-        # Rafraîchit l'écran
+        # Dessinez la carte
+        self.group.draw(self.screen)
         pygame.display.flip()
-        
-#     def flip_display(self):
-        
-#          # upload the map
-#         tmx_data = pytmx.util_pygame.load_pygame('map.tmx')  # load the tiled map
-#         map_data = pyscroll.data.TiledMapData(tmx_data)  # data of the map
-#         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.window.get_size())  # all layer
-#         # draw layer
-#         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=2)
-#         self.group2 = pygame.sprite.Group()  # map pas inlcu pour pouvoir gerer player et map 
-
 
 def main():
 
