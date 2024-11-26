@@ -15,9 +15,10 @@ Thor : (175, 0)
 class Player(pygame.sprite.Sprite):
     
     #--------------------- init function -------------------------
-    def __init__(self,x,y,size):
+    def __init__(self, name_hero, x, y, size):
         #initial condition
         super().__init__()
+        self.name_hero = name_hero
         self.x=x
         self.y=y
         self.size=size
@@ -26,8 +27,11 @@ class Player(pygame.sprite.Sprite):
         
         
         # add the player 1 team 1    
-        self.sprite_sheet=pygame.image.load('Marvel.png') 
-        self.image=self.get_image(95,0) # get image in this coordinate
+        if name_hero == "captain america" :
+            self.sprite_sheet=pygame.image.load('Marvel.png') 
+            self.image=self.get_image(95,0) # get image in this coordinate
+        
+
         self.image=pygame.transform.scale(self.image,(32,32))
         self.image.set_colorkey([255,255,255]) # to remove the withe color of the background
         self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
