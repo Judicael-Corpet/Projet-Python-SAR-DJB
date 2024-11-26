@@ -14,7 +14,7 @@ BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 
 
-class Unit:
+class Unit(pygame.sprite.Sprite):
     """
     Classe pour représenter une unité.
 
@@ -44,9 +44,10 @@ class Unit:
         Dessine l'unité sur la grille.
     """
 
-    def __init__(self, x, y, health, attack_power, team):
+    def __init__(self, x, y, health, attack_power, defense, team, size):
+        super().__init__() #permet d'inialiser la classe sprite en appelant son constructeur avec super()
         """
-        Construit une unité avec une position, une santé, une puissance d'attaque et une équipe.
+        Construit une unité avec une position, une santé, une puissance d'attaque, une défense et une équipe.
 
         Paramètres
         ----------
@@ -58,6 +59,9 @@ class Unit:
             La santé de l'unité.
         attack_power : int
             La puissance d'attaque de l'unité.
+        defense : int
+            La capacité de résistance aux attaques
+
         team : str
             L'équipe de l'unité ('player' ou 'enemy').
         """
@@ -66,7 +70,15 @@ class Unit:
         self.health = health
         self.attack_power = attack_power
         self.team = team  # 'player' ou 'enemy'
+        self.defense = defense
         self.is_selected = False
+        self.size = size
+        # pour générer l'image du joueur que l'on a choisi (Spiderman par exemple)
+        self.image = pygame.image.load('Personnages/Deadpool.png')
+        #self.image = self.get_image(95,0) # get image in this coordinate
+        self.image = pygame.transform.scale(self.image,(32,32))
+        self.image.set_colorkey([255,255,255]) # to remove the withe color of the background
+        self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) #permet de générer un rectangle avec l'image que l'on pourra ensuite déplacer
 
     def move(self, dx, dy):
         """Déplace l'unité de dx, dy."""
@@ -78,8 +90,7 @@ class Unit:
         """Attaque une unité cible."""
         if abs(self.x - target.x) <= 1 and abs(self.y - target.y) <= 1:
             target.health -= self.attack_power
-<<<<<<< Updated upstream
-=======
+
     
     def soigner(self, target) :
         """soigner une unité ciblée"""
@@ -91,19 +102,20 @@ class Unit:
             
 
 
->>>>>>> Stashed changes
+
 
     def draw(self, screen):
-        """Affiche l'unité sur l'écran.
+        """Affiche l'unité sur l'écran."""
         color = BLUE if self.team == 'player' else RED
         if self.is_selected:
             pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
                              self.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
         pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
-                           2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)"""
+                           2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
+        '''
         if self.team == 'player':
             self.sprite_sheet=pygame.image.load('Marvel.png') 
             self.image=self.get_image(self.x,self.y) # get image in this coordinate
             self.image=pygame.transform.scale(self.image,(32,32))
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1])
+            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1])'''

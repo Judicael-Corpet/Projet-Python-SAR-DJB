@@ -1,8 +1,18 @@
 import pygame # pour  comprendre comment fonctionne pygame : https://zestedesavoir.com/tutoriels/pdf/846/pygame-pour-les-zesteurs.pdf
 import random
 
-from unit import *
+from unit import Unit
 
+GRID_SIZE = 8
+CELL_SIZE = 60
+WIDTH = GRID_SIZE * CELL_SIZE
+HEIGHT = GRID_SIZE * CELL_SIZE
+FPS = 30
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
+GREEN = (0, 255, 0)
 
 class Game:
     """
@@ -29,11 +39,16 @@ class Game:
             La surface de la fenêtre du jeu.
         """
         self.screen = screen
-        self.player_units = [Unit(0, 0, 10, 2, 3,'player'),
-                             Unit(1, 0, 10, 2, 3, 'player')]
+        
+        #Charger l'image du joueur
+        player1 = Unit(0,0, 100, 15, 5, "player", [64,64])
 
-        self.enemy_units = [Unit(6, 6, 8, 1, 3, 'enemy'),
-                            Unit(7, 6, 8, 1, 3, 'enemy')]
+
+        self.player_units = [Unit(0, 0, 10, 2, 3,'player', [32,32]),
+                             Unit(1, 0, 10, 2, 3, 'player', [32,32])]
+
+        self.enemy_units = [Unit(6, 6, 8, 1, 3, 'enemy', [32,32]),
+                            Unit(7, 6, 8, 1, 3, 'enemy', [32,32])]
 
     def handle_player_turn(self):
         """Tour du joueur"""
@@ -131,6 +146,8 @@ def main():
     while True:
         game.handle_player_turn()
         game.handle_enemy_turn()
+        screen.blit(player1.image, player1.rect())
+
 
 
 if __name__ == "__main__":
