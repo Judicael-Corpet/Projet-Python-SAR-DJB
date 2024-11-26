@@ -2,10 +2,12 @@ import pygame
 import random
 
 # Constantes
-GRID_SIZE = 8
-CELL_SIZE = 60
-WIDTH = GRID_SIZE * CELL_SIZE
-HEIGHT = GRID_SIZE * CELL_SIZE
+
+GRID_SIZE_x = 40
+GRID_SIZE_y=25
+CELL_SIZE = 32
+WIDTH = GRID_SIZE_x * CELL_SIZE
+HEIGHT = GRID_SIZE_y * CELL_SIZE
 FPS = 30
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -73,7 +75,7 @@ class Unit:
 
     def move(self, dx, dy):
         """Déplace l'unité de dx, dy."""
-        if 0 <= self.x + dx < GRID_SIZE and 0 <= self.y + dy < GRID_SIZE: # boundary
+        if 0 <= self.x + dx < GRID_SIZE_x and 0 <= self.y + dy < GRID_SIZE_y: # boundary
             self.x += dx
             self.y += dy
 
@@ -82,11 +84,15 @@ class Unit:
         if abs(self.x - target.x) <= 1 and abs(self.y - target.y) <= 1:
             target.health -= self.attack_power
 
-    def draw(self, screen):
-        """Affiche l'unité sur l'écran."""
-        color = BLUE if self.team == 'player' else RED
-        if self.is_selected:
-            pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
-                             self.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
-        pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
-                           2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
+
+
+
+          
+    # def draw(self, screen):
+    #     """Affiche l'unité sur l'écran."""
+    #     color = BLUE if self.team == 'player' else RED
+    #     if self.is_selected:
+    #         pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
+    #                          self.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+    #     pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
+    #                        2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
