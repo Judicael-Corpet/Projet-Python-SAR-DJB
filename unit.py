@@ -77,7 +77,7 @@ class Unit(pygame.sprite.Sprite):
         # pour générer l'image du joueur que l'on a choisi (Spiderman par exemple)
         self.image = pygame.image.load('Personnages/Deadpool.png')
         #self.image = self.get_image(95,0) # get image in this coordinate
-        self.image = pygame.transform.scale(self.image,(64,64))
+        self.image = pygame.transform.scale(self.image,(50,50))
         self.image.set_colorkey([255,255,255]) # to remove the withe color of the background
         self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) #permet de générer un rectangle avec l'image que l'on pourra ensuite déplacer
     

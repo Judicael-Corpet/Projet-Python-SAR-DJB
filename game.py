@@ -41,9 +41,6 @@ class Game:
         self.screen = screen
         
         #Charger l'image du joueur
-        player1 = Unit(0,0, 100, 15, 5, "player", [64,64])
-
-
         self.player_units = [Unit(0, 0, 10, 2, 3,'player', [64,64]),
                              Unit(1, 0, 10, 2, 3, 'player', [32,32]),
                              Unit(1, 0, 10, 2, 3, 'player', [32,32])]
@@ -147,7 +144,7 @@ def main():
     while True:
         game.handle_player_turn()
         game.handle_enemy_turn()
-        screen.blit(player1.image, player1.rect())
+        
 
 
 
