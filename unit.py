@@ -79,7 +79,7 @@ class Unit(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image,(32,32))
         self.image.set_colorkey([255,255,255]) # to remove the withe color of the background
         self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) #permet de générer un rectangle avec l'image que l'on pourra ensuite déplacer
-
+    
     def move(self, dx, dy):
         """Déplace l'unité de dx, dy."""
         if 0 <= self.x + dx < GRID_SIZE and 0 <= self.y + dy < GRID_SIZE:
@@ -101,21 +101,22 @@ class Unit(pygame.sprite.Sprite):
         #if position == position_obstacle :
             
 
-
-
-
     def draw(self, screen):
         """Affiche l'unité sur l'écran."""
         color = BLUE if self.team == 'player' else RED
         if self.is_selected:
             pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
                              self.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
-        pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
-                           2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
-        '''
-        if self.team == 'player':
-            self.sprite_sheet=pygame.image.load('Marvel.png') 
-            self.image=self.get_image(self.x,self.y) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,(32,32))
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1])'''
+        #pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
+                           #2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
+        screen.blit(self.image, (self.x*CELL_SIZE, self.y*CELL_SIZE))
+
+class captain_america :
+    def __init__(self):
+        self.health = 150
+        self.move = 3
+        self.defense = 90
+        self.attack1 = "lancer_bouclier"
+        self.attack2 = "poings"
+        self.image = pygame.image.load("Personnages/CaptainAmerica.png").convert_alpha
+    
