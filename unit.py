@@ -96,3 +96,4 @@ class Unit:
     #                          self.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
     #     pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
     #                        2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
+# test de merge
