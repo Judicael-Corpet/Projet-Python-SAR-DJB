@@ -117,6 +117,17 @@ class captain_america :
         self.move = 3
         self.defense = 90
         self.attack1 = "lancer_bouclier"
+        self.attack_power1 = 20
         self.attack2 = "poings"
+        self.attack_power2 = 10
         self.image = pygame.image.load("Personnages/CaptainAmerica.png").convert_alpha
     
+class hulk :
+    def __init__(self):
+        self.health = 300
+        self.move = 4
+        self.defense = 90
+        self.attack1 = "casser_les_murs"
+        self.attack2 = "poings"
+        self.attack_power2 = 30
+        self.image = pygame.image.load("Personnages/CaptainAmerica.png").convert_alpha
