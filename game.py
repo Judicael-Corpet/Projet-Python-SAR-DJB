@@ -30,11 +30,11 @@ class Game:
             La surface de la fenêtre du jeu.
         """
         self.screen = screen
-        self.player_units = [Unit(0, 0, 10,1, 2, 'player'),
-                             Unit(1, 0, 10,1, 2, 'player')]
+        self.player_units = [Unit(0, 0, 'player', [32,32]),
+                             Unit(1, 0, 'player', [32,32])]
 
-        self.enemy_units = [Unit(6, 6, 8,1, 1, 'enemy'),
-                            Unit(7, 6, 8,1, 1, 'enemy')]
+        self.enemy_units = [Unit(6, 6, 'enemy', [32,32]),
+                            Unit(7, 6, 'enemy', [32,32])]
         
     
         
