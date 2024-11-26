@@ -44,7 +44,8 @@ class Game:
         player1 = Unit(0,0, 100, 15, 5, "player", [64,64])
 
 
-        self.player_units = [Unit(0, 0, 10, 2, 3,'player', [32,32]),
+        self.player_units = [Unit(0, 0, 10, 2, 3,'player', [64,64]),
+                             Unit(1, 0, 10, 2, 3, 'player', [32,32]),
                              Unit(1, 0, 10, 2, 3, 'player', [32,32])]
 
         self.enemy_units = [Unit(6, 6, 8, 1, 3, 'enemy', [32,32]),
