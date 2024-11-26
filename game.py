@@ -41,12 +41,12 @@ class Game:
         self.screen = screen
         
         #Charger l'image du joueur
-        self.player_units = [Unit(0, 0, 10, 2, 3,'player', [64,64]),
-                             Unit(1, 0, 10, 2, 3, 'player', [32,32]),
-                             Unit(1, 0, 10, 2, 3, 'player', [32,32])]
+        self.player_units = [Unit(0, 0,'player', [50,50]),
+                             Unit(1, 0, 'player', [50,50]),
+                             Unit(0, 1, 'player', [50,50])]
 
-        self.enemy_units = [Unit(6, 6, 8, 1, 3, 'enemy', [32,32]),
-                            Unit(7, 6, 8, 1, 3, 'enemy', [32,32])]
+        self.enemy_units = [Unit(6, 6, 'enemy', [50,50]),
+                            Unit(7, 6, 'enemy', [50,50])]
 
     def handle_player_turn(self):
         """Tour du joueur"""
@@ -135,7 +135,7 @@ def main():
 
     # Instanciation de la fenêtre
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Mon jeu de stratégie")
+    pygame.display.set_caption("Marvel fights")
 
     # Instanciation du jeu
     game = Game(screen)
