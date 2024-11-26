@@ -27,9 +27,9 @@ class Player(pygame.sprite.Sprite):
         
         
         # add the player 1 team 1    
-        if name_hero == "captain america" :
-            self.sprite_sheet=pygame.image.load('Marvel.png') 
-            self.image=self.get_image(95,0) # get image in this coordinate
+        
+        self.sprite_sheet=pygame.image.load('Marvel.png') 
+        self.image=self.get_image(95,0) # get image in this coordinate
         
 
         self.image=pygame.transform.scale(self.image,(32,32))
