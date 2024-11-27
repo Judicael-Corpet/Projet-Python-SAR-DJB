@@ -36,19 +36,20 @@ class Game:
         self.enemy_units = [Unit(6, 6, 8,1, 1, 'enemy'),
                             Unit(7, 6, 8,1, 1, 'enemy')]
         
+
         
 
     def handle_player_turn(self):
         """Tour du joueur"""
         for selected_unit in self.player_units:
-
             # Tant que l'unité n'a pas terminé son tour
             has_acted = False
             selected_unit.is_selected = True
+            selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
             self.flip_display()
             
             while not has_acted:
-                
+
 
                 # Important: cette boucle permet de gérer les événements Pygame
                 for event in pygame.event.get():
@@ -82,9 +83,11 @@ class Game:
                                     selected_unit.attack(enemy)
                                     if enemy.health <= 0:
                                         self.enemy_units.remove(enemy)
-
+                            
                             has_acted = True
                             selected_unit.is_selected = False
+                            selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
+                            self.flip_display()
                             
     def handle_enemy_turn(self):
         """IA très simple pour les ennemis."""
@@ -130,7 +133,9 @@ class Game:
         # Ajoutez les sprites des unités/players
         for unit in self.player_units + self.enemy_units:
             unit.draw(self.screen)
+            
             unit.draw_green_case(self.screen)
+                
 
         # Actualisation/Raffraichissement
         pygame.display.flip()
