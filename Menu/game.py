@@ -18,6 +18,8 @@ class Game():
         self.main_menu = MainMenu(self)
         self.options = OptionsMenu(self)
         self.credits = CreditsMenu(self)
+        self.Choix_Personnages = Choix_Personnage_Menu(self)
+        self.Choix_Carte = Choix_Carte_Menu(self)
         self.curr_menu = self.main_menu
 
         # gerer le son
