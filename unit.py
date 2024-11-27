@@ -13,7 +13,7 @@ RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 
-personnages = ["Captain_America", "Hulk"]#, "Ironman", "Spiderman", "Thor", "Hawkeye", "Wolverine", "Black_Panther", "Starlord", "Deadpool", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
+#personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Hawkeye", "Wolverine", "Black_Panther", "Starlord", "Deadpool", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
 
 
 class Unit(pygame.sprite.Sprite):
@@ -68,106 +68,106 @@ class Unit(pygame.sprite.Sprite):
 
         #Pour générer l'image du joueur que l'on a choisi
 
-        self.personnage = random.choice(personnages)
+        self.personnage = "Captain_America" #random.choice(personnages)
 
         if self.personnage == "Captain_America" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
-        
-
-        elif self.personnage == "Hulk" :
-            self.image = pygame.image.load('personnages/avengers.png')
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+        
+
+        elif self.personnage == "Hulk" :
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
+            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
         elif self.personnage == "Ironman" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            #self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
         elif self.personnage == "Spiderman" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            #self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
         
         elif self.personnage == "Thor" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            #self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
         elif self.personnage == "Hawkeye" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            #self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
         elif self.personnage == "Wolverine" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            #self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
         elif self.personnage == "Black_Panther" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            #self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
         elif self.personnage == "Starlord" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            #self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
         elif self.personnage == "Deadpool" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            #self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
+            self.isprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
         elif self.personnage == "Torch" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            #self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
         elif self.personnage == "Jane_Storm" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            #self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
         elif self.personnage == "Chose" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            #self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
         elif self.personnage == "Dr_Strange" :
-            self.image = pygame.image.load('personnages/avengers.png')
-            #self.image=self.get_image(0,0) # get image in this coordinate
-            self.image=pygame.transform.scale(self.image,self.size)
+            self.sprite_sheet = pygame.image.load('personnages/avengers.png')
+            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
-            self.rect=pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
+            self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
     def move(self, dx, dy):
         """Déplace l'unité de dx, dy."""
@@ -186,8 +186,14 @@ class Unit(pygame.sprite.Sprite):
         if self.is_selected:
             pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
                              self.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
-        pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
-                           2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
+        #pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
+                           #2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
+        screen.blit(self.image, (self.x*CELL_SIZE, self.y*CELL_SIZE))
+
+    def get_image(self,x,y): # get image  permet de decouper l'image png du morceau qu'on souhaite
+        image=pygame.Surface([42,52])
+        image.blit(self.sprite_sheet,(0,0),(x,y,42,52))
+        return image
 
 #création de la classe de chaque personnage
 class captain_america :
