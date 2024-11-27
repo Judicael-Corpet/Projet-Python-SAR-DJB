@@ -23,11 +23,9 @@ class Game():
         # gerer le son
         self.sound_manager = SoundManager()
         self.Volume = Volume(self)
-        """
-        #timer
-        self.start_timer=3000 # ms
-        self.reset_time=0
-        """
+        self.Musique = Volume(self)
+
+
     def game_loop(self):
         while self.playing:
             self.check_events()
