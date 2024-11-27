@@ -72,6 +72,7 @@ class Unit:
         self.defense = defense
         self.is_selected = False
 
+    
 
     def move(self, dx, dy):
         """Déplace l'unité de dx, dy."""
@@ -83,17 +84,21 @@ class Unit:
         """Attaque une unité cible."""
         if abs(self.x - target.x) <= 1 and abs(self.y - target.y) <= 1:
             target.health -= self.attack_power
-
-
-
-
           
-    # def draw(self, screen):
-    #     """Affiche l'unité sur l'écran."""
-    #     color = BLUE if self.team == 'player' else RED
-    #     if self.is_selected:
-    #         pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
-    #                          self.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
-    #     pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
-    #                        2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
-# test de merge
+    def draw(self, screen):
+        """Affiche l'unité sur l'écran."""
+        color = BLUE if self.team == 'player' else RED
+        if self.is_selected:
+            pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
+                             self.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+        pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
+                           2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
+    
+
+    
+    def draw_green_case(self,screen):
+        color=GREEN
+        if self.is_selected:
+            pygame.draw.rect(screen,color,(self.x*CELL_SIZE+CELL_SIZE,self.y*CELL_SIZE+CELL_SIZE,CELL_SIZE,CELL_SIZE))
+        
+

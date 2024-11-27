@@ -30,13 +30,11 @@ class Game:
             La surface de la fenêtre du jeu.
         """
         self.screen = screen
+        
         self.player_units = [Unit(0, 0, 10,1, 2, 'player'),
                              Unit(1, 0, 10,1, 2, 'player')]
-
         self.enemy_units = [Unit(6, 6, 8,1, 1, 'enemy'),
                             Unit(7, 6, 8,1, 1, 'enemy')]
-        
-    
         
         
 
@@ -48,7 +46,9 @@ class Game:
             has_acted = False
             selected_unit.is_selected = True
             self.flip_display()
+            
             while not has_acted:
+                
 
                 # Important: cette boucle permet de gérer les événements Pygame
                 for event in pygame.event.get():
@@ -85,7 +85,7 @@ class Game:
 
                             has_acted = True
                             selected_unit.is_selected = False
-
+                            
     def handle_enemy_turn(self):
         """IA très simple pour les ennemis."""
         for enemy in self.enemy_units:
@@ -103,7 +103,7 @@ class Game:
                     self.player_units.remove(target)
 
     def flip_display(self):
-        """Affiche la carte et les éléments du jeu."""
+        # """Affiche la carte et les éléments du jeu."""
         # Chargement des données de la carte
         tmx_data = pytmx.util_pygame.load_pygame('map/map.tmx')
         map_data = pyscroll.data.TiledMapData(tmx_data)
@@ -114,14 +114,29 @@ class Game:
 
         # Groupe Pyscroll pour les sprites et la carte
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=5)
-
-        # Ajoutez les sprites des unités/players
-            #for unit in self.player_units + self.enemy_units:
-                #unit.draw(self.screen)
-
+        
         # Dessinez la carte
         self.group.draw(self.screen)
+        
+        
+        # Ajout dune grille
+        for x in range(0, WIDTH, CELL_SIZE):
+            for y in range(0, HEIGHT, CELL_SIZE):
+                rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
+                pygame.draw.rect(self.screen, WHITE, rect, 1) 
+                
+        
+        
+        # Ajoutez les sprites des unités/players
+        for unit in self.player_units + self.enemy_units:
+            unit.draw(self.screen)
+            unit.draw_green_case(self.screen)
+
+        # Actualisation/Raffraichissement
         pygame.display.flip()
+        
+        
+        
 
 def main():
 
@@ -139,7 +154,9 @@ def main():
     while True:
         game.handle_player_turn()
         game.handle_enemy_turn()
+        
 
 
 if __name__ == "__main__":
     main()
+
