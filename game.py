@@ -30,11 +30,18 @@ class Game:
             La surface de la fenêtre du jeu.
         """
         self.screen = screen
-        self.player_units = [Unit(0, 0, 'player', [32,32]),
-                             Unit(1, 0, 'player', [32,32])]
+        self.player_units = [Unit(0, 0, [55,55]),
+                             Unit(0, 1, [55,55]),
+                             Unit(0, 2, [55,55]),
+                             Unit(0, 3, [55,55]),
+                             Unit(1, 3, [55,55]),
+                             Unit(2, 3, [55,55])]
 
-        self.enemy_units = [Unit(6, 6, 'enemy', [32,32]),
-                            Unit(7, 6, 'enemy', [32,32])]
+        self.enemy_units = [Unit(15, 10, [55,55]),
+                            Unit(16, 10, [55,55]),
+                            Unit(15, 9, [55,55]),
+                            Unit(16, 9, [55,55]),
+                            Unit(17, 9, [55,55])]
         
     
         
@@ -108,20 +115,24 @@ class Game:
         tmx_data = pytmx.util_pygame.load_pygame('map/map.tmx')
         map_data = pyscroll.data.TiledMapData(tmx_data)
         
+        
         # Rendu de la carte
         map_layer = pyscroll.BufferedRenderer(map_data, self.screen.get_size())
         map_layer.zoom = 1  # Ajustez si nécessaire
-
+        
         # Groupe Pyscroll pour les sprites et la carte
         self.group = pyscroll.PyscrollGroup(map_layer = map_layer, default_layer=5)
-
+       
+        # Dessinez la carte
+        self.group.update()
+        self.group.draw(self.screen)
+        
         # Ajoutez les sprites des unités/players
         for unit in self.player_units + self.enemy_units:
             unit.draw(self.screen)
-
-        # Dessinez la carte
-        self.group.draw(self.screen)
         pygame.display.flip()
+
+        
 
 def main():
 
