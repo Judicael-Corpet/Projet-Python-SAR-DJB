@@ -3,7 +3,49 @@ from sound import SoundManager
 from game import *
 
 fond = pygame.image.load('Menu\Fond_ecran.png')
-panther = pygame.image.load('Personnages\Blackpanther.png')
+
+captain = pygame.image.load('Menu\Personnages_menu\captain_america_menu.jpeg')
+captain2 = pygame.transform.scale(captain, (100, 100))
+#C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\black_panther_menu.jpeg
+hulk = pygame.image.load('Menu\Personnages_menu\hulk_menu.jpeg')
+hulk2 = pygame.transform.scale(hulk, (100, 100))
+
+ironman = pygame.image.load('Menu\Personnages_menu\ironman_menu.jpeg')
+ironman2 = pygame.transform.scale(ironman, (100, 100))
+
+Spiderman = pygame.image.load('Menu\Personnages_menu\spiderman_menu.jpeg')
+Spiderman2 = pygame.transform.scale(Spiderman, (100, 100))
+
+Thor = pygame.image.load('Menu\Personnages_menu\thor_menu.jpeg')
+Thor2 = pygame.transform.scale(Thor, (100, 100))
+
+Groot = pygame.image.load('Menu\Personnages_menu\groot_menu.jpeg')
+Groot2 = pygame.transform.scale(Groot, (100, 100))
+
+Wolverine = pygame.image.load('Menu\Personnages_menu\wolverine_menu.jpeg')
+Wolverine2 = pygame.transform.scale(Wolverine, (100, 100))
+
+Panther = pygame.image.load('Menu\Personnages_menu\black_panther_menu.jpeg')
+Panther2 = pygame.transform.scale(Panther, (100, 100))
+
+Starlord = pygame.image.load('Menu\Personnages_menu\starlord_menu.jpeg')
+Starlord2 = pygame.transform.scale(Starlord, (100, 100))
+
+Yondu = pygame.image.load('Menu\Personnages_menu\yondu_menu.jpeg')
+Yondu2 = pygame.transform.scale(Yondu, (100, 100))
+
+Torch = pygame.image.load('Menu\Personnages_menu\torch_menu.jpeg')
+Torch2 = pygame.transform.scale(Torch, (100, 100))
+
+Jane = pygame.image.load('Menu\Personnages_menu\jane_storm_menu.png')
+Jane2 = pygame.transform.scale(Jane, (100, 100))
+
+Chose = pygame.image.load('Menu\Personnages_menu\chose_menu.png')
+Chose2 = pygame.transform.scale(Chose, (100, 100))
+
+Strange = pygame.image.load('Menu\Personnages_menu\docteur_strange_menu.jpeg')
+Strange2 = pygame.transform.scale(Strange, (100, 100))
+
 class Menu():
     def __init__(self, game):
         self.game = game
@@ -121,129 +163,132 @@ class Choix_Personnage_Menu(Menu):
 
     def display_menu(self):
         self.run_display = True
+        prev_state = None
         while self.run_display:
             self.game.check_events()
             self.check_input()
-            self.game.display.blit(fond, (0, 0))
+            if self.state != prev_state:
+                self.game.display.blit(fond, (0, 0))
             
-            self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 249)
-            self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 251)
-            self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 250)
-            self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 250)
-            self.game.draw_text_white('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 250)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 249)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 251)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 250)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 250)
+                self.game.draw_text_white('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 250)
 
-            self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 - 2)
-            self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 2)
-            self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3)
-            self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3)
-            self.game.draw_text_white("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3)
 
-            self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 62)
-            self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 58)
-            self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 60)
-            self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 60)
-            self.game.draw_text_white("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 62)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 58)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_white("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 60)
 
-            self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 118)
-            self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 122)
-            self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 120)
-            self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 120)
-            self.game.draw_text_white("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 118)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 122)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_white("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 120)
 
-            self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180 - 2)
-            self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180 + 2)
-            self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 180)
-            self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 180)
-            self.game.draw_text_white("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180 - 2)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180 + 2)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180)
 
-            self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 - 2 + 240)
-            self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 2 + 240)
-            self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 240)
-            self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 240)
-            self.game.draw_text_white("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 - 2 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 2 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_white("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 240)
 
-            self.game.draw_text_black("Hawkeye", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2)
-            self.game.draw_text_black("Hawkeye", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2)
-            self.game.draw_text_black("Hawkeye", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3)
-            self.game.draw_text_black("Hawkeye", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3)
-            self.game.draw_text_white("Hawkeye", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Hawkeye", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Hawkeye", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Hawkeye", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Hawkeye", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Hawkeye", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3)
 
-            self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 62)
-            self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 58)
-            self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 60)
-            self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 60)
-            self.game.draw_text_white("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 62)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 58)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_white("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 60)
 
-            self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120 - 2)
-            self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120 + 2)
-            self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 120)
-            self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 120)
-            self.game.draw_text_white("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120 - 2)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120 + 2)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_white("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120)
 
-            self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 180)
-            self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 180)
-            self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 180)
-            self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 180)
-            self.game.draw_text_white("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 180)
 
-            self.game.draw_text_black("Deadpool", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 240)
-            self.game.draw_text_black("Deadpool", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 240)
-            self.game.draw_text_black("Deadpool", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 240)
-            self.game.draw_text_black("Deadpool", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 240)
-            self.game.draw_text_white("Deadpool", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_black("Deadpool", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 240)
+                self.game.draw_text_black("Deadpool", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 240)
+                self.game.draw_text_black("Deadpool", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_black("Deadpool", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_white("Deadpool", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 240)
 
-            self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
-            self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
-            self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3)
-            self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
-            self.game.draw_text_white("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
 
-            self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 60)
-            self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 60)
-            self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 60)
-            self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 60)
-            self.game.draw_text_white("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_white("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 60)
 
-            self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 120)
-            self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 120)
-            self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 120)
-            self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 120)
-            self.game.draw_text_white("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_white("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 120)
 
-            self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
-            self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
-            self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
-            self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
-            self.game.draw_text_white("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
 
-            self.game.draw_text_black("Back", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 300)
-            self.game.draw_text_black("Back", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 300)
-            self.game.draw_text_black("Back", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 300)
-            self.game.draw_text_black("Back", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 300)
-            self.game.draw_text_white("Back", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 300)
+                self.game.draw_text_white("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 300)
 
-            self.draw_cursor()
-            self.blit_screen()
+                self.draw_cursor()
+                self.blit_screen()
+
+            if self.state == 'Hulk':
+                self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3 - self.offset, 500))
+
+            elif self.state == 'Ironman':
+                self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3 - self.offset, 500))
+
+            pygame.display.flip()
+            prev_state = self.state
+
 
     def move_cursor(self):
+
         if self.game.DOWN_KEY:
             if self.state == 'Captain_America':
                 self.state = 'Hulk'
-                self.game.sound_manager.bruit('Boule_feu')
+                self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
-
-                # Partie image lors de la sélection
-                panther2 = pygame.transform.scale(panther, (100, 100))
-                self.game.window.blit(panther2, (200, 500))
-                while self.state == 'Hulk' and self.game.DOWN_KEY :
-                    pygame.display.flip()
-                    for event in pygame.event.get():
-                        if event.type == pygame.KEYDOWN:  # Si une touche est relâchée
-                            self.game.DOWN_KEY = False
-
             elif self.state == 'Hulk':
                 self.state = 'Ironman'
-                self.game.sound_manager.bruit('Boule_feu')
+                self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Ironman':
                 self.state = 'Spiderman'
