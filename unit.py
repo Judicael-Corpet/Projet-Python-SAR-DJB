@@ -2,10 +2,10 @@ import pygame
 import random
 
 # Constantes
-GRID_SIZE = 8
+GRID_SIZE = 21.3
 CELL_SIZE = 60
 WIDTH = GRID_SIZE * CELL_SIZE
-HEIGHT = GRID_SIZE * CELL_SIZE
+HEIGHT = GRID_SIZE * CELL_SIZE/(1.596)
 FPS = 30
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
