@@ -35,5 +35,9 @@ class SoundManager :
         #self.sounds[name].play()
         if name in self.sounds:
             self.sounds[name].play()
+            if self.sounds[name] == 'Musique_lancement':
+                pygame.mixer.music.play(-1)
+            else :
+                self.sounds[name].play()
         else:
             print(f"Son {name} introuvable.")

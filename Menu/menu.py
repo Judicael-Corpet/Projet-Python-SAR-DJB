@@ -6,10 +6,10 @@ fond = pygame.image.load('Menu/Fond_ecran.png')
 
 captain = pygame.image.load('Menu/Personnages_menu/captain_america_menu.jpeg')
 captain2 = pygame.transform.scale(captain, (200, 200))
-
+#captain2.set_colorkey((255, 255, 255))
 hulk = pygame.image.load('Menu/Personnages_menu/hulk_menu.jpeg')
 hulk2 = pygame.transform.scale(hulk, (200, 200))
-
+#hulk2.set_colorkey((255, 255, 255))
 ironman = pygame.image.load('Menu/Personnages_menu/ironman_menu.jpeg')
 ironman2 = pygame.transform.scale(ironman, (200, 200))
 
@@ -147,11 +147,11 @@ class MainMenu(Menu):
     def check_input(self):
         self.move_cursor()
         if self.game.START_KEY:
-            print(self.state)
             if self.state == 'Start':
                 self.game.curr_menu = self.game.Choix_Personnages
                 if self.game.Musique :
                     self.game.sound_manager.bruit('Musique_lancement')
+                    #pygame.mixer.music.play(-1)  # Lecture en boucle infinie (-1)
                 #self.game.playing = True
             elif self.state == 'Options':
                 self.game.curr_menu = self.game.options
@@ -468,9 +468,9 @@ class Choix_Personnage_Menu(Menu):
             elif self.state == 'Dr_Strange':
                 self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
             elif self.state == 'Back':
-                print(self.state)
                 self.game.curr_menu = self.game.main_menu
                 self.game.START_KEY = False
+                pygame.mixer.music.stop()
                 self.run_display = False
 
 class Choix_Carte_Menu(Menu):
@@ -689,7 +689,6 @@ class OptionsMenu(Menu):
             self.game.curr_menu = self.game.Volume
             self.run_display = False
         elif self.game.START_KEY and self.state == 'Back':
-            print(self.state)
             self.game.curr_menu = self.game.main_menu
             self.run_display = False
 class CreditsMenu(Menu):
