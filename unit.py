@@ -15,6 +15,7 @@ GREEN = (0, 255, 0)
 
 personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", "Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
 
+attacks = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
 
 class Unit(pygame.sprite.Sprite):
     """
@@ -279,23 +280,23 @@ class Thor :
         self.health = 300
         self.move = 8
         self.defense = 75
-        self.attack1 = "marteau"
+        self.attack1 = "Marteau"
         self.attack_power1 = 50
         self.distance_attack1 = 5
-        self.attack2 = "foudre"
+        self.attack2 = "Foudre"
         self.attack_power2 = 60
         self.distance_attack2 = 3
         self.image = pygame.image.load("Personnages/Thor1.png").convert_alpha
 
-class hawkeye :
+class Groot :
     def __init__(self):
         self.health = 150
         self.move = 3
         self.defense = 30
-        self.attack1 = "fleches"
+        self.attack1 = "Attaque_Branche"
         self.attack_power1 = 30
         self.distance_attack1 = 6
-        self.attack2 = "sabre"
+        self.attack2 = "Protection"
         self.attack_power2 = 30
         self.distance_attack2 = 1
         self.image = pygame.image.load("Personnages/Hawkeye.png").convert_alpha
@@ -305,10 +306,10 @@ class wolverine :
         self.health = 300
         self.move = 3
         self.defense = 75
-        self.attack1 = "griffes"
+        self.attack1 = "Griffes"
         self.attack_power1 = 60
         self.distance_attack1 = 2
-        self.attack2 = "poings"
+        self.attack2 = "Poings"
         self.attack_power2 = 30
         self.distance_attack2 = 1
         self.image = pygame.image.load("Personnages/Wolverine.png").convert_alpha
@@ -318,10 +319,10 @@ class blackpanther :
         self.health = 250
         self.move = 4
         self.defense = 30
-        self.attack1 = "griffes"
+        self.attack1 = "Griffes"
         self.attack_power1 = 50
         self.distance_attack1 = 2
-        self.attack2 = "poings"
+        self.attack2 = "Poings"
         self.attack_power2 = 30
         self.distance_attack2 = 1
         self.image = pygame.image.load("Personnages/Blackpanther.png").convert_alpha
@@ -331,23 +332,23 @@ class starlord :
         self.health = 150
         self.move = 6
         self.defense = 30
-        self.attack1 = "pistolets"
+        self.attack1 = "Pistolets"
         self.attack_power1 = 40
         self.distance_attack1 = 4
-        self.attack2 = "poings"
+        self.attack2 = "Poings"
         self.attack_power2 = 30
         self.distance_attack2 = 1
         self.image = pygame.image.load("Personnages/Starlord.png").convert_alpha
 
-class deadpool :
+class  yondu :
     def __init__(self):
         self.health = 500
         self.move = 3
         self.defense = 50
-        self.attack1 = "pistolets"
+        self.attack1 = "Fleche_Yaka"
         self.attack_power1 = 40
         self.distance_attack1 = 4
-        self.attack2 = "poings"
+        self.attack2 = "Poings"
         self.attack_power2 = 30
         self.distance_attack2 = 1
         self.image = pygame.image.load("Personnages/Deadpool.png").convert_alpha
@@ -357,10 +358,10 @@ class torche :
         self.health = 150
         self.move = 8
         self.defense = 40
-        self.attack1 = "boule de feu"
+        self.attack1 = "Boule_De_Feu"
         self.attack_power1 = 60
         self.distance_attack1 = 5
-        self.attack2 = "poings"
+        self.attack2 = "Poings"
         self.attack_power2 = 40
         self.distance_attack2 = 1
         self.image = pygame.image.load("Personnages/Toch1.png").convert_alpha
@@ -370,9 +371,9 @@ class janestorm :
         self.health = 100
         self.move = 3
         self.defense = 30
-        self.attack1 = "soigner"
+        self.attack1 = "Soigner"
         self.distance_attack1 = 3
-        self.attack2 = "poings"
+        self.attack2 = "Poings"
         self.attack_power2 = 30
         self.distance_attack2 = 1
         self.image = pygame.image.load("Personnages/JaneStorm.png").convert_alpha
@@ -382,9 +383,9 @@ class chose :
         self.health = 300
         self.move = 4
         self.defense = 80
-        self.attack1 = "casser_les_murs"
+        self.attack1 = "Casser_les_murs"
         self.distance_attack1 = 1
-        self.attack2 = "poings"
+        self.attack2 = "Poings"
         self.attack_power2 = 40
         self.distance_attack2 = 2
         self.image = pygame.image.load("Personnages/Chose1.png").convert_alpha
@@ -394,10 +395,128 @@ class drstrange :
         self.health = 150
         self.move = 6
         self.defense = 80
-        self.attack1 = "bloquer_adversaire"
-        self.attack_power1 = 30
+        self.attack1 = "Bloquer_adversaire"
         self.distance_attack1 = 4
-        self.attack2 = "projectiles"
-        self.attack_power2 = 40
+        self.attack2 = "Projectiles"
         self.distance_attack2 = 5
         self.image = pygame.image.load("Personnages/Drstange.png").convert_alpha
+
+
+#Création de la classe de chaque attaque
+#attacks = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
+
+class poings :
+    def __init__(self):
+        self.power = 30
+        self.quantite = 100
+        self.distance = 1
+       
+
+class griffes :
+    def __init__(self):
+        self.power = 50
+        self.quantite = 4
+        self.distance = 3
+        
+
+class lancer_bouclier :
+    def __init__(self):
+        self.power = 40
+        self.quantite = 3
+        self.distance = 3
+       
+
+class casser_les_murs :
+    def __init__(self):
+        self.power = 60
+        self.quantite = 2
+        self.distance = 1
+        
+
+class laser :
+    def __init__(self):
+        self.power = 60
+        self. quantite = 3
+        self.distance = 5
+        
+
+class missile :
+    def __init__(self):
+        self.power = 70
+        self.quantite = 1
+        self.distance = 6
+        
+
+class bloquer_adversaire :
+    def __init__(self):
+        self.temps = 1
+        self.power = 10
+        self.quantite = 2
+        self.distance = 4
+        
+
+class attaque_toile :
+    def __init__(self):
+        self.power = 40
+        self.quantite = 4
+        self.distance = 3
+        
+
+class marteau :
+    def __init__(self):
+        self.power = 50
+        self.quantite = 2
+        self.distance = 5
+        
+class foudre :
+    def __init__(self):
+        self.power = 90
+        self.quantite = 1
+        self.distance = 6
+
+class attaque_branche :
+    def __init__(self):
+        self.power = 30
+        self.quantite = 100
+        self.distance = 3
+
+class protection :
+    def __init__(self):
+        self.power = 100
+        self.temps = 1
+        self.distance = 1
+
+class pistolets :
+    def __init__(self):
+        self.power = 40
+        self.quantite = 10
+        self.distance = 4
+
+class fleche_yaka :
+    def __init__(self):
+        self.power = 50
+        self.quantite = 3
+        self.distance = 5
+
+class boule_de_feu :
+    def __init__(self):
+        self.power = 60
+        self.quantite = 3
+        self.distance = 5
+
+class soigner :
+    def __init__(self):
+        self.power = 150
+        self.quantite = 3
+        self.distance = 1
+
+class projectile :
+    def __init__(self):
+        self.power = 50
+        self.quantite = 4
+        self.distance = 5
+        
+
+
+
+
