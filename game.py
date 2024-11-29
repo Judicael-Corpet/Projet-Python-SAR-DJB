@@ -31,17 +31,13 @@ class Game:
         """
         self.screen = screen
         self.player_units = [Unit(0, 0, [55,55]),
-                             Unit(0, 1, [55,55]),
-                             Unit(0, 2, [55,55]),
-                             Unit(0, 3, [55,55]),
-                             Unit(1, 3, [55,55]),
-                             Unit(2, 3, [55,55])]
+                             Unit(0, 1, [55,55])]
+                            
+                           
 
         self.enemy_units = [Unit(15, 10, [55,55]),
                             Unit(16, 10, [55,55]),
-                            Unit(15, 9, [55,55]),
-                            Unit(16, 9, [55,55]),
-                            Unit(17, 9, [55,55])]
+]
         
     
         
@@ -127,9 +123,12 @@ class Game:
         self.group.update()
         self.group.draw(self.screen)
         
+        
         # Ajoutez les sprites des unités/players
         for unit in self.player_units + self.enemy_units:
             unit.draw(self.screen)
+    
+            
         pygame.display.flip()
 
         

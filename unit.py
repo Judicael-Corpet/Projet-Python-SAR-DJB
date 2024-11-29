@@ -64,6 +64,8 @@ class Unit(pygame.sprite.Sprite):
         self.is_selected = False
         self.size = size
         self.image = pygame.Surface(size)
+        self.max_health = 150
+        self.health = 150
 
         #Pour générer l'image du joueur que l'on a choisi
 
@@ -173,7 +175,8 @@ class Unit(pygame.sprite.Sprite):
         if 0 <= self.x + dx < GRID_SIZE and 0 <= self.y + dy < GRID_SIZE: # boundary
             self.x += dx
             self.y += dy
-
+        return self.x, self.y
+    
     def attack(self, target):
         """Attaque une unité cible."""
         if abs(self.x - target.x) <= 1 and abs(self.y - target.y) <= 1:
@@ -181,17 +184,44 @@ class Unit(pygame.sprite.Sprite):
 
     def draw(self, screen):
         """Affiche l'unité sur l'écran."""
+        
         if self.is_selected:
             pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
                              self.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
         #pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
                            #2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
         screen.blit(self.image, (self.x*CELL_SIZE, self.y*CELL_SIZE))
+        self.draw_health_bar(screen)
+        
 
     def get_image(self,x,y): # get image  permet de decouper l'image png du morceau qu'on souhaite
         image=pygame.Surface([52,52])
         image.blit(self.sprite_sheet,(10,0),(x,y,42,52))
         return image
+
+    def draw_health_bar(self, surface):
+        RED = (255, 0, 0)
+        GREEN = (0, 255, 0)
+        BLACK = (0, 0, 0)
+        bar_length = 50  # Longueur de la barre
+        bar_height = 3   # Hauteur de la barre
+
+        # Calcul de la largeur en fonction des PV
+        fill = max(0, (self.health / self.max_health) * bar_length)
+
+
+        # Position de la barre (juste au-dessus du personnage)
+        bar_x = self.x
+        bar_y = self.y 
+
+        # Dessin de la barre de fond (contour)
+        pygame.draw.rect(surface, BLACK, (bar_x*CELL_SIZE , bar_y*CELL_SIZE , bar_length + 2, bar_height + 2))
+        # Dessin de la barre de vie actuelle
+        pygame.draw.rect(surface, RED, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, bar_length, bar_height))  # Barre vide
+        pygame.draw.rect(surface, GREEN, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, fill, bar_height))     # Barre remplie
+        print("Bar X:", bar_x, "Bar Y:", bar_y)
+
+
 
 #création de la classe de chaque personnage
 class captain_america :
