@@ -3,49 +3,49 @@ from sound import SoundManager
 from game import *
 
 fond = pygame.image.load('Menu\Fond_ecran.png')
-
-captain = pygame.image.load('Menu\Personnages_menu\captain_america_menu.jpeg')
+"""
+captain = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\captain_america_menu.jpeg')
 captain2 = pygame.transform.scale(captain, (100, 100))
 #C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\black_panther_menu.jpeg
-hulk = pygame.image.load('Menu\Personnages_menu\hulk_menu.jpeg')
+hulk = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\hulk_menu.jpeg')
 hulk2 = pygame.transform.scale(hulk, (100, 100))
 
-ironman = pygame.image.load('Menu\Personnages_menu\ironman_menu.jpeg')
+ironman = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\ironman_menu.jpeg')
 ironman2 = pygame.transform.scale(ironman, (100, 100))
 
-Spiderman = pygame.image.load('Menu\Personnages_menu\spiderman_menu.jpeg')
+Spiderman = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\spiderman_menu.jpeg')
 Spiderman2 = pygame.transform.scale(Spiderman, (100, 100))
 
-Thor = pygame.image.load('Menu\Personnages_menu\thor_menu.jpeg')
+Thor = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\thor_menu.jpeg')
 Thor2 = pygame.transform.scale(Thor, (100, 100))
 
-Groot = pygame.image.load('Menu\Personnages_menu\groot_menu.jpeg')
+Groot = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\groot_menu.jpeg')
 Groot2 = pygame.transform.scale(Groot, (100, 100))
 
-Wolverine = pygame.image.load('Menu\Personnages_menu\wolverine_menu.jpeg')
+Wolverine = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\wolverine_menu.jpeg')
 Wolverine2 = pygame.transform.scale(Wolverine, (100, 100))
 
-Panther = pygame.image.load('Menu\Personnages_menu\black_panther_menu.jpeg')
+Panther = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\black_panther_menu.jpeg')
 Panther2 = pygame.transform.scale(Panther, (100, 100))
 
-Starlord = pygame.image.load('Menu\Personnages_menu\starlord_menu.jpeg')
+Starlord = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\starlord_menu.jpeg')
 Starlord2 = pygame.transform.scale(Starlord, (100, 100))
 
-Yondu = pygame.image.load('Menu\Personnages_menu\yondu_menu.jpeg')
+Yondu = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\yondu_menu.jpeg')
 Yondu2 = pygame.transform.scale(Yondu, (100, 100))
 
-Torch = pygame.image.load('Menu\Personnages_menu\torch_menu.jpeg')
+Torch = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\torch_menu.jpeg')
 Torch2 = pygame.transform.scale(Torch, (100, 100))
 
-Jane = pygame.image.load('Menu\Personnages_menu\jane_storm_menu.png')
+Jane = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\jane_storm_menu.png')
 Jane2 = pygame.transform.scale(Jane, (100, 100))
 
-Chose = pygame.image.load('Menu\Personnages_menu\chose_menu.png')
+Chose = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\chose_menu.png')
 Chose2 = pygame.transform.scale(Chose, (100, 100))
 
-Strange = pygame.image.load('Menu\Personnages_menu\docteur_strange_menu.jpeg')
+Strange = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\docteur_strange_menu.jpeg')
 Strange2 = pygame.transform.scale(Strange, (100, 100))
-
+"""
 class Menu():
     def __init__(self, game):
         self.game = game
