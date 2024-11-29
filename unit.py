@@ -203,12 +203,11 @@ class Unit(pygame.sprite.Sprite):
         RED = (255, 0, 0)
         GREEN = (0, 255, 0)
         BLACK = (0, 0, 0)
-        bar_length = 50  # Longueur de la barre
+        bar_length = 60  # Longueur de la barre
         bar_height = 3   # Hauteur de la barre
 
         # Calcul de la largeur en fonction des PV
         fill = max(0, (self.health / self.max_health) * bar_length)
-
 
         # Position de la barre (juste au-dessus du personnage)
         bar_x = self.x
