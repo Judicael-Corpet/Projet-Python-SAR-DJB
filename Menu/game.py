@@ -33,14 +33,16 @@ class Game():
             self.check_events()
             if self.START_KEY:
                 self.playing= False
-            self.display.fill(self.BLACK)
-            self.draw_text_white('Thanks for Playing', 20, self.DISPLAY_W/2, self.DISPLAY_H/2)
             self.window.blit(fond, (0,0))  
             # Wait avec la musique
             """
             self.game.sound_manager.bruit('Boule_feu')
             pygame.mixer.music.stop
             """
+
+            #if self.Musique :
+            #    self.game.sound_manager.bruit('Musique_lancement')
+
             pygame.display.update()
             self.reset_keys()
 

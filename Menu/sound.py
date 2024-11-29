@@ -27,7 +27,8 @@ class SoundManager :
             'Soin' : pygame.mixer.Sound("Sons\Soin.mp3"),
             'Tir_1_coup' : pygame.mixer.Sound("Sons\Tir_1_coup.mp3"),
             'Tir_rafale' : pygame.mixer.Sound("Sons\Tir_rafale.mp3"),
-            'Tir_rafale_v2': pygame.mixer.Sound("Sons\Tir_rafale_v2.mp3")
+            'Tir_rafale_v2': pygame.mixer.Sound("Sons\Tir_rafale_v2.mp3"),
+            'Musique_lancement' : pygame.mixer.Sound("Sons\The_Avengers.mp3")
         }
 
     def bruit(self, name):

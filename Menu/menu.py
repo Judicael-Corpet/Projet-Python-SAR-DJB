@@ -2,50 +2,51 @@ import pygame
 from sound import SoundManager
 from game import *
 
-fond = pygame.image.load('Menu\Fond_ecran.png')
-"""
-captain = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\captain_america_menu.jpeg')
-captain2 = pygame.transform.scale(captain, (100, 100))
-#C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\black_panther_menu.jpeg
-hulk = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\hulk_menu.jpeg')
-hulk2 = pygame.transform.scale(hulk, (100, 100))
+fond = pygame.image.load('Menu/Fond_ecran.png')
 
-ironman = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\ironman_menu.jpeg')
-ironman2 = pygame.transform.scale(ironman, (100, 100))
+captain = pygame.image.load('Menu/Personnages_menu/captain_america_menu.jpeg')
+captain2 = pygame.transform.scale(captain, (200, 200))
 
-Spiderman = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\spiderman_menu.jpeg')
-Spiderman2 = pygame.transform.scale(Spiderman, (100, 100))
+hulk = pygame.image.load('Menu/Personnages_menu/hulk_menu.jpeg')
+hulk2 = pygame.transform.scale(hulk, (200, 200))
 
-Thor = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\thor_menu.jpeg')
-Thor2 = pygame.transform.scale(Thor, (100, 100))
+ironman = pygame.image.load('Menu/Personnages_menu/ironman_menu.jpeg')
+ironman2 = pygame.transform.scale(ironman, (200, 200))
 
-Groot = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\groot_menu.jpeg')
-Groot2 = pygame.transform.scale(Groot, (100, 100))
+Spiderman = pygame.image.load('Menu/Personnages_menu/spiderman_menu.png')
+Spiderman2 = pygame.transform.scale(Spiderman, (200, 200))
 
-Wolverine = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\wolverine_menu.jpeg')
-Wolverine2 = pygame.transform.scale(Wolverine, (100, 100))
+Thor = pygame.image.load('Menu/Personnages_menu/thor_menu.jpeg')
+Thor2 = pygame.transform.scale(Thor, (200, 200))
 
-Panther = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\black_panther_menu.jpeg')
-Panther2 = pygame.transform.scale(Panther, (100, 100))
+Groot = pygame.image.load('Menu/Personnages_menu/groot_menu.jpeg')
+Groot2 = pygame.transform.scale(Groot, (200, 200))
 
-Starlord = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\starlord_menu.jpeg')
-Starlord2 = pygame.transform.scale(Starlord, (100, 100))
+Wolverine = pygame.image.load('Menu/Personnages_menu/wolverine_menu.jpeg')
+Wolverine2 = pygame.transform.scale(Wolverine, (200, 200))
 
-Yondu = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\yondu_menu.jpeg')
-Yondu2 = pygame.transform.scale(Yondu, (100, 100))
+Panther = pygame.image.load('Menu/Personnages_menu/black_panther_menu.jpeg')
+Panther2 = pygame.transform.scale(Panther, (200, 200))
 
-Torch = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\torch_menu.jpeg')
-Torch2 = pygame.transform.scale(Torch, (100, 100))
+Starlord = pygame.image.load('Menu/Personnages_menu/starlord_menu.jpeg')
+Starlord2 = pygame.transform.scale(Starlord, (200, 200))
 
-Jane = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\jane_storm_menu.png')
-Jane2 = pygame.transform.scale(Jane, (100, 100))
+Yondu = pygame.image.load('Menu/Personnages_menu/yondu_menu.jpeg')
+Yondu2 = pygame.transform.scale(Yondu, (200, 200))
 
-Chose = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\chose_menu.png')
-Chose2 = pygame.transform.scale(Chose, (100, 100))
+Torch = pygame.image.load('Menu/Personnages_menu/torch_menu.jpeg')
+Torch2 = pygame.transform.scale(Torch, (200, 200))
 
-Strange = pygame.image.load('C:\Users\Baptiste\Desktop\Version_finale\Projet-Python-SAR-DJB\Menu\Personnages_menu\docteur_strange_menu.jpeg')
-Strange2 = pygame.transform.scale(Strange, (100, 100))
-"""
+Jane = pygame.image.load('Menu/Personnages_menu/jane_storm_menu.png')
+Jane2 = pygame.transform.scale(Jane, (200, 200))
+
+Chose = pygame.image.load('Menu/Personnages_menu/chose_menu.png')
+Chose2 = pygame.transform.scale(Chose, (200, 200))
+
+Strange = pygame.image.load('Menu/Personnages_menu/docteur_strange_menu.jpeg')
+Strange2 = pygame.transform.scale(Strange, (200, 200))
+
+
 class Menu():
     def __init__(self, game):
         self.game = game
@@ -146,8 +147,11 @@ class MainMenu(Menu):
     def check_input(self):
         self.move_cursor()
         if self.game.START_KEY:
+            print(self.state)
             if self.state == 'Start':
                 self.game.curr_menu = self.game.Choix_Personnages
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Musique_lancement')
                 #self.game.playing = True
             elif self.state == 'Options':
                 self.game.curr_menu = self.game.options
@@ -206,11 +210,11 @@ class Choix_Personnage_Menu(Menu):
                 self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 240)
                 self.game.draw_text_white("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 240)
 
-                self.game.draw_text_black("Hawkeye", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2)
-                self.game.draw_text_black("Hawkeye", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2)
-                self.game.draw_text_black("Hawkeye", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3)
-                self.game.draw_text_black("Hawkeye", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3)
-                self.game.draw_text_white("Hawkeye", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Groot", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3)
 
                 self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 62)
                 self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 58)
@@ -230,11 +234,11 @@ class Choix_Personnage_Menu(Menu):
                 self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 180)
                 self.game.draw_text_white("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 180)
 
-                self.game.draw_text_black("Deadpool", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 240)
-                self.game.draw_text_black("Deadpool", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 240)
-                self.game.draw_text_black("Deadpool", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 240)
-                self.game.draw_text_black("Deadpool", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 240)
-                self.game.draw_text_white("Deadpool", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_white("Yondu", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 240)
 
                 self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
                 self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
@@ -268,13 +272,36 @@ class Choix_Personnage_Menu(Menu):
 
                 self.draw_cursor()
                 self.blit_screen()
-
-            if self.state == 'Hulk':
-                self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3 - self.offset, 500))
-
+            
+            if self.state == 'Captain_America':
+                self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Hulk':
+                self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
             elif self.state == 'Ironman':
-                self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3 - self.offset, 500))
-
+                self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Spiderman':
+                self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Thor':
+                self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Groot':
+                self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Wolverine':
+                self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Black_Panther':
+                self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Starlord':
+                self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Yondu':
+                self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Torch':
+                self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Jane_Storm':
+                self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Chose':
+                self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Dr_Strange':
+                self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
+            
             pygame.display.flip()
             prev_state = self.state
 
@@ -299,10 +326,10 @@ class Choix_Personnage_Menu(Menu):
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Thor':
-                self.state = 'Hawkeye'
+                self.state = 'Groot'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
-            elif self.state == 'Hawkeye':
+            elif self.state == 'Groot':
                 self.state = 'Wolverine'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
@@ -315,10 +342,10 @@ class Choix_Personnage_Menu(Menu):
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Starlord':
-                self.state = 'Deadpool'
+                self.state = 'Yondu'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
-            elif self.state == 'Deadpool':
+            elif self.state == 'Yondu':
                 self.state = 'Torch'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
@@ -335,6 +362,10 @@ class Choix_Personnage_Menu(Menu):
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Dr_Strange':
+                self.state = 'Back'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
+            elif self.state == 'Back':
                 self.state = 'Captain_America'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
@@ -356,12 +387,12 @@ class Choix_Personnage_Menu(Menu):
                 self.state = 'Spiderman'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
-            elif self.state == 'Hawkeye':
+            elif self.state == 'Groot':
                 self.state = 'Thor'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Wolverine':
-                self.state = 'Hawkeye'
+                self.state = 'Groot'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Black_Panther':
@@ -372,12 +403,12 @@ class Choix_Personnage_Menu(Menu):
                 self.state = 'Black_Panther'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
-            elif self.state == 'Deadpool':
+            elif self.state == 'Yondu':
                 self.state = 'Starlord'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Torch':
-                self.state = 'Deadpool'
+                self.state = 'Yondu'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Jane_Storm':
@@ -392,21 +423,55 @@ class Choix_Personnage_Menu(Menu):
                 self.state = 'Chose'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
-            elif self.state == 'Captain_America':
+            elif self.state == 'Back':
                 self.state = 'Dr_Strange'
                 self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Captain_America':
+                self.state = 'Back'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
 
     def check_input(self):
         self.move_cursor()
         if self.game.START_KEY:
+            """
             if self.state == 'Yes':
                 self.game.curr_menu = self.game.Choix_Carte
-            elif self.state == 'No':
-                self.game.Musique = False
+            """
+            if self.state == 'Captain_America':
+                self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Hulk':
+                self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Ironman':
+                self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Spiderman':
+                self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Thor':
+                self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Groot':
+                self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Wolverine':
+                self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Black_Panther':
+                self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Starlord':
+                self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Yondu':
+                self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Torch':
+                self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Jane_Storm':
+                self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Chose':
+                self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Dr_Strange':
+                self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
             elif self.state == 'Back':
-                self.game.curr_menu = self.game.options
-            self.run_display = False
+                print(self.state)
+                self.game.curr_menu = self.game.main_menu
+                self.game.START_KEY = False
+                self.run_display = False
 
 class Choix_Carte_Menu(Menu):
     def __init__(self, game):
@@ -569,7 +634,7 @@ class Volume(Menu):
         self.move_cursor()
         if self.game.START_KEY:
             if self.state == 'Yes':
-                self.game.Musique = True
+                self.game.Musique = True         
             elif self.state == 'No':
                 self.game.Musique = False
             elif self.state == 'Back':
@@ -587,8 +652,6 @@ class OptionsMenu(Menu):
         self.run_display = True
         while self.run_display:
             self.game.check_events()
-            if self.game.START_KEY and (self.cursor_rect.midtop == (self.backx + self.offset, self.backy)):
-                self.game.curr_menu = self.game.main_menu
             self.check_input()
             self.game.display.blit(fond, (0, 0))
             
@@ -626,6 +689,7 @@ class OptionsMenu(Menu):
             self.game.curr_menu = self.game.Volume
             self.run_display = False
         elif self.game.START_KEY and self.state == 'Back':
+            print(self.state)
             self.game.curr_menu = self.game.main_menu
             self.run_display = False
 class CreditsMenu(Menu):
