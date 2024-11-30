@@ -3,8 +3,10 @@ import random
 import pytmx
 import pyscroll
 from unit import *
-#from menu import *
-#from sound import 
+from menu import *
+from sound import *
+
+fond = pygame.image.load('Fond_ecran.png')
 
 personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", 
                             "Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
@@ -31,6 +33,30 @@ class Game:
         screen : pygame.Surface
             La surface de la fenêtre du jeu.
         """
+        self.running, self.playing = True, False
+        self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY = False, False, False, False
+        self.DISPLAY_W, self.DISPLAY_H = 1080, 720
+        self.display = pygame.Surface((self.DISPLAY_W,self.DISPLAY_H))
+        self.window = pygame.display.set_mode(((self.DISPLAY_W,self.DISPLAY_H)))
+        self.font_name = '8-BIT WONDER.TTF'
+        self.font_name = pygame.font.get_default_font()
+        self.BLACK, self.WHITE = (0, 0, 0), (255, 255, 255)
+        self.main_menu = MainMenu(self)
+        self.options = OptionsMenu(self)
+        self.credits = CreditsMenu(self)
+        self.Choix_Personnages_1 = Choix_Personnage_Menu_1(self)
+        self.Choix_Personnages_2 = Choix_Personnage_Menu_2(self)
+        self.Choix_Personnages_3 = Choix_Personnage_Menu_3(self)
+        self.Choix_Personnages_4 = Choix_Personnage_Menu_4(self)
+        self.Choix_Carte = Choix_Carte_Menu(self)
+        self.curr_menu = self.main_menu
+
+        # gerer le son
+        self.sound_manager = SoundManager()
+        self.Volume = Volume(self)
+        self.Musique = Volume(self)
+
+        
         self.screen = screen
         self.selected_attack_index = 0  # Indice de l'attaque sélectionnée
         self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
@@ -201,7 +227,38 @@ class Game:
    
         pygame.display.flip()
 
-        
+    def check_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running, self.playing = False, False
+                self.curr_menu.run_display = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    self.START_KEY = True
+                if event.key == pygame.K_BACKSPACE:
+                    self.BACK_KEY = True
+                if event.key == pygame.K_DOWN:
+                    self.DOWN_KEY = True
+                if event.key == pygame.K_UP:
+                    self.UP_KEY = True
+
+    def reset_keys(self):
+        self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY = False, False, False, False
+
+    def draw_text_white(self, text, size, x, y ):
+        font = pygame.font.Font(self.font_name,size)
+        text_surface = font.render(text, True, self.WHITE)
+        text_rect = text_surface.get_rect()
+        text_rect.center = (x,y)
+        self.display.blit(text_surface,text_rect)
+
+    def draw_text_black(self, text, size, x, y ):
+        font = pygame.font.Font(self.font_name,size)
+        text_surface = font.render(text, True, self.BLACK)
+        text_rect = text_surface.get_rect()
+        text_rect.center = (x,y)
+        self.display.blit(text_surface,text_rect)
+    
 
 def main():
 
@@ -215,11 +272,15 @@ def main():
     # Instanciation du jeu
     game = Game(screen)
 
+    while game.running:
+        game.curr_menu.display_menu()
+        if (game.playing):
+            break
     # Boucle principale du jeu
-    while True:
-        
+    while game.playing :
+        print('okay')
         game.handle_player_turn()
-        game.handle_enemy_turn()  
+        game.handle_enemy_turn()   
         
 
 if __name__ == "__main__":

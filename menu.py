@@ -830,7 +830,7 @@ class Choix_Personnage_Menu_3(Menu):
             if self.state != prev_state:
                 self.game.display.blit(fond, (0, 0))
             
-            self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 249)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 249)
                 self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 251)
                 self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 250)
                 self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 250)
