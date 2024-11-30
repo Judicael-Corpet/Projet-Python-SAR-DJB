@@ -4,6 +4,9 @@ import pytmx
 import pyscroll
 from unit import *
 
+
+personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", 
+                            "Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
 class Game:
     """
     Classe pour représenter le jeu.
@@ -31,18 +34,30 @@ class Game:
         self.selected_attack_index = 0  # Indice de l'attaque sélectionnée
         self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
         self.menu_attaques = False
-        self.player_units = [Unit(0, 0, [55,55]),
-                             Unit(0, 1, [55,55])]                   
+        self.selected_attack = False
 
-        self.enemy_units = [Unit(15, 10, [55,55]),
-                            Unit(16, 10, [55,55]),]
-    
+
+        self.player_units = [Unit("Captain_America", 0, 0, [55,55],150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
+                             Unit("Captain_America", 0, 1, [55,55], 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                   
+
+        self.enemy_units = [Unit("Captain_America", 16, 9, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
+                             Unit("Captain_America", 17, 9, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
+
+    def selection_personnages(self, liste_perso) :
+          
+        for i in range(3) :
+            self.list_names.append(random.choice(liste_perso))
+        return self.list_names    
+
     def draw_attack_menu(self) :
         """Dessine le menu des attaques."""
         #Fond noir dans le coin inférieur gauche
         pygame.draw.rect(self.screen, (0, 0, 0), (20, 340, 250, 600 ))
         pygame.draw.rect(self.screen, (255, 255, 255), (20, 340, 250, 600), 2)  # Bordure blanche
 
+        #if selected_unit == "Captain_America" :
+        self.attaques = ["Poings", "Lancer_bouclier"]
+        
         # Dessiner chaque attaque dans le rectangle
         for i, attaque in enumerate(self.attaques):
             color = (0, 255, 0) if i == self.selected_attack_index else (255, 255, 255)  # Mettre en surbrillance l'attaque sélectionnée
@@ -89,7 +104,6 @@ class Game:
                         selected_unit.move(dx, dy)
                         
 
-
                         # Attaque (touche espace) met fin au tour
                         if event.key == pygame.K_SPACE:
                             
@@ -104,21 +118,22 @@ class Game:
                             
                             elif event.key == pygame.K_RETURN :
                                 print (f"Attaque sélectionnée : {self.attaques[self.selected_attack_index]}") # attaque validée
+                                self.selected_attack = True
                                 self.menu_attaques = False
                                     #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
-                                        
+
+#Suite du code à écrire ici pour pour appliquer l'attaque à l'ennemi ciblé
+                        
+                        #if self.selected_attack :
+                                
+
+                                self.selected_attack = False
                                 has_acted = True
                                 selected_unit.is_selected = False 
 
                         self.flip_display()    
                 
-                            
-
-                            
-                            
-
-                        
-                        
+                
 
                             #print(f"Attaque choisie : {attack['name']}")
                             #for enemy in self.enemy_units:
@@ -169,7 +184,7 @@ class Game:
             unit.draw(self.screen)
 
          # Si le menu des attaques est actif, dessiner le menu par-dessus
-        if self.menu_attaques:  # Tu peux utiliser self.menu_attaques pour vérifier si le menu est ouvert
+        if self.menu_attaques:  
             self.draw_attack_menu()
    
         pygame.display.flip()
@@ -189,8 +204,8 @@ def main():
     game = Game(screen)
 
     # Boucle principale du jeu
-    
     while True:
+        
         game.handle_player_turn()
         game.handle_enemy_turn()  
         
