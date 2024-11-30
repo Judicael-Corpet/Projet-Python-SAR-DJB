@@ -27,7 +27,7 @@ class Game():
         self.Volume = Volume(self)
         self.Musique = Volume(self)
 
-
+    """
     def game_loop(self):
         while self.playing:
             self.check_events()
@@ -35,17 +35,17 @@ class Game():
                 self.playing= False
             self.window.blit(fond, (0,0))  
             # Wait avec la musique
-            """
+            
             self.game.sound_manager.bruit('Boule_feu')
             pygame.mixer.music.stop
-            """
+        
 
             #if self.Musique :
             #    self.game.sound_manager.bruit('Musique_lancement')
 
             pygame.display.update()
             self.reset_keys()
-
+        """
 
 
     def check_events(self):
