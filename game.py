@@ -59,13 +59,17 @@ class Game:
         self.selected_attack_index = 0  # Indice de l'attaque sélectionnée
         self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
         self.menu_attaques = False
+        """
         self.player_units = [Unit(0, 0, [55,55]),
                              Unit(0, 1, [55,55])]                   
 
         self.enemy_units = [Unit(15, 10, [55,55]),
                             Unit(16, 10, [55,55]),]
-    
-
+        
+        """
+        self.player_units = [Unit(self.Choix_Personnages, 0, 0, [55,55])]
+        print(self.Choix_Personnages)
+        self.enemy_units = [Unit(self.Choix_Personnages,0, 0, [55,55])]
 
 
 
@@ -256,12 +260,12 @@ def main():
 
     while game.running:
         game.curr_menu.display_menu()
+
     # Boucle principale du jeu
-    """
-    while True:
+    while self.game.playing :
         game.handle_player_turn()
         game.handle_enemy_turn()  
-    """
+    
 
-#if __name__ == "__main__":
-#    main()
+if __name__ == "__main__":
+    main()

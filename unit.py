@@ -1,6 +1,10 @@
 import pygame
 import random
 
+from menu import *
+from sound import *
+
+
 # Constantes
 GRID_SIZE = 21.3
 CELL_SIZE = 60
@@ -59,7 +63,7 @@ class Unit(pygame.sprite.Sprite):
             L'équipe de l'unité ('player' ou 'enemy').
      
        """
-    def __init__(self, x, y, size):
+    def __init__(self, perso, x, y, size):
         super().__init__() #permet d'inialiser la classe sprite en appelant son constructeur avec super()
         self.personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", "Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
 
@@ -76,8 +80,10 @@ class Unit(pygame.sprite.Sprite):
 
         #Pour générer l'image du joueur que l'on a choisi
 
-        personnage = random.choice(self.personnages)
-
+        self.personnage = perso
+        print(self.personnage)
+        #personnage = random.choice(self.personnages)
+        """
         if personnage == "Captain_America" :
             self.personnage = Captain_america()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
@@ -190,7 +196,7 @@ class Unit(pygame.sprite.Sprite):
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
-
+        """
     def move(self, dx, dy):
         """Déplace l'unité de dx, dy."""
         if 0 <= self.x + dx < GRID_SIZE and 0 <= self.y + dy < GRID_SIZE: # boundary

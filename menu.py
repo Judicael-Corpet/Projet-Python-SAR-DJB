@@ -442,8 +442,15 @@ class Choix_Personnage_Menu(Menu):
             """
             if self.state == 'Captain_America':
                 self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.personnage = 'Captain_America'
+                self.game.playing = True
+                self.run_display = False
+                self.game.curr_menu = self.playing
+
             elif self.state == 'Hulk':
                 self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.personnage = 'Hulk'
+                self.game.curr_menu = self.game.Choix_Carte_Menu
             elif self.state == 'Ironman':
                 self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
             elif self.state == 'Spiderman':
