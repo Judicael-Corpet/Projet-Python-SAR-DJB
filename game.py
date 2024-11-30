@@ -45,7 +45,10 @@ class Game:
         self.main_menu = MainMenu(self)
         self.options = OptionsMenu(self)
         self.credits = CreditsMenu(self)
-        self.Choix_Personnages = Choix_Personnage_Menu(self)
+        self.Choix_Personnages_1 = Choix_Personnage_Menu_1(self)
+        self.Choix_Personnages_2 = Choix_Personnage_Menu_2(self)
+        self.Choix_Personnages_3 = Choix_Personnage_Menu_3(self)
+        self.Choix_Personnages_4 = Choix_Personnage_Menu_4(self)
         self.Choix_Carte = Choix_Carte_Menu(self)
         self.curr_menu = self.main_menu
 
@@ -67,9 +70,10 @@ class Game:
                             Unit(16, 10, [55,55]),]
         
         """
-        self.player_units = [Unit(self.Choix_Personnages, 0, 0, [55,55])]
-        print(self.Choix_Personnages)
-        self.enemy_units = [Unit(self.Choix_Personnages,0, 0, [55,55])]
+        self.player_units = [Unit(self.Choix_Personnages_1, 0, 0, [55,55]), 
+                             Unit(self.Choix_Personnages_2, 0, 0, [55,55])]
+        self.enemy_units = [Unit(self.Choix_Personnages_3,0, 0, [55,55]), 
+                            Unit(self.Choix_Personnages_4, 0, 0, [55,55])]
 
 
 
@@ -260,9 +264,11 @@ def main():
 
     while game.running:
         game.curr_menu.display_menu()
-
+        if (game.playing):
+            break
     # Boucle principale du jeu
-    while self.game.playing :
+    while game.playing :
+        print('okay')
         game.handle_player_turn()
         game.handle_enemy_turn()  
     

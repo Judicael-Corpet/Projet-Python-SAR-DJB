@@ -149,7 +149,7 @@ class MainMenu(Menu):
         self.move_cursor()
         if self.game.START_KEY:
             if self.state == 'Start':
-                self.game.curr_menu = self.game.Choix_Personnages
+                self.game.curr_menu = self.game.Choix_Personnages_1
                 if self.game.Musique :
                     self.game.sound_manager.bruit('Musique_lancement')
                     #pygame.mixer.music.play(-1)  # Lecture en boucle infinie (-1)
@@ -160,7 +160,7 @@ class MainMenu(Menu):
                 self.game.curr_menu = self.game.credits
             self.run_display = False
 
-class Choix_Personnage_Menu(Menu):
+class Choix_Personnage_Menu_1(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
         self.state = 'Captain_America'
@@ -270,6 +270,12 @@ class Choix_Personnage_Menu(Menu):
                 self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 300)
                 self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 300)
                 self.game.draw_text_white("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 300)
+
+                self.game.draw_text_black('J1', 60, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 179)
+                self.game.draw_text_black('J1', 60, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 181)
+                self.game.draw_text_black('J1', 60, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 180)
+                self.game.draw_text_black('J1', 60, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 180)
+                self.game.draw_text_white('J1', 60, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 180)
 
                 self.draw_cursor()
                 self.blit_screen()
@@ -442,10 +448,1000 @@ class Choix_Personnage_Menu(Menu):
             """
             if self.state == 'Captain_America':
                 self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game.personnage = 'Captain_America'
+                self.game.playing = False
+                print(self.game.playing)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+
+            elif self.state == 'Hulk':
+                self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.personnage = 'Hulk'
+                self.game.curr_menu = self.game.Choix_Carte_Menu
+            elif self.state == 'Ironman':
+                self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Spiderman':
+                self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Thor':
+                self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Groot':
+                self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Wolverine':
+                self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Black_Panther':
+                self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Starlord':
+                self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Yondu':
+                self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Torch':
+                self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Jane_Storm':
+                self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Chose':
+                self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Dr_Strange':
+                self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Back':
+                self.game.curr_menu = self.game.main_menu
+                self.game.START_KEY = False
+                pygame.mixer.music.stop()
+                self.run_display = False
+
+class Choix_Personnage_Menu_2(Menu):
+    def __init__(self, game):
+        Menu.__init__(self, game)
+        self.state = 'Captain_America'
+        self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 150, self.game.DISPLAY_H / 3 + 10)
+
+    def display_menu(self):
+        self.run_display = True
+        prev_state = None
+        while self.run_display:
+            self.game.check_events()
+            self.check_input()
+            if self.state != prev_state:
+                self.game.display.blit(fond, (0, 0))
+            
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 249)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 251)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 250)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 250)
+                self.game.draw_text_white('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 250)
+
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3)
+
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 62)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 58)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_white("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 60)
+
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 118)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 122)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_white("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 120)
+
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180 - 2)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180 + 2)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180)
+
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 - 2 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 2 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_white("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 240)
+
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Groot", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3)
+
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 62)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 58)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_white("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 60)
+
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120 - 2)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120 + 2)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_white("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120)
+
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 180)
+
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_white("Yondu", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 240)
+
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
+
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_white("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 60)
+
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_white("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 120)
+
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
+
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 300)
+                self.game.draw_text_white("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 300)
+
+                self.game.draw_text_black('J2', 60, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 179)
+                self.game.draw_text_black('J2', 60, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 181)
+                self.game.draw_text_black('J2', 60, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 180)
+                self.game.draw_text_black('J2', 60, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 180)
+                self.game.draw_text_white('J2', 60, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 180)
+
+                self.draw_cursor()
+                self.blit_screen()
+            
+            if self.state == 'Captain_America':
+                self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Hulk':
+                self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Ironman':
+                self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Spiderman':
+                self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Thor':
+                self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Groot':
+                self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Wolverine':
+                self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Black_Panther':
+                self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Starlord':
+                self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Yondu':
+                self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Torch':
+                self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Jane_Storm':
+                self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Chose':
+                self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Dr_Strange':
+                self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
+            
+            pygame.display.flip()
+            prev_state = self.state
+
+
+    def move_cursor(self):
+
+        if self.game.DOWN_KEY:
+            if self.state == 'Captain_America':
+                self.state = 'Hulk'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Hulk':
+                self.state = 'Ironman'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Ironman':
+                self.state = 'Spiderman'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Spiderman':
+                self.state = 'Thor'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
+            elif self.state == 'Thor':
+                self.state = 'Groot'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Groot':
+                self.state = 'Wolverine'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Wolverine':
+                self.state = 'Black_Panther'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Black_Panther':
+                self.state = 'Starlord'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Starlord':
+                self.state = 'Yondu'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
+            elif self.state == 'Yondu':
+                self.state = 'Torch'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Torch':
+                self.state = 'Jane_Storm'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60+ 10)
+            elif self.state == 'Jane_Storm':
+                self.state = 'Chose'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Chose':
+                self.state = 'Dr_Strange'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Dr_Strange':
+                self.state = 'Back'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
+            elif self.state == 'Back':
+                self.state = 'Captain_America'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
+
+        elif self.game.UP_KEY :
+            if self.state == 'Hulk':
+                self.state = 'Captain_America'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Ironman':
+                self.state = 'Hulk'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Spiderman':
+                self.state = 'Ironman'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Thor':
+                self.state = 'Spiderman'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Groot':
+                self.state = 'Thor'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
+            elif self.state == 'Wolverine':
+                self.state = 'Groot'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Black_Panther':
+                self.state = 'Wolverine'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Starlord':
+                self.state = 'Black_Panther'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Yondu':
+                self.state = 'Starlord'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Torch':
+                self.state = 'Yondu'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
+            elif self.state == 'Jane_Storm':
+                self.state = 'Torch'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Chose':
+                self.state = 'Jane_Storm'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Dr_Strange':
+                self.state = 'Chose'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Back':
+                self.state = 'Dr_Strange'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Captain_America':
+                self.state = 'Back'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
+
+    def check_input(self):
+        self.move_cursor()
+        if self.game.START_KEY:
+            """
+            if self.state == 'Yes':
+                self.game.curr_menu = self.game.Choix_Carte
+            """
+            if self.state == 'Captain_America':
+                self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game.personnage = 'Captain_America'
+                self.game.playing = False
+                print(self.game.playing)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+
+            elif self.state == 'Hulk':
+                self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.personnage = 'Hulk'
+                self.game.curr_menu = self.game.Choix_Carte_Menu
+            elif self.state == 'Ironman':
+                self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Spiderman':
+                self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Thor':
+                self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Groot':
+                self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Wolverine':
+                self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Black_Panther':
+                self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Starlord':
+                self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Yondu':
+                self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Torch':
+                self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Jane_Storm':
+                self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Chose':
+                self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Dr_Strange':
+                self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Back':
+                self.game.curr_menu = self.game.main_menu
+                self.game.START_KEY = False
+                pygame.mixer.music.stop()
+                self.run_display = False
+
+class Choix_Personnage_Menu_3(Menu):
+    def __init__(self, game):
+        Menu.__init__(self, game)
+        self.state = 'Captain_America'
+        self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 150, self.game.DISPLAY_H / 3 + 10)
+
+    def display_menu(self):
+        self.run_display = True
+        prev_state = None
+        while self.run_display:
+            self.game.check_events()
+            self.check_input()
+            if self.state != prev_state:
+                self.game.display.blit(fond, (0, 0))
+            
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 249)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 251)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 250)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 250)
+                self.game.draw_text_white('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 250)
+
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3)
+
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 62)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 58)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_white("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 60)
+
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 118)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 122)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_white("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 120)
+
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180 - 2)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180 + 2)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180)
+
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 - 2 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 2 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_white("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 240)
+
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Groot", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3)
+
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 62)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 58)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_white("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 60)
+
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120 - 2)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120 + 2)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_white("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120)
+
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 180)
+
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_white("Yondu", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 240)
+
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
+
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_white("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 60)
+
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_white("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 120)
+
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
+
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 300)
+                self.game.draw_text_white("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 300)
+
+                self.game.draw_text_black('J3', 60, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 179)
+                self.game.draw_text_black('J3', 60, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 181)
+                self.game.draw_text_black('J3', 60, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 180)
+                self.game.draw_text_black('J3', 60, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 180)
+                self.game.draw_text_white('J3', 60, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 180)
+
+                self.draw_cursor()
+                self.blit_screen()
+            
+            if self.state == 'Captain_America':
+                self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Hulk':
+                self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Ironman':
+                self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Spiderman':
+                self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Thor':
+                self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Groot':
+                self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Wolverine':
+                self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Black_Panther':
+                self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Starlord':
+                self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Yondu':
+                self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Torch':
+                self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Jane_Storm':
+                self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Chose':
+                self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Dr_Strange':
+                self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
+            
+            pygame.display.flip()
+            prev_state = self.state
+
+
+    def move_cursor(self):
+
+        if self.game.DOWN_KEY:
+            if self.state == 'Captain_America':
+                self.state = 'Hulk'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Hulk':
+                self.state = 'Ironman'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Ironman':
+                self.state = 'Spiderman'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Spiderman':
+                self.state = 'Thor'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
+            elif self.state == 'Thor':
+                self.state = 'Groot'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Groot':
+                self.state = 'Wolverine'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Wolverine':
+                self.state = 'Black_Panther'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Black_Panther':
+                self.state = 'Starlord'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Starlord':
+                self.state = 'Yondu'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
+            elif self.state == 'Yondu':
+                self.state = 'Torch'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Torch':
+                self.state = 'Jane_Storm'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60+ 10)
+            elif self.state == 'Jane_Storm':
+                self.state = 'Chose'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Chose':
+                self.state = 'Dr_Strange'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Dr_Strange':
+                self.state = 'Back'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
+            elif self.state == 'Back':
+                self.state = 'Captain_America'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
+
+        elif self.game.UP_KEY :
+            if self.state == 'Hulk':
+                self.state = 'Captain_America'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Ironman':
+                self.state = 'Hulk'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Spiderman':
+                self.state = 'Ironman'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Thor':
+                self.state = 'Spiderman'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Groot':
+                self.state = 'Thor'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
+            elif self.state == 'Wolverine':
+                self.state = 'Groot'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Black_Panther':
+                self.state = 'Wolverine'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Starlord':
+                self.state = 'Black_Panther'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Yondu':
+                self.state = 'Starlord'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Torch':
+                self.state = 'Yondu'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
+            elif self.state == 'Jane_Storm':
+                self.state = 'Torch'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Chose':
+                self.state = 'Jane_Storm'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Dr_Strange':
+                self.state = 'Chose'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Back':
+                self.state = 'Dr_Strange'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Captain_America':
+                self.state = 'Back'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
+
+    def check_input(self):
+        self.move_cursor()
+        if self.game.START_KEY:
+            """
+            if self.state == 'Yes':
+                self.game.curr_menu = self.game.Choix_Carte
+            """
+            if self.state == 'Captain_America':
+                self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game.personnage = 'Captain_America'
+                self.game.playing = False
+                print(self.game.playing)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
+
+            elif self.state == 'Hulk':
+                self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.personnage = 'Hulk'
+                self.game.curr_menu = self.game.Choix_Carte_Menu
+            elif self.state == 'Ironman':
+                self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Spiderman':
+                self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Thor':
+                self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Groot':
+                self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Wolverine':
+                self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Black_Panther':
+                self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Starlord':
+                self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Yondu':
+                self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Torch':
+                self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Jane_Storm':
+                self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Chose':
+                self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Dr_Strange':
+                self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Back':
+                self.game.curr_menu = self.game.main_menu
+                self.game.START_KEY = False
+                pygame.mixer.music.stop()
+                self.run_display = False
+
+class Choix_Personnage_Menu_4(Menu):
+    def __init__(self, game):
+        Menu.__init__(self, game)
+        self.state = 'Captain_America'
+        self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 150, self.game.DISPLAY_H / 3 + 10)
+
+    def display_menu(self):
+        self.run_display = True
+        prev_state = None
+        while self.run_display:
+            self.game.check_events()
+            self.check_input()
+            if self.state != prev_state:
+                self.game.display.blit(fond, (0, 0))
+            
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 249)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 251)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 250)
+                self.game.draw_text_black('Choix personnage', 100, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 250)
+                self.game.draw_text_white('Choix personnage', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 250)
+
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Captain America", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3)
+
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 62)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 58)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_white("Hulk", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 60)
+
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 118)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 122)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_white("Ironman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 120)
+
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180 - 2)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180 + 2)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Spiderman", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 180)
+
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 - 2 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 2 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset - 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_black("Thor", 30, self.game.DISPLAY_W / 3 + self.offset + 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_white("Thor", 30, self.game.DISPLAY_W / 3 + self.offset, self.game.DISPLAY_H / 3 + 240)
+
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Groot", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Groot", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3)
+
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 62)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 58)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Wolverine", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_white("Wolverine", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 60)
+
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120 - 2)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120 + 2)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Black Panther", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_white("Black Panther", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 120)
+
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Starlord", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Starlord", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 180)
+
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_black("Yondu", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 240)
+                self.game.draw_text_white("Yondu", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 240)
+
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("Torch", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
+
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_black("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 60)
+                self.game.draw_text_white("Jane Storm", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 60)
+
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 120)
+                self.game.draw_text_white("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 120)
+
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
+
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2 - 2, self.game.DISPLAY_H / 3 + 300)
+                self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2 + 2, self.game.DISPLAY_H / 3 + 300)
+                self.game.draw_text_white("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 300)
+
+                self.game.draw_text_black('J4', 60, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 179)
+                self.game.draw_text_black('J4', 60, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 181)
+                self.game.draw_text_black('J4', 60, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 180)
+                self.game.draw_text_black('J4', 60, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 180)
+                self.game.draw_text_white('J4', 60, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 180)
+
+
+                self.draw_cursor()
+                self.blit_screen()
+            
+            if self.state == 'Captain_America':
+                self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Hulk':
+                self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Ironman':
+                self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Spiderman':
+                self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Thor':
+                self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Groot':
+                self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Wolverine':
+                self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Black_Panther':
+                self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Starlord':
+                self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Yondu':
+                self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Torch':
+                self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Jane_Storm':
+                self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Chose':
+                self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
+            elif self.state == 'Dr_Strange':
+                self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
+            
+            pygame.display.flip()
+            prev_state = self.state
+
+
+    def move_cursor(self):
+
+        if self.game.DOWN_KEY:
+            if self.state == 'Captain_America':
+                self.state = 'Hulk'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Hulk':
+                self.state = 'Ironman'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Ironman':
+                self.state = 'Spiderman'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Spiderman':
+                self.state = 'Thor'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
+            elif self.state == 'Thor':
+                self.state = 'Groot'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Groot':
+                self.state = 'Wolverine'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Wolverine':
+                self.state = 'Black_Panther'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Black_Panther':
+                self.state = 'Starlord'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Starlord':
+                self.state = 'Yondu'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
+            elif self.state == 'Yondu':
+                self.state = 'Torch'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Torch':
+                self.state = 'Jane_Storm'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60+ 10)
+            elif self.state == 'Jane_Storm':
+                self.state = 'Chose'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Chose':
+                self.state = 'Dr_Strange'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Dr_Strange':
+                self.state = 'Back'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
+            elif self.state == 'Back':
+                self.state = 'Captain_America'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
+
+        elif self.game.UP_KEY :
+            if self.state == 'Hulk':
+                self.state = 'Captain_America'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Ironman':
+                self.state = 'Hulk'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Spiderman':
+                self.state = 'Ironman'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Thor':
+                self.state = 'Spiderman'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Groot':
+                self.state = 'Thor'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
+            elif self.state == 'Wolverine':
+                self.state = 'Groot'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Black_Panther':
+                self.state = 'Wolverine'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Starlord':
+                self.state = 'Black_Panther'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Yondu':
+                self.state = 'Starlord'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Torch':
+                self.state = 'Yondu'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
+            elif self.state == 'Jane_Storm':
+                self.state = 'Torch'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
+            elif self.state == 'Chose':
+                self.state = 'Jane_Storm'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60 + 10)
+            elif self.state == 'Dr_Strange':
+                self.state = 'Chose'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
+            elif self.state == 'Back':
+                self.state = 'Dr_Strange'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
+            elif self.state == 'Captain_America':
+                self.state = 'Back'
+                self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
+
+    def check_input(self):
+        self.move_cursor()
+        if self.game.START_KEY:
+            """
+            if self.state == 'Yes':
+                self.game.curr_menu = self.game.Choix_Carte
+            """
+            if self.state == 'Captain_America':
+                self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
                 self.game.personnage = 'Captain_America'
                 self.game.playing = True
+                print(self.game.playing)
                 self.run_display = False
-                self.game.curr_menu = self.playing
+                #self.game.curr_menu = self.game.Choix_Personnages_2
 
             elif self.state == 'Hulk':
                 self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
