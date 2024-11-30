@@ -2,10 +2,12 @@ import pygame
 import random
 
 # Constantes
-GRID_SIZE = 21.3
-CELL_SIZE = 60
-WIDTH = GRID_SIZE * CELL_SIZE
-HEIGHT = GRID_SIZE * CELL_SIZE/(1.596)
+
+GRID_SIZE_x = 40
+GRID_SIZE_y=25
+CELL_SIZE = 32
+WIDTH = GRID_SIZE_x * CELL_SIZE
+HEIGHT = GRID_SIZE_y * CELL_SIZE
 FPS = 30
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -13,10 +15,8 @@ RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 
-#listes des personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Hawkeye", "Wolverine", "Black_Panther", "Starlord", "Deadpool", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
 
-
-class Unit(pygame.sprite.Sprite):
+class Unit:
     """
     Classe pour représenter une unité.
 
@@ -27,6 +27,11 @@ class Unit(pygame.sprite.Sprite):
         La position x de l'unité sur la grille.
     y : int
         La position y de l'unité sur la grille.
+    health : int
+        La santé de l'unité.
+    attack_power : int
+        La puissance d'attaque de l'unité.
+    defense : int
     team : str
         L'équipe de l'unité ('player' ou 'enemy').
     is_selected : bool
@@ -40,7 +45,10 @@ class Unit(pygame.sprite.Sprite):
         Attaque une unité cible.
     draw(screen)
         Dessine l'unité sur la grille.
+    """
 
+    def __init__(self, x, y, health, attack_power, defense, team):
+        """
         Construit une unité avec une position, une santé, une puissance d'attaque et une équipe.
 
         Paramètres
@@ -55,13 +63,13 @@ class Unit(pygame.sprite.Sprite):
             La puissance d'attaque de l'unité.
         team : str
             L'équipe de l'unité ('player' ou 'enemy').
-     
-       """
-    def __init__(self, x, y, team, size):
-        super().__init__() #permet d'inialiser la classe sprite en appelant son constructeur avec super()
+        """
         self.x = x
         self.y = y
+        self.health = health
+        self.attack_power = attack_power
         self.team = team  # 'player' ou 'enemy'
+        self.defense = defense
         self.is_selected = False
         self.green_cases=[]
     
