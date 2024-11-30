@@ -1,14 +1,9 @@
 import pygame # pour  comprendre comment fonctionne pygame : https://zestedesavoir.com/tutoriels/pdf/846/pygame-pour-les-zesteurs.pdf
 import random
-import sys
 import pytmx
 import pyscroll
 from unit import *
 
-screen2 = pygame.display.set_mode((640, 480))
-pygame.display.set_caption("Menu d'actions")
-
-menu_attaques = False
 class Game:
     """
     Classe pour représenter le jeu.

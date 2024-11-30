@@ -15,15 +15,6 @@ GREEN = (0, 255, 0)
 GRAY = (100, 100, 100)
 YELLOW = (255, 255, 0)
 
-personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", "Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
-
-attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
-attacks = [{"name": "Coup de poing", "damage": 10}, {"name": "Coup spécial", "damage": 20}]
-#selected_attack_index = 0
-pygame.font.init()
-screen = pygame.display.set_mode((606, 400))
-pygame.display.set_caption("Menu des attaques")
-font = pygame.font.Font(None, 36)
 
 
 class Unit(pygame.sprite.Sprite):
@@ -70,6 +61,11 @@ class Unit(pygame.sprite.Sprite):
        """
     def __init__(self, x, y, size):
         super().__init__() #permet d'inialiser la classe sprite en appelant son constructeur avec super()
+        self.personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", "Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
+
+        self.selected_attack_index = 0  # Indice de l'attaque sélectionnée
+        self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
+        self.menu_attaques = False
         self.x = x
         self.y = y
         self.is_selected = False
@@ -80,7 +76,7 @@ class Unit(pygame.sprite.Sprite):
 
         #Pour générer l'image du joueur que l'on a choisi
 
-        personnage = random.choice(personnages)
+        personnage = random.choice(self.personnages)
 
         if personnage == "Captain_America" :
             self.personnage = Captain_america()
@@ -203,9 +199,19 @@ class Unit(pygame.sprite.Sprite):
         return self.x, self.y
     
     # Fonction pour afficher les attaques
-    #def draw_action_menu(self):
-        
     
+        
+    def draw_attack_menu(self) :
+        """Dessine le menu des attaques."""
+        # Fond noir dans le coin inférieur gauche
+        pygame.draw.rect(self.screen, (0, 0, 0), (20, 340, 250, 120))
+        pygame.draw.rect(self.screen, (255, 255, 255), (20, 340, 250, 120), 2)  # Bordure blanche
+
+        # Dessiner chaque attaque dans le rectangle
+        for i, attaque in enumerate(self.attaques):
+            color = (0, 255, 0) if i == self.selected_attack_index else (255, 255, 0)  # Mettre en surbrillance l'attaque sélectionnée
+            text = pygame.font.Font(None, 36).render(attaque, True, color)
+            self.screen.blit(text, (30, 350 + i * 30))  # Positionnement des attaques
 
 
     def attack(self, target):
