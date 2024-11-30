@@ -197,21 +197,6 @@ class Unit(pygame.sprite.Sprite):
             self.x += dx
             self.y += dy
         return self.x, self.y
-    
-    # Fonction pour afficher les attaques
-    
-        
-    def draw_attack_menu(self) :
-        """Dessine le menu des attaques."""
-        # Fond noir dans le coin inférieur gauche
-        pygame.draw.rect(self.screen, (0, 0, 0), (20, 340, 250, 120))
-        pygame.draw.rect(self.screen, (255, 255, 255), (20, 340, 250, 120), 2)  # Bordure blanche
-
-        # Dessiner chaque attaque dans le rectangle
-        for i, attaque in enumerate(self.attaques):
-            color = (0, 255, 0) if i == self.selected_attack_index else (255, 255, 0)  # Mettre en surbrillance l'attaque sélectionnée
-            text = pygame.font.Font(None, 36).render(attaque, True, color)
-            self.screen.blit(text, (30, 350 + i * 30))  # Positionnement des attaques
 
 
     def attack(self, target):
