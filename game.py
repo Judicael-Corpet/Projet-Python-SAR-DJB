@@ -1,9 +1,10 @@
-import pygame # pour  comprendre comment fonctionne pygame : https://zestedesavoir.com/tutoriels/pdf/846/pygame-pour-les-zesteurs.pdf
+import pygame 
 import random
 import pytmx
 import pyscroll
 from unit import *
-
+#from menu import *
+#from sound import 
 
 personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", 
                             "Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
@@ -74,6 +75,8 @@ class Game:
             # Tant que l'unité n'a pas terminé son tour
             has_acted = False
             selected_unit.is_selected = True
+            selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
+            
             self.flip_display()
             
             while not has_acted:
@@ -102,6 +105,7 @@ class Game:
                             dy = 1
                             
                         selected_unit.move(dx, dy)
+                        self.flip_display()
                         
 
                         # Attaque (touche espace) met fin au tour
@@ -129,6 +133,7 @@ class Game:
 
                                 self.selected_attack = False
                                 has_acted = True
+                                selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
                                 selected_unit.is_selected = False 
 
                         self.flip_display()    
@@ -179,9 +184,16 @@ class Game:
         self.group.update()
         self.group.draw(self.screen) 
         
+        # Ajout dune grille
+        for x in range(0, WIDTH, CELL_SIZE):
+            for y in range(0, HEIGHT, CELL_SIZE):
+                rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
+                pygame.draw.rect(self.screen, WHITE, rect, -1)
+
         # Ajoutez les sprites des unités/players
         for unit in self.player_units + self.enemy_units:
             unit.draw(self.screen)
+            unit.draw_green_case(self.screen)
 
          # Si le menu des attaques est actif, dessiner le menu par-dessus
         if self.menu_attaques:  
