@@ -1,6 +1,7 @@
 
 from game import Game
 from menu import *
+import sys
 
 g = Game()
 
