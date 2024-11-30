@@ -12,12 +12,22 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
+GRAY = (100, 100, 100)
+YELLOW = (255, 255, 0)
 
 personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", "Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
 
-attacks = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
+attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
+attacks = [{"name": "Coup de poing", "damage": 10}, {"name": "Coup spécial", "damage": 20}]
+#selected_attack_index = 0
+pygame.font.init()
+screen = pygame.display.set_mode((606, 400))
+pygame.display.set_caption("Menu des attaques")
+font = pygame.font.Font(None, 36)
+
 
 class Unit(pygame.sprite.Sprite):
+    
     """
     Classe pour représenter une unité.
 
@@ -70,9 +80,10 @@ class Unit(pygame.sprite.Sprite):
 
         #Pour générer l'image du joueur que l'on a choisi
 
-        self.personnage = random.choice(personnages)
+        personnage = random.choice(personnages)
 
-        if self.personnage == "Captain_America" :
+        if personnage == "Captain_America" :
+            self.personnage = Captain_america()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -80,91 +91,104 @@ class Unit(pygame.sprite.Sprite):
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
         
 
-        elif self.personnage == "Hulk" :
+        elif personnage == "Hulk" :
+            self.personnage = Hulk()
             self.sprite_sheet = pygame.image.load('personnages/avengers2.jpg.png')
             self.image = self.get_image(52,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
-        elif self.personnage == "Ironman" :
+        elif personnage == "Ironman" :
+            self.personnage = Ironman
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
-        elif self.personnage == "Spiderman" :
+        elif personnage == "Spiderman" :
+            self.personnage = Spiderman()
             self.sprite_sheet = pygame.image.load('personnages/avengers3.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
         
-        elif self.personnage == "Thor" :
+        elif personnage == "Thor" :
+            self.personage = Thor()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(295,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
-        elif self.personnage == "Groot" :
+        elif personnage == "Groot" :
+            self.personnage = Groot()
             self.sprite_sheet = pygame.image.load('personnages/galaxy2.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
-        elif self.personnage == "Wolverine" :
+        elif personnage == "Wolverine" :
+            self.personnage = Wolverine()
             self.sprite_sheet = pygame.image.load('personnages/x_men.png')
             self.image = self.get_image(0,192) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
-        elif self.personnage == "Black_Panther" :
+        elif personnage == "Black_Panther" :
+            self.personnage = Blackpanther()
             self.sprite_sheet = pygame.image.load('personnages/avengers3.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
-        elif self.personnage == "Starlord" :
+        elif personnage == "Starlord" :
+            self.personnage = Starlord()
             self.sprite_sheet = pygame.image.load('personnages/galaxy.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
-        elif self.personnage == "Yondu" :
+        elif personnage == "Yondu" :
+            self.personnage = Yondu()
             self.sprite_sheet = pygame.image.load('personnages/galaxy.png')
             self.image = self.get_image(295,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
-        elif self.personnage == "Torch" :
+        elif personnage == "Torch" :
+            self.personnage = Torch()
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
             self.image = self.get_image(295, 193) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
-        elif self.personnage == "Jane_Storm" :
+        elif personnage == "Jane_Storm" :
+            self.personnage = Janestorm()
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
-        elif self.personnage == "Chose" :
+        elif personnage == "Chose" :
+            self.personnage = Chose()
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
             self.image = self.get_image(0,193) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             self.rect = pygame.Rect(self.x,self.y,self.size[0],self.size[1]) # create a rectangle for the player, pygame.Rect() --> create a rectangle object
 
-        elif self.personnage == "Dr_Strange" :
+        elif personnage == "Dr_Strange" :
+            self.personnage = Drstrange()
             self.sprite_sheet = pygame.image.load('personnages/doctor_strange.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -178,6 +202,12 @@ class Unit(pygame.sprite.Sprite):
             self.y += dy
         return self.x, self.y
     
+    # Fonction pour afficher les attaques
+    #def draw_action_menu(self):
+        
+    
+
+
     def attack(self, target):
         """Attaque une unité cible."""
         if abs(self.x - target.x) <= 1 and abs(self.y - target.y) <= 1:
@@ -200,6 +230,7 @@ class Unit(pygame.sprite.Sprite):
         image.blit(self.sprite_sheet,(10,0),(x,y,42,52))
         return image
 
+    # Affichage de la barre de vie
     def draw_health_bar(self, surface):
         RED = (255, 0, 0)
         GREEN = (0, 255, 0)
@@ -219,12 +250,12 @@ class Unit(pygame.sprite.Sprite):
         # Dessin de la barre de vie actuelle
         pygame.draw.rect(surface, RED, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, bar_length, bar_height))  # Barre vide
         pygame.draw.rect(surface, GREEN, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, fill, bar_height))     # Barre remplie
-        print("Bar X:", bar_x, "Bar Y:", bar_y)
+    
 
 
 
 #création de la classe de chaque personnage
-class captain_america :
+class Captain_america :
     def __init__(self):
         self.health = 150
         self.move = 3
@@ -235,9 +266,9 @@ class captain_america :
         self.attack2 = "poings"
         self.attack_power2 = 10
         self.distance_attack2 = 1
-        self.image = pygame.image.load("Personnages/CaptainAmerica.png").convert_alpha
+        
     
-class hulk :
+class Hulk :
     def __init__(self):
         self.health = 300
         self.move = 4
@@ -247,9 +278,9 @@ class hulk :
         self.attack2 = "poings"
         self.attack_power2 = 30
         self.distance_attack2 = 2
-        self.image = pygame.image.load("Personnages/Hulk.png").convert_alpha
 
-class ironman :
+
+class Ironman :
     def __init__(self):
         self.health = 150
         self.move = 8
@@ -260,7 +291,7 @@ class ironman :
         self.attack2 = "missile"
         self.attack_power2 = 40
         self.distance_attack2 = 5
-        self.image = pygame.image.load("Personnages/Ironman.png").convert_alpha
+        
 
 class Spiderman :
     def __init__(self):
@@ -273,7 +304,7 @@ class Spiderman :
         self.attack2 = "attaque_toile"
         self.attack_power2 = 40
         self.distance_attack2 = 3
-        self.image = pygame.image.load("Personnages/Spiderman.png").convert_alpha
+    
 
 class Thor :
     def __init__(self):
@@ -286,7 +317,7 @@ class Thor :
         self.attack2 = "Foudre"
         self.attack_power2 = 60
         self.distance_attack2 = 3
-        self.image = pygame.image.load("Personnages/Thor1.png").convert_alpha
+
 
 class Groot :
     def __init__(self):
@@ -299,9 +330,9 @@ class Groot :
         self.attack2 = "Protection"
         self.attack_power2 = 30
         self.distance_attack2 = 1
-        self.image = pygame.image.load("Personnages/Hawkeye.png").convert_alpha
+        
 
-class wolverine :
+class Wolverine :
     def __init__(self):
         self.health = 300
         self.move = 3
@@ -312,9 +343,9 @@ class wolverine :
         self.attack2 = "Poings"
         self.attack_power2 = 30
         self.distance_attack2 = 1
-        self.image = pygame.image.load("Personnages/Wolverine.png").convert_alpha
 
-class blackpanther :
+
+class Blackpanther :
     def __init__(self):
         self.health = 250
         self.move = 4
@@ -325,9 +356,9 @@ class blackpanther :
         self.attack2 = "Poings"
         self.attack_power2 = 30
         self.distance_attack2 = 1
-        self.image = pygame.image.load("Personnages/Blackpanther.png").convert_alpha
+    
 
-class starlord :
+class Starlord :
     def __init__(self):
         self.health = 150
         self.move = 6
@@ -338,9 +369,9 @@ class starlord :
         self.attack2 = "Poings"
         self.attack_power2 = 30
         self.distance_attack2 = 1
-        self.image = pygame.image.load("Personnages/Starlord.png").convert_alpha
+        
 
-class  yondu :
+class  Yondu :
     def __init__(self):
         self.health = 500
         self.move = 3
@@ -351,9 +382,9 @@ class  yondu :
         self.attack2 = "Poings"
         self.attack_power2 = 30
         self.distance_attack2 = 1
-        self.image = pygame.image.load("Personnages/Deadpool.png").convert_alpha
+        
 
-class torche :
+class Torch :
     def __init__(self):
         self.health = 150
         self.move = 8
@@ -364,9 +395,8 @@ class torche :
         self.attack2 = "Poings"
         self.attack_power2 = 40
         self.distance_attack2 = 1
-        self.image = pygame.image.load("Personnages/Toch1.png").convert_alpha
 
-class janestorm :
+class Janestorm :
     def __init__(self):
         self.health = 100
         self.move = 3
@@ -376,9 +406,9 @@ class janestorm :
         self.attack2 = "Poings"
         self.attack_power2 = 30
         self.distance_attack2 = 1
-        self.image = pygame.image.load("Personnages/JaneStorm.png").convert_alpha
+        
 
-class chose :
+class Chose :
     def __init__(self):
         self.health = 300
         self.move = 4
@@ -388,9 +418,8 @@ class chose :
         self.attack2 = "Poings"
         self.attack_power2 = 40
         self.distance_attack2 = 2
-        self.image = pygame.image.load("Personnages/Chose1.png").convert_alpha
 
-class drstrange :
+class Drstrange :
     def __init__(self):
         self.health = 150
         self.move = 6
@@ -399,55 +428,54 @@ class drstrange :
         self.distance_attack1 = 4
         self.attack2 = "Projectiles"
         self.distance_attack2 = 5
-        self.image = pygame.image.load("Personnages/Drstange.png").convert_alpha
 
 
 #Création de la classe de chaque attaque
 #attacks = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
 
-class poings :
+class Poings :
     def __init__(self):
         self.power = 30
         self.quantite = 100
         self.distance = 1
        
 
-class griffes :
+class Griffes :
     def __init__(self):
         self.power = 50
         self.quantite = 4
         self.distance = 3
         
 
-class lancer_bouclier :
+class Lancer_bouclier :
     def __init__(self):
         self.power = 40
         self.quantite = 3
         self.distance = 3
        
 
-class casser_les_murs :
+class Casser_les_murs :
     def __init__(self):
         self.power = 60
         self.quantite = 2
         self.distance = 1
         
 
-class laser :
+class Laser :
     def __init__(self):
         self.power = 60
         self. quantite = 3
         self.distance = 5
         
 
-class missile :
+class Missile :
     def __init__(self):
         self.power = 70
         self.quantite = 1
         self.distance = 6
         
 
-class bloquer_adversaire :
+class Bloquer_adversaire :
     def __init__(self):
         self.temps = 1
         self.power = 10
@@ -455,67 +483,67 @@ class bloquer_adversaire :
         self.distance = 4
         
 
-class attaque_toile :
+class Attaque_toile :
     def __init__(self):
         self.power = 40
         self.quantite = 4
         self.distance = 3
         
 
-class marteau :
+class Marteau :
     def __init__(self):
         self.power = 50
         self.quantite = 2
         self.distance = 5
         
-class foudre :
+class Foudre :
     def __init__(self):
         self.power = 90
         self.quantite = 1
         self.distance = 6
 
-class attaque_branche :
+class Attaque_branche :
     def __init__(self):
         self.power = 30
         self.quantite = 100
         self.distance = 3
 
-class protection :
+class Protection :
     def __init__(self):
         self.power = 100
         self.temps = 1
         self.distance = 1
 
-class pistolets :
+class Pistolets :
     def __init__(self):
         self.power = 40
         self.quantite = 10
         self.distance = 4
 
-class fleche_yaka :
+class Fleche_yaka :
     def __init__(self):
         self.power = 50
         self.quantite = 3
         self.distance = 5
 
-class boule_de_feu :
+class Boule_de_feu :
     def __init__(self):
         self.power = 60
         self.quantite = 3
         self.distance = 5
 
-class soigner :
+class Soigner :
     def __init__(self):
         self.power = 150
         self.quantite = 3
         self.distance = 1
 
-class projectile :
+class Projectile :
     def __init__(self):
         self.power = 50
         self.quantite = 4
         self.distance = 5
-        
+
 
 
 
