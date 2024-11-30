@@ -13,7 +13,7 @@ RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 
-#personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Hawkeye", "Wolverine", "Black_Panther", "Starlord", "Deadpool", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
+#listes des personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Hawkeye", "Wolverine", "Black_Panther", "Starlord", "Deadpool", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
 
 
 class Unit(pygame.sprite.Sprite):
