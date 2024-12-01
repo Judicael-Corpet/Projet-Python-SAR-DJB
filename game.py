@@ -162,7 +162,7 @@ class Game:
                                 selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
                                 selected_unit.is_selected = False 
 
-                        self.flip_display()    
+                                self.flip_display()    
                 
                 
 
