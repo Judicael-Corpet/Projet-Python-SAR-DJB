@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="tileset_test" tilewidth="32" tileheight="32" tilecount="3404" columns="74">
- <image source="Tech Dungeon Roguelite - Asset Pack (DEMO)/tileset x2.png" width="2368" height="1472"/>
-</tileset>
