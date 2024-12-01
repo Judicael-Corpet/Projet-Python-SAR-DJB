@@ -83,7 +83,7 @@ class Game:
         pygame.draw.rect(self.screen, (255, 255, 255), (20, 340, 250, 600), 2)  # Bordure blanche
 
         #if selected_unit == "Captain_America" :
-        self.attaques = ["Poings", "Lancer_bouclier"]
+        self.attaques = ["Aucune_action", "Poings", "Lancer_bouclier"]
         
         # Dessiner chaque attaque dans le rectangle
         for i, attaque in enumerate(self.attaques):
@@ -152,17 +152,19 @@ class Game:
                                 self.menu_attaques = False
                                     #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
 
-#Suite du code à écrire ici pour pour appliquer l'attaque à l'ennemi ciblé
-                        
-                        #if self.selected_attack :
-                                
 
-                                self.selected_attack = False
+                                
                                 has_acted = True
                                 selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
                                 selected_unit.is_selected = False 
 
-                                self.flip_display()    
+                        self.flip_display() 
+#Suite du code à écrire ici pour pour appliquer l'attaque à l'ennemi ciblé
+                        
+                        #if self.selected_attack :
+                                
+            self.flip_display()
+                                  
                 
                 
 
@@ -214,7 +216,7 @@ class Game:
         for x in range(0, WIDTH, CELL_SIZE):
             for y in range(0, HEIGHT, CELL_SIZE):
                 rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
-                pygame.draw.rect(self.screen, WHITE, rect, -1)
+                pygame.draw.rect(self.screen, WHITE, rect, 1)
 
         # Ajoutez les sprites des unités/players
         for unit in self.player_units + self.enemy_units:

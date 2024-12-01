@@ -165,7 +165,7 @@ class Unit(pygame.sprite.Sprite):
         personnage = "Captain_America" 
 
         if personnage == "Captain_America" :
-            self.personnage = Captain_america()
+            #self.personnage.Captain_america()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -303,10 +303,13 @@ class Unit(pygame.sprite.Sprite):
 
 #création de la classe de chaque personnage A CONFIRMER CAR PEUT-ETRE PAS NECESSAIRE
 
-class Captain_america :
+class Personnages (Unit) :
     def __init__(self):
+        pass
+
+    def Captain_america(self):
         self.health = 150
-        self.move = 3
+        self.nbre_move = 3
         self.defense = 90
         self.attaques = ["Poings","Lancer_bouclier" ]
         self.attack_power1 = 20
@@ -315,10 +318,9 @@ class Captain_america :
         self.attack_power2 = 10
         self.distance_attack2 = 1
     
-class Hulk :
-    def __init__(self):
+    def Hulk(self) :
         self.health = 300
-        self.move = 4
+        self.nbre_move = 4
         self.defense = 90
         self.attack1 = "casser_les_murs"
         self.distance_attack1 = 1
@@ -327,10 +329,10 @@ class Hulk :
         self.distance_attack2 = 2
 
 
-class Ironman :
+class Ironman (Unit) :
     def __init__(self):
         self.health = 150
-        self.move = 8
+        self.nbre_move = 8
         self.defense = 75
         self.attack1 = "laser"
         self.attack_power1 = 40
@@ -340,7 +342,7 @@ class Ironman :
         self.distance_attack2 = 5
         
 
-class Spiderman :
+class Spiderman(Unit) :
     def __init__(self):
         self.health = 100
         self.move = 6
@@ -353,8 +355,8 @@ class Spiderman :
         self.distance_attack2 = 3
     
 
-class Thor :
-    def __init__(self):
+    def Thor(self) :
+   
         self.health = 300
         self.move = 8
         self.defense = 75
@@ -366,7 +368,7 @@ class Thor :
         self.distance_attack2 = 3
 
 
-class Groot :
+class Groot(Unit) :
     def __init__(self):
         self.health = 150
         self.move = 3
@@ -379,7 +381,7 @@ class Groot :
         self.distance_attack2 = 1
         
 
-class Wolverine :
+class Wolverine(Unit) :
     def __init__(self):
         self.health = 300
         self.move = 3
@@ -392,7 +394,7 @@ class Wolverine :
         self.distance_attack2 = 1
 
 
-class Blackpanther :
+class Blackpanther(Unit) :
     def __init__(self):
         self.health = 250
         self.move = 4
@@ -418,7 +420,7 @@ class Starlord :
         self.distance_attack2 = 1
         
 
-class  Yondu :
+class  Yondu(Unit):
     def __init__(self):
         self.health = 500
         self.move = 3
@@ -431,7 +433,7 @@ class  Yondu :
         self.distance_attack2 = 1
         
 
-class Torch :
+class Torch(Unit) :
     def __init__(self):
         self.health = 150
         self.move = 8
@@ -443,7 +445,7 @@ class Torch :
         self.attack_power2 = 40
         self.distance_attack2 = 1
 
-class Janestorm :
+class Janestorm(Unit) :
     def __init__(self):
         self.health = 100
         self.move = 3
@@ -455,7 +457,7 @@ class Janestorm :
         self.distance_attack2 = 1
         
 
-class Chose :
+class Chose(Unit) :
     def __init__(self):
         self.health = 300
         self.move = 4
@@ -466,7 +468,7 @@ class Chose :
         self.attack_power2 = 40
         self.distance_attack2 = 2
 
-class Drstrange :
+class Drstrange(Unit) :
     def __init__(self):
         self.health = 150
         self.move = 6
@@ -481,35 +483,38 @@ class Drstrange :
 #Création de la classe de chaque attaque
 #attacks = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
 
-class Poings :
+class Attacks(Personnages) :
     def __init__(self):
+        pass
+
+    def Poings(self) :
         self.power = 30
         self.quantite = 100
         self.distance = 1
        
 
-class Griffes :
+class Griffes(Unit) :
     def __init__(self):
         self.power = 50
         self.quantite = 4
         self.distance = 3
         
 
-class Lancer_bouclier :
+class Lancer_bouclier(Unit) :
     def __init__(self):
         self.power = 40
         self.quantite = 3
         self.distance = 3
        
 
-class Casser_les_murs :
+class Casser_les_murs(Unit) :
     def __init__(self):
         self.power = 60
         self.quantite = 2
         self.distance = 1
         
 
-class Laser :
+class Laser(Unit) :
     def __init__(self):
         self.power = 60
         self. quantite = 3
