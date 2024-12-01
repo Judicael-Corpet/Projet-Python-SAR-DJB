@@ -277,10 +277,13 @@ def main():
         if (game.playing):
             break
     # Boucle principale du jeu
+    """
+   
     while game.playing :
         print('okay')
-        game.handle_player_turn()
-        game.handle_enemy_turn()   
+        """
+    game.handle_player_turn()
+    game.handle_enemy_turn()   
         
 
 if __name__ == "__main__":
