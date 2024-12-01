@@ -70,12 +70,8 @@ class Game:
         self.menu_attaques = False
         self.selected_attack = False
 
-        self.player_units = [Unit(self.Choix_Personnages_1.game_personnage, 0, 0, [55,55],150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
-                             Unit(self.Choix_Personnages_2.game_personnage, 0, 1, [55,55], 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
-
-        self.enemy_units = [Unit(self.Choix_Personnages_3.game_personnage, 16, 9, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
-                             Unit(self.Choix_Personnages_4.game_personnage, 17, 9, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
-
+        self.player_units = []
+        self.enemy_units = []
         #p1 = Unit("Captain_America", 0, 0, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"])
         #print (p1.name)
 
@@ -287,14 +283,13 @@ def main():
         game.curr_menu.display_menu()
         if (game.playing):
             break
+    
+    game.player_units = [Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55],150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
+                             Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55], 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
 
-            # Boucle principale du jeu
-    """
-   
-    while game.playing :
-        print('okay')
-
-    """
+    game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 16, 9, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
+                             Unit(game.Choix_Personnages_4.game_personnage, 17, 9, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
+    # Boucle principale du jeu
     
     game.handle_player_turn()
     game.handle_enemy_turn()   

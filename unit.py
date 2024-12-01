@@ -121,7 +121,8 @@ class Unit(pygame.sprite.Sprite):
         personnage = self.name
 
         if personnage == "Captain_America" :
-            #self.personnage.Captain_america()
+            Pax = Personnages()
+            Pax.Captain_america()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -138,84 +139,96 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Ironman" :
-            self.personnage = Ironman()
+            Pax = Personnages()
+            self.personnage = Pax.Ironman()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Spiderman" :
-            self.personnage = Spiderman()
+            Pax = Personnages()
+            self.personnage = Pax.Spiderman()
             self.sprite_sheet = pygame.image.load('personnages/avengers3.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Thor" :
-            self.personage = Thor()
+            Pax = Personnages()
+            self.personnage = Pax.Thor()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(295,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Groot" :
-            self.personnage = Groot()
+            Pax = Personnages()
+            self.personnage = Pax.Groot()
             self.sprite_sheet = pygame.image.load('personnages/galaxy2.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Wolverine" :
-            self.personnage = Wolverine()
+            Pax = Personnages()
+            self.personnage = Pax.Wolverine()
             self.sprite_sheet = pygame.image.load('personnages/x_men.png')
             self.image = self.get_image(0,192) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Black_Panther" :
-            self.personnage = Blackpanther()
+            Pax = Personnages()
+            self.personnage = Pax.Black_panther()
             self.sprite_sheet = pygame.image.load('personnages/avengers3.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Starlord" :
-            self.personnage = Starlord()
+            Pax = Personnages()
+            self.personnage = Pax.Starlord()
             self.sprite_sheet = pygame.image.load('personnages/galaxy.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Yondu" :
-            self.personnage = Yondu()
+            Pax = Personnages()
+            self.personnage = Pax.Yondu()
             self.sprite_sheet = pygame.image.load('personnages/galaxy.png')
             self.image = self.get_image(295,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Torch" :
-            self.personnage = Torch()
+            Pax = Personnages()
+            self.personnage = Pax.Torch()
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
             self.image = self.get_image(295, 193) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Jane_Storm" :
-            self.personnage = Janestorm()
+            Pax = Personnages()
+            self.personnage = Pax.Jane_storm()
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Chose" :
-            self.personnage = Chose()
+            Pax = Personnages()
+            self.personnage = Pax.Chose()
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
             self.image = self.get_image(0,193) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Dr_Strange" :
-            self.personnage = Drstrange()
+            Pax = Personnages()
+            self.personnage = Pax.Dr_strange()
             self.sprite_sheet = pygame.image.load('personnages/doctor_strange.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -286,8 +299,8 @@ class Personnages (Unit) :
         self.distance_attack2 = 2
 
 
-class Ironman (Unit) :
-    def __init__(self):
+    def Ironman (self) :
+    
         self.health = 150
         self.nbre_move = 8
         self.defense = 75
@@ -299,10 +312,9 @@ class Ironman (Unit) :
         self.distance_attack2 = 5
         
 
-class Spiderman(Unit) :
-    def __init__(self):
+    def Spiderman(self) :
         self.health = 100
-        self.move = 6
+        self.nbre_move = 6
         self.defense = 50
         self.attack1 = "bloquer_adversaire"
         self.attack_power1 = 20
@@ -315,7 +327,7 @@ class Spiderman(Unit) :
     def Thor(self) :
    
         self.health = 300
-        self.move = 8
+        self.nbre_move = 8
         self.defense = 75
         self.attack1 = "Marteau"
         self.attack_power1 = 50
@@ -325,10 +337,9 @@ class Spiderman(Unit) :
         self.distance_attack2 = 3
 
 
-class Groot(Unit) :
-    def __init__(self):
+    def Groot(self) :
         self.health = 150
-        self.move = 3
+        self.nbre_move = 3
         self.defense = 30
         self.attack1 = "Attaque_Branche"
         self.attack_power1 = 30
@@ -338,10 +349,10 @@ class Groot(Unit) :
         self.distance_attack2 = 1
         
 
-class Wolverine(Unit) :
-    def __init__(self):
+    def Wolverine(self) :
+    
         self.health = 300
-        self.move = 3
+        self.nbre_move = 3
         self.defense = 75
         self.attack1 = "Griffes"
         self.attack_power1 = 60
@@ -351,10 +362,9 @@ class Wolverine(Unit) :
         self.distance_attack2 = 1
 
 
-class Blackpanther(Unit) :
-    def __init__(self):
+    def Black_panther(self) :
         self.health = 250
-        self.move = 4
+        self.nbre_move = 4
         self.defense = 30
         self.attack1 = "Griffes"
         self.attack_power1 = 50
@@ -364,10 +374,9 @@ class Blackpanther(Unit) :
         self.distance_attack2 = 1
     
 
-class Starlord :
-    def __init__(self):
+    def Starlord (self) :
         self.health = 150
-        self.move = 6
+        self.nbre_move = 6
         self.defense = 30
         self.attack1 = "Pistolets"
         self.attack_power1 = 40
@@ -377,10 +386,9 @@ class Starlord :
         self.distance_attack2 = 1
         
 
-class  Yondu(Unit):
-    def __init__(self):
+    def  Yondu(self):
         self.health = 500
-        self.move = 3
+        self.nbre_move = 3
         self.defense = 50
         self.attack1 = "Fleche_Yaka"
         self.attack_power1 = 40
@@ -390,10 +398,9 @@ class  Yondu(Unit):
         self.distance_attack2 = 1
         
 
-class Torch(Unit) :
-    def __init__(self):
+    def Torch(self) :
         self.health = 150
-        self.move = 8
+        self.nbre_move = 8
         self.defense = 40
         self.attack1 = "Boule_De_Feu"
         self.attack_power1 = 60
@@ -402,10 +409,10 @@ class Torch(Unit) :
         self.attack_power2 = 40
         self.distance_attack2 = 1
 
-class Janestorm(Unit) :
-    def __init__(self):
+    def Jane_storm(self) :
+
         self.health = 100
-        self.move = 3
+        self.nbre_move = 3
         self.defense = 30
         self.attack1 = "Soigner"
         self.distance_attack1 = 3
@@ -414,10 +421,9 @@ class Janestorm(Unit) :
         self.distance_attack2 = 1
         
 
-class Chose(Unit) :
-    def __init__(self):
+    def Chose(self) :
         self.health = 300
-        self.move = 4
+        self.nbre_move = 4
         self.defense = 80
         self.attack1 = "Casser_les_murs"
         self.distance_attack1 = 1
@@ -425,10 +431,9 @@ class Chose(Unit) :
         self.attack_power2 = 40
         self.distance_attack2 = 2
 
-class Drstrange(Unit) :
-    def __init__(self):
+    def Dr_strange(self) :
         self.health = 150
-        self.move = 6
+        self.nbre_move = 6
         self.defense = 80
         self.attack1 = "Bloquer_adversaire"
         self.distance_attack1 = 4
