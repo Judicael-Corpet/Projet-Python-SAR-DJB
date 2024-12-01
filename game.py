@@ -71,9 +71,9 @@ class Game:
         
         """
         self.player_units = [Unit(self.Choix_Personnages_1, 0, 0, [55,55]), 
-                             Unit(self.Choix_Personnages_2, 0, 0, [55,55])]
-        self.enemy_units = [Unit(self.Choix_Personnages_3,0, 0, [55,55]), 
-                            Unit(self.Choix_Personnages_4, 0, 0, [55,55])]
+                             Unit(self.Choix_Personnages_2, 0, 1, [55,55])]
+        self.enemy_units = [Unit(self.Choix_Personnages_3,15, 10, [55,55]), 
+                            Unit(self.Choix_Personnages_4, 16, 10, [55,55])]
 
 
 
@@ -266,6 +266,7 @@ def main():
         game.curr_menu.display_menu()
         if (game.playing):
             break
+    
     # Boucle principale du jeu
     while game.playing :
         print('okay')
