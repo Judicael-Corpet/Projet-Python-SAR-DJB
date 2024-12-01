@@ -337,8 +337,8 @@ class Personnages (Unit) :
         self.distance_attack2 = 2
 
 
-class Ironman (Unit) :
-    def __init__(self):
+    def Ironman (self) :
+    
         self.health = 150
         self.nbre_move = 8
         self.defense = 75
@@ -350,10 +350,9 @@ class Ironman (Unit) :
         self.distance_attack2 = 5
         
 
-class Spiderman(Unit) :
-    def __init__(self):
+    def Spiderman(self) :
         self.health = 100
-        self.move = 6
+        self.nbre_move = 6
         self.defense = 50
         self.attack1 = "bloquer_adversaire"
         self.attack_power1 = 20
@@ -366,7 +365,7 @@ class Spiderman(Unit) :
     def Thor(self) :
    
         self.health = 300
-        self.move = 8
+        self.nbre_move = 8
         self.defense = 75
         self.attack1 = "Marteau"
         self.attack_power1 = 50
@@ -376,8 +375,7 @@ class Spiderman(Unit) :
         self.distance_attack2 = 3
 
 
-class Groot(Unit) :
-    def __init__(self):
+    def Groot(self) :
         self.health = 150
         self.move = 3
         self.defense = 30
