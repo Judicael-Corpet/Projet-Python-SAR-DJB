@@ -2,7 +2,7 @@ import pygame
 from sound import SoundManager
 from game import *
 
-fond = pygame.image.load('Menu\Fond_ecran.png')
+fond = pygame.image.load('Fond_ecran.png')
 
 class Menu():
     def __init__(self, game):
