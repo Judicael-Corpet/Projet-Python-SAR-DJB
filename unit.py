@@ -26,57 +26,13 @@ YELLOW = (255, 255, 0)
 
 class Unit(pygame.sprite.Sprite):
     
-    """
-    Classe pour représenter une unité.
-
-    ...
-    Attributs
-    ---------
-    x : int
-        La position x de l'unité sur la grille.
-    y : int
-        La position y de l'unité sur la grille.
-    team : str
-        L'équipe de l'unité ('player' ou 'enemy').
-    is_selected : bool
-        Si l'unité est sélectionnée ou non.
-
-    Méthodes
-    --------
-    move(dx, dy)
-        Déplace l'unité de dx, dy.
-    attack(target)
-        Attaque une unité cible.
-    draw(screen)
-        Dessine l'unité sur la grille.
-
-        Construit une unité avec une position, une santé, une puissance d'attaque et une équipe.
-
-        Paramètres
-        ----------
-        name : str
-            Le nom du personnage choisi
-        x : int
-            La position x du personnage sur la grille.
-        y : int
-            La position y du personnage sur la grille.
-        health : int
-            La santé du personnage
-        move : int
-            Le nombre de case maximum de déplacement du personnage
-        defense : int
-            La résistance du personnage aux attaques de l'ennemi
-        attacks : liste de str
-            La liste d'attaques du personnage.
-        
-     
-       """
     def __init__(self, name, x, y, size, health, nbre_move, defense, attacks):
         super().__init__() #permet d'inialiser la classe sprite en appelant son constructeur avec super()
         self.name = name
         self.x = x # Position x du personnage
         self.y = y # Position y du personnage
         self.size = size # taille de l'image du personnage
+        
         self.health = health
         self.nbre_move = nbre_move
         self.defense = defense
@@ -158,11 +114,11 @@ class Unit(pygame.sprite.Sprite):
         if abs(self.x - target.x) <= self.distance_attack and abs(self.y - target.y) <= self.distance_attack :
             target.health -= self.attack_power
 
-    def draw(self, screen):
+    def draw(self, screen, personnage):
         """Affiche l'unité sur l'écran."""
         #personnage = random.choice(self.personnages) 
         #Pour générer l'image du joueur que l'on a choisi
-        personnage = "Captain_America" 
+        personnage = self.name
 
         if personnage == "Captain_America" :
             #self.personnage.Captain_america()
@@ -174,14 +130,15 @@ class Unit(pygame.sprite.Sprite):
             
         
         elif personnage == "Hulk" :
-            self.personnage = Hulk()
+            Pax = Personnages()
+            self.personnage = Pax.Hulk()
             self.sprite_sheet = pygame.image.load('personnages/avengers2.jpg.png')
             self.image = self.get_image(52,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Ironman" :
-            self.personnage = Ironman
+            self.personnage = Ironman()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
