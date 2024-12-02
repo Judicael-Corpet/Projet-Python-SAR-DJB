@@ -108,7 +108,6 @@ class Unit(pygame.sprite.Sprite):
         
         self.image = pygame.Surface(size)
 
-
     def move(self, dx, dy):
         """Déplace l'unité de dx, dy, uniquement si la case cible est valide."""
         # Calcul de la position cible
