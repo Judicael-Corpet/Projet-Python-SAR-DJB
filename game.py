@@ -118,28 +118,28 @@ class Game:
 
                     # Gestion des touches du clavier
                     elif event.type == pygame.KEYDOWN:
-
+                        if self.menu_attaques == False :
                         # Déplacement (touches fléchées)
-                        dx, dy = 0, 0
-                        if event.key == pygame.K_LEFT:
-                            dx = -1
-                        elif event.key == pygame.K_RIGHT:
-                            dx = 1
-                        elif event.key == pygame.K_UP and not self.menu_attaques:
-                            dy = -1
+                            dx, dy = 0, 0
+                            if event.key == pygame.K_LEFT:
+                                dx = -1
+                            elif event.key == pygame.K_RIGHT:
+                                dx = 1
+                            elif event.key == pygame.K_UP and not self.menu_attaques:
+                                dy = -1
+                                
+                            elif event.key == pygame.K_DOWN and not self.menu_attaques:
+                                dy = 1
+                                
+                            selected_unit.move(dx, dy)
                             
-                        elif event.key == pygame.K_DOWN and not self.menu_attaques:
-                            dy = 1
-                            
-                        selected_unit.move(dx, dy)
-                        
                         
 
                         # Attaque (touche espace) met fin au tour
-                        if event.key == pygame.K_SPACE:
-                            
-                            self.menu_attaques = True #active le menu des attaques
-                        # Navigation dans le menu des attaques
+                            if event.key == pygame.K_SPACE:
+                                
+                                self.menu_attaques = True #active le menu des attaques
+                            # Navigation dans le menu des attaques
                         if self.menu_attaques :
                             if event.key == pygame.K_DOWN:
                                 self.selected_attack_index = (self.selected_attack_index + 1) % len(self.attaques) # Navigation dans le menu des attaques vers le haut
@@ -151,14 +151,14 @@ class Game:
                                 print (f"Attaque sélectionnée : {self.attaques[self.selected_attack_index]}") # attaque validée
                                 self.selected_attack = True
                                 self.menu_attaques = False
-                                    #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
+                                #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
 
 
                                 
                                 has_acted = True
                                 selected_unit.is_selected = False 
                 
-                selected_unit.is_selected = True            #selected_unit.update_green_case(self.player_units, self.enemy_units)
+                           #selected_unit.update_green_case(self.player_units, self.enemy_units)
                 self.flip_display()
                
 #Suite du code à écrire ici pour pour appliquer l'attaque à l'ennemi ciblé
@@ -186,8 +186,8 @@ class Game:
        
         
         for enemy in self.enemy_units:
-
-            
+            enemy.is_selected  = True
+            enemy.update_green_case(self.player_units,self.enemy_units)   
 
                 # Déplacement aléatoire
             target = random.choice(self.player_units)
@@ -195,13 +195,17 @@ class Game:
             dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
             enemy.move(dx, dy)
 
+
             # Attaque si possible
             if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
                 enemy.attack(target)
                 if target.health <= 0:
                     self.player_units.remove(target)
            
-
+            enemy.is_selected = False
+        self.flip_display() 
+        play = True
+        return play 
 
     def flip_display(self):
         """Affiche la carte et les éléments du jeu."""
@@ -301,12 +305,15 @@ def main():
     game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 16, 9, [55,55]),#, 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              Unit(game.Choix_Personnages_4.game_personnage, 17, 9, [55,55])]#, 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
     
+    play = True
+    iter = 0
     
     # Boucle principale du jeu
-    
-    game.handle_player_turn()
-    game.handle_enemy_turn()   
-            
+    while play and iter<100 :
+        game.handle_player_turn()
+        game.handle_enemy_turn()   
+        iter += 1 
+        play =  game.handle_enemy_turn() 
 
 if __name__ == "__main__":
     main()
