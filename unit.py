@@ -57,6 +57,7 @@ class Unit(pygame.sprite.Sprite):
         self.image = pygame.Surface(size)
 
         self.green_cases=[]
+        
 
     def move(self, dx, dy):
         """Déplace l'unité de dx, dy, uniquement si la case cible est valide."""
@@ -119,11 +120,11 @@ class Unit(pygame.sprite.Sprite):
         #personnage = random.choice(self.personnages) 
         #Pour générer l'image du joueur que l'on a choisi
         personnage = self.name
-        Pax = Personnages()
+        
 
         if personnage == "Captain_America" :
             
-            self.personnage = Pax.Captain_america()
+            self.personnage = Captain_america()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -132,14 +133,14 @@ class Unit(pygame.sprite.Sprite):
             
         
         elif personnage == "Hulk" :
-            self.personnage = Pax.Hulk()
+            self.personnage = Hulk()
             self.sprite_sheet = pygame.image.load('personnages/avengers2.jpg.png')
             self.image = self.get_image(52,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Ironman" :
-            self.personnage = Pax.Ironman()
+            self.personnage = Ironman()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -147,7 +148,7 @@ class Unit(pygame.sprite.Sprite):
             
         elif personnage == "Spiderman" :
             
-            self.personnage = Pax.Spiderman()
+            self.personnage = Spiderman()
             self.sprite_sheet = pygame.image.load('personnages/avengers3.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -155,7 +156,7 @@ class Unit(pygame.sprite.Sprite):
             
         elif personnage == "Thor" :
             
-            self.personnage = Pax.Thor()
+            self.personnage = Thor()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(295,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -163,7 +164,7 @@ class Unit(pygame.sprite.Sprite):
             
         elif personnage == "Groot" :
             
-            self.personnage = Pax.Groot()
+            self.personnage = Groot()
             self.sprite_sheet = pygame.image.load('personnages/galaxy2.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -171,7 +172,7 @@ class Unit(pygame.sprite.Sprite):
             
         elif personnage == "Wolverine" :
             
-            self.personnage = Pax.Wolverine()
+            self.personnage = Wolverine()
             self.sprite_sheet = pygame.image.load('personnages/x_men.png')
             self.image = self.get_image(0,192) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -179,7 +180,7 @@ class Unit(pygame.sprite.Sprite):
             
         elif personnage == "Black_Panther" :
             
-            self.personnage = Pax.Black_panther()
+            self.personnage = Black_panther()
             self.sprite_sheet = pygame.image.load('personnages/avengers3.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -187,7 +188,7 @@ class Unit(pygame.sprite.Sprite):
             
         elif personnage == "Starlord" :
             
-            self.personnage = Pax.Starlord()
+            self.personnage = Starlord()
             self.sprite_sheet = pygame.image.load('personnages/galaxy.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -195,7 +196,7 @@ class Unit(pygame.sprite.Sprite):
             
         elif personnage == "Yondu" :
             
-            self.personnage = Pax.Yondu()
+            self.personnage = Yondu()
             self.sprite_sheet = pygame.image.load('personnages/galaxy.png')
             self.image = self.get_image(295,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -203,7 +204,7 @@ class Unit(pygame.sprite.Sprite):
             
         elif personnage == "Torch" :
             
-            self.personnage = Pax.Torch()
+            self.personnage = Torch()
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
             self.image = self.get_image(295, 193) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -211,7 +212,7 @@ class Unit(pygame.sprite.Sprite):
             
         elif personnage == "Jane_Storm" :
             
-            self.personnage = Pax.Jane_storm()
+            self.personnage = Jane_storm()
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
             self.image = self.get_image(150,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -219,7 +220,7 @@ class Unit(pygame.sprite.Sprite):
             
         elif personnage == "Chose" :
             
-            self.personnage = Pax.Chose()
+            self.personnage = Chose()
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
             self.image = self.get_image(0,193) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -227,7 +228,7 @@ class Unit(pygame.sprite.Sprite):
             
         elif personnage == "Dr_Strange" :
             
-            self.personnage = Pax.Dr_strange()
+            self.personnage = Dr_strange()
             self.sprite_sheet = pygame.image.load('personnages/doctor_strange.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -272,11 +273,10 @@ class Unit(pygame.sprite.Sprite):
 
 #création de la classe de chaque personnage A CONFIRMER CAR PEUT-ETRE PAS NECESSAIRE
 
-class Personnages (Unit) :
-    def __init__(self):
-        pass
 
-    def Captain_america(self):
+
+class Captain_america(Unit):
+    def __init__(self):
         self.health = 150
         self.nbre_move = 3
         self.defense = 90
@@ -287,7 +287,8 @@ class Personnages (Unit) :
         self.attack_power2 = 10
         self.distance_attack2 = 1
     
-    def Hulk(self) :
+class Hulk(Unit) :
+    def __init__(self):
         self.health = 300
         self.nbre_move = 4
         self.defense = 90
@@ -298,8 +299,8 @@ class Personnages (Unit) :
         self.distance_attack2 = 2
 
 
-    def Ironman (self) :
-    
+class Ironman (Unit) :
+    def __init__(self):
         self.health = 150
         self.nbre_move = 8
         self.defense = 75
@@ -311,7 +312,8 @@ class Personnages (Unit) :
         self.distance_attack2 = 5
         
 
-    def Spiderman(self) :
+class Spiderman(Unit) :
+    def __init__(self):
         self.health = 100
         self.nbre_move = 6
         self.defense = 50
@@ -323,8 +325,8 @@ class Personnages (Unit) :
         self.distance_attack2 = 3
     
 
-    def Thor(self) :
-   
+class Thor(Unit) :
+    def __init__(self) :
         self.health = 300
         self.nbre_move = 8
         self.defense = 75
@@ -336,7 +338,8 @@ class Personnages (Unit) :
         self.distance_attack2 = 3
 
 
-    def Groot(self) :
+class Groot(Unit) :
+    def __init__(self):
         self.health = 150
         self.nbre_move = 3
         self.defense = 30
@@ -348,8 +351,8 @@ class Personnages (Unit) :
         self.distance_attack2 = 1
         
 
-    def Wolverine(self) :
-    
+class Wolverine(Unit) :
+    def __init__(self):   
         self.health = 300
         self.nbre_move = 3
         self.defense = 75
@@ -361,7 +364,8 @@ class Personnages (Unit) :
         self.distance_attack2 = 1
 
 
-    def Black_panther(self) :
+class Black_panther(Unit) :
+    def __init__(self):
         self.health = 250
         self.nbre_move = 4
         self.defense = 30
@@ -373,7 +377,8 @@ class Personnages (Unit) :
         self.distance_attack2 = 1
     
 
-    def Starlord (self) :
+class Starlord (Unit) :
+    def __init__(self):
         self.health = 150
         self.nbre_move = 6
         self.defense = 30
@@ -385,7 +390,8 @@ class Personnages (Unit) :
         self.distance_attack2 = 1
         
 
-    def  Yondu(self):
+class  Yondu(Unit):
+    def __init__(self):
         self.health = 500
         self.nbre_move = 3
         self.defense = 50
@@ -397,7 +403,8 @@ class Personnages (Unit) :
         self.distance_attack2 = 1
         
 
-    def Torch(self) :
+class Torch(Unit) :
+    def __init__(self):
         self.health = 150
         self.nbre_move = 8
         self.defense = 40
@@ -408,8 +415,8 @@ class Personnages (Unit) :
         self.attack_power2 = 40
         self.distance_attack2 = 1
 
-    def Jane_storm(self) :
-
+class Jane_storm(Unit) :
+    def __init__(self):
         self.health = 100
         self.nbre_move = 3
         self.defense = 30
@@ -420,7 +427,8 @@ class Personnages (Unit) :
         self.distance_attack2 = 1
         
 
-    def Chose(self) :
+class Chose(Unit) :
+    def __init__(self):
         self.health = 300
         self.nbre_move = 4
         self.defense = 80
@@ -430,7 +438,8 @@ class Personnages (Unit) :
         self.attack_power2 = 40
         self.distance_attack2 = 2
 
-    def Dr_strange(self) :
+class Dr_strange(Unit) :
+    def __init__(self):
         self.health = 150
         self.nbre_move = 6
         self.defense = 80
@@ -444,7 +453,7 @@ class Personnages (Unit) :
 #Création de la classe de chaque attaque
 #attacks = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
 
-class Attacks(Personnages) :
+class Attacks(Unit) :
     def __init__(self):
         pass
 
@@ -482,14 +491,14 @@ class Laser(Unit) :
         self.distance = 5
         
 
-class Missile :
+class Missile (Unit):
     def __init__(self):
         self.power = 70
         self.quantite = 1
         self.distance = 6
         
 
-class Bloquer_adversaire :
+class Bloquer_adversaire (Unit):
     def __init__(self):
         self.temps = 1
         self.power = 10
@@ -497,62 +506,62 @@ class Bloquer_adversaire :
         self.distance = 4
         
 
-class Attaque_toile :
+class Attaque_toile (Unit):
     def __init__(self):
         self.power = 40
         self.quantite = 4
         self.distance = 3
         
 
-class Marteau :
+class Marteau (Unit):
     def __init__(self):
         self.power = 50
         self.quantite = 2
         self.distance = 5
         
-class Foudre :
+class Foudre (Unit):
     def __init__(self):
         self.power = 90
         self.quantite = 1
         self.distance = 6
 
-class Attaque_branche :
+class Attaque_branche(Unit) :
     def __init__(self):
         self.power = 30
         self.quantite = 100
         self.distance = 3
 
-class Protection :
+class Protection (Unit):
     def __init__(self):
         self.power = 100
         self.temps = 1
         self.distance = 1
 
-class Pistolets :
+class Pistolets(Unit) :
     def __init__(self):
         self.power = 40
         self.quantite = 10
         self.distance = 4
 
-class Fleche_yaka :
+class Fleche_yaka(Unit) :
     def __init__(self):
         self.power = 50
         self.quantite = 3
         self.distance = 5
 
-class Boule_de_feu :
+class Boule_de_feu (Unit):
     def __init__(self):
         self.power = 60
         self.quantite = 3
         self.distance = 5
 
-class Soigner :
+class Soigner (Unit):
     def __init__(self):
         self.power = 150
         self.quantite = 3
         self.distance = 1
 
-class Projectile :
+class Projectile(Unit) :
     def __init__(self):
         self.power = 50
         self.quantite = 4
