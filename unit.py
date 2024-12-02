@@ -302,7 +302,6 @@ class Unit(pygame.sprite.Sprite):
         self.nbre_move = self.personnage.nbre_move
         self.defense = self.personnage.defense
         self.attaques = self.personnage.attaques
-        self.distance_attack = self.personnage.distance_attack
         self.attack_power = self.personnage.attack_power
 
         if self.is_selected:
