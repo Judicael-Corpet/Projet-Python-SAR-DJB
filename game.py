@@ -54,7 +54,7 @@ class Game:
         self.Choix_Personnages_4 = Choix_Personnage_Menu_4(self) #Instanciation de self.Choix_Personnages_4 à la classe Choix_Personnage_Menu_4 dans menu.py
         self.Choix_Carte = Choix_Carte_Menu(self)
         self.curr_menu = self.main_menu
-        
+
         # gerer le son
         self.sound_manager = SoundManager()
         self.Volume = Volume(self)
@@ -98,7 +98,7 @@ class Game:
             # Tant que l'unité n'a pas terminé son tour
             has_acted = False
             selected_unit.is_selected = True
-            selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
+            selected_unit.update_green_case(self.player_units,self.enemy_units)
             
             health = selected_unit.health
             nbre_move = selected_unit.nbre_move
@@ -157,7 +157,7 @@ class Game:
                                 
                                 has_acted = True
                                 selected_unit.is_selected = False 
-                            selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
+                            selected_unit.update_green_case(self.player_units, self.enemy_units)
                 self.flip_display()
                
 #Suite du code à écrire ici pour pour appliquer l'attaque à l'ennemi ciblé
@@ -189,16 +189,16 @@ class Game:
             
 
                 # Déplacement aléatoire
-                target = random.choice(self.player_units)
-                dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
-                dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
-                enemy.move(dx, dy)
+            target = random.choice(self.player_units)
+            dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
+            dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
+            enemy.move(dx, dy)
 
-                # Attaque si possible
-                if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
-                    enemy.attack(target)
-                    if target.health <= 0:
-                        self.player_units.remove(target)
+            # Attaque si possible
+            if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
+                enemy.attack(target)
+                if target.health <= 0:
+                    self.player_units.remove(target)
            
 
 
@@ -226,15 +226,16 @@ class Game:
                 pygame.draw.rect(self.screen, WHITE, rect, 1)
 
         # Ajoutez les sprites des unités/players
-        for unit in self.player_units :
+        for unit in self.player_units + self.enemy_units :
             unit.draw(self.screen)
-            unit.draw_green_case(self.screen)
-            print (f"l'unité est : {unit.name}, {unit.defense}")
+            if unit.is_selected :
+                unit.draw_green_case(self.screen)
+                print (f"l'unité est : {unit.name}, {unit.defense}")
 
 
-        for unit in self.enemy_units :
-            unit.draw(self.screen)
-            unit.draw_green_case(self.screen)
+        #for unit in self.enemy_units :
+        #    unit.draw(self.screen)
+        #    unit.draw_green_case(self.screen)
             
 
          # Si le menu des attaques est actif, dessiner le menu par-dessus

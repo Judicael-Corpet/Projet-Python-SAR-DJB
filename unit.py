@@ -74,7 +74,7 @@ class Unit(pygame.sprite.Sprite):
             print("Déplacement invalide : en dehors des cases autorisées.")
 
 
-    def update_green_case(self,screen,player_units,enemy_units):
+    def update_green_case(self,player_units,enemy_units):
         self.green_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.green_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
 
