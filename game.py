@@ -157,7 +157,8 @@ class Game:
                                 
                                 has_acted = True
                                 selected_unit.is_selected = False 
-                            selected_unit.update_green_case(self.player_units, self.enemy_units)
+                
+                selected_unit.is_selected = True            #selected_unit.update_green_case(self.player_units, self.enemy_units)
                 self.flip_display()
                
 #Suite du code à écrire ici pour pour appliquer l'attaque à l'ennemi ciblé
