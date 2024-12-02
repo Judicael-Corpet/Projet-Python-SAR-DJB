@@ -36,23 +36,23 @@ class Unit(pygame.sprite.Sprite):
         self.health = 0
         self.nbre_move = 0
         self.defense = 0
-        self.attacks = []
+        self.attaques = []
+        
+        self.distance_attack = 0
         
 
-        # Liste des personnages 
+        
 
         self.is_selected = False # variable servant dans la méthode draw() pour afficher le personnage
         
         # Liste des attaques
-        self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", 
-                         "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", 
-                         "Boule_De_Feu", "Soigner", "Projectile" ]
+        #self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", 
+                         #"Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", 
+                         #"Boule_De_Feu", "Soigner", "Projectile" ]
         
         self.selected_attack_index = 0  # Indice de l'attaque sélectionnée
 
-        self.distance_attack = 0
-        self.max_health = 150
-        self.health = 150
+        
         
         self.image = pygame.Surface(size)
 
@@ -121,7 +121,6 @@ class Unit(pygame.sprite.Sprite):
         #Pour générer l'image du joueur que l'on a choisi
         personnage = self.name
         
-
         if personnage == "Captain_America" :
             
             self.personnage = Captain_america()
@@ -234,6 +233,13 @@ class Unit(pygame.sprite.Sprite):
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
 
+        self.health = self.personnage.health
+        self.nbre_move = self.personnage.nbre_move
+        self.defense = self.personnage.defense
+        self.attaques = self.personnage.attaques
+        self.distance_attack = self.personnage.distance_attack
+        self.max_health = 150
+
         if self.is_selected:
             pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
                              self.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
@@ -279,24 +285,17 @@ class Captain_america(Unit):
     def __init__(self):
         self.health = 150
         self.nbre_move = 3
-        self.defense = 90
-        self.attaques = ["Poings","Lancer_bouclier" ]
-        self.attack_power1 = 20
-        self.distance_attack1 = 3
-        self.attack2 = "poings"
-        self.attack_power2 = 10
-        self.distance_attack2 = 1
+        self.defense = 75
+        self.attaques = ["Aucune action", "Poings","Lancer_bouclier" ]
+        self.distance_attack = 1
     
 class Hulk(Unit) :
     def __init__(self):
         self.health = 300
         self.nbre_move = 4
         self.defense = 90
-        self.attack1 = "casser_les_murs"
-        self.distance_attack1 = 1
-        self.attack2 = "poings"
-        self.attack_power2 = 30
-        self.distance_attack2 = 2
+        self.attaques = ["Aucune action", "Poings", "casser_les_murs"]
+        self.distance_attack = 2
 
 
 class Ironman (Unit) :
@@ -304,12 +303,8 @@ class Ironman (Unit) :
         self.health = 150
         self.nbre_move = 8
         self.defense = 75
-        self.attack1 = "laser"
-        self.attack_power1 = 40
-        self.distance_attack1 = 4
-        self.attack2 = "missile"
-        self.attack_power2 = 40
-        self.distance_attack2 = 5
+        self.attaques = ["Aucune action", "poings","laser", "missile"]
+        self.distance_attack = 5
         
 
 class Spiderman(Unit) :
@@ -317,12 +312,8 @@ class Spiderman(Unit) :
         self.health = 100
         self.nbre_move = 6
         self.defense = 50
-        self.attack1 = "bloquer_adversaire"
-        self.attack_power1 = 20
-        self.distance_attack1 = 4
-        self.attack2 = "attaque_toile"
-        self.attack_power2 = 40
-        self.distance_attack2 = 3
+        self.attaques = ["Aucune action", "poings","bloquer_adversaire", "attaque_toile"]
+        self.distance_attack = 3
     
 
 class Thor(Unit) :
@@ -330,12 +321,8 @@ class Thor(Unit) :
         self.health = 300
         self.nbre_move = 8
         self.defense = 75
-        self.attack1 = "Marteau"
-        self.attack_power1 = 50
-        self.distance_attack1 = 5
-        self.attack2 = "Foudre"
-        self.attack_power2 = 60
-        self.distance_attack2 = 3
+        self.attaques = ["Aucune action", "poings","Marteau", "Foudre"]
+        self.distance_attack = 3
 
 
 class Groot(Unit) :
@@ -343,12 +330,8 @@ class Groot(Unit) :
         self.health = 150
         self.nbre_move = 3
         self.defense = 30
-        self.attack1 = "Attaque_Branche"
-        self.attack_power1 = 30
-        self.distance_attack1 = 6
-        self.attack2 = "Protection"
-        self.attack_power2 = 30
-        self.distance_attack2 = 1
+        self.attaques = ["Aucune action","Attaque_Branche", "Protection"]
+        self.distance_attack = 1
         
 
 class Wolverine(Unit) :
@@ -356,12 +339,8 @@ class Wolverine(Unit) :
         self.health = 300
         self.nbre_move = 3
         self.defense = 75
-        self.attack1 = "Griffes"
-        self.attack_power1 = 60
-        self.distance_attack1 = 2
-        self.attack2 = "Poings"
-        self.attack_power2 = 30
-        self.distance_attack2 = 1
+        self.attaques = ["Aucune action", "poings","Griffes"]
+        self.distance_attack = 1
 
 
 class Black_panther(Unit) :
@@ -369,12 +348,8 @@ class Black_panther(Unit) :
         self.health = 250
         self.nbre_move = 4
         self.defense = 30
-        self.attack1 = "Griffes"
-        self.attack_power1 = 50
-        self.distance_attack1 = 2
-        self.attack2 = "Poings"
-        self.attack_power2 = 30
-        self.distance_attack2 = 1
+        self.attaques = ["Aucune action", "poings","Griffes"]
+        self.distance_attack = 1
     
 
 class Starlord (Unit) :
@@ -382,12 +357,8 @@ class Starlord (Unit) :
         self.health = 150
         self.nbre_move = 6
         self.defense = 30
-        self.attack1 = "Pistolets"
-        self.attack_power1 = 40
-        self.distance_attack1 = 4
-        self.attack2 = "Poings"
-        self.attack_power2 = 30
-        self.distance_attack2 = 1
+        self.attaques = ["Aucune action", "poings","Pistolets"]
+        self.distance_attack = 4
         
 
 class  Yondu(Unit):
@@ -395,12 +366,8 @@ class  Yondu(Unit):
         self.health = 500
         self.nbre_move = 3
         self.defense = 50
-        self.attack1 = "Fleche_Yaka"
-        self.attack_power1 = 40
-        self.distance_attack1 = 4
-        self.attack2 = "Poings"
-        self.attack_power2 = 30
-        self.distance_attack2 = 1
+        self.attaques = ["Aucune action", "poings","Fleche_Yaka"]
+        self.distance_attack = 4
         
 
 class Torch(Unit) :
@@ -408,23 +375,16 @@ class Torch(Unit) :
         self.health = 150
         self.nbre_move = 8
         self.defense = 40
-        self.attack1 = "Boule_De_Feu"
-        self.attack_power1 = 60
-        self.distance_attack1 = 5
-        self.attack2 = "Poings"
-        self.attack_power2 = 40
-        self.distance_attack2 = 1
+        self.attaques = ["Aucune action", "poings","Boule_De_Feu"]
+        self.distance_attack2 = 4
 
 class Jane_storm(Unit) :
     def __init__(self):
         self.health = 100
         self.nbre_move = 3
         self.defense = 30
-        self.attack1 = "Soigner"
-        self.distance_attack1 = 3
-        self.attack2 = "Poings"
-        self.attack_power2 = 30
-        self.distance_attack2 = 1
+        self.attaques = ["Aucune action", "poings","Soigner"]
+        self.distance_attack = 1
         
 
 class Chose(Unit) :
@@ -432,10 +392,7 @@ class Chose(Unit) :
         self.health = 300
         self.nbre_move = 4
         self.defense = 80
-        self.attack1 = "Casser_les_murs"
-        self.distance_attack1 = 1
-        self.attack2 = "Poings"
-        self.attack_power2 = 40
+        self.attaques = ["Aucune action", "poings","Casser_les_murs"]
         self.distance_attack2 = 2
 
 class Dr_strange(Unit) :
@@ -443,10 +400,8 @@ class Dr_strange(Unit) :
         self.health = 150
         self.nbre_move = 6
         self.defense = 80
-        self.attack1 = "Bloquer_adversaire"
-        self.distance_attack1 = 4
-        self.attack2 = "Projectiles"
-        self.distance_attack2 = 5
+        self.attaques = ["Aucune action", "poings","Bloquer_adversaire","Projectiles" ]
+        self.distance_attack = 5
 
 
 

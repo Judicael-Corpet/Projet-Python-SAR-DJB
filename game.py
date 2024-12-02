@@ -49,15 +49,12 @@ class Game:
         
         
         self.Choix_Personnages_1 = Choix_Personnage_Menu_1(self) #Instanciation de self.Choix_Personnages_1 à la classe Choix_Personnage_Menu_1 dans menu.py
-       
         self.Choix_Personnages_2 = Choix_Personnage_Menu_2(self) #Instanciation de self.Choix_Personnages_2 à la classe Choix_Personnage_Menu_2 dans menu.py
-        #PAX = self.Choix_Personnages_2.check_input()
         self.Choix_Personnages_3 = Choix_Personnage_Menu_3(self) #Instanciation de self.Choix_Personnages_3 à la classe Choix_Personnage_Menu_3 dans menu.py
-        self.Choix_Personnages_3.check_input()
         self.Choix_Personnages_4 = Choix_Personnage_Menu_4(self) #Instanciation de self.Choix_Personnages_4 à la classe Choix_Personnage_Menu_4 dans menu.py
-        self.Choix_Personnages_4.check_input()
         self.Choix_Carte = Choix_Carte_Menu(self)
         self.curr_menu = self.main_menu
+        
         # gerer le son
         self.sound_manager = SoundManager()
         self.Volume = Volume(self)
