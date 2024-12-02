@@ -229,7 +229,7 @@ class Game:
                 pygame.draw.rect(self.screen, WHITE, rect, 1)
 
         # Ajoutez les sprites des unités/players
-        for unit in self.player_units :
+        for unit in self.player_units:
             unit.draw(self.screen)
             unit.draw_green_case(self.screen)
             print (f"l'unité est : {unit.name}, {unit.defense}")
