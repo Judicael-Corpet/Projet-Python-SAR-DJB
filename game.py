@@ -76,38 +76,40 @@ class Game:
     def draw_attack_menu(self) :
         """Dessine le menu des attaques."""
         #Fond noir dans le coin inférieur gauche
-        pygame.draw.rect(self.screen, (0, 0, 0), (20, 340, 250, 600 ))
-        pygame.draw.rect(self.screen, (255, 255, 255), (20, 340, 250, 600), 2)  # Bordure blanche
+        pygame.draw.rect(self.screen, (0, 0, 0), (20, 340, 250, 150 ))
+        pygame.draw.rect(self.screen, (255, 255, 255), (20, 340, 250, 150), 2)  # Bordure blanche
 
         #if selected_unit == "Captain_America" :
-        self.attaques = ["Aucune_action", "Poings", "Lancer_bouclier"]
-        
+        #self.attaques = []
+        #self.attaques = ["Aucune_action", "Poings", "Lancer_bouclier"]
+        list_attacks = self.attaques
         # Dessiner chaque attaque dans le rectangle
-        for i, attaque in enumerate(self.attaques):
+        for i, attaque in enumerate(list_attacks):
             color = (0, 255, 0) if i == self.selected_attack_index else (255, 255, 255)  # Mettre en surbrillance l'attaque sélectionnée
             text = pygame.font.Font(None, 36).render(attaque, True, color)
             self.screen.blit(text, (30, 350 + i * 30))  # Positionnement des attaques
-  
+            
 
     def handle_player_turn(self):
         """Tour du joueur"""
-
+         
         
         for selected_unit in self.player_units:
-
+            self.flip_display()
             # Tant que l'unité n'a pas terminé son tour
             has_acted = False
             selected_unit.is_selected = True
             selected_unit.update_green_case(self.player_units,self.enemy_units)
-            
+            list_attacks = selected_unit.attaques
             health = selected_unit.health
             nbre_move = selected_unit.nbre_move
             defense = selected_unit.defense
+            print (f"l'unité est : {selected_unit.name}, {selected_unit.defense}")
             print(f"Points de vie :{health}, nbre_move = {nbre_move}, defense = {defense}")
             #self.flip_display()
             
             while not has_acted:
-
+                
                 # Important: cette boucle permet de gérer les événements Pygame
                 for event in pygame.event.get():
 
@@ -137,7 +139,7 @@ class Game:
 
                         # Attaque (touche espace) met fin au tour
                             if event.key == pygame.K_SPACE:
-                                
+                                self.attaques = selected_unit.attaques
                                 self.menu_attaques = True #active le menu des attaques
                             # Navigation dans le menu des attaques
                         if self.menu_attaques :
@@ -152,14 +154,14 @@ class Game:
                                 self.selected_attack = True
                                 self.menu_attaques = False
                                 #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
-
+                                
 
                                 
                                 has_acted = True
                                 selected_unit.is_selected = False 
                 
                            #selected_unit.update_green_case(self.player_units, self.enemy_units)
-                self.flip_display()
+                    self.flip_display()   
                
 #Suite du code à écrire ici pour pour appliquer l'attaque à l'ennemi ciblé
                         
@@ -235,14 +237,7 @@ class Game:
             unit.draw(self.screen)
             if unit.is_selected :
                 unit.draw_green_case(self.screen)
-                print (f"l'unité est : {unit.name}, {unit.defense}")
-
-
-        #for unit in self.enemy_units :
-        #    unit.draw(self.screen)
-        #    unit.draw_green_case(self.screen)
             
-
          # Si le menu des attaques est actif, dessiner le menu par-dessus
         if self.menu_attaques:  
             self.draw_attack_menu()

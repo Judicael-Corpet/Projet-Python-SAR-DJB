@@ -1,11 +1,12 @@
 import pygame
 import random
 
+
 # Constantes
 GRID_SIZE_x = 25
 GRID_SIZE_y=15
 CELL_SIZE = 50
-#CELL_SIZE = 60
+
 WIDTH = GRID_SIZE_x * CELL_SIZE
 HEIGHT = GRID_SIZE_y * CELL_SIZE
 
@@ -19,6 +20,7 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
+LIGHT_GREEN = (50, 205, 50)
 GRAY = (100, 100, 100)
 YELLOW = (255, 255, 0)
 
@@ -32,13 +34,13 @@ class Unit(pygame.sprite.Sprite):
         self.x = x # Position x du personnage
         self.y = y # Position y du personnage
         self.size = size # taille de l'image du personnage
-        
-        self.health = 0
+        self.max_health = 150
+        self.health = None
         self.nbre_move = 0
         self.defense = 0
         self.attaques = []
-        
         self.distance_attack = 0
+        self.attack_power = 0
         
 
         
@@ -112,12 +114,74 @@ class Unit(pygame.sprite.Sprite):
 
     def attack(self, target):
         """Attaque une unité cible."""
-        if abs(self.x - target.x) <= self.distance_attack and abs(self.y - target.y) <= self.distance_attack :
-            target.health -= self.attack_power
+        #if abs(self.x - target.x) <= self.distance_attack and abs(self.y - target.y) <= self.distance_attack :
+        #    target.health -= self.attack_power
+        precision = random.uniform(0.0, 0.9)
+        list_attack = self.attaques
+        for i, attack in enumerate(list_attack) :
+            if attack == "Poings" :
+                attack = Poings()
+            
+            elif attack == "Griffes" :
+                attack = Griffes()
 
+            elif attack == "Lancer_bouclier" :
+                attack = Lancer_bouclier
+
+            elif attack == "Casser_les_murs" :
+                attack = Casser_les_murs()
+            
+            elif attack == "Laser" :
+                attack = Laser()
+            
+            elif attack == "Missile":
+                attack = Missile()
+            
+            elif attack == "Bloquer_adversaire":
+                attack = Bloquer_adversaire()
+
+            elif attack == "Attaque_toile":
+                attack = Attaque_toile()
+            
+            elif attack == "Marteau":
+                attack = Marteau()
+            
+            elif attack == "Foudre":
+                attack = Foudre()
+            
+            elif attack == "Attaque_branche":
+                attack = Attaque_branche()
+            
+            elif attack == "Protection":
+                attack = Protection()
+            
+            elif attack == "Pistolets":
+                attack = Pistolets()
+            
+            elif attack == "Fleche_Yaka":
+                attack = Fleche_yaka()
+
+            elif attack == "Boule_de_feu":
+                attack = Boule_de_feu()
+
+            elif attack == "Soigner":
+                attack = Soigner()
+
+            elif attack == "Projectile":
+                attack = Projectile()
+        
+        if abs(self.x - target.x) <= attack.distance_attack and abs(self.y - target.y) <= attack.distance_attack :
+            target.health -= attack.attack_power*precision*(1-target.defense)*1/attack.distance_attack
+        
+        return target.health
+
+
+#self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", 
+                         #"Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", 
+                         #"Boule_De_Feu", "Soigner", "Projectile" ]
     def draw(self, screen):
         """Affiche l'unité sur l'écran."""
-        #personnage = random.choice(self.personnages) 
+         
         #Pour générer l'image du joueur que l'on a choisi
         personnage = self.name
         
@@ -234,11 +298,12 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
 
         self.health = self.personnage.health
+        self.health_max = self.personnage.health_max
         self.nbre_move = self.personnage.nbre_move
         self.defense = self.personnage.defense
         self.attaques = self.personnage.attaques
         self.distance_attack = self.personnage.distance_attack
-        self.max_health = 150
+        self.attack_power = self.personnage.attack_power
 
         if self.is_selected:
             pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
@@ -246,8 +311,7 @@ class Unit(pygame.sprite.Sprite):
             
         screen.blit(self.image, (self.x*CELL_SIZE, self.y*CELL_SIZE))
         self.draw_health_bar(screen)
-        return self.personnage
-
+        
     def get_image(self,x,y): # get image  permet de decouper l'image png du morceau qu'on souhaite
         image=pygame.Surface([52,52])
         image.blit(self.sprite_sheet,(10,0),(x,y,42,52))
@@ -262,7 +326,7 @@ class Unit(pygame.sprite.Sprite):
         bar_height = 3   # Hauteur de la barre
 
         # Calcul de la largeur en fonction des PV
-        fill = max(0, (self.health / self.max_health) * bar_length)
+        fill = (self.health / self.health_max) * bar_length
 
         # Position de la barre (juste au-dessus du personnage)
         bar_x = self.x
@@ -272,7 +336,7 @@ class Unit(pygame.sprite.Sprite):
         pygame.draw.rect(surface, BLACK, (bar_x*CELL_SIZE , bar_y*CELL_SIZE , bar_length + 2, bar_height + 2))
         # Dessin de la barre de vie actuelle
         pygame.draw.rect(surface, RED, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, bar_length, bar_height))  # Barre vide
-        pygame.draw.rect(surface, GREEN, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, fill, bar_height))     # Barre remplie
+        pygame.draw.rect(surface, LIGHT_GREEN, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, fill, bar_height))     # Barre remplie
     
 
 
@@ -284,144 +348,172 @@ class Unit(pygame.sprite.Sprite):
 class Captain_america(Unit):
     def __init__(self):
         self.health = 150
+        self.health_max = 150
         self.nbre_move = 3
         self.defense = 75
+        self.attack_power = 10
         self.attaques = ["Aucune action", "Poings","Lancer_bouclier" ]
-        self.distance_attack = 1
+        
     
 class Hulk(Unit) :
     def __init__(self):
         self.health = 300
+        self.health_max = 300
         self.nbre_move = 4
         self.defense = 90
+        self.attack_power = 10
         self.attaques = ["Aucune action", "Poings", "casser_les_murs"]
-        self.distance_attack = 2
 
 
 class Ironman (Unit) :
     def __init__(self):
         self.health = 150
+        self.health_max = 150
         self.nbre_move = 8
         self.defense = 75
-        self.attaques = ["Aucune action", "poings","laser", "missile"]
-        self.distance_attack = 5
+        self.attack_power = 10
+        self.attaques = ["Aucune action", "Poings","laser", "missile"]
+    
         
 
 class Spiderman(Unit) :
     def __init__(self):
-        self.health = 100
+        self.health = 150
+        self.health_max = 150
         self.nbre_move = 6
         self.defense = 50
-        self.attaques = ["Aucune action", "poings","bloquer_adversaire", "attaque_toile"]
-        self.distance_attack = 3
+        self.attack_power = 10
+        self.attaques = ["Aucune action", "Poings","bloquer_adversaire", "attaque_toile"]
+    
     
 
 class Thor(Unit) :
     def __init__(self) :
         self.health = 300
+        self.health_max = 300
         self.nbre_move = 8
         self.defense = 75
-        self.attaques = ["Aucune action", "poings","Marteau", "Foudre"]
-        self.distance_attack = 3
+        self.attack_power = 10
+        self.attaques = ["Aucune action", "Poings","Marteau", "Foudre"]
+    
 
 
 class Groot(Unit) :
     def __init__(self):
-        self.health = 150
+        self.health = 300
+        self.health_max = 300
         self.nbre_move = 3
         self.defense = 30
-        self.attaques = ["Aucune action","Attaque_Branche", "Protection"]
-        self.distance_attack = 1
+        self.attack_power = 10
+        self.attaques = ["Aucune action","Attaque_branche", "Protection"]
+    
         
 
 class Wolverine(Unit) :
     def __init__(self):   
         self.health = 300
+        self.health_max = 350
         self.nbre_move = 3
         self.defense = 75
-        self.attaques = ["Aucune action", "poings","Griffes"]
-        self.distance_attack = 1
+        self.attack_power = 10
+        self.attaques = ["Aucune action", "Poings","Griffes"]
+    
 
 
 class Black_panther(Unit) :
     def __init__(self):
         self.health = 250
+        self.health_max = 250
         self.nbre_move = 4
         self.defense = 30
-        self.attaques = ["Aucune action", "poings","Griffes"]
-        self.distance_attack = 1
+        self.attack_power = 10
+        self.attaques = ["Aucune action", "Poings","Griffes"]
+    
     
 
 class Starlord (Unit) :
     def __init__(self):
         self.health = 150
+        self.health_max = 150
         self.nbre_move = 6
         self.defense = 30
-        self.attaques = ["Aucune action", "poings","Pistolets"]
-        self.distance_attack = 4
+        self.attack_power = 10
+        self.attaques = ["Aucune action", "Poings","Pistolets"]
+    
         
 
 class  Yondu(Unit):
     def __init__(self):
-        self.health = 500
+        self.health = 300
+        self.health_max = 300
         self.nbre_move = 3
         self.defense = 50
-        self.attaques = ["Aucune action", "poings","Fleche_Yaka"]
-        self.distance_attack = 4
+        self.attack_power = 10
+        self.attaques = ["Aucune action", "Poings","Fleche_Yaka"]
+    
         
 
 class Torch(Unit) :
     def __init__(self):
         self.health = 150
+        self.health_max = 150
         self.nbre_move = 8
         self.defense = 40
-        self.attaques = ["Aucune action", "poings","Boule_De_Feu"]
-        self.distance_attack2 = 4
+        self.attack_power = 10
+        self.attaques = ["Aucune action", "Poings","Boule_de_feu"]
+        
 
 class Jane_storm(Unit) :
     def __init__(self):
         self.health = 100
+        self.health_max = 100
         self.nbre_move = 3
         self.defense = 30
-        self.attaques = ["Aucune action", "poings","Soigner"]
-        self.distance_attack = 1
+        self.attack_power = 10
+        self.attaques = ["Aucune action", "Poings","Soigner"]
+    
         
 
 class Chose(Unit) :
     def __init__(self):
         self.health = 300
+        self.health_max = 300
         self.nbre_move = 4
         self.defense = 80
-        self.attaques = ["Aucune action", "poings","Casser_les_murs"]
-        self.distance_attack2 = 2
+        self.attack_power = 10
+        self.attaques = ["Aucune action", "Poings","Casser_les_murs"]
+    
 
 class Dr_strange(Unit) :
     def __init__(self):
         self.health = 150
+        self.health_max = 150
         self.nbre_move = 6
         self.defense = 80
-        self.attaques = ["Aucune action", "poings","Bloquer_adversaire","Projectiles" ]
-        self.distance_attack = 5
+        self.attack_power = 10
+        self.attaques = ["Aucune action", "Poings","Bloquer_adversaire","Projectiles" ]
+    
 
 
 
 #Création de la classe de chaque attaque
 #attacks = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
 
-class Attacks(Unit) :
-    def __init__(self):
-        pass
+#class Attacks(Unit) :
+    #def __init__(self):
+    #    pass
 
-    def Poings(self) :
-        self.power = 30
+class Poings(Unit) :
+    def __init__(self) :
+        self.power = 20
         self.quantite = 100
-        self.distance = 1
+        self.distance_attack = 1
        
 
 class Griffes(Unit) :
     def __init__(self):
-        self.power = 50
-        self.quantite = 4
+        self.power = 40
+        self.quantite = 3
         self.distance = 3
         
 
@@ -435,14 +527,14 @@ class Lancer_bouclier(Unit) :
 class Casser_les_murs(Unit) :
     def __init__(self):
         self.power = 60
-        self.quantite = 2
+        self.quantite = 1
         self.distance = 1
         
 
 class Laser(Unit) :
     def __init__(self):
         self.power = 60
-        self. quantite = 3
+        self. quantite = 1
         self.distance = 5
         
 
@@ -455,7 +547,7 @@ class Missile (Unit):
 
 class Bloquer_adversaire (Unit):
     def __init__(self):
-        self.temps = 1
+        self.temps = 3
         self.power = 10
         self.quantite = 2
         self.distance = 4
@@ -464,7 +556,7 @@ class Bloquer_adversaire (Unit):
 class Attaque_toile (Unit):
     def __init__(self):
         self.power = 40
-        self.quantite = 4
+        self.quantite = 3
         self.distance = 3
         
 
@@ -488,7 +580,7 @@ class Attaque_branche(Unit) :
 
 class Protection (Unit):
     def __init__(self):
-        self.power = 100
+        self.power = 150
         self.temps = 1
         self.distance = 1
 
@@ -500,13 +592,13 @@ class Pistolets(Unit) :
 
 class Fleche_yaka(Unit) :
     def __init__(self):
-        self.power = 50
+        self.power = 70
         self.quantite = 3
         self.distance = 5
 
 class Boule_de_feu (Unit):
     def __init__(self):
-        self.power = 60
+        self.power = 70
         self.quantite = 3
         self.distance = 5
 
@@ -518,8 +610,8 @@ class Soigner (Unit):
 
 class Projectile(Unit) :
     def __init__(self):
-        self.power = 50
-        self.quantite = 4
+        self.power = 60
+        self.quantite = 3
         self.distance = 5
 
 
