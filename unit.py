@@ -298,8 +298,8 @@ class Hulk(Unit) :
         self.distance_attack = 2
 
 
-    def Ironman (self) :
-    
+class Ironman (Unit) :
+    def __init__(self):
         self.health = 150
         self.nbre_move = 8
         self.defense = 75
@@ -307,7 +307,8 @@ class Hulk(Unit) :
         self.distance_attack = 5
         
 
-    def Spiderman(self) :
+class Spiderman(Unit) :
+    def __init__(self):
         self.health = 100
         self.nbre_move = 6
         self.defense = 50
@@ -324,7 +325,8 @@ class Thor(Unit) :
         self.distance_attack = 3
 
 
-    def Groot(self) :
+class Groot(Unit) :
+    def __init__(self):
         self.health = 150
         self.nbre_move = 3
         self.defense = 30
