@@ -101,7 +101,6 @@ class Game:
             has_acted = False
             selected_unit.is_selected = True
             selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
-            
             self.flip_display()
             
             while not has_acted:
@@ -138,6 +137,10 @@ class Game:
                         if event.key == pygame.K_SPACE:
                             
                             self.menu_attaques = True #active le menu des attaques
+                            selected_unit.update_red_case(self.screen,self.player_units,self.enemy_units)
+                        
+
+
                         # Navigation dans le menu des attaques
                         if self.menu_attaques :
                             if event.key == pygame.K_DOWN:
@@ -150,34 +153,23 @@ class Game:
                                 print (f"Attaque sélectionnée : {self.attaques[self.selected_attack_index]}") # attaque validée
                                 self.selected_attack = True
                                 self.menu_attaques = False
-                                    #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
-
-
+                                #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
                                 
-                                has_acted = True
-                                selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
-                                selected_unit.is_selected = False 
-
-                        self.flip_display() 
-#Suite du code à écrire ici pour pour appliquer l'attaque à l'ennemi ciblé
-                        
-                        #if self.selected_attack :
-                                
-            self.flip_display()
-                                  
-                
-                
-
                             #print(f"Attaque choisie : {attack['name']}")
                             #for enemy in self.enemy_units:
                             #    if abs(selected_unit.x - enemy.x) <= 1 and abs(selected_unit.y - enemy.y) <= 1:
                             #        selected_unit.attack(enemy)
                             #        if enemy.health <= 0:
                             #            self.enemy_units.remove(enemy)
-
                             
+                            has_acted = True
+                            selected_unit.is_selected = False 
+                        selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
+                                
+        self.flip_display()
+                                  
                 
-                        
+                  
 
     def handle_enemy_turn(self):
         """IA très simple pour les ennemis."""
@@ -221,12 +213,13 @@ class Game:
         # Ajoutez les sprites des unités/players
         for unit in self.player_units + self.enemy_units:
             unit.draw(self.screen)
-            unit.draw_green_case(self.screen)
+            if unit.is_selected:
+                unit.draw_green_case(self.screen)
 
          # Si le menu des attaques est actif, dessiner le menu par-dessus
         if self.menu_attaques:  
             self.draw_attack_menu()
-   
+
         pygame.display.flip()
         
         

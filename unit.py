@@ -89,7 +89,7 @@ class Unit(pygame.sprite.Sprite):
         self.nbre_move = nbre_move
         self.defense = defense
         self.attacks = attacks
-        
+        self.green_cases=[]
 
         # Liste des personnages 
 
@@ -108,7 +108,6 @@ class Unit(pygame.sprite.Sprite):
         
         self.image = pygame.Surface(size)
 
-        self.green_cases=[]
 
     def move(self, dx, dy):
         """Déplace l'unité de dx, dy, uniquement si la case cible est valide."""
@@ -165,6 +164,9 @@ class Unit(pygame.sprite.Sprite):
         """Attaque une unité cible."""
         if abs(self.x - target.x) <= self.distance_attack and abs(self.y - target.y) <= self.distance_attack :
             target.health -= self.attack_power
+    
+    
+    
           
     def draw(self, screen):
         """Affiche l'unité sur l'écran."""
