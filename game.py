@@ -2,9 +2,11 @@ import pygame
 import random
 import pytmx
 import pyscroll
+import numpy as np
 from unit import *
 from menu import *
 from sound import *
+from IA import *
 
 fond = pygame.image.load('Fond_ecran.png')
 
@@ -54,7 +56,7 @@ class Game:
         self.Choix_Personnages_4 = Choix_Personnage_Menu_4(self) #Instanciation de self.Choix_Personnages_4 à la classe Choix_Personnage_Menu_4 dans menu.py
         self.Choix_Carte = Choix_Carte_Menu(self)
         self.curr_menu = self.main_menu
-        
+
         # gerer le son
         self.sound_manager = SoundManager()
         self.Volume = Volume(self)
@@ -76,38 +78,40 @@ class Game:
     def draw_attack_menu(self) :
         """Dessine le menu des attaques."""
         #Fond noir dans le coin inférieur gauche
-        pygame.draw.rect(self.screen, (0, 0, 0), (20, 340, 250, 600 ))
-        pygame.draw.rect(self.screen, (255, 255, 255), (20, 340, 250, 600), 2)  # Bordure blanche
+        pygame.draw.rect(self.screen, (0, 0, 0), (20, 340, 250, 150 ))
+        pygame.draw.rect(self.screen, (255, 255, 255), (20, 340, 250, 150), 2)  # Bordure blanche
 
         #if selected_unit == "Captain_America" :
-        self.attaques = ["Aucune_action", "Poings", "Lancer_bouclier"]
-        
+        #self.attaques = []
+        #self.attaques = ["Aucune_action", "Poings", "Lancer_bouclier"]
+        list_attacks = self.attaques
         # Dessiner chaque attaque dans le rectangle
-        for i, attaque in enumerate(self.attaques):
+        for i, attaque in enumerate(list_attacks):
             color = (0, 255, 0) if i == self.selected_attack_index else (255, 255, 255)  # Mettre en surbrillance l'attaque sélectionnée
             text = pygame.font.Font(None, 36).render(attaque, True, color)
             self.screen.blit(text, (30, 350 + i * 30))  # Positionnement des attaques
-  
+            
 
     def handle_player_turn(self):
         """Tour du joueur"""
-
+         
         
         for selected_unit in self.player_units:
-
+            self.flip_display()
             # Tant que l'unité n'a pas terminé son tour
             has_acted = False
             selected_unit.is_selected = True
-            selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
-            
+            selected_unit.update_green_case(self.player_units,self.enemy_units)
+            list_attacks = selected_unit.attaques
             health = selected_unit.health
             nbre_move = selected_unit.nbre_move
             defense = selected_unit.defense
+            print (f"l'unité est : {selected_unit.name}, {selected_unit.defense}")
             print(f"Points de vie :{health}, nbre_move = {nbre_move}, defense = {defense}")
             #self.flip_display()
             
             while not has_acted:
-
+                
                 # Important: cette boucle permet de gérer les événements Pygame
                 for event in pygame.event.get():
 
@@ -118,28 +122,28 @@ class Game:
 
                     # Gestion des touches du clavier
                     elif event.type == pygame.KEYDOWN:
-
+                        if self.menu_attaques == False :
                         # Déplacement (touches fléchées)
-                        dx, dy = 0, 0
-                        if event.key == pygame.K_LEFT:
-                            dx = -1
-                        elif event.key == pygame.K_RIGHT:
-                            dx = 1
-                        elif event.key == pygame.K_UP and not self.menu_attaques:
-                            dy = -1
+                            dx, dy = 0, 0
+                            if event.key == pygame.K_LEFT:
+                                dx = -1
+                            elif event.key == pygame.K_RIGHT:
+                                dx = 1
+                            elif event.key == pygame.K_UP and not self.menu_attaques:
+                                dy = -1
+                                
+                            elif event.key == pygame.K_DOWN and not self.menu_attaques:
+                                dy = 1
+                                
+                            selected_unit.move(dx, dy)
                             
-                        elif event.key == pygame.K_DOWN and not self.menu_attaques:
-                            dy = 1
-                            
-                        selected_unit.move(dx, dy)
-                        
                         
 
                         # Attaque (touche espace) met fin au tour
-                        if event.key == pygame.K_SPACE:
-                            
-                            self.menu_attaques = True #active le menu des attaques
-                        # Navigation dans le menu des attaques
+                            if event.key == pygame.K_SPACE:
+                                self.attaques = selected_unit.attaques
+                                self.menu_attaques = True #active le menu des attaques
+                            # Navigation dans le menu des attaques
                         if self.menu_attaques :
                             if event.key == pygame.K_DOWN:
                                 self.selected_attack_index = (self.selected_attack_index + 1) % len(self.attaques) # Navigation dans le menu des attaques vers le haut
@@ -151,14 +155,15 @@ class Game:
                                 print (f"Attaque sélectionnée : {self.attaques[self.selected_attack_index]}") # attaque validée
                                 self.selected_attack = True
                                 self.menu_attaques = False
-                                    #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
-
+                                #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
+                                
 
                                 
                                 has_acted = True
                                 selected_unit.is_selected = False 
-                            selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
-                self.flip_display()
+                
+                           #selected_unit.update_green_case(self.player_units, self.enemy_units)
+                    self.flip_display()   
                
 #Suite du code à écrire ici pour pour appliquer l'attaque à l'ennemi ciblé
                         
@@ -181,26 +186,40 @@ class Game:
                         
 
     def handle_enemy_turn(self):
-        """IA très simple pour les ennemis."""
-       
-        
         for enemy in self.enemy_units:
+            enemy.is_selected  = True
+            enemy.update_green_case(self.player_units,self.enemy_units) 
+            # Déterminer la cible la plus proche
+            target_1 = self.player_units[0]
+            target_2 = self.player_units[1]
+            dist_1 = np.sqrt((target_1.x - enemy.x) ** 2 + (target_1.y - enemy.y) ** 2)
+            dist_2 = np.sqrt((target_2.x - enemy.x) ** 2 + (target_2.y - enemy.y) ** 2)
+            target = target_1 if dist_1 < dist_2 else target_2
+            L = [(14,8), (14,9), (14,10), (14,11), (15,8), (16,8), (17,8)]
+            case = L # cases obstacles
+            for unit in self.player_units + self.enemy_units:
+                case.append((unit.x,unit.y))
+            print('dur')
+            # Appliquer A* pour trouver le chemin vers la cible
+            grid = Grid(WIDTH, HEIGHT, case)
+            print('bg')
+            path = a_star(grid, (enemy.x, enemy.y), (target.x, target.y))
 
-            
-
-                # Déplacement aléatoire
-                target = random.choice(self.player_units)
-                dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
-                dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
-                enemy.move(dx, dy)
-
-                # Attaque si possible
-                if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
-                    enemy.attack(target)
-                    if target.health <= 0:
-                        self.player_units.remove(target)
-           
-
+            # Déplacer l'ennemi d'une étape sur le chemin
+            if path and len(path) > 1:
+                next_step = path[1]  # Le premier élément est la position actuelle
+                enemy.x, enemy.y = next_step
+            print('pas ouf')
+            # Si l'ennemi est à portée, attaquer
+            if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
+                enemy.attack(target)
+                if target.health <= 0:
+                    self.player_units.remove(target)
+            enemy.is_selected = False
+            print('hey')
+        self.flip_display() 
+        play = True
+        return play 
 
     def flip_display(self):
         """Affiche la carte et les éléments du jeu."""
@@ -226,17 +245,11 @@ class Game:
                 pygame.draw.rect(self.screen, WHITE, rect, 1)
 
         # Ajoutez les sprites des unités/players
-        for unit in self.player_units :
+        for unit in self.player_units + self.enemy_units :
             unit.draw(self.screen)
-            unit.draw_green_case(self.screen)
-            print (f"l'unité est : {unit.name}, {unit.defense}")
-
-
-        for unit in self.enemy_units :
-            unit.draw(self.screen)
-            unit.draw_green_case(self.screen)
+            if unit.is_selected :
+                unit.draw_green_case(self.screen)
             
-
          # Si le menu des attaques est actif, dessiner le menu par-dessus
         if self.menu_attaques:  
             self.draw_attack_menu()
@@ -299,13 +312,15 @@ def main():
     game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 16, 9, [55,55]),#, 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              Unit(game.Choix_Personnages_4.game_personnage, 17, 9, [55,55])]#, 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
     
+    play = True
+    iter = 0
     
     # Boucle principale du jeu
-    
-    game.handle_player_turn()
-    print('okay')
-    game.handle_enemy_turn()   
-            
+    while play and iter<100 :
+        game.handle_player_turn()
+        game.handle_enemy_turn()   
+        iter += 1 
+        play =  game.handle_enemy_turn() 
 
 if __name__ == "__main__":
     main()
