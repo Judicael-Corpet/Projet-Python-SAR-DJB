@@ -73,6 +73,8 @@ class Game:
         #p1 = Unit("Captain_America", 0, 0, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"])
         #print (p1.name)
         
+       
+        self.cases=[]
 
     def draw_attack_menu(self) :
         """Dessine le menu des attaques."""
@@ -243,18 +245,17 @@ class Game:
                     unit.draw_red_case(self.screen)
                 print (f"l'unité est : {unit.name}, {unit.defense}")
 
-
-        #for unit in self.enemy_units :
-        #    unit.draw(self.screen)
-        #    unit.draw_green_case(self.screen)
-            
+       
 
          # Si le menu des attaques est actif, dessiner le menu par-dessus
         if self.menu_attaques:  
             self.draw_attack_menu()
    
         pygame.display.flip()
+        
+        
 
+      
     def check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -313,6 +314,7 @@ def main():
     
     play = True
     iter = 0
+    
     
     # Boucle principale du jeu
     while play and iter<100 :

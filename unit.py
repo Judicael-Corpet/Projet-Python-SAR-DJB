@@ -77,7 +77,15 @@ class Unit(pygame.sprite.Sprite):
     def update_green_case(self,player_units,enemy_units):
         self.green_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.green_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
-
+        
+        self.cases=[()] # cases obstacles
+        # rivière 9-10
+        for i in range(9,10+1):
+            for j in range(0,9):
+                self.cases.append((i,j)) 
+        
+ 
+        
         if self.is_selected:
             # Définir les déplacements possibles : orthogonaux + diagonales proches
             offsets = [
@@ -98,7 +106,15 @@ class Unit(pygame.sprite.Sprite):
                         if unit.x == green_x and unit.y == green_y:
                             case_occupée = True
                             break
+                    # TRoisieme verif cases obstacles
+                    for x,y in self.cases:
+                        if x==green_x and y==green_y:
+                            case_occupée = True
+                            break
+                            
                     
+                
+                
                     # Si la case n'est pas occupée, ajoutez-la à la liste des cases vertes
                     if not case_occupée:
                         self.green_cases.append((green_x, green_y))
@@ -134,7 +150,18 @@ class Unit(pygame.sprite.Sprite):
         for red_x,red_y in self.red_cases:
             pygame.draw.rect(screen, color, (red_x*CELL_SIZE, red_y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 2)  # Dessine les bords
     
+    # def case_obstacle(self):
+    #     self.cases=[]
+    #     # rivière 9-10
+    #     for i in range(9,10+1):
+    #         for j in range(0,9):
+    #             self.cases.append((i,j))
+        
     
+    # def draw_case_obstacle(self, screen):
+    #     color = BLUE
+    #     for x,y in self.cases:
+    #         pygame.draw.rect(screen, color, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 2)  # Dessine les bords
     
     
     def attack(self, target):
@@ -453,6 +480,8 @@ class Attacks(Unit) :
             self.power=0
         else:
             self.power= initial_power
+            
+        return self.power
             
 class Griffes(Unit) :
     def __init__(self):
