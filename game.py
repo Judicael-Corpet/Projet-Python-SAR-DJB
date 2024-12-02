@@ -100,6 +100,7 @@ class Game:
             has_acted = False
             selected_unit.is_selected = True
             selected_unit.update_green_case(self.player_units,self.enemy_units)
+            selected_unit.update_red_case()
             list_attacks = selected_unit.attaques
             health = selected_unit.health
             nbre_move = selected_unit.nbre_move
@@ -143,6 +144,7 @@ class Game:
                                 self.menu_attaques = True #active le menu des attaques
                             # Navigation dans le menu des attaques
                         if self.menu_attaques :
+                            selected_unit.update_red_case()
                             if event.key == pygame.K_DOWN:
                                 self.selected_attack_index = (self.selected_attack_index + 1) % len(self.attaques) # Navigation dans le menu des attaques vers le haut
                             
@@ -154,9 +156,12 @@ class Game:
                                 self.selected_attack = True
                                 self.menu_attaques = False
                                 #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
-                                
+
 
                                 
+
+
+
                                 has_acted = True
                                 selected_unit.is_selected = False 
                 
@@ -237,6 +242,8 @@ class Game:
             unit.draw(self.screen)
             if unit.is_selected :
                 unit.draw_green_case(self.screen)
+                if self.menu_attaques:
+                    unit.draw_red_case(self.screen)
             
          # Si le menu des attaques est actif, dessiner le menu par-dessus
         if self.menu_attaques:  
