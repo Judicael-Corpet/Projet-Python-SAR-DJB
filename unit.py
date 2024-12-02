@@ -110,12 +110,7 @@ class Unit(pygame.sprite.Sprite):
         for green_x,green_y in self.green_cases:
             pygame.draw.rect(screen, color, (green_x*CELL_SIZE, green_y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 2)  # Dessine les bords
     
-    
-    
-    
-    
-    
-    
+
     def update_red_case(self):
         self.red_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.red_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
