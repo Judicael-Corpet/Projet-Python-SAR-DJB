@@ -188,20 +188,27 @@ class Game:
        
         
         for enemy in self.enemy_units:
-
-            
+            enemy.is_selected  = True
+            enemy.update_green_case(self.player_units,self.enemy_units)   
 
                 # Déplacement aléatoire
-                target = random.choice(self.player_units)
-                dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
-                dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
-                enemy.move(dx, dy)
+            target = random.choice(self.player_units)
+            dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
+            dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
+            enemy.move(dx, dy)
 
-                # Attaque si possible
-                if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
-                    enemy.attack(target)
-                    if target.health <= 0:
-                        self.player_units.remove(target)
+
+            # Attaque si possible
+            if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
+                enemy.attack(target)
+                if target.health <= 0:
+                    self.player_units.remove(target)
+           
+            enemy.is_selected = False
+        self.flip_display() 
+        play = True
+        return play 
+    
            
 
 
