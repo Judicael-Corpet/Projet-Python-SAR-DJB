@@ -74,7 +74,7 @@ class Game:
         self.enemy_units = []
         #p1 = Unit("Captain_America", 0, 0, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"])
         #print (p1.name)
-
+        
 
     def draw_attack_menu(self) :
         """Dessine le menu des attaques."""
@@ -103,6 +103,10 @@ class Game:
             selected_unit.is_selected = True
             selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
             
+            health = selected_unit.health
+            nbre_move = selected_unit.nbre_move
+            defense = selected_unit.defense
+            print(f"Points de vie :{health}, nbre_move = {nbre_move}, defense = {defense}")
             #self.flip_display()
             
             while not has_acted:
@@ -157,7 +161,8 @@ class Game:
                                 has_acted = True
                                 selected_unit.is_selected = False 
                             selected_unit.update_green_case(self.screen,self.player_units,self.enemy_units)
-                self.flip_display() 
+                self.flip_display()
+               
 #Suite du code à écrire ici pour pour appliquer l'attaque à l'ennemi ciblé
                         
                         #if self.selected_attack :
@@ -180,19 +185,25 @@ class Game:
 
     def handle_enemy_turn(self):
         """IA très simple pour les ennemis."""
+       
+        
         for enemy in self.enemy_units:
 
-            # Déplacement aléatoire
-            target = random.choice(self.player_units)
-            dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
-            dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
-            enemy.move(dx, dy)
+            
 
-            # Attaque si possible
-            if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
-                enemy.attack(target)
-                if target.health <= 0:
-                    self.player_units.remove(target)
+                # Déplacement aléatoire
+                target = random.choice(self.player_units)
+                dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
+                dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
+                enemy.move(dx, dy)
+
+                # Attaque si possible
+                if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
+                    enemy.attack(target)
+                    if target.health <= 0:
+                        self.player_units.remove(target)
+           
+
 
     def flip_display(self):
         """Affiche la carte et les éléments du jeu."""
@@ -219,12 +230,13 @@ class Game:
 
         # Ajoutez les sprites des unités/players
         for unit in self.player_units :
-            unit.draw(self.screen, unit.name)
+            unit.draw(self.screen)
             unit.draw_green_case(self.screen)
-            print (f"l'unité est : {unit.name}")
+            print (f"l'unité est : {unit.name}, {unit.defense}")
+
 
         for unit in self.enemy_units :
-            unit.draw(self.screen, unit.name)
+            unit.draw(self.screen)
             unit.draw_green_case(self.screen)
             
 
@@ -284,11 +296,13 @@ def main():
         if (game.playing):
             break
     
-    game.player_units = [Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55],150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
-                             Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55], 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
+    game.player_units = [Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55]),#,150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
+                             Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55])]#, 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
 
-    game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 16, 9, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
-                             Unit(game.Choix_Personnages_4.game_personnage, 17, 9, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
+    game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 16, 9, [55,55]),#, 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
+                             Unit(game.Choix_Personnages_4.game_personnage, 17, 9, [55,55])]#, 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
+    
+    
     # Boucle principale du jeu
     
     game.handle_player_turn()

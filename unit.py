@@ -26,17 +26,17 @@ YELLOW = (255, 255, 0)
 
 class Unit(pygame.sprite.Sprite):
     
-    def __init__(self, name, x, y, size, health, nbre_move, defense, attacks):
+    def __init__(self, name, x, y, size):#, health, nbre_move, defense, attacks):
         super().__init__() #permet d'inialiser la classe sprite en appelant son constructeur avec super()
         self.name = name
         self.x = x # Position x du personnage
         self.y = y # Position y du personnage
         self.size = size # taille de l'image du personnage
         
-        self.health = health
-        self.nbre_move = nbre_move
-        self.defense = defense
-        self.attacks = attacks
+        self.health = 0
+        self.nbre_move = 0
+        self.defense = 0
+        self.attacks = []
         
 
         # Liste des personnages 
@@ -114,15 +114,16 @@ class Unit(pygame.sprite.Sprite):
         if abs(self.x - target.x) <= self.distance_attack and abs(self.y - target.y) <= self.distance_attack :
             target.health -= self.attack_power
 
-    def draw(self, screen, personnage):
+    def draw(self, screen):
         """Affiche l'unité sur l'écran."""
         #personnage = random.choice(self.personnages) 
         #Pour générer l'image du joueur que l'on a choisi
         personnage = self.name
+        Pax = Personnages()
 
         if personnage == "Captain_America" :
-            Pax = Personnages()
-            Pax.Captain_america()
+            
+            self.personnage = Pax.Captain_america()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
@@ -131,7 +132,6 @@ class Unit(pygame.sprite.Sprite):
             
         
         elif personnage == "Hulk" :
-            Pax = Personnages()
             self.personnage = Pax.Hulk()
             self.sprite_sheet = pygame.image.load('personnages/avengers2.jpg.png')
             self.image = self.get_image(52,0) # get image in this coordinate
@@ -139,7 +139,6 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Ironman" :
-            Pax = Personnages()
             self.personnage = Pax.Ironman()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(150,0) # get image in this coordinate
@@ -147,7 +146,7 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Spiderman" :
-            Pax = Personnages()
+            
             self.personnage = Pax.Spiderman()
             self.sprite_sheet = pygame.image.load('personnages/avengers3.png')
             self.image = self.get_image(150,0) # get image in this coordinate
@@ -155,7 +154,7 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Thor" :
-            Pax = Personnages()
+            
             self.personnage = Pax.Thor()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(295,0) # get image in this coordinate
@@ -163,7 +162,7 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Groot" :
-            Pax = Personnages()
+            
             self.personnage = Pax.Groot()
             self.sprite_sheet = pygame.image.load('personnages/galaxy2.png')
             self.image = self.get_image(150,0) # get image in this coordinate
@@ -171,7 +170,7 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Wolverine" :
-            Pax = Personnages()
+            
             self.personnage = Pax.Wolverine()
             self.sprite_sheet = pygame.image.load('personnages/x_men.png')
             self.image = self.get_image(0,192) # get image in this coordinate
@@ -179,7 +178,7 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Black_Panther" :
-            Pax = Personnages()
+            
             self.personnage = Pax.Black_panther()
             self.sprite_sheet = pygame.image.load('personnages/avengers3.png')
             self.image = self.get_image(0,0) # get image in this coordinate
@@ -187,7 +186,7 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Starlord" :
-            Pax = Personnages()
+            
             self.personnage = Pax.Starlord()
             self.sprite_sheet = pygame.image.load('personnages/galaxy.png')
             self.image = self.get_image(0,0) # get image in this coordinate
@@ -195,7 +194,7 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Yondu" :
-            Pax = Personnages()
+            
             self.personnage = Pax.Yondu()
             self.sprite_sheet = pygame.image.load('personnages/galaxy.png')
             self.image = self.get_image(295,0) # get image in this coordinate
@@ -203,7 +202,7 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Torch" :
-            Pax = Personnages()
+            
             self.personnage = Pax.Torch()
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
             self.image = self.get_image(295, 193) # get image in this coordinate
@@ -211,7 +210,7 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Jane_Storm" :
-            Pax = Personnages()
+            
             self.personnage = Pax.Jane_storm()
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
             self.image = self.get_image(150,0) # get image in this coordinate
@@ -219,7 +218,7 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Chose" :
-            Pax = Personnages()
+            
             self.personnage = Pax.Chose()
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
             self.image = self.get_image(0,193) # get image in this coordinate
@@ -227,7 +226,7 @@ class Unit(pygame.sprite.Sprite):
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
             
         elif personnage == "Dr_Strange" :
-            Pax = Personnages()
+            
             self.personnage = Pax.Dr_strange()
             self.sprite_sheet = pygame.image.load('personnages/doctor_strange.png')
             self.image = self.get_image(0,0) # get image in this coordinate
@@ -240,7 +239,7 @@ class Unit(pygame.sprite.Sprite):
             
         screen.blit(self.image, (self.x*CELL_SIZE, self.y*CELL_SIZE))
         self.draw_health_bar(screen)
-        
+        return self.personnage
 
     def get_image(self,x,y): # get image  permet de decouper l'image png du morceau qu'on souhaite
         image=pygame.Surface([52,52])
