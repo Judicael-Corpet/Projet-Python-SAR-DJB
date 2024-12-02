@@ -56,7 +56,7 @@ class Unit(pygame.sprite.Sprite):
         
         self.image = pygame.Surface(size)
 
-        self.green_cases=[]
+        # self.green_cases=[]
         
 
     def move(self, dx, dy):
@@ -74,7 +74,7 @@ class Unit(pygame.sprite.Sprite):
             print("Déplacement invalide : en dehors des cases autorisées.")
 
 
-    def update_green_case(self,screen,player_units,enemy_units):
+    def update_green_case(self,player_units,enemy_units):
         self.green_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.green_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
 
@@ -109,7 +109,39 @@ class Unit(pygame.sprite.Sprite):
         color = GREEN
         for green_x,green_y in self.green_cases:
             pygame.draw.rect(screen, color, (green_x*CELL_SIZE, green_y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 2)  # Dessine les bords
+    
+    
+    
+    
+    
+    
+    
+    def update_red_case(self):
+        self.red_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
+        self.red_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
 
+        if self.is_selected:
+            # Définir les déplacements possibles : orthogonaux + diagonales proches
+            offsets = [(2, 0), (1, 0)] #la case ou se trouve déjà le personnage, au cas où il ne souhaite pas se déplacer
+
+            for dx, dy in offsets:
+                # Calcul des coordonnées de la case
+                red_x = self.x + dx # pas encore implementer dans la liste qui dessine les cases
+                red_y = self.y + dy
+
+                # PREMIERE VERIFICATION: Vérifier que la case est dans les limites de la grille
+                if 0 <= red_x < GRID_SIZE_x and 0 <= red_y < GRID_SIZE_y:
+                    self.red_cases.append((red_x, red_y))
+                
+    
+    def draw_red_case(self, screen):
+        color = RED
+        for red_x,red_y in self.red_cases:
+            pygame.draw.rect(screen, color, (red_x*CELL_SIZE, red_y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 2)  # Dessine les bords
+    
+    
+    
+    
     def attack(self, target):
         """Attaque une unité cible."""
         if abs(self.x - target.x) <= self.distance_attack and abs(self.y - target.y) <= self.distance_attack :
@@ -413,11 +445,20 @@ class Attacks(Unit) :
         pass
 
     def Poings(self) :
-        self.power = 30
+        initial_power=30
         self.quantite = 100
         self.distance = 1
-       
-
+        
+        temp=random.randint(0,100)
+        if temp<=10:
+            #coup critique
+            self.power = initial_power*2
+        elif 10<temp<=25:
+            #coup raté
+            self.power=0
+        else:
+            self.power= initial_power
+            
 class Griffes(Unit) :
     def __init__(self):
         self.power = 50
