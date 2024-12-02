@@ -78,7 +78,7 @@ class Unit(pygame.sprite.Sprite):
         self.green_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.green_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
         
-        self.cases=[()] # cases obstacles
+        self.cases=[] # cases obstacles
         # rivière 9-10
         for i in range(9,10+1):
             for j in range(0,9):
