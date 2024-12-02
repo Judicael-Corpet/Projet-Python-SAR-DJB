@@ -55,6 +55,7 @@ class Menu():
         self.cursor_rect = pygame.Rect(0, 0, 20, 20)
         self.offset = - 100
         
+        
     def draw_cursor(self):
         self.game.draw_text_black('*', 50, self.cursor_rect.x - 2, self.cursor_rect.y)
         self.game.draw_text_black('*', 50, self.cursor_rect.x + 2, self.cursor_rect.y)
@@ -164,6 +165,7 @@ class Choix_Personnage_Menu_1(Menu):
         Menu.__init__(self, game)
         self.state = 'Captain_America'
         self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 150, self.game.DISPLAY_H / 3 + 10)
+        self.game_personnage = 'None'
 
     def display_menu(self):
         self.run_display = True
@@ -447,44 +449,122 @@ class Choix_Personnage_Menu_1(Menu):
             if self.state == 'Captain_America':
                 self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
-                self.game.personnage = 'Captain_America'
+                self.game_personnage = "Captain_America"
                 self.game.playing = False
-                print(self.game.playing)
+                print(self.game_personnage)
                 self.run_display = False
                 self.game.curr_menu = self.game.Choix_Personnages_2
-        elif self.state == 'Hulk':
-            self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
-            self.game.personnage = 'Hulk'
-            #self.game.curr_menu = self.game.Choix_Carte_Menu
-        elif self.state == 'Ironman':
-            self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Spiderman':
-            self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Thor':
-            self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Groot':
-            self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Wolverine':
-            self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Black_Panther':
-            self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Starlord':
-            self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Yondu':
-            self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Torch':
-            self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Jane_Storm':
-            self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Chose':
-            self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Dr_Strange':
-            self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Back':
-            self.game.curr_menu = self.game.main_menu
-            self.game.START_KEY = False
-            pygame.mixer.music.stop()
-            self.run_display = False
+            elif self.state == 'Hulk':
+                self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Hulk'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+                #self.game.curr_menu = self.game.Choix_Carte_Menu
+            elif self.state == 'Ironman':
+                self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Ironman'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+            elif self.state == 'Spiderman':
+                self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Spiderman'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+            elif self.state == 'Thor':
+                self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Thor'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+            elif self.state == 'Groot':
+                self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Groot'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+            elif self.state == 'Wolverine':
+                self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Wolverine'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+            elif self.state == 'Black_Panther':
+                self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Black_Panther'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+            elif self.state == 'Starlord':
+                self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Starlord'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+            elif self.state == 'Yondu':
+                self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Yondu'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+            elif self.state == 'Torch':
+                self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Torch'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+            elif self.state == 'Jane_Storm':
+                self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Jane_Storm'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+            elif self.state == 'Chose':
+                self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Chose'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+            elif self.state == 'Dr_Strange':
+                self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Dr_Strange'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_2
+            elif self.state == 'Back':
+                self.game.curr_menu = self.game.main_menu
+                self.game.START_KEY = False
+                pygame.mixer.music.stop()
+                self.run_display = False
+            return self.game_personnage
 
 
 class Choix_Personnage_Menu_2(Menu):
@@ -492,6 +572,7 @@ class Choix_Personnage_Menu_2(Menu):
         Menu.__init__(self, game)
         self.state = 'Captain_America'
         self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 150, self.game.DISPLAY_H / 3 + 10)
+        self.game_personnage = 'None'
 
     def display_menu(self):
         self.run_display = True
@@ -775,51 +856,130 @@ class Choix_Personnage_Menu_2(Menu):
             if self.state == 'Captain_America':
                 self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
-                self.game.personnage = 'Captain_America'
+                self.game_personnage = 'Captain_America'
                 self.game.playing = False
-                print(self.game.playing)
+                print(self.game_personnage)
                 self.run_display = False
                 self.game.curr_menu = self.game.Choix_Personnages_3
 
-        elif self.state == 'Hulk':
-            self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
-            self.game.personnage = 'Hulk'
+            elif self.state == 'Hulk':
+                self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Hulk'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
             #self.game.curr_menu = self.game.Choix_Carte_Menu
-        elif self.state == 'Ironman':
-            self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Spiderman':
-            self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Thor':
-            self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Groot':
-            self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Wolverine':
-            self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Black_Panther':
-            self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Starlord':
-            self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Yondu':
-            self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Torch':
-            self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Jane_Storm':
-            self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Chose':
-            self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Dr_Strange':
-            self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
-        elif self.state == 'Back':
-            self.game.curr_menu = self.game.main_menu
-            self.game.START_KEY = False
-            pygame.mixer.music.stop()
-            self.run_display = False
+            elif self.state == 'Ironman':
+                self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Ironman'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+            elif self.state == 'Spiderman':
+                self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Spiderman'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+            elif self.state == 'Thor':
+                self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Thor'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+            elif self.state == 'Groot':
+                self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Groot'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+            elif self.state == 'Wolverine':
+                self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Wolverine'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+            elif self.state == 'Black_Panther':
+                self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Black_Panther'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+            elif self.state == 'Starlord':
+                self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Starlord'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+            elif self.state == 'Yondu':
+                self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Yondu'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+            elif self.state == 'Torch':
+                self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Torch'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+            elif self.state == 'Jane_Storm':
+                self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Jane_Storm'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+            elif self.state == 'Chose':
+                self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Chose'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+            elif self.state == 'Dr_Strange':
+                self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage= 'Dr_Strange'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_3
+            elif self.state == 'Back':
+                self.game.curr_menu = self.game.main_menu
+                self.game.START_KEY = False
+                pygame.mixer.music.stop()
+                self.run_display = False
+            return self.game_personnage
             
 class Choix_Personnage_Menu_3(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
         self.state = 'Captain_America'
         self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 150, self.game.DISPLAY_H / 3 + 10)
+        self.game_personnage = 'None'
 
     def display_menu(self):
         self.run_display = True
@@ -1103,51 +1263,128 @@ class Choix_Personnage_Menu_3(Menu):
             if self.state == 'Captain_America':
                 self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
-                self.game.personnage = 'Captain_America'
+                self.game_personnage = 'Captain_America'
                 self.game.playing = False
-                print(self.game.playing)
+                print(self.game_personnage)
                 self.run_display = False
                 self.game.curr_menu = self.game.Choix_Personnages_4
 
             elif self.state == 'Hulk':
                 self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
-                self.game.personnage = 'Hulk'
+                self.game.START_KEY = False
+                self.game_personnage = 'Hulk'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
                 #self.game.curr_menu = self.game.Choix_Carte_Menu
             elif self.state == 'Ironman':
                 self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Ironman'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
             elif self.state == 'Spiderman':
                 self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Spiderman'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
             elif self.state == 'Thor':
                 self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Thor'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
             elif self.state == 'Groot':
                 self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Groot'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
             elif self.state == 'Wolverine':
                 self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Wolverine'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
             elif self.state == 'Black_Panther':
                 self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Black_Panther'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
             elif self.state == 'Starlord':
                 self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Starlord'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
             elif self.state == 'Yondu':
                 self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Yondu'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
             elif self.state == 'Torch':
                 self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Torch'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
             elif self.state == 'Jane_Storm':
                 self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Jane_Storm'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
             elif self.state == 'Chose':
                 self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Chose'
+                self.game.playing = False
+                print(self.game_personnage)
+                self.run_display = False
+                self.game.curr_menu = self.game.Choix_Personnages_4
             elif self.state == 'Dr_Strange':
                 self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Chose'
+                self.game.playing = False
+                print(self.game_personnage)
             elif self.state == 'Back':
                 self.game.curr_menu = self.game.main_menu
                 self.game.START_KEY = False
                 pygame.mixer.music.stop()
                 self.run_display = False
+            return self.game_personnage
 
 class Choix_Personnage_Menu_4(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
         self.state = 'Captain_America'
         self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 150, self.game.DISPLAY_H / 3 + 10)
+        self.game_personnage = 'None'
 
     def display_menu(self):
         self.run_display = True
@@ -1433,45 +1670,110 @@ class Choix_Personnage_Menu_4(Menu):
             if self.state == 'Captain_America':
                 self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
-                self.game.personnage = 'Captain_America'
+                self.game_personnage = 'Captain_America'
                 self.game.playing = True
-                print(self.game.playing)
+                print(self.game_personnage)
                 self.run_display = False
                 #self.game.curr_menu = self.game.Choix_Personnages_2
 
             elif self.state == 'Hulk':
                 self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
-                self.game.personnage = 'Hulk'
+                self.game.START_KEY = False
+                self.game_personnage = 'Hulk'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
                 #self.game.curr_menu = self.game.Choix_Carte_Menu
             elif self.state == 'Ironman':
                 self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Ironman'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
             elif self.state == 'Spiderman':
                 self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Spiderman'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
             elif self.state == 'Thor':
                 self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Thor'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
             elif self.state == 'Groot':
                 self.game.window.blit(Groot2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Groot'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
             elif self.state == 'Wolverine':
                 self.game.window.blit(Wolverine2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Wolverine'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
             elif self.state == 'Black_Panther':
                 self.game.window.blit(Panther2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Black_Panther'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
             elif self.state == 'Starlord':
                 self.game.window.blit(Starlord2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Starlord'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
             elif self.state == 'Yondu':
                 self.game.window.blit(Yondu2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Yondu'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
             elif self.state == 'Torch':
                 self.game.window.blit(Torch2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Torch'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
             elif self.state == 'Jane_Storm':
                 self.game.window.blit(Jane2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Jane_Storm'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
             elif self.state == 'Chose':
                 self.game.window.blit(Chose2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Chose'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
             elif self.state == 'Dr_Strange':
                 self.game.window.blit(Strange2, (2*self.game.DISPLAY_W / 3, 450))
+                self.game.START_KEY = False
+                self.game_personnage = 'Dr_Strange'
+                self.game.playing = True
+                print(self.game_personnage)
+                self.run_display = False
             elif self.state == 'Back':
                 self.game.curr_menu = self.game.main_menu
                 self.game.START_KEY = False
                 pygame.mixer.music.stop()
                 self.run_display = False
+            return self.game_personnage
 
 class Choix_Carte_Menu(Menu):
     def __init__(self, game):
@@ -1597,6 +1899,21 @@ class Volume(Menu):
             self.game.draw_text_black("Back", 50, self.backx + 2, self.backy + 60)
             self.game.draw_text_white("Back", 50, self.backx, self.backy + 60)
 
+            if self.game.Musique :
+                self.game.draw_text_black("ON", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("ON", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("ON", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("ON", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("ON", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
+                self.run_display = False
+            else :
+                self.game.draw_text_black("OFF", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("OFF", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("OFF", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("OFF", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("OFF", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
+                self.run_display = False
+                
             self.draw_cursor()
             self.blit_screen()
 
