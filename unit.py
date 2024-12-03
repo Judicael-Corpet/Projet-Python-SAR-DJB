@@ -26,7 +26,7 @@ YELLOW = (255, 255, 0)
 
 
 
-class Unit(pygame.sprite.Sprite):
+class Unit():
     
     def __init__(self, name, x, y, size):#, health, nbre_move, defense, attacks):
         super().__init__() #permet d'inialiser la classe sprite en appelant son constructeur avec super()
@@ -59,7 +59,7 @@ class Unit(pygame.sprite.Sprite):
         self.image = pygame.Surface(size)
 
         self.green_cases=[]
-        
+ 
 
     def move(self, dx, dy):
         """Déplace l'unité de dx, dy, uniquement si la case cible est valide."""
@@ -76,7 +76,10 @@ class Unit(pygame.sprite.Sprite):
             print("Déplacement invalide : en dehors des cases autorisées.")
 
 
-    def update_green_case(self,player_units,enemy_units):
+    def update_green_case(self, player_units, enemy_units):
+        print("GREEEEEN")
+        print (type(player_units))
+        print (player_units)
         self.green_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.green_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
 
@@ -96,10 +99,14 @@ class Unit(pygame.sprite.Sprite):
                 if 0 <= green_x < GRID_SIZE_x and 0 <= green_y < GRID_SIZE_y:
                     #DEUXIEME VERIFICATION: Vérifier si la case est occupée par une unité (joueur ou ennemi)
                     case_occupée = False
-                    for unit in player_units + enemy_units:
-                        if unit.x == green_x and unit.y == green_y:
+                    for perso in enemy_units :
+                        if perso.x == green_x and perso.y == green_y:
                             case_occupée = True
-                            break
+                            #break
+                    for pax in player_units :    
+                        if self.x == green_x and self.y == green_y:
+                            case_occupée = True
+                            #break
                     
                     # Si la case n'est pas occupée, ajoutez-la à la liste des cases vertes
                     if not case_occupée:
@@ -138,68 +145,70 @@ class Unit(pygame.sprite.Sprite):
     
     
     
-    def attack(self, target):
+    def attack(self, unit, target):
         """Attaque une unité cible."""
-        #if abs(self.x - target.x) <= self.distance_attack and abs(self.y - target.y) <= self.distance_attack :
-        #    target.health -= self.attack_power
         precision = random.uniform(0.0, 0.9)
-        list_attack = self.attaques
+        print ("le type de cet objet est :")
+        print (type(unit))
+        list_attack = unit.attaques
+        selected_attack = None 
         for i, attack in enumerate(list_attack) :
             if attack == "Poings" :
-                attack = Poings()
+                selected_attack = Poings()
             
             elif attack == "Griffes" :
-                attack = Griffes()
+                selected_attack = Griffes()
 
             elif attack == "Lancer_bouclier" :
-                attack = Lancer_bouclier
+                selected_attack = Lancer_bouclier()
 
             elif attack == "Casser_les_murs" :
-                attack = Casser_les_murs()
+                selected_attack = Casser_les_murs()
             
             elif attack == "Laser" :
-                attack = Laser()
+                selected_attack = Laser()
             
             elif attack == "Missile":
-                attack = Missile()
+                selected_attack = Missile()
             
             elif attack == "Bloquer_adversaire":
-                attack = Bloquer_adversaire()
+                selected_attack = Bloquer_adversaire()
 
             elif attack == "Attaque_toile":
-                attack = Attaque_toile()
+                selected_attack = Attaque_toile()
             
             elif attack == "Marteau":
-                attack = Marteau()
+                selected_attack = Marteau()
             
             elif attack == "Foudre":
-                attack = Foudre()
+                selected_attack = Foudre()
             
             elif attack == "Attaque_branche":
-                attack = Attaque_branche()
+                selected_attack = Attaque_branche()
             
             elif attack == "Protection":
-                attack = Protection()
+                selected_attack = Protection()
             
             elif attack == "Pistolets":
-                attack = Pistolets()
+                selected_attack = Pistolets()
             
             elif attack == "Fleche_Yaka":
-                attack = Fleche_yaka()
+                selected_attack = Fleche_yaka()
 
             elif attack == "Boule_de_feu":
-                attack = Boule_de_feu()
+                selected_attack = Boule_de_feu()
 
             elif attack == "Soigner":
-                attack = Soigner()
+                selected_attack = Soigner()
 
             elif attack == "Projectile":
-                attack = Projectile()
+                selected_attack = Projectile()
         
-        if abs(self.x - target.x) <= attack.distance_attack and abs(self.y - target.y) <= attack.distance_attack :
-            target.health = attack.attack_power*precision*(1-target.defense)*1/attack.distance_attack
-        
-        return target.health
+        print (f"Lattaque selectionnee pour la methode attack est {selected_attack}")
+        if abs(unit.x - target.x) <= selected_attack.distance_attack and abs(unit.y - target.y) <= selected_attack.distance_attack :
+            #selected_attack.utiliser(target)
+            target.health = selected_attack.attack_power*precision*(1-target.defense)*1/selected_attack.distance_attack
+
 
 
 #self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", 
@@ -347,7 +356,7 @@ class Unit(pygame.sprite.Sprite):
         RED = (255, 0, 0)
         GREEN = (0, 255, 0)
         BLACK = (0, 0, 0)
-        bar_length = GRID_SIZE_x  # Longueur de la barre
+        bar_length = GRID_SIZE_x * 2 # Longueur de la barre
         bar_height = 3   # Hauteur de la barre
 
         # Calcul de la largeur en fonction des PV
@@ -372,8 +381,8 @@ class Unit(pygame.sprite.Sprite):
 
 class Captain_america(Unit):
     def __init__(self):
-        self.health = 150
-        self.health_max = 150
+        self.health = 1500
+        self.health_max = 1500
         self.nbre_move = 3
         self.defense = 75
         self.attack_power = 10
@@ -530,114 +539,213 @@ class Dr_strange(Unit) :
 
 class Poings(Unit) :
     def __init__(self) :
-        self.power = 20
+        self.attack_power = 20
         self.quantite = 100
         self.distance_attack = 1
-       
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
 
 class Griffes(Unit) :
     def __init__(self):
-        self.power = 40
+        self.attack_power = 40
         self.quantite = 3
-        self.distance = 3
+        self.distance_attack = 3
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
         
 
 class Lancer_bouclier(Unit) :
     def __init__(self):
-        self.power = 40
+        self.attack_power = 40
         self.quantite = 3
-        self.distance = 3
+        self.distance_attack = 3
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
        
 
 class Casser_les_murs(Unit) :
     def __init__(self):
-        self.power = 60
+        self.attack_power = 60
         self.quantite = 1
-        self.distance = 1
+        self.distance_attack = 1
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
         
 
 class Laser(Unit) :
     def __init__(self):
-        self.power = 60
+        self.attack_power = 60
         self. quantite = 1
-        self.distance = 5
+        self.distance_attack = 5
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
         
 
 class Missile (Unit):
     def __init__(self):
-        self.power = 70
+        self.attack_power = 70
         self.quantite = 1
-        self.distance = 6
+        self.distance_attack = 6
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
         
 
 class Bloquer_adversaire (Unit):
     def __init__(self):
         self.temps = 3
-        self.power = 10
+        self.attack_power = 10
         self.quantite = 2
-        self.distance = 4
+        self.distance_attack = 4
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
         
 
 class Attaque_toile (Unit):
     def __init__(self):
-        self.power = 40
+        self.attack_power = 40
         self.quantite = 3
-        self.distance = 3
+        self.distance_attack = 3
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
         
 
 class Marteau (Unit):
     def __init__(self):
-        self.power = 50
+        self.attack_power = 50
         self.quantite = 2
-        self.distance = 5
+        self.distance_attack = 5
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
         
 class Foudre (Unit):
     def __init__(self):
-        self.power = 90
+        self.attack_power = 90
         self.quantite = 1
-        self.distance = 6
+        self.distance_attack = 6
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
 
 class Attaque_branche(Unit) :
     def __init__(self):
-        self.power = 30
+        self.attack_power = 30
         self.quantite = 100
-        self.distance = 3
+        self.distance_attack = 3
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
 
 class Protection (Unit):
     def __init__(self):
-        self.power = 150
+        self.attack_power = 150
         self.temps = 1
-        self.distance = 1
+        self.distance_attack = 1
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
 
 class Pistolets(Unit) :
     def __init__(self):
-        self.power = 40
+        self.attack_power = 40
         self.quantite = 10
-        self.distance = 4
+        self.distance_attack = 4
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
 
 class Fleche_yaka(Unit) :
     def __init__(self):
-        self.power = 70
+        self.attack_power = 70
         self.quantite = 3
-        self.distance = 5
+        self.distance_attack = 5
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
 
 class Boule_de_feu (Unit):
     def __init__(self):
-        self.power = 70
+        self.attack_power = 70
         self.quantite = 3
-        self.distance = 5
+        self.distance_attack = 5
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
 
 class Soigner (Unit):
     def __init__(self):
-        self.power = 150
+        self.attack_power = 150
         self.quantite = 3
-        self.distance = 1
+        self.distance_attack = 1
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
 
 class Projectile(Unit) :
     def __init__(self):
-        self.power = 60
+        self.attack_power = 60
         self.quantite = 3
-        self.distance = 5
+        self.distance_attack = 5
+        self.precision = random.uniform(0.0, 1)
+
+    def utiliser (self, cible) :
+        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        return cible.health
+        
 
 
 

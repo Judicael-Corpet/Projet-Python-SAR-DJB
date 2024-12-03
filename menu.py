@@ -5,37 +5,37 @@ from game import *
 
 fond = pygame.image.load('Fond_ecran.png')
 
-captain = pygame.image.load('Personnages_menu/captain_america_menu.jpeg')    #.convert_alpha()
+captain = pygame.image.load('Personnages_menu/captain_america_menu.png')
 captain2 = pygame.transform.scale(captain, (200, 200))
-captain2.set_colorkey((0,0,0))
-hulk = pygame.image.load('Personnages_menu/hulk_menu.jpeg')
+
+hulk = pygame.image.load('Personnages_menu/hulk_menu.png')
 hulk2 = pygame.transform.scale(hulk, (200, 200))
-hulk2.set_colorkey((255,255,255))
-ironman = pygame.image.load('Personnages_menu/ironman_menu.jpeg')
+
+ironman = pygame.image.load('Personnages_menu/ironman_menu.png')
 ironman2 = pygame.transform.scale(ironman, (200, 200))
 
 Spiderman = pygame.image.load('Personnages_menu/spiderman_menu.png')
 Spiderman2 = pygame.transform.scale(Spiderman, (200, 200))
 
-Thor = pygame.image.load('Personnages_menu/thor_menu.jpeg')
+Thor = pygame.image.load('Personnages_menu/thor_menu.png')
 Thor2 = pygame.transform.scale(Thor, (200, 200))
 
-Groot = pygame.image.load('Personnages_menu/groot_menu.jpeg')
+Groot = pygame.image.load('Personnages_menu/groot_menu.png')
 Groot2 = pygame.transform.scale(Groot, (200, 200))
 
-Wolverine = pygame.image.load('Personnages_menu/wolverine_menu.jpeg')
+Wolverine = pygame.image.load('Personnages_menu/wolverine_menu.png')
 Wolverine2 = pygame.transform.scale(Wolverine, (200, 200))
 
-Panther = pygame.image.load('Personnages_menu/black_panther_menu.jpeg')
+Panther = pygame.image.load('Personnages_menu/black_panther_menu.png')
 Panther2 = pygame.transform.scale(Panther, (200, 200))
 
-Starlord = pygame.image.load('Personnages_menu/starlord_menu.jpeg')
+Starlord = pygame.image.load('Personnages_menu/starlord_menu.png')
 Starlord2 = pygame.transform.scale(Starlord, (200, 200))
 
-Yondu = pygame.image.load('Personnages_menu/yondu_menu.jpeg')
+Yondu = pygame.image.load('Personnages_menu/yondu_menu.png')
 Yondu2 = pygame.transform.scale(Yondu, (200, 200))
 
-Torch = pygame.image.load('Personnages_menu/torch_menu.jpeg')
+Torch = pygame.image.load('Personnages_menu/torch_menu.png')
 Torch2 = pygame.transform.scale(Torch, (200, 200))
 
 Jane = pygame.image.load('Personnages_menu/jane_storm_menu.png')
@@ -44,7 +44,7 @@ Jane2 = pygame.transform.scale(Jane, (200, 200))
 Chose = pygame.image.load('Personnages_menu/chose_menu.png')
 Chose2 = pygame.transform.scale(Chose, (200, 200))
 
-Strange = pygame.image.load('Personnages_menu/docteur_strange_menu.jpeg')
+Strange = pygame.image.load('Personnages_menu/docteur_strange_menu.png')
 Strange2 = pygame.transform.scale(Strange, (200, 200))
 
 class Menu():
@@ -1674,16 +1674,13 @@ class Choix_Personnage_Menu_4(Menu):
                 self.game.playing = True
                 print(self.game_personnage)
                 self.run_display = False
-                #self.game.curr_menu = self.game.Choix_Personnages_2
-
             elif self.state == 'Hulk':
                 self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
                 self.game_personnage = 'Hulk'
                 self.game.playing = True
                 print(self.game_personnage)
-                self.run_display = False
-                #self.game.curr_menu = self.game.Choix_Carte_Menu
+                self.run_display = False      
             elif self.state == 'Ironman':
                 self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False

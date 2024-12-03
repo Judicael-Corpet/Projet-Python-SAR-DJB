@@ -72,6 +72,12 @@ class Game:
         #p1 = Unit("Captain_America", 0, 0, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"])
         #print (p1.name)
         
+    def traiter_unites(self, unites):
+        if isinstance(unites, list):  # Vérifie si c'est bien une liste
+            for perso in unites:
+                print(perso.name)
+        else:
+            print("Erreur : 'unites' n'est pas une liste")  
 
     def draw_attack_menu(self) :
         """Dessine le menu des attaques."""
@@ -96,12 +102,13 @@ class Game:
         
         for selected_unit in self.player_units:
             self.flip_display()
+            print(selected_unit.health)
             # Tant que l'unité n'a pas terminé son tour
             has_acted = False
             selected_unit.is_selected = True
             selected_unit.update_green_case(self.player_units,self.enemy_units)
             selected_unit.update_red_case()
-            list_attacks = selected_unit.attaques
+            
             health = selected_unit.health
             nbre_move = selected_unit.nbre_move
             defense = selected_unit.defense
@@ -156,26 +163,21 @@ class Game:
                                 self.selected_attack = True
                                 self.menu_attaques = False
                                 #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
-
-
+                                print("verif player")
+                                self.traiter_unites(self.player_units)
+                                self.traiter_unites(self.enemy_units)
                                 
-
-
-
+                                for i, enemy in enumerate (self.enemy_units) :
+                                    if abs(enemy.x - selected_unit.x)<= 3  and abs(enemy.y - selected_unit.y)<= 3 :
+                                        selected_unit.attack(selected_unit, enemy)
+                                        if enemy.health <= 0 :
+                                            print(f"{enemy.name} est mort") 
+                                            self.enemy_units.remove(enemy)
+                                
                                 has_acted = True
                                 selected_unit.is_selected = False 
                 
-                           #selected_unit.update_green_case(self.player_units, self.enemy_units)
                     self.flip_display()   
-               
-#Suite du code à écrire ici pour pour appliquer l'attaque à l'ennemi ciblé
-                        
-                        #if self.selected_attack :
-                                
-            
-                                  
-                
-                
 
                             #print(f"Attaque choisie : {attack['name']}")
                             #for enemy in self.enemy_units:
@@ -193,7 +195,9 @@ class Game:
        
         
         for enemy in self.enemy_units:
-            enemy.is_selected  = True
+            print (enemy.health)
+            enemy.is_selected  = True 
+             
             enemy.update_green_case(self.player_units,self.enemy_units)   
 
                 # Déplacement aléatoire
@@ -204,11 +208,14 @@ class Game:
 
 
             # Attaque si possible
-            if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
-                enemy.attack(target)
-                if target.health <= 0:
-                    self.player_units.remove(target)
-           
+            for i, player in enumerate(self.player_units) :    
+                if abs(enemy.x - player.x) <= 1 and abs(enemy.y - player.y) <= 1:
+                    enemy.attack(enemy, player)
+                    if player.health <= 0:
+                        #index = self.player_units.index(player)
+                        #self.player_units = self.player_units.pop(index)
+                        print(f"{player.name} est mort")
+                        self.player_units.remove(player)
             enemy.is_selected = False
         self.flip_display() 
         play = True
@@ -238,13 +245,18 @@ class Game:
                 pygame.draw.rect(self.screen, WHITE, rect, 1)
 
         # Ajoutez les sprites des unités/players
-        for unit in self.player_units + self.enemy_units :
-            unit.draw(self.screen)
-            if unit.is_selected :
-                unit.draw_green_case(self.screen)
+        for perso in self.enemy_units:
+            perso.draw(self.screen)
+            print("Bonjour")
+        self.traiter_unites(self.enemy_units)
+        for perso in self.player_units:
+            perso.draw(self.screen)
+            if perso.is_selected :
+                perso.draw_green_case(self.screen)
                 if self.menu_attaques:
-                    unit.draw_red_case(self.screen)
-            
+                    perso.draw_red_case(self.screen)
+        self.traiter_unites(self.player_units)
+
          # Si le menu des attaques est actif, dessiner le menu par-dessus
         if self.menu_attaques:  
             self.draw_attack_menu()
@@ -291,7 +303,7 @@ def main():
     
     # Instanciation de la fenêtre
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Mon jeu de stratégie")
+    pygame.display.set_caption("Marvel Game")
     
     # Instanciation du jeu
     game = Game(screen)
@@ -301,12 +313,17 @@ def main():
         if (game.playing):
             break
     
+    
     game.player_units = [Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55]),#,150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55])]#, 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
 
+    
     game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 16, 9, [55,55]),#, 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              Unit(game.Choix_Personnages_4.game_personnage, 17, 9, [55,55])]#, 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
     
+    print("Hello")
+    game.traiter_unites(game.player_units )
+    game.traiter_unites(game.enemy_units)
     play = True
     iter = 0
     
@@ -315,7 +332,7 @@ def main():
         game.handle_player_turn()
         game.handle_enemy_turn()   
         iter += 1 
-        play =  game.handle_enemy_turn() 
+         
 
 if __name__ == "__main__":
     main()
