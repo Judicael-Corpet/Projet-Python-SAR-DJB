@@ -3,10 +3,10 @@ from menu import *
 from game import *
 
 
-
+import pygame
 import heapq
 import math
-
+"""
 class Grid:
     def __init__(self, width, height, obstacles):
         self.width = width
@@ -14,11 +14,67 @@ class Grid:
         self.obstacles = set(obstacles)
 
     def is_walkable(self, x, y):
-        """Vérifie si une case est praticable."""
+        Vérifie si une case est praticable.
         return (x, y) not in self.obstacles and 0 <= x < self.width and 0 <= y < self.height
 
 
-"""
+import heapq
+grid = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0],
+    [0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0],
+    [1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+    [1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0],
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
+    [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+]
+grid2 = grid
+
+
+import heapq
+for unit in self.game.player_units + self.game.enemy_units:
+    grid[unit.x][unit.y] = 1
+def a_star(grid, start, goal):
+    def heuristic(a, b):
+        # Distance de Manhattan
+        return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+    rows, cols = len(grid), len(grid[0])
+    open_set = []
+    heapq.heappush(open_set, (0, start))
+    came_from = {}
+    g_score = {start: 0}
+    f_score = {start: heuristic(start, goal)}
+
+    while open_set:
+        _, current = heapq.heappop(open_set)
+
+        if current == goal:
+            path = []
+            while current in came_from:
+                path.append(current)
+                current = came_from[current]
+            path.reverse()
+            return path  # Chemin trouvé
+
+        for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:  # Déplacements possibles
+            neighbor = (current[0] + dx, current[1] + dy)
+            if 0 <= neighbor[0] < rows and 0 <= neighbor[1] < cols and grid[neighbor[0]][neighbor[1]] == 0:
+                tentative_g_score = g_score[current] + 1
+                if tentative_g_score < g_score.get(neighbor, float('inf')):
+                    came_from[neighbor] = current
+                    g_score[neighbor] = tentative_g_score
+                    f_score[neighbor] = tentative_g_score + heuristic(neighbor, goal)
+                    heapq.heappush(open_set, (f_score[neighbor], neighbor))
+    grid = grid2
+    return None  # Aucun chemin trouvé
+
+
 class Node:
     def __init__(self, position, parent=None):
         self.position = position  # Position sous forme de tuple (x, y)
@@ -98,7 +154,7 @@ def a_star(grid, start, goal):
 """
 
 
-
+"""
 class Node:
     def __init__(self, x, y, parent=None):
         self.x = x
@@ -112,12 +168,12 @@ class Node:
         return self.f_score < other.f_score
 
 def heuristic(a, b):
-    """Distance de Manhattan pour une grille (si les déplacements diagonaux sont permis, utilisez euclidienne)."""
+    Distance de Manhattan pour une grille (si les déplacements diagonaux sont permis, utilisez euclidienne).
     return math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2)
 
 
 def a_star(grid, start, goal):
-    """Implémente l'algorithme A* avec des optimisations de base."""
+    Implémente l'algorithme A* avec des optimisations de base.
     open_list = []
     closed_list = set()
     
@@ -175,7 +231,7 @@ def a_star(grid, start, goal):
     return None  # Retourne None si aucun chemin n'est trouvé
 
 
-
+"""
 
 
 
@@ -254,3 +310,213 @@ def a_star(grid, start, goal):
 
 
 """
+
+
+"""
+import heapq
+
+grid = [
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+    [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+    [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+]
+
+
+def a_star(grid, start, goal):
+    def heuristic(a, b):
+        # Distance de Manhattan            
+        return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+    rows, cols = len(grid), len(grid[0])
+    open_set = []        
+    heapq.heappush(open_set, (0, start))
+    came_from = {}
+    g_score = {start: 0}
+    f_score = {start: heuristic(start, goal)}
+
+    while open_set:
+        _, current = heapq.heappop(open_set)
+
+        if current == goal:
+            path = []
+            while current in came_from:
+                path.append(current)
+                current = came_from[current]
+            path.reverse()
+            return path  # Chemin trouvé
+
+        for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:  # Déplacements possibles
+            neighbor = (current[0] + dx, current[1] + dy)
+            if 0 <= neighbor[0] < rows and 0 <= neighbor[1] < cols and grid[neighbor[0]][neighbor[1]] == 0:
+                tentative_g_score = g_score[current] + 1
+                if tentative_g_score < g_score.get(neighbor, float('inf')):
+                    came_from[neighbor] = current
+                    g_score[neighbor] = tentative_g_score
+                    f_score[neighbor] = tentative_g_score + heuristic(neighbor, goal)
+                    heapq.heappush(open_set, (f_score[neighbor], neighbor))
+    return None  # Aucun chemin trouvé
+
+
+start = (0, 0)
+goal = (5, 5)
+path = a_star(grid, start, goal)
+print("Chemin trouvé:", path if path else "Aucun chemin trouvé")
+
+
+
+
+from collections import deque
+
+from collections import deque
+
+def bfs(grid, start, goal):
+    rows, cols = len(grid), len(grid[0])
+
+    # Vérifier si les points de départ et d'arrivée sont valides
+    if not (0 <= start[0] < rows and 0 <= start[1] < cols) or grid[start[0]][start[1]] == 1:
+        print("Point de départ invalide.")
+        return None
+    if not (0 <= goal[0] < rows and 0 <= goal[1] < cols) or grid[goal[0]][goal[1]] == 1:
+        print("Point d'arrivée invalide.")
+        return None
+
+    queue = deque([start])
+    came_from = {start: None}
+
+    while queue:
+        current = queue.popleft()
+
+        if current == goal:
+            # Construire le chemin à partir du dictionnaire `came_from`
+            path = []
+            while current:
+                path.append(current)
+                current = came_from[current]
+            path.reverse()
+            return path
+
+        # Vérifier les voisins
+        for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            neighbor = (current[0] + dx, current[1] + dy)
+            if (0 <= neighbor[0] < rows and 0 <= neighbor[1] < cols  # Dans les limites de la grille
+                    and grid[neighbor[0]][neighbor[1]] == 0           # Pas un obstacle
+                    and neighbor not in came_from):                  # Pas déjà visité
+                queue.append(neighbor)
+                came_from[neighbor] = current
+
+    print("Aucun chemin trouvé.")
+    return None
+# Exemple d'utilisation
+grid = [
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 1, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0],
+    [0, 0, 2, 2, 2, 2, 1, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0],
+    [0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1],
+    [0, 0, 0, 1, 0, 2, 0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1],
+    [0, 0, 0, 1, 0, 2, 2, 2, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+    [1, 1, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+    [0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 2, 2, 2, 0, 0, 0],
+    [0, 0, 0, 0, 0, 2, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 1, 1, 1, 0, 2, 2, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1],
+]
+
+start = (16, 9)
+goal = (0, 0)
+
+path = bfs(grid, start, goal)
+if path:
+    print("Chemin trouvé :", path)
+else:
+    print("Aucun chemin trouvé.")
+    
+grid = [
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 1, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0],
+    [0, 0, 2, 2, 2, 2, 1, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0],
+    [0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1],
+    [0, 0, 0, 1, 0, 2, 0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1],
+    [0, 0, 0, 1, 0, 2, 2, 2, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+    [1, 1, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+    [0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 2, 2, 2, 0, 0, 0],
+    [0, 0, 0, 0, 0, 2, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 1, 1, 1, 0, 2, 2, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1],
+]
+
+
+start = (16, 9)
+goal = (0, 0)
+
+import heapq
+
+def a_star(grid, start, goal):
+    def heuristic(a, b):
+        #Distance de Manhattan pour estimer le coût restant.
+        return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+    rows, cols = len(grid), len(grid[0])
+    open_set = []  # File de priorité
+    heapq.heappush(open_set, (0, start))  # Ajoute la case de départ avec un score f=0
+    came_from = {}  # Garde une trace des déplacements
+    g_score = {start: 0}  # Coût pour atteindre un nœud
+    f_score = {start: heuristic(start, goal)}  # Score total estimé (g + h)
+
+    while open_set:
+        _, current = heapq.heappop(open_set)  # Récupère le nœud avec le plus faible f_score
+
+        print(f"Exploring node: {current}")
+
+        # Si on atteint l'objectif
+        if current == goal:
+            path = []
+            while current in came_from:
+                path.append(current)
+                current = came_from[current]
+            path.append(start)  # Inclut le point de départ
+            path.reverse()  # Retourne le chemin
+            return path  # Retourne le chemin trouvé
+
+        # Explore les voisins (haut, bas, gauche, droite)
+        for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            neighbor = (current[0] + dx, current[1] + dy)
+
+            # Vérifie si le voisin est dans la grille et accessible
+            if 0 <= neighbor[0] < rows and 0 <= neighbor[1] < cols and grid[neighbor[0]][neighbor[1]] != 1:
+                cost = 1
+                if grid[neighbor[0]][neighbor[1]] == 2:
+                    cost = 0.1  # Coût réduit pour les chemins spéciaux
+
+                tentative_g_score = g_score[current] + cost  # Coût d'un pas supplémentaire
+
+                # Si le coût pour atteindre ce voisin est meilleur, on met à jour
+                if tentative_g_score < g_score.get(neighbor, float('inf')):
+                    came_from[neighbor] = current
+                    g_score[neighbor] = tentative_g_score
+                    f_score[neighbor] = tentative_g_score + heuristic(neighbor, goal)
+
+                    # Ajouter à l'open_set si pas déjà présent
+                    if neighbor not in [i[1] for i in open_set]:
+                        heapq.heappush(open_set, (f_score[neighbor], neighbor))
+                        print(f"Adding neighbor: {neighbor} with f_score: {f_score[neighbor]}")
+
+    return None  # Aucun chemin trouvé
+"""
+

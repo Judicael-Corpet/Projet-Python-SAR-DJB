@@ -7,11 +7,87 @@ from unit import *
 from menu import *
 from sound import *
 from IA import *
+import heapq
 
 fond = pygame.image.load('Fond_ecran.png')
 
 personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", 
                             "Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
+
+grid = [
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 1, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0],
+    [0, 0, 2, 2, 2, 2, 1, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0],
+    [0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1],
+    [0, 0, 0, 1, 0, 2, 0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1],
+    [0, 0, 0, 1, 0, 2, 2, 2, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+    [1, 1, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+    [0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 2, 2, 2, 0, 0, 0],
+    [0, 0, 0, 0, 0, 2, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 1, 1, 1, 0, 2, 2, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1],
+]
+
+
+
+def a_star(grid, start, goal):
+    def heuristic(a, b):
+        """Distance de Manhattan pour estimer le coût restant."""
+        return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+    rows, cols = len(grid), len(grid[0])
+    open_set = []  # File de priorité
+    heapq.heappush(open_set, (0, start))  # Ajoute la case de départ avec un score f=0
+    came_from = {}  # Garde une trace des déplacements
+    g_score = {start: 0}  # Coût pour atteindre un nœud
+    f_score = {start: heuristic(start, goal)}  # Score total estimé (g + h)
+
+    while open_set:
+        _, current = heapq.heappop(open_set)  # Récupère le nœud avec le plus faible f_score
+
+        print(f"Exploring node: {current}")
+
+        # Si on atteint l'objectif
+        if current == goal:
+            path = []
+            while current in came_from:
+                path.append(current)
+                current = came_from[current]
+            path.append(start)  # Inclut le point de départ
+            path.reverse()  # Retourne le chemin
+            return path  # Retourne le chemin trouvé
+
+        # Explore les voisins (haut, bas, gauche, droite)
+        for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            neighbor = (current[0] + dx, current[1] + dy)
+
+            # Vérifie si le voisin est dans la grille et accessible
+            if 0 <= neighbor[0] < rows and 0 <= neighbor[1] < cols and grid[neighbor[0]][neighbor[1]] != 1:
+                cost = 1
+                if grid[neighbor[0]][neighbor[1]] == 2:
+                    cost = 0.1  # Coût réduit pour les chemins spéciaux
+
+                tentative_g_score = g_score[current] + cost  # Coût d'un pas supplémentaire
+
+                # Si le coût pour atteindre ce voisin est meilleur, on met à jour
+                if tentative_g_score < g_score.get(neighbor, float('inf')):
+                    came_from[neighbor] = current
+                    g_score[neighbor] = tentative_g_score
+                    f_score[neighbor] = tentative_g_score + heuristic(neighbor, goal)
+
+                    # Ajouter à l'open_set si pas déjà présent
+                    if neighbor not in [i[1] for i in open_set]:
+                        heapq.heappush(open_set, (f_score[neighbor], neighbor))
+                        print(f"Adding neighbor: {neighbor} with f_score: {f_score[neighbor]}")
+
+    return None  # Aucun chemin trouvé
+
+
+
+
 class Game:
     """
     Classe pour représenter le jeu.
@@ -131,10 +207,8 @@ class Game:
                                 dx = 1
                             elif event.key == pygame.K_UP and not self.menu_attaques:
                                 dy = -1
-                                
                             elif event.key == pygame.K_DOWN and not self.menu_attaques:
                                 dy = 1
-                                
                             selected_unit.move(dx, dy)
                             
                         
@@ -183,43 +257,55 @@ class Game:
 
                             
                 
-                        
+    
+
+
+
 
     def handle_enemy_turn(self):
         for enemy in self.enemy_units:
-            enemy.is_selected  = True
-            enemy.update_green_case(self.player_units,self.enemy_units) 
+            enemy.is_selected = True
+            enemy.update_green_case(self.player_units, self.enemy_units)
+            print(enemy)
             # Déterminer la cible la plus proche
             target_1 = self.player_units[0]
             target_2 = self.player_units[1]
             dist_1 = np.sqrt((target_1.x - enemy.x) ** 2 + (target_1.y - enemy.y) ** 2)
             dist_2 = np.sqrt((target_2.x - enemy.x) ** 2 + (target_2.y - enemy.y) ** 2)
             target = target_1 if dist_1 < dist_2 else target_2
-            L = [(14,8), (14,9), (14,10), (14,11), (15,8), (16,8), (17,8)]
-            case = L # cases obstacles
-            for unit in self.player_units + self.enemy_units:
-                case.append((unit.x,unit.y))
-            print('dur')
-            # Appliquer A* pour trouver le chemin vers la cible
-            grid = Grid(WIDTH, HEIGHT, case)
-            print('bg')
-            path = a_star(grid, (enemy.x, enemy.y), (target.x, target.y))
 
+            # Mise à jour de la grille avec les positions des unités comme obstacles
+            current_grid = [row[:] for row in grid]  # Copie de la grille
+            for unit in self.player_units + self.enemy_units:
+                
+                current_grid[unit.y][unit.x] = 1  # Marquer les cases occupées comme obstacles
+
+            # Appliquer A* pour trouver le chemin vers la cible
+            start = (enemy.x, enemy.y)
+            goal = (target.x, target.y)
+
+            path = a_star(current_grid, start, goal)
+            #path = bfs(current_grid, start, goal)
+            print(path)
             # Déplacer l'ennemi d'une étape sur le chemin
             if path and len(path) > 1:
-                next_step = path[1]  # Le premier élément est la position actuelle
+                next_step = path[0]  # Le premier élément est la position actuelle
                 enemy.x, enemy.y = next_step
-            print('pas ouf')
+                print('deplacement')
+            else:
+                print("Aucun chemin trouvé pour l'ennemi :", enemy)
+
             # Si l'ennemi est à portée, attaquer
             if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
                 enemy.attack(target)
                 if target.health <= 0:
                     self.player_units.remove(target)
+
             enemy.is_selected = False
-            print('hey')
-        self.flip_display() 
+
+        self.flip_display()
         play = True
-        return play 
+        return play
 
     def flip_display(self):
         """Affiche la carte et les éléments du jeu."""
@@ -309,8 +395,8 @@ def main():
     game.player_units = [Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55]),#,150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55])]#, 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
 
-    game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 16, 9, [55,55]),#, 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
-                             Unit(game.Choix_Personnages_4.game_personnage, 17, 9, [55,55])]#, 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
+    game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 5, 5, [55,55]),#, 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
+                             Unit(game.Choix_Personnages_4.game_personnage, 16, 9, [55,55])]#, 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
     
     play = True
     iter = 0
