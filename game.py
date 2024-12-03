@@ -31,7 +31,7 @@ grid = [
     [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1],
 ]
 
-
+#passer d'un côté si on est de ce coté de la colonne sinon de l'autre
 
 def a_star(grid, start, goal):
     def heuristic(a, b):
