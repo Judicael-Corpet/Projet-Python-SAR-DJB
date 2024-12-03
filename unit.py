@@ -41,7 +41,7 @@ class Unit():
         self.attaques = []
         self.distance_attack = 0
         self.attack_power = 0
-        
+        self.red_cases = []
 
         
 
@@ -76,13 +76,18 @@ class Unit():
             print("Déplacement invalide : en dehors des cases autorisées.")
 
 
-    def update_green_case(self, player_units, enemy_units):
-        print("GREEEEEN")
-        print (type(player_units))
-        print (player_units)
+    def update_green_case(self,player_units,enemy_units):
         self.green_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.green_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
-
+        
+        self.cases=[] # cases obstacles
+        # rivière 9-10
+        for i in range(9,10+1):
+            for j in range(0,9):
+                self.cases.append((i,j)) 
+        
+ 
+        
         if self.is_selected:
             # Définir les déplacements possibles : orthogonaux + diagonales proches
             offsets = [
@@ -99,14 +104,15 @@ class Unit():
                 if 0 <= green_x < GRID_SIZE_x and 0 <= green_y < GRID_SIZE_y:
                     #DEUXIEME VERIFICATION: Vérifier si la case est occupée par une unité (joueur ou ennemi)
                     case_occupée = False
-                    for perso in enemy_units :
-                        if perso.x == green_x and perso.y == green_y:
+                    for unit in player_units + enemy_units:
+                        if unit.x == green_x and unit.y == green_y:
                             case_occupée = True
-                            #break
-                    for pax in player_units :    
-                        if self.x == green_x and self.y == green_y:
+                            break
+                    # TRoisieme verif cases obstacles
+                    for x,y in self.cases:
+                        if x==green_x and y==green_y:
                             case_occupée = True
-                            #break
+                            break
                     
                     # Si la case n'est pas occupée, ajoutez-la à la liste des cases vertes
                     if not case_occupée:
@@ -120,15 +126,66 @@ class Unit():
             pygame.draw.rect(screen, color, (green_x*CELL_SIZE, green_y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 2)  # Dessine les bords
 
 
-    def update_red_case(self):
+    def update_red_case(self,attack):
         self.red_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.red_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
+        
+        if attack == "Poings" :
+            selected_attack = Poings()
+        
+        elif attack == "Griffes" :
+            selected_attack = Griffes()
+
+        elif attack == "Lancer_bouclier" :
+            selected_attack = Lancer_bouclier()
+
+        elif attack == "Casser_les_murs" :
+            selected_attack = Casser_les_murs()
+        
+        elif attack == "Laser" :
+            selected_attack = Laser()
+        
+        elif attack == "Missile":
+            selected_attack = Missile()
+        
+        elif attack == "Bloquer_adversaire":
+            selected_attack = Bloquer_adversaire()
+
+        elif attack == "Attaque_toile":
+            selected_attack = Attaque_toile()
+        
+        elif attack == "Marteau":
+            selected_attack = Marteau()
+        
+        elif attack == "Foudre":
+            selected_attack = Foudre()
+        
+        elif attack == "Attaque_branche":
+            selected_attack = Attaque_branche()
+        
+        elif attack == "Protection":
+            selected_attack = Protection()
+        
+        elif attack == "Pistolets":
+            selected_attack = Pistolets()
+        
+        elif attack == "Fleche_Yaka":
+            selected_attack = Fleche_yaka()
+
+        elif attack == "Boule_de_feu":
+            selected_attack = Boule_de_feu()
+
+        elif attack == "Soigner":
+            selected_attack = Soigner()
+
+        elif attack == "Projectile":
+            selected_attack = Projectile()
 
         if self.is_selected:
             # Définir les déplacements possibles : orthogonaux + diagonales proches
-            offsets = [(2, 0), (1, 0)] #la case ou se trouve déjà le personnage, au cas où il ne souhaite pas se déplacer
+            #la case ou se trouve déjà le personnage, au cas où il ne souhaite pas se déplacer
 
-            for dx, dy in offsets:
+            for dx, dy in selected_attack.offsets:
                 # Calcul des coordonnées de la case
                 red_x = self.x + dx # pas encore implementer dans la liste qui dessine les cases
                 red_y = self.y + dy
@@ -539,6 +596,10 @@ class Dr_strange(Unit) :
 
 class Poings(Unit) :
     def __init__(self) :
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 20
         self.quantite = 100
         self.distance_attack = 1
@@ -550,6 +611,10 @@ class Poings(Unit) :
 
 class Griffes(Unit) :
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 40
         self.quantite = 3
         self.distance_attack = 3
@@ -562,6 +627,10 @@ class Griffes(Unit) :
 
 class Lancer_bouclier(Unit) :
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 40
         self.quantite = 3
         self.distance_attack = 3
@@ -575,6 +644,10 @@ class Lancer_bouclier(Unit) :
 
 class Casser_les_murs(Unit) :
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 60
         self.quantite = 1
         self.distance_attack = 1
@@ -588,6 +661,10 @@ class Casser_les_murs(Unit) :
 
 class Laser(Unit) :
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 60
         self. quantite = 1
         self.distance_attack = 5
@@ -601,6 +678,10 @@ class Laser(Unit) :
 
 class Missile (Unit):
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 70
         self.quantite = 1
         self.distance_attack = 6
@@ -614,6 +695,10 @@ class Missile (Unit):
 
 class Bloquer_adversaire (Unit):
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.temps = 3
         self.attack_power = 10
         self.quantite = 2
@@ -628,6 +713,10 @@ class Bloquer_adversaire (Unit):
 
 class Attaque_toile (Unit):
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 40
         self.quantite = 3
         self.distance_attack = 3
@@ -641,6 +730,10 @@ class Attaque_toile (Unit):
 
 class Marteau (Unit):
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 50
         self.quantite = 2
         self.distance_attack = 5
@@ -653,6 +746,10 @@ class Marteau (Unit):
         
 class Foudre (Unit):
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 90
         self.quantite = 1
         self.distance_attack = 6
@@ -665,6 +762,10 @@ class Foudre (Unit):
 
 class Attaque_branche(Unit) :
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 30
         self.quantite = 100
         self.distance_attack = 3
@@ -677,6 +778,10 @@ class Attaque_branche(Unit) :
 
 class Protection (Unit):
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 150
         self.temps = 1
         self.distance_attack = 1
@@ -689,6 +794,10 @@ class Protection (Unit):
 
 class Pistolets(Unit) :
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 40
         self.quantite = 10
         self.distance_attack = 4
@@ -701,6 +810,10 @@ class Pistolets(Unit) :
 
 class Fleche_yaka(Unit) :
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 70
         self.quantite = 3
         self.distance_attack = 5
@@ -713,6 +826,10 @@ class Fleche_yaka(Unit) :
 
 class Boule_de_feu (Unit):
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 70
         self.quantite = 3
         self.distance_attack = 5
@@ -725,6 +842,10 @@ class Boule_de_feu (Unit):
 
 class Soigner (Unit):
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 150
         self.quantite = 3
         self.distance_attack = 1
@@ -737,6 +858,10 @@ class Soigner (Unit):
 
 class Projectile(Unit) :
     def __init__(self):
+        self.offsets = [
+                (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                ]
         self.attack_power = 60
         self.quantite = 3
         self.distance_attack = 5

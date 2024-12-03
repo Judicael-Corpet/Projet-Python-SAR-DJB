@@ -107,7 +107,7 @@ class Game:
             has_acted = False
             selected_unit.is_selected = True
             selected_unit.update_green_case(self.player_units,self.enemy_units)
-            selected_unit.update_red_case()
+            
             
             health = selected_unit.health
             nbre_move = selected_unit.nbre_move
@@ -151,16 +151,18 @@ class Game:
                                 self.menu_attaques = True #active le menu des attaques
                             # Navigation dans le menu des attaques
                         if self.menu_attaques :
-                            selected_unit.update_red_case()
+                            
+
                             if event.key == pygame.K_DOWN:
                                 self.selected_attack_index = (self.selected_attack_index + 1) % len(self.attaques) # Navigation dans le menu des attaques vers le haut
-                            
+                                selected_unit.update_red_case(self.attaques[self.selected_attack_index])
                             elif event.key == pygame.K_UP:
                                 self.selected_attack_index = (self.selected_attack_index - 1) % len(self.attaques) # Navigation dans le menu des attaques vers le bas
-                            
+                                selected_unit.update_red_case(self.attaques[self.selected_attack_index])
                             elif event.key == pygame.K_RETURN :
                                 print (f"Attaque sélectionnée : {self.attaques[self.selected_attack_index]}") # attaque validée
                                 self.selected_attack = True
+                                
                                 self.menu_attaques = False
                                 #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
                                 print("verif player")
@@ -249,12 +251,13 @@ class Game:
             perso.draw(self.screen)
             print("Bonjour")
         self.traiter_unites(self.enemy_units)
-        for perso in self.player_units:
-            perso.draw(self.screen)
-            if perso.is_selected :
-                perso.draw_green_case(self.screen)
+        for perso1 in self.player_units:
+            perso1.draw(self.screen)
+            if perso1.is_selected :
+                perso1.draw_green_case(self.screen)
                 if self.menu_attaques:
-                    perso.draw_red_case(self.screen)
+                    perso1.draw_red_case(self.screen)
+
         self.traiter_unites(self.player_units)
 
          # Si le menu des attaques est actif, dessiner le menu par-dessus
