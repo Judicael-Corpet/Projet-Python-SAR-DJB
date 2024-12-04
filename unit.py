@@ -207,63 +207,8 @@ class Unit():
     
     
     def attack(self, type_attack, target):
-        """Attaque une unité cible.
-
-        if type_attack == "Aucune Action" :
-            self.attaque_selectionne = Aucune_action()
+        """Attaque une unité cible."""
         
-        elif type_attack == "Poings" :
-            self.attaque_selectionne = Poings()
-        
-        elif type_attack == "Griffes" :
-            self.attaque_selectionne = Griffes()
-
-        elif type_attack == "Lancer_bouclier" :
-            self.attaque_selectionne = Lancer_bouclier()
-
-        elif type_attack == "Casser_les_murs" :
-            self.attaque_selectionne = Casser_les_murs()
-        
-        elif type_attack == "Laser" :
-            self.attaque_selectionne = Laser()
-        
-        elif type_attack == "Missile":
-            self.attaque_selectionne = Missile()
-        
-        elif type_attack == "Bloquer_adversaire":
-            self.attaque_selectionne = Bloquer_adversaire()
-
-        elif type_attack == "Attaque_toile":
-            self.attaque_selectionne = Attaque_toile()
-        
-        elif type_attack == "Marteau":
-            self.attaque_selectionne = Marteau()
-        
-        elif type_attack == "Foudre":
-            self.attaque_selectionne = Foudre()
-        
-        elif type_attack == "Attaque_branche":
-            self.attaque_selectionne = Attaque_branche()
-        
-        elif type_attack == "Protection":
-            self.attaque_selectionne = Protection()
-        
-        elif type_attack == "Pistolets":
-            self.attaque_selectionne = Pistolets()
-        
-        elif type_attack == "Fleche_Yaka":
-            self.attaque_selectionne = Fleche_yaka()
-
-        elif type_attack == "Boule_de_feu":
-            self.attaque_selectionne = Boule_de_feu()
-
-        elif type_attack == "Soigner":
-            self.attaque_selectionne = Soigner()
-
-        elif type_attack == "Projectile":
-            self.attaque_selectionne = Projectile()
-        """
-
         #print (f"Lattaque selectionnee pour la methode attack {self.attaque_selectionne.name}")
         for red_x, red_y in self.red_cases :
             if target.x == red_x and  target.y == red_y :

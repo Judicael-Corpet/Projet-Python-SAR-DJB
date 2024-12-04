@@ -14,28 +14,10 @@ fond = pygame.image.load('Fond_ecran.png')
 
 
 class Game:
-    """
-    Classe pour représenter le jeu.
-
-    ...
-    Attributs
-    ---------
-    screen: pygame.Surface 
-        La surface de la fenêtre du jeu.
-    player_units : list[Unit]
-        La liste des unités du joueur.
-    enemy_units : list[Unit]
-        La liste des unités de l'adversaire.
-    """
+    
     
     def __init__(self, screen):
-        """
-        Construit le jeu avec la surface de la fenêtre.
-        Paramètres
-        ----------
-        screen : pygame.Surface
-            La surface de la fenêtre du jeu.
-        """
+        
         self.running, self.playing = True, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY = False, False, False, False
         self.DISPLAY_W, self.DISPLAY_H = 1080, 720
@@ -69,7 +51,8 @@ class Game:
         #self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
         self.menu_attaques = False
         self.selected_attack = False
-
+        self.enemy_health = 300
+        self.player_health = 300
         self.player_units = []
         self.enemy_units = []
         #p1 = Unit("Captain_America", 0, 0, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"])
@@ -95,7 +78,7 @@ class Game:
 
     def handle_player_turn(self):
         """Tour du joueur"""
-        new_health = 0 
+         
         
         for selected_unit in self.player_units:
            
@@ -220,11 +203,13 @@ class Game:
                                     self.attaque_selectionne = Projectile()
                                 
                                 
-                                for i, enemy in enumerate (self.enemy_units) :                                  
-                                    selected_unit.attack(self.attaque_selectionne, enemy)
-                                    
-                                    print (enemy.health)
-                                        
+                                for i, enemy in enumerate (self.enemy_units) :  
+                                    enemy.health = self.enemy_health                              
+                                    enemy.health = selected_unit.attack(self.attaque_selectionne, enemy)
+
+                                    print (f"AILLLEE T'AS PRIS CHER!!!! IL TE RESTE {enemy.health} POINTS DE VIE !!!")
+                                    self.enemy_health = enemy.health
+
                                     if enemy.health <= 0 :
                                         print(f"{enemy.name} est mort") 
                                         self.enemy_units.remove(enemy)
@@ -240,7 +225,7 @@ class Game:
                             #        selected_unit.attack(enemy)
                             #        if enemy.health <= 0:
                             #            self.enemy_units.remove(enemy)
-
+        return self.enemy_health
                             
                 
                         
@@ -250,7 +235,7 @@ class Game:
        
         
         for enemy in self.enemy_units:
-            print (enemy.health)
+            print (f"VOICI MA VIE!!!! : {enemy.health}")
             enemy.is_selected  = True 
              
             enemy.update_green_case(self.player_units,self.enemy_units)   
@@ -265,10 +250,11 @@ class Game:
 
             # Attaque si possible
             for player in self.player_units :
-                new_player_health = enemy.attack(enemy_attack,player)
-                player.health = new_player_health
-                print(player.health)
-                    
+                player.health = enemy.attack(enemy_attack,player)
+
+                print(f"ET MOI MES POINTS DE VIE SONT BIEN MEILLEURS!!! {player.health}")
+                self.player_health = player.health
+
                 if player.health <= 0:
                     #index = self.player_units.index(player)
                     #self.player_units = self.player_units.pop(index)
@@ -277,7 +263,7 @@ class Game:
             enemy.is_selected = False
         #self.flip_display() 
         play = True
-        return play 
+        return play, self.player_health
 
     def flip_display(self):
         """Affiche la carte et les éléments du jeu."""
@@ -377,8 +363,8 @@ def main():
                              Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55])]#, 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
 
     
-    game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 16, 9, [55,55]),#, 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
-                             Unit(game.Choix_Personnages_4.game_personnage, 17, 9, [55,55])]#, 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
+    game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 0, 9, [55,55]),#, 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
+                             Unit(game.Choix_Personnages_4.game_personnage, 1, 9, [55,55])]#, 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
 
     play = True
     iter = 0
