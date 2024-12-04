@@ -207,12 +207,8 @@ class Unit():
     
     
     def attack(self, type_attack, target):
-        """Attaque une unité cible."""
-        
-        print ("le type de cet objet est :")
-        print(self)
-         
-        
+        """Attaque une unité cible.
+
         if type_attack == "Aucune Action" :
             self.attaque_selectionne = Aucune_action()
         
@@ -266,11 +262,12 @@ class Unit():
 
         elif type_attack == "Projectile":
             self.attaque_selectionne = Projectile()
-        
-        print (f"Lattaque selectionnee pour la methode attack {self.attaque_selectionne.name}")
+        """
+
+        #print (f"Lattaque selectionnee pour la methode attack {self.attaque_selectionne.name}")
         for red_x, red_y in self.red_cases :
             if target.x == red_x and  target.y == red_y :
-                target.health = target.health - self.attaque_selectionne.attack_power*self.attaque_selectionne.precision*(target.defense/100)
+                target.health = target.health - type_attack.attack_power*type_attack.precision*(target.defense/100)
         return target.health
     
                 #target.healthlf.attaque_selectionne.attack_power*precision*(1-target.defense)          self.attaque_selectionne.distance_attack

@@ -63,7 +63,7 @@ class Game:
         self.Volume = Volume(self)
         self.Musique = Volume(self)
 
-        
+        self.attaque_selectionne = Aucune_action()
         self.screen = screen
         self.selected_attack_index = 0  # Indice de l'attaque sélectionnée
         #self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
@@ -108,7 +108,7 @@ class Game:
             self.selected_attack_index = 0
             #selected_attack = Aucune_action()
             
-            health = selected_unit.health
+            health = selected_unit.health 
             nbre_move = selected_unit.nbre_move
             defense = selected_unit.defense
             print (f"l'unité est : {selected_unit.name}, {selected_unit.defense}")
@@ -165,11 +165,63 @@ class Game:
                                 
                                 self.menu_attaques = False
                                 #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
+                                if self.attaques[self.selected_attack_index] == "Aucune Action" :
+                                    self.attaque_selectionne = Aucune_action()
                                 
+                                elif self.attaques[self.selected_attack_index] == "Poings" :
+                                    self.attaque_selectionne = Poings()
+                                
+                                elif self.attaques[self.selected_attack_index] == "Griffes" :
+                                    self.attaque_selectionne = Griffes()
+
+                                elif self.attaques[self.selected_attack_index] == "Lancer_bouclier" :
+                                    self.attaque_selectionne = Lancer_bouclier()
+
+                                elif self.attaques[self.selected_attack_index] == "Casser_les_murs" :
+                                    self.attaque_selectionne = Casser_les_murs()
+                                
+                                elif self.attaques[self.selected_attack_index] == "Laser" :
+                                    self.attaque_selectionne = Laser()
+                                
+                                elif self.attaques[self.selected_attack_index] == "Missile":
+                                    self.attaque_selectionne = Missile()
+                                
+                                elif self.attaques[self.selected_attack_index] == "Bloquer_adversaire":
+                                    self.attaque_selectionne = Bloquer_adversaire()
+
+                                elif self.attaques[self.selected_attack_index] == "Attaque_toile":
+                                    self.attaque_selectionne = Attaque_toile()
+                                
+                                elif self.attaques[self.selected_attack_index] == "Marteau":
+                                    self.attaque_selectionne = Marteau()
+                                
+                                elif self.attaques[self.selected_attack_index] == "Foudre":
+                                    self.attaque_selectionne = Foudre()
+                                
+                                elif self.attaques[self.selected_attack_index] == "Attaque_branche":
+                                    self.attaque_selectionne = Attaque_branche()
+                                
+                                elif self.attaques[self.selected_attack_index] == "Protection":
+                                    self.attaque_selectionne = Protection()
+                                
+                                elif self.attaques[self.selected_attack_index] == "Pistolets":
+                                    self.attaque_selectionne = Pistolets()
+                                
+                                elif self.attaques[self.selected_attack_index] == "Fleche_Yaka":
+                                    self.attaque_selectionne = Fleche_yaka()
+
+                                elif self.attaques[self.selected_attack_index] == "Boule_de_feu":
+                                    self.attaque_selectionne = Boule_de_feu()
+
+                                elif self.attaques[self.selected_attack_index] == "Soigner":
+                                    self.attaque_selectionne = Soigner()
+
+                                elif self.attaques[self.selected_attack_index] == "Projectile":
+                                    self.attaque_selectionne = Projectile()
                                 
                                 
                                 for i, enemy in enumerate (self.enemy_units) :                                  
-                                    selected_unit.attack(self.attaques[self.selected_attack_index], enemy)
+                                    selected_unit.attack(self.attaque_selectionne, enemy)
                                     
                                     print (enemy.health)
                                         
