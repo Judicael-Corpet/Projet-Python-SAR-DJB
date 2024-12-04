@@ -108,7 +108,8 @@ class Game:
             has_acted = False
             selected_unit.is_selected = True
             selected_unit.update_green_case(self.player_units,self.enemy_units)
-            
+            self.selected_attack_index = 0
+            #selected_attack = Aucune_action()
             
             health = selected_unit.health
             nbre_move = selected_unit.nbre_move
@@ -152,7 +153,7 @@ class Game:
                                 self.menu_attaques = True #active le menu des attaques
                             # Navigation dans le menu des attaques
                         if self.menu_attaques :
-                            
+                            selected_unit.update_red_case(self.attaques[self.selected_attack_index])
 
                             if event.key == pygame.K_DOWN:
                                 self.selected_attack_index = (self.selected_attack_index + 1) % len(self.attaques) # Navigation dans le menu des attaques vers le haut

@@ -43,7 +43,8 @@ class Unit():
         self.attack_power = 0
         self.red_cases = []
         self.health_max = 150
-        
+        #self.selected_attack = Aucune_action()
+        self.offsets = []
 
         self.is_selected = False # variable servant dans la méthode draw() pour afficher le personnage
         
@@ -130,64 +131,67 @@ class Unit():
         self.red_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.red_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
         
+        if attack == "Aucune action":
+            self.selected_attack = Aucune_action()
+
         if attack == "Poings" :
-            selected_attack = Poings()
+            self.selected_attack = Poings()
         
         elif attack == "Griffes" :
-            selected_attack = Griffes()
+            self.selected_attack = Griffes()
 
         elif attack == "Lancer_bouclier" :
-            selected_attack = Lancer_bouclier()
+            self.selected_attack = Lancer_bouclier()
 
         elif attack == "Casser_les_murs" :
-            selected_attack = Casser_les_murs()
+            self.selected_attack = Casser_les_murs()
         
         elif attack == "Laser" :
-            selected_attack = Laser()
+            self.selected_attack = Laser()
         
         elif attack == "Missile":
-            selected_attack = Missile()
+            self.selected_attack = Missile()
         
         elif attack == "Bloquer_adversaire":
-            selected_attack = Bloquer_adversaire()
+            self.selected_attack = Bloquer_adversaire()
 
         elif attack == "Attaque_toile":
-            selected_attack = Attaque_toile()
+            self.selected_attack = Attaque_toile()
         
         elif attack == "Marteau":
-            selected_attack = Marteau()
+            self.selected_attack = Marteau()
         
         elif attack == "Foudre":
-            selected_attack = Foudre()
+            self.selected_attack = Foudre()
         
         elif attack == "Attaque_branche":
-            selected_attack = Attaque_branche()
+            self.selected_attack = Attaque_branche()
         
         elif attack == "Protection":
-            selected_attack = Protection()
+            self.selected_attack = Protection()
         
         elif attack == "Pistolets":
-            selected_attack = Pistolets()
+            self.selected_attack = Pistolets()
         
         elif attack == "Fleche_Yaka":
-            selected_attack = Fleche_yaka()
+            self.selected_attack = Fleche_yaka()
 
         elif attack == "Boule_de_feu":
-            selected_attack = Boule_de_feu()
+            self.selected_attack = Boule_de_feu()
 
         elif attack == "Soigner":
-            selected_attack = Soigner()
+            self.selected_attack = Soigner()
 
         elif attack == "Projectile":
-            selected_attack = Projectile()
+            self.selected_attack = Projectile()
 
         if self.is_selected:
             # Définir les déplacements possibles : orthogonaux + diagonales proches
             #la case ou se trouve déjà le personnage, au cas où il ne souhaite pas se déplacer
 
-            for dx, dy in selected_attack.offsets:
+            for dx, dy in self.selected_attack.offsets:
                 # Calcul des coordonnées de la case
-                red_x = self.x + dx # pas encore implementer dans la liste qui dessine les cases
+                red_x = self.x + dx 
                 red_y = self.y + dy
 
                 # PREMIERE VERIFICATION: Vérifier que la case est dans les limites de la grille
@@ -210,7 +214,10 @@ class Unit():
         list_attack = unit.attaques
         selected_attack = None 
         for i, attack in enumerate(list_attack) :
-            if attack == "Poings" :
+            if attack == "Aucune Action" :
+                selected_attack = Aucune_action()
+            
+            elif attack == "Poings" :
                 selected_attack = Poings()
             
             elif attack == "Griffes" :
@@ -597,6 +604,21 @@ class Dr_strange(Unit) :
 #class Attacks(Unit) :
     #def __init__(self):
     #    pass
+
+class Aucune_action(Unit) :
+    def __init__(self) :
+        self.offsets = [
+                (0, 0),  # Diagonales proches
+                ]
+        self.attack_power = 0
+        self.quantite = 100
+        self.distance_attack = 1
+        self.precision = 0
+
+    def utiliser (self, cible) :
+        
+        damage = 0
+        cible.take_damage(damage)
 
 class Poings(Unit) :
     def __init__(self) :
