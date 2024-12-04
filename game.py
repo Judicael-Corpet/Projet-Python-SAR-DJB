@@ -101,6 +101,7 @@ class Game:
          
         
         for selected_unit in self.player_units:
+           
             self.flip_display()
             print(selected_unit.health)
             # Tant que l'unité n'a pas terminé son tour
@@ -172,6 +173,8 @@ class Game:
                                 for i, enemy in enumerate (self.enemy_units) :
                                     if abs(enemy.x - selected_unit.x)<= 3  and abs(enemy.y - selected_unit.y)<= 3 :
                                         selected_unit.attack(selected_unit, enemy)
+                                        print (enemy.health)
+                                        
                                         if enemy.health <= 0 :
                                             print(f"{enemy.name} est mort") 
                                             self.enemy_units.remove(enemy)
@@ -213,6 +216,8 @@ class Game:
             for i, player in enumerate(self.player_units) :    
                 if abs(enemy.x - player.x) <= 1 and abs(enemy.y - player.y) <= 1:
                     enemy.attack(enemy, player)
+                    print(player.health)
+                    
                     if player.health <= 0:
                         #index = self.player_units.index(player)
                         #self.player_units = self.player_units.pop(index)

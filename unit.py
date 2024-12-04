@@ -35,14 +35,14 @@ class Unit():
         self.y = y # Position y du personnage
         self.size = size # taille de l'image du personnage
         self.max_health = 150
-        self.health = None
+        self.health = 0
         self.nbre_move = 0
         self.defense = 0
         self.attaques = []
         self.distance_attack = 0
         self.attack_power = 0
         self.red_cases = []
-
+        self.health_max = 150
         
 
         self.is_selected = False # variable servant dans la méthode draw() pour afficher le personnage
@@ -263,8 +263,8 @@ class Unit():
         
         print (f"Lattaque selectionnee pour la methode attack est {selected_attack}")
         if abs(unit.x - target.x) <= selected_attack.distance_attack and abs(unit.y - target.y) <= selected_attack.distance_attack :
-            #selected_attack.utiliser(target)
-            target.health = selected_attack.attack_power*precision*(1-target.defense)*1/selected_attack.distance_attack
+            selected_attack.utiliser(target)
+            #target.health = selected_attack.attack_power*precision*(1-target.defense)*1/selected_attack.distance_attack
 
 
 
@@ -429,9 +429,13 @@ class Unit():
         pygame.draw.rect(surface, RED, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, bar_length, bar_height))  # Barre vide
         pygame.draw.rect(surface, LIGHT_GREEN, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, fill, bar_height))     # Barre remplie
     
+    def take_damage(self, damage):
+        # Réduit les PV en tenant compte d'une valeur minimale à 0
+        self.health -= damage
+        if self.health < 0:
+            self.health = 0
 
-
-
+    
 #création de la classe de chaque personnage A CONFIRMER CAR PEUT-ETRE PAS NECESSAIRE
 
 
@@ -600,14 +604,15 @@ class Poings(Unit) :
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 20
+        self.attack_power = 70
         self.quantite = 100
         self.distance_attack = 1
         self.precision = random.uniform(0.0, 1)
 
     def utiliser (self, cible) :
-        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
+        
+        damage = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        cible.take_damage(damage)
 
 class Griffes(Unit) :
     def __init__(self):
@@ -615,7 +620,7 @@ class Griffes(Unit) :
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 40
+        self.attack_power = 90
         self.quantite = 3
         self.distance_attack = 3
         self.precision = random.uniform(0.0, 1)
@@ -631,7 +636,7 @@ class Lancer_bouclier(Unit) :
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 40
+        self.attack_power = 90
         self.quantite = 3
         self.distance_attack = 3
         self.precision = random.uniform(0.0, 1)
@@ -648,7 +653,7 @@ class Casser_les_murs(Unit) :
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 60
+        self.attack_power = 100
         self.quantite = 1
         self.distance_attack = 1
         self.precision = random.uniform(0.0, 1)
@@ -665,7 +670,7 @@ class Laser(Unit) :
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 60
+        self.attack_power = 100
         self. quantite = 1
         self.distance_attack = 5
         self.precision = random.uniform(0.0, 1)
@@ -682,7 +687,7 @@ class Missile (Unit):
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 70
+        self.attack_power = 130
         self.quantite = 1
         self.distance_attack = 6
         self.precision = random.uniform(0.0, 1)
@@ -700,13 +705,13 @@ class Bloquer_adversaire (Unit):
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
         self.temps = 3
-        self.attack_power = 10
+        self.attack_power = 100
         self.quantite = 2
         self.distance_attack = 4
         self.precision = random.uniform(0.0, 1)
 
     def utiliser (self, cible) :
-        cible.health = self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
+        cible.health = cible.health - self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
         return cible.health
         
         
@@ -717,7 +722,7 @@ class Attaque_toile (Unit):
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 40
+        self.attack_power = 90
         self.quantite = 3
         self.distance_attack = 3
         self.precision = random.uniform(0.0, 1)
@@ -734,7 +739,7 @@ class Marteau (Unit):
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 50
+        self.attack_power = 130
         self.quantite = 2
         self.distance_attack = 5
         self.precision = random.uniform(0.0, 1)
@@ -750,7 +755,7 @@ class Foudre (Unit):
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 90
+        self.attack_power = 150
         self.quantite = 1
         self.distance_attack = 6
         self.precision = random.uniform(0.0, 1)
@@ -766,7 +771,7 @@ class Attaque_branche(Unit) :
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 30
+        self.attack_power = 100
         self.quantite = 100
         self.distance_attack = 3
         self.precision = random.uniform(0.0, 1)
@@ -798,7 +803,7 @@ class Pistolets(Unit) :
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 40
+        self.attack_power = 120
         self.quantite = 10
         self.distance_attack = 4
         self.precision = random.uniform(0.0, 1)
@@ -814,7 +819,7 @@ class Fleche_yaka(Unit) :
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 70
+        self.attack_power = 150
         self.quantite = 3
         self.distance_attack = 5
         self.precision = random.uniform(0.0, 1)
@@ -826,11 +831,16 @@ class Fleche_yaka(Unit) :
 
 class Boule_de_feu (Unit):
     def __init__(self):
-        self.offsets = [
+        self.offsets = [(-5, 0), (5, 0), (0, -5), (0, 5),
+                (-4, 0), (4, 0), (0, -4), (0, 4),
+                (-3, 0), (3, 0), (0, -3), (0, 3),
+                (-2, 0), (2, 0), (0, -2), (0, 2),
+                (-2, 1), (2, 1), (1, -2), (1, 2),
+                (-2, -1), (2, -1), (-1, -2), (-1, 2),
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 70
+        self.attack_power = 150
         self.quantite = 3
         self.distance_attack = 5
         self.precision = random.uniform(0.0, 1)
@@ -862,7 +872,7 @@ class Projectile(Unit) :
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
-        self.attack_power = 60
+        self.attack_power = 100
         self.quantite = 3
         self.distance_attack = 5
         self.precision = random.uniform(0.0, 1)
