@@ -457,38 +457,42 @@ class Game:
         # Groupe Pyscroll pour les sprites et la carte
         self.group = pyscroll.PyscrollGroup(map_layer = map_layer, default_layer=5)
        
+       
         # Dessinez la carte
         self.group.update()
-        self.group.draw(self.screen) 
+        self.group.draw(self.screen)
+        # Dessine cases de téléportations
+        self.cases_teleportation(self.screen)
+        # Dessine cases soins
+        self.cases_soin(self.screen)
+        #Dessine cases degats
+        self.cases_degat(self.screen)
+        
         
         # Ajout dune grille
         for x in range(0, WIDTH, CELL_SIZE):
             for y in range(0, HEIGHT, CELL_SIZE):
                 rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
-                pygame.draw.rect(self.screen, WHITE, rect, -1)
+                pygame.draw.rect(self.screen, WHITE, rect, 1)
+
 
         # Ajoutez les sprites des unités/players
-        for i, perso in enumerate(self.enemy_units) :
-            perso_selected = perso.attribuer_class_perso()
-            health_perso = self.list_enemy_health[i]
-            perso.draw(self.screen)
-            perso_selected.draw_health_bar(self.screen, health_perso)
+        for perso in self.enemy_units:
+            perso.draw_perso(self.screen)
+            perso.draw_health_bar(self.screen)
             
-        for i, perso1 in enumerate(self.player_units):
-            perso1_selected = perso1.attribuer_class_perso()
-            health_perso1 = self.list_player_health[i]
-            perso1.draw(self.screen)
-            perso1.draw_health_bar(self.screen, health_perso1)
-            
+        for perso1 in self.player_units:
+            perso1.draw_perso(self.screen)
+            perso1.draw_health_bar(self.screen)
             if perso1.is_selected :
                 perso1.draw_green_case(self.screen)
                 if self.menu_attaques:
-                    perso1.draw_red_case(self.screen, )
+                    perso1.draw_red_case(self.screen)
 
 
          # Si le menu des attaques est actif, dessiner le menu par-dessus
         if self.menu_attaques:  
-            self.draw_attack_menu()
+            Attaque.draw_attack_menu(self)
    
         pygame.display.flip()
 
