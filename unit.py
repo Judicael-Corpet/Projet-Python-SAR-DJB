@@ -34,7 +34,6 @@ class Unit():
         self.x = x # Position x du personnage
         self.y = y # Position y du personnage
         self.size = size # taille de l'image du personnage
-        self.max_health = 150
         self.health = 0
         self.nbre_move = 0
         self.defense = 0
@@ -42,7 +41,6 @@ class Unit():
         self.distance_attack = 0
         self.attack_power = 0
         self.red_cases = []
-        self.health_max = 150
         #self.attaque_selectionne = Aucune_action()
         self.offsets = []
         self.attaque_selectionne = "Aucune Action"
@@ -329,7 +327,6 @@ class Unit():
     
     def draw_health_bar(self, screen, health): # méthode permettant l'affichage de la barre de vie
         RED = (255, 0, 0)
-        GREEN = (0, 255, 0)
         BLACK = (0, 0, 0)
         bar_length = GRID_SIZE_x * 2 # Longueur de la barre
         bar_height = 3   # Hauteur de la barre

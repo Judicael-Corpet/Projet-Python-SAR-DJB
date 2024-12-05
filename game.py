@@ -48,7 +48,7 @@ class Game:
          # Mode de jeu
         self.Mode = Mode(self)
         self.Mode_jeu = Mode(self)
-        
+
         self.attaque_selectionne = Aucune_action()
         self.screen = screen
         self.selected_attack_index = 0  # Indice de l'attaque sélectionnée
@@ -474,7 +474,7 @@ class Game:
             perso1_selected = perso1.attribuer_class_perso()
             health_perso1 = self.list_player_health[i]
             perso1.draw(self.screen)
-            perso1.draw_health_bar(self.screen, health_perso1)
+            perso1_selected.draw_health_bar(self.screen, health_perso1)
             
             if perso1.is_selected :
                 perso1.draw_green_case(self.screen)
