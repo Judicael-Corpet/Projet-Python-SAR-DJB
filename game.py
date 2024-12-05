@@ -45,6 +45,10 @@ class Game:
         self.Volume = Volume(self)
         self.Musique = Volume(self)
 
+         # Mode de jeu
+        self.Mode = Mode(self)
+        self.Mode_jeu = Mode(self)
+        
         self.attaque_selectionne = Aucune_action()
         self.screen = screen
         self.selected_attack_index = 0  # Indice de l'attaque sélectionnée
