@@ -80,6 +80,7 @@ class Game:
             color = (0, 255, 0) if i == self.selected_attack_index else (255, 255, 255)  # Mettre en surbrillance l'attaque sélectionnée
             text = pygame.font.Font(None, 36).render(attaque, True, color)
             self.screen.blit(text, (30, 550 + i * 30))  # Positionnement des attaques
+
     def cases_teleportation(self,screen):
         self.cases_tp=[3,3]
         cas_arrive=[15,10]
@@ -244,6 +245,7 @@ class Game:
                                 #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
                                 
                                 attaque_selectionne = hero_selected.attribuer_class_attaque(self.selected_attack_index)
+                
                                 print(attaque_selectionne.attack_power)
                                 print(attaque_selectionne.precision)
                                 print(attaque_selectionne.distance_attack)
@@ -563,13 +565,13 @@ def main():
     
     #game.player_units = [Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55]),#,150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              #Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55])]#, 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
-    player1 = Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55])
+    player1 = Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55], game)
     hero1 = player1.attribuer_class_perso()
     if hero1 :
         hero_health1 = hero1.get_health()
     game.player_units.append(player1)
     game.list_player_health.append(hero_health1)
-    player2 = Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55])
+    player2 = Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55], game)
     hero2 = player2.attribuer_class_perso()
     hero_health2 = hero2.get_health() 
     game.player_units.append(player2)
@@ -582,12 +584,12 @@ def main():
     #game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 0, 9, [55,55]),#, 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              #Unit(game.Choix_Personnages_4.game_personnage, 1, 9, [55,55])]#, 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
 
-    player3 = Unit(game.Choix_Personnages_3.game_personnage, 0, 9, [55,55])
+    player3 = Unit(game.Choix_Personnages_3.game_personnage, 0, 9, [55,55], game)
     hero3 = player3.attribuer_class_perso()
     hero_health3 = hero3.get_health()
     game.enemy_units.append(player3)
     game.list_enemy_health.append(hero_health3)
-    player4 = Unit(game.Choix_Personnages_4.game_personnage, 1, 9, [55,55])
+    player4 = Unit(game.Choix_Personnages_4.game_personnage, 1, 9, [55,55], game)
     hero4 = player4.attribuer_class_perso()
     hero_health4 = hero4.get_health()
     game.enemy_units.append(player4)

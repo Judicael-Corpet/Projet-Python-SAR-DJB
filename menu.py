@@ -599,6 +599,8 @@ class Choix_Personnage_Menu_1(Menu):
                 self.game.START_KEY = False
                 pygame.mixer.music.stop()
                 self.run_display = False
+            if self.game.Musique :
+                self.game.sound_manager.bruit("Au_Combat")
             return self.game_personnage
 
 
@@ -1037,6 +1039,8 @@ class Choix_Personnage_Menu_2(Menu):
                 self.game.START_KEY = False
                 pygame.mixer.music.stop()
                 self.run_display = False
+            if self.game.Musique :
+                self.game.sound_manager.bruit("En_avant")
             return self.game_personnage
             
 class Choix_Personnage_Menu_3(Menu):
@@ -1472,6 +1476,8 @@ class Choix_Personnage_Menu_3(Menu):
                 self.game.START_KEY = False
                 pygame.mixer.music.stop()
                 self.run_display = False
+            if self.game.Musique :
+                self.game.sound_manager.bruit("Ecrasons_ennemi")
             return self.game_personnage
 
 class Choix_Personnage_Menu_4(Menu):
@@ -1898,6 +1904,8 @@ class Choix_Personnage_Menu_4(Menu):
                 self.game.START_KEY = False
                 pygame.mixer.music.stop()
                 self.run_display = False
+            if self.game.Musique :
+                self.game.sound_manager.bruit("A_vos_ordres")
             return self.game_personnage
 
 class Choix_Carte_Menu(Menu):
