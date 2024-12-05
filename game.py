@@ -8,8 +8,11 @@ from sound import *
 
 fond = pygame.image.load('Fond_ecran.png')
 
-personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", 
-                            "Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
+#personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", 
+                            #"Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
+
+
+
 class Game:
     """
     Classe pour représenter le jeu.
@@ -63,7 +66,7 @@ class Game:
         
         self.screen = screen
         self.selected_attack_index = 0  # Indice de l'attaque sélectionnée
-        self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
+        #self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
         self.menu_attaques = False
         self.selected_attack = False
 
@@ -71,43 +74,144 @@ class Game:
         self.enemy_units = []
         #p1 = Unit("Captain_America", 0, 0, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"])
         #print (p1.name)
+    
+        self.cases=[]
+        self.case_tp=[]
+    
+    def cases_teleportation(self,screen):
+        self.cases_tp=[3,3]
+        cas_arrive=[15,10]
+        color=(255, 255, 100)
+        pygame.draw.rect(screen, color, (self.cases_tp[0]*CELL_SIZE, self.cases_tp[1]*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
+        # pygame
+        for player in self.player_units:
+            if player.x==self.cases_tp[0] and player.y== self.cases_tp[1]:
+                player.x,player.y=(cas_arrive[0],cas_arrive[1])
+                
+    def cases_soin(self, screen):
+        self.case_soin = [5, 3] 
+        color = WHITE
+        color1=(20,255,20)
+        x, y = self.case_soin  # Position de la case
+        half_size = CELL_SIZE // 2  # La moitié de la taille d'une cellule
+        line_width = 15  # Épaisseur des lignes de la croix
+        bonus_health=30
+        for player in self.player_units:
+            if player.x==self.case_soin[0] and player.y== self.case_soin[1]:
+            
+                if player.health<=120:
+                    player.health+=bonus_health
+                    print("joueur a été soigné")
+                elif player.health>120:
+                    print("joueur a été soigné")
+                    player.health=150
+                
+
+        # dessine le fond:
+        pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
+
+        # Dessiner la ligne verticale
+        pygame.draw.line(
+            screen, 
+            color, 
+            (x * CELL_SIZE + half_size , y * CELL_SIZE+5),  # Début de la ligne
+            (x * CELL_SIZE + half_size , y * CELL_SIZE + CELL_SIZE-5),  # Fin de la ligne
+            line_width  # Épaisseur
+        )
+
+        # Dessiner la ligne horizontale
+        pygame.draw.line(
+            screen, 
+            color, 
+            (x * CELL_SIZE+5, y * CELL_SIZE + half_size ),  # Début de la ligne
+            (x * CELL_SIZE + CELL_SIZE-5, y * CELL_SIZE + half_size ),  # Fin de la ligne
+            line_width  # Épaisseur
+        )
+        
         
 
+            
+    def cases_degat(self, screen):
+        self.case_degat = [1, 1]
+        color = BLACK
+        color1=(255,20,20)
+        x, y = self.case_degat  # Position de la case
+        half_size = CELL_SIZE // 2  # La moitié de la taille d'une cellule
+        line_width1 = 10  # Épaisseur des lignes de verticales
+        line_width2=5 # épaisseur horizontale 
+
+        degat=1600
+        
+        for player in self.player_units:
+            if player.x==self.case_degat[0] and player.y== self.case_degat[1]:
+                player.health-=degat
+                print(player.health)
+                print("joueur a été blaissé")
+                  
+                
+        # dessine le fond:
+        pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
+
+        # Dessiner la ligne verticale
+        pygame.draw.line(
+            screen, 
+            color, 
+            (x * CELL_SIZE + half_size , y * CELL_SIZE+5),  # Début de la ligne
+            (x * CELL_SIZE + half_size , y * CELL_SIZE + CELL_SIZE-5),  # Fin de la ligne
+            line_width1  # Épaisseur
+        )
+
+        # Dessiner la ligne horizontale
+        pygame.draw.line(
+            screen, 
+            color, 
+            (x * CELL_SIZE+10, y * CELL_SIZE + 35 ),  # Début de la ligne
+            (x * CELL_SIZE + CELL_SIZE-10, y * CELL_SIZE + 35),  # Fin de la ligne
+            line_width2  # Épaisseur
+        )
+        
+    
     def draw_attack_menu(self) :
         """Dessine le menu des attaques."""
         #Fond noir dans le coin inférieur gauche
-        pygame.draw.rect(self.screen, (0, 0, 0), (20, 340, 250, 600 ))
-        pygame.draw.rect(self.screen, (255, 255, 255), (20, 340, 250, 600), 2)  # Bordure blanche
+        pygame.draw.rect(self.screen, (0, 0, 0), (20, 340, 250, 150 ))
+        pygame.draw.rect(self.screen, (255, 255, 255), (20, 340, 250, 150), 2)  # Bordure blanche
 
         #if selected_unit == "Captain_America" :
-        self.attaques = ["Aucune_action", "Poings", "Lancer_bouclier"]
-        
+        #self.attaques = []
+        #self.attaques = ["Aucune_action", "Poings", "Lancer_bouclier"]
+        list_attacks = self.attaques
         # Dessiner chaque attaque dans le rectangle
-        for i, attaque in enumerate(self.attaques):
+        for i, attaque in enumerate(list_attacks):
             color = (0, 255, 0) if i == self.selected_attack_index else (255, 255, 255)  # Mettre en surbrillance l'attaque sélectionnée
             text = pygame.font.Font(None, 36).render(attaque, True, color)
             self.screen.blit(text, (30, 350 + i * 30))  # Positionnement des attaques
-  
+            
 
     def handle_player_turn(self):
         """Tour du joueur"""
-
+        new_health = 0 
         
         for selected_unit in self.player_units:
-
+           
+            #self.flip_display()
+            
             # Tant que l'unité n'a pas terminé son tour
             has_acted = False
             selected_unit.is_selected = True
             selected_unit.update_green_case(self.player_units,self.enemy_units)
+            self.selected_attack_index = 0
+            #selected_attack = Aucune_action()
             
             health = selected_unit.health
             nbre_move = selected_unit.nbre_move
             defense = selected_unit.defense
+            print (f"l'unité est : {selected_unit.name}, {selected_unit.defense}")
             print(f"Points de vie :{health}, nbre_move = {nbre_move}, defense = {defense}")
             #self.flip_display()
             
             while not has_acted:
-
+                
                 # Important: cette boucle permet de gérer les événements Pygame
                 for event in pygame.event.get():
 
@@ -137,45 +241,51 @@ class Game:
 
                         # Attaque (touche espace) met fin au tour
                             if event.key == pygame.K_SPACE:
-                                
+                                self.attaques = selected_unit.attaques
                                 self.menu_attaques = True #active le menu des attaques
                             # Navigation dans le menu des attaques
                         if self.menu_attaques :
+                            selected_unit.update_red_case(self.attaques[self.selected_attack_index])
+
                             if event.key == pygame.K_DOWN:
                                 self.selected_attack_index = (self.selected_attack_index + 1) % len(self.attaques) # Navigation dans le menu des attaques vers le haut
-                            
+                                selected_unit.update_red_case(self.attaques[self.selected_attack_index])
                             elif event.key == pygame.K_UP:
                                 self.selected_attack_index = (self.selected_attack_index - 1) % len(self.attaques) # Navigation dans le menu des attaques vers le bas
-                            
+                                selected_unit.update_red_case(self.attaques[self.selected_attack_index])
                             elif event.key == pygame.K_RETURN :
+                                print("MMMMMMMMMMMMM")
                                 print (f"Attaque sélectionnée : {self.attaques[self.selected_attack_index]}") # attaque validée
                                 self.selected_attack = True
+                                
                                 self.menu_attaques = False
                                 #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
-
-
+                                
+                                
+                                
+                                for i, enemy in enumerate (self.enemy_units) :                                  
+                                    selected_unit.attack(self.attaques[self.selected_attack_index], enemy)
+                                    
+                                    print (enemy.health)
+                                        
+                                    if enemy.health <= 0 :
+                                        print(f"{enemy.name} est mort") 
+                                        self.enemy_units.remove(enemy)
+                                    
+                                for player in self.player_units:
+                                    player.update_health_bar()
                                 
                                 has_acted = True
                                 selected_unit.is_selected = False 
                 
-                           #selected_unit.update_green_case(self.player_units, self.enemy_units)
-                self.flip_display()
-               
-#Suite du code à écrire ici pour pour appliquer l'attaque à l'ennemi ciblé
-                        
-                        #if self.selected_attack :
-                                
-            
-                                  
-                
-                
+                    # self.flip_display()   
 
-                            #print(f"Attaque choisie : {attack['name']}")
-                            #for enemy in self.enemy_units:
-                            #    if abs(selected_unit.x - enemy.x) <= 1 and abs(selected_unit.y - enemy.y) <= 1:
-                            #        selected_unit.attack(enemy)
-                            #        if enemy.health <= 0:
-                            #            self.enemy_units.remove(enemy)
+                    
+                    # for unit in self.player_units:
+                    #     if unit.health <= 0:
+                    #         self.player_units.remove(unit)
+                    
+                    self.flip_display()
 
                             
                 
@@ -186,7 +296,9 @@ class Game:
        
         
         for enemy in self.enemy_units:
-            enemy.is_selected  = True
+            print (enemy.health)
+            enemy.is_selected  = True 
+             
             enemy.update_green_case(self.player_units,self.enemy_units)   
 
                 # Déplacement aléatoire
@@ -195,15 +307,21 @@ class Game:
             dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
             enemy.move(dx, dy)
 
+            enemy_attack = random.choice(enemy.attaques)
 
             # Attaque si possible
-            if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
-                enemy.attack(target)
-                if target.health <= 0:
-                    self.player_units.remove(target)
-           
+            for player in self.player_units :
+                new_player_health = enemy.attack(enemy_attack,player)
+                player.health = new_player_health
+                print(player.health)
+                    
+                if player.health <= 0:
+                    #index = self.player_units.index(player)
+                    #self.player_units = self.player_units.pop(index)
+                    print(f"{player.name} est mort")
+                    self.player_units.remove(player)
             enemy.is_selected = False
-        self.flip_display() 
+        #self.flip_display() 
         play = True
         return play 
 
@@ -223,6 +341,12 @@ class Game:
         # Dessinez la carte
         self.group.update()
         self.group.draw(self.screen) 
+        # Dessine cases de téléportations
+        self.cases_teleportation(self.screen)
+        # Dessine cases soins
+        self.cases_soin(self.screen)
+        #Dessine cases degats
+        self.cases_degat(self.screen)
         
         # Ajout dune grille
         for x in range(0, WIDTH, CELL_SIZE):
@@ -231,17 +355,18 @@ class Game:
                 pygame.draw.rect(self.screen, WHITE, rect, 1)
 
         # Ajoutez les sprites des unités/players
-        for unit in self.player_units + self.enemy_units :
-            unit.draw(self.screen)
-            if unit.is_selected :
-                unit.draw_green_case(self.screen)
-                print (f"l'unité est : {unit.name}, {unit.defense}")
-
-
-        #for unit in self.enemy_units :
-        #    unit.draw(self.screen)
-        #    unit.draw_green_case(self.screen)
+        for perso in self.enemy_units:
+            perso.draw(self.screen)
+            perso.draw_health_bar(self.screen)
             
+        for perso1 in self.player_units:
+            perso1.draw(self.screen)
+            perso1.draw_health_bar(self.screen)
+            if perso1.is_selected :
+                perso1.draw_green_case(self.screen)
+                if self.menu_attaques:
+                    perso1.draw_red_case(self.screen)
+
 
          # Si le menu des attaques est actif, dessiner le menu par-dessus
         if self.menu_attaques:  
@@ -289,7 +414,7 @@ def main():
     
     # Instanciation de la fenêtre
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Mon jeu de stratégie")
+    pygame.display.set_caption("Marvel Game")
     
     # Instanciation du jeu
     game = Game(screen)
@@ -299,12 +424,14 @@ def main():
         if (game.playing):
             break
     
+    
     game.player_units = [Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55]),#,150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55])]#, 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
 
+    
     game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 16, 9, [55,55]),#, 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              Unit(game.Choix_Personnages_4.game_personnage, 17, 9, [55,55])]#, 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
-    
+
     play = True
     iter = 0
     
@@ -312,8 +439,9 @@ def main():
     while play and iter<100 :
         game.handle_player_turn()
         game.handle_enemy_turn()   
+        
         iter += 1 
-        play =  game.handle_enemy_turn() 
+         
 
 if __name__ == "__main__":
     main()
