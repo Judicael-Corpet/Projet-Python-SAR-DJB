@@ -63,8 +63,8 @@ class Game:
     def draw_attack_menu(self) :
         """Dessine le menu des attaques."""
         #Fond noir dans le coin inférieur gauche
-        pygame.draw.rect(self.screen, (0, 0, 0), (20, 340, 250, 150 ))
-        pygame.draw.rect(self.screen, (255, 255, 255), (20, 340, 250, 150), 2)  # Bordure blanche
+        pygame.draw.rect(self.screen, (0, 0, 0), (20, 530, 250, 150 ))
+        pygame.draw.rect(self.screen, (255, 255, 255), (20, 530, 250, 150), 2)  # Bordure blanche
 
         #if selected_unit == "Captain_America" :
         #self.attaques = []
@@ -74,7 +74,7 @@ class Game:
         for i, attaque in enumerate(list_attacks):
             color = (0, 255, 0) if i == self.selected_attack_index else (255, 255, 255)  # Mettre en surbrillance l'attaque sélectionnée
             text = pygame.font.Font(None, 36).render(attaque, True, color)
-            self.screen.blit(text, (30, 350 + i * 30))  # Positionnement des attaques
+            self.screen.blit(text, (30, 550 + i * 30))  # Positionnement des attaques
             
 
     def handle_player_turn(self):
@@ -229,7 +229,7 @@ class Game:
                 new_player_health = enemy_selected.attack(enemy_attack_selected, player_selected, player_health)
                                                     
 
-                print (f"AILLLEE T'AS PRIS CHER!!!! IL TE RESTE {enemy_health} POINTS DE VIE !!!")
+                print (f"AILLLEE T'AS PRIS CHER!!!! IL TE RESTE {new_player_health} POINTS DE VIE !!!")
                 self.list_player_health[i] = new_player_health
 
                 if player_health <= 0:
@@ -264,18 +264,22 @@ class Game:
                 pygame.draw.rect(self.screen, WHITE, rect, -1)
 
         # Ajoutez les sprites des unités/players
-        for perso in self.enemy_units :
+        for i, perso in enumerate(self.enemy_units) :
+            perso_selected = perso.attribuer_class_perso()
+            health_perso = self.list_enemy_health[i]
             perso.draw(self.screen)
-            perso.draw_health_bar(self.screen)
+            perso_selected.draw_health_bar(self.screen, health_perso)
             
-        for perso1 in self.player_units:
+        for i, perso1 in enumerate(self.player_units):
+            perso1_selected = perso1.attribuer_class_perso()
+            health_perso1 = self.list_player_health[i]
             perso1.draw(self.screen)
-            perso1.draw_health_bar(self.screen)
+            perso1.draw_health_bar(self.screen, health_perso1)
             
             if perso1.is_selected :
                 perso1.draw_green_case(self.screen)
                 if self.menu_attaques:
-                    perso1.draw_red_case(self.screen)
+                    perso1.draw_red_case(self.screen, )
 
 
          # Si le menu des attaques est actif, dessiner le menu par-dessus

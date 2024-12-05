@@ -119,7 +119,6 @@ class Unit():
                     if not case_occupée:
                         self.green_cases.append((green_x, green_y))
                     
-
     
     def draw_green_case(self, screen):
         color = GREEN
@@ -204,8 +203,7 @@ class Unit():
         for red_x,red_y in self.red_cases:
             pygame.draw.rect(screen, color, (red_x*CELL_SIZE, red_y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 2)  # Dessine les bords
     
-    
-    
+      
     def attack(self, type_attack, target, target_health):
         """Attaque une unité cible."""
         #target_health = target.get_health()
@@ -333,7 +331,7 @@ class Unit():
         #new_health = self.health
 
     
-    def draw_health_bar(self, screen):
+    def draw_health_bar(self, screen, health):
         RED = (255, 0, 0)
         GREEN = (0, 255, 0)
         BLACK = (0, 0, 0)
@@ -341,7 +339,7 @@ class Unit():
         bar_height = 3   # Hauteur de la barre
 
         # Calcul de la largeur en fonction des PV
-        fill = (self.health / self.health_max) * bar_length
+        fill = (health / self.health_max) * bar_length
 
         # Position de la barre (juste au-dessus du personnage)
         bar_x = self.x
@@ -498,7 +496,6 @@ class perso_Spiderman(Unit) :
     def get_health (self):
         return self.__health    
     
-
 class perso_Thor(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Thor", x, y, size)
@@ -525,12 +522,11 @@ class perso_Groot(Unit) :
     def get_health (self):
         return self.__health
         
-
 class perso_Wolverine(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Wolverine", x, y, size)   
         self.__health = 300
-        self.health_max = 350
+        self.health_max = 300
         self.nbre_move = 3
         self.defense = 75
         self.attack_power = 10
@@ -553,7 +549,6 @@ class perso_Black_panther(Unit) :
     def get_health (self):
         return self.__health    
     
-
 class perso_Starlord (Unit) :
     def __init__(self, x, y, size):
         super().__init__("Starlord", x, y, size)
@@ -567,7 +562,6 @@ class perso_Starlord (Unit) :
     def get_health (self):
         return self.__health    
         
-
 class  perso_Yondu(Unit):
     def __init__(self, x, y, size):
         super().__init__("Yondu", x, y, size)
@@ -581,7 +575,6 @@ class  perso_Yondu(Unit):
     def get_health (self):
         return self.__health    
         
-
 class perso_Torch(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Torch", x, y, size)
@@ -608,7 +601,6 @@ class perso_Jane_storm(Unit) :
     def get_health (self):
         return self.__health    
         
-
 class perso_Chose(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Chose", x, y, size)
@@ -630,19 +622,12 @@ class perso_Dr_strange(Unit) :
         self.nbre_move = 6
         self.defense = 80
         self.attack_power = 10
-        self.list_attaques = ["Aucune Action", "Poings","Bloquer_adversaire","Projectiles" ]
+        self.list_attaques = ["Aucune Action", "Poings","Bloquer_adversaire","Projectile" ]
 
     def get_health (self):
         return self.__health
 
 
-
-#Création de la classe de chaque attaque
-#attacks = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
-
-#class Attacks(Unit) :
-    #def __init__(self):
-    #    pass
 
 class Aucune_action(Unit) :
     def __init__(self) :
@@ -654,6 +639,7 @@ class Aucune_action(Unit) :
         self.quantite = 100
         self.distance_attack = 1
         self.precision = 0
+
 class Poings(Unit) :
     def __init__(self) :
         self.name = "Poings"
@@ -691,7 +677,6 @@ class Lancer_bouclier(Unit) :
         self.distance_attack = 3
         self.precision = random.uniform(0.5, 1)
  
-
 class Casser_les_murs(Unit) :
     def __init__(self):
         self.name = "Casser_les_murs"
@@ -708,8 +693,6 @@ class Casser_les_murs(Unit) :
         cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
         return cible.health
         
-        
-
 class Laser(Unit) :
     def __init__(self):
         self.name = "Laser"
@@ -747,8 +730,6 @@ class Missile (Unit):
     def utiliser (self, cible) :
         cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
         return cible.health
-        
-        
 
 class Bloquer_adversaire (Unit):
     def __init__(self):
@@ -820,7 +801,6 @@ class Foudre (Unit):
         cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
         return cible.health
         
-
 class Attaque_branche(Unit) :
     def __init__(self):
         self.name = "Attaque_branche"
@@ -853,7 +833,6 @@ class Protection (Unit):
         cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
         return cible.health
         
-
 class Pistolets(Unit) :
     def __init__(self):
         self.name = "Pistolets"
@@ -910,7 +889,6 @@ class Boule_de_feu (Unit):
         cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
         return cible.health
         
-
 class Soigner (Unit):
     def __init__(self):
         self.name = "Soigner"
@@ -942,9 +920,7 @@ class Projectile(Unit) :
         self.quantite = 3
         self.distance_attack = 3
         self.precision = random.uniform(0.5, 1)
-#hero = Unit("Captain_America",0,0,[55,55])
-#mechant = Unit("Hulk",0,0,[55,55])
-#hero.attack("Poings", mechant)
+
 
 
 
