@@ -122,28 +122,34 @@ class MainMenu(Menu):
             if self.state == 'Start':
                 self.cursor_rect.midtop = (self.optionsx + self.offset, self.optionsy + 50)
                 self.state = 'Options'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
             elif self.state == 'Options':
                 self.cursor_rect.midtop = (self.creditsx + self.offset, self.creditsy + 70)
                 self.state = 'Credits'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
             elif self.state == 'Credits':
                 self.cursor_rect.midtop = (self.startx + self.offset, self.starty + 30)
                 self.state = 'Start'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
         elif self.game.UP_KEY:
             if self.state == 'Start':
                 self.cursor_rect.midtop = (self.creditsx + self.offset, self.creditsy + 70)
                 self.state = 'Credits'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
             elif self.state == 'Options':
                 self.cursor_rect.midtop = (self.startx + self.offset, self.starty + 30)
                 self.state = 'Start'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
             elif self.state == 'Credits':
                 self.cursor_rect.midtop = (self.optionsx + self.offset, self.optionsy + 50)
                 self.state = 'Options'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
 
     def check_input(self):
         self.move_cursor()
@@ -153,7 +159,6 @@ class MainMenu(Menu):
                 if self.game.Musique :
                     self.game.sound_manager.bruit('Musique_lancement')
                     #pygame.mixer.music.play(-1)  # Lecture en boucle infinie (-1)
-                #self.game.playing = True
             elif self.state == 'Options':
                 self.game.curr_menu = self.game.options
             elif self.state == 'Credits':
@@ -318,125 +323,155 @@ class Choix_Personnage_Menu_1(Menu):
         if self.game.DOWN_KEY:
             if self.state == 'Captain_America':
                 self.state = 'Hulk'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Hulk':
                 self.state = 'Ironman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Ironman':
                 self.state = 'Spiderman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Spiderman':
                 self.state = 'Thor'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Thor':
                 self.state = 'Groot'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Groot':
                 self.state = 'Wolverine'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Wolverine':
                 self.state = 'Black_Panther'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Black_Panther':
                 self.state = 'Starlord'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Starlord':
                 self.state = 'Yondu'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Yondu':
                 self.state = 'Torch'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Torch':
                 self.state = 'Jane_Storm'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60+ 10)
             elif self.state == 'Jane_Storm':
                 self.state = 'Chose'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Chose':
                 self.state = 'Dr_Strange'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Dr_Strange':
                 self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
             elif self.state == 'Back':
                 self.state = 'Captain_America'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
 
         elif self.game.UP_KEY :
             if self.state == 'Hulk':
                 self.state = 'Captain_America'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Ironman':
                 self.state = 'Hulk'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Spiderman':
                 self.state = 'Ironman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Thor':
                 self.state = 'Spiderman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Groot':
                 self.state = 'Thor'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Wolverine':
                 self.state = 'Groot'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Black_Panther':
                 self.state = 'Wolverine'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Starlord':
                 self.state = 'Black_Panther'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Yondu':
                 self.state = 'Starlord'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Torch':
                 self.state = 'Yondu'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Jane_Storm':
                 self.state = 'Torch'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Chose':
                 self.state = 'Jane_Storm'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Dr_Strange':
                 self.state = 'Chose'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Back':
                 self.state = 'Dr_Strange'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Captain_America':
                 self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
 
     def check_input(self):
@@ -725,125 +760,155 @@ class Choix_Personnage_Menu_2(Menu):
         if self.game.DOWN_KEY:
             if self.state == 'Captain_America':
                 self.state = 'Hulk'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Hulk':
                 self.state = 'Ironman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Ironman':
                 self.state = 'Spiderman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Spiderman':
                 self.state = 'Thor'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Thor':
                 self.state = 'Groot'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Groot':
                 self.state = 'Wolverine'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Wolverine':
                 self.state = 'Black_Panther'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Black_Panther':
                 self.state = 'Starlord'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Starlord':
                 self.state = 'Yondu'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Yondu':
                 self.state = 'Torch'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Torch':
                 self.state = 'Jane_Storm'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60+ 10)
             elif self.state == 'Jane_Storm':
                 self.state = 'Chose'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Chose':
                 self.state = 'Dr_Strange'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Dr_Strange':
                 self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
             elif self.state == 'Back':
                 self.state = 'Captain_America'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
 
         elif self.game.UP_KEY :
             if self.state == 'Hulk':
                 self.state = 'Captain_America'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Ironman':
                 self.state = 'Hulk'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Spiderman':
                 self.state = 'Ironman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Thor':
                 self.state = 'Spiderman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Groot':
                 self.state = 'Thor'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Wolverine':
                 self.state = 'Groot'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Black_Panther':
                 self.state = 'Wolverine'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Starlord':
                 self.state = 'Black_Panther'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Yondu':
                 self.state = 'Starlord'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Torch':
                 self.state = 'Yondu'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Jane_Storm':
                 self.state = 'Torch'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Chose':
                 self.state = 'Jane_Storm'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Dr_Strange':
                 self.state = 'Chose'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Back':
                 self.state = 'Dr_Strange'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Captain_America':
                 self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
 
     def check_input(self):
@@ -1132,125 +1197,155 @@ class Choix_Personnage_Menu_3(Menu):
         if self.game.DOWN_KEY:
             if self.state == 'Captain_America':
                 self.state = 'Hulk'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Hulk':
                 self.state = 'Ironman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Ironman':
                 self.state = 'Spiderman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Spiderman':
                 self.state = 'Thor'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Thor':
                 self.state = 'Groot'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Groot':
                 self.state = 'Wolverine'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Wolverine':
                 self.state = 'Black_Panther'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Black_Panther':
                 self.state = 'Starlord'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Starlord':
                 self.state = 'Yondu'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Yondu':
                 self.state = 'Torch'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Torch':
                 self.state = 'Jane_Storm'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60+ 10)
             elif self.state == 'Jane_Storm':
                 self.state = 'Chose'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Chose':
                 self.state = 'Dr_Strange'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Dr_Strange':
                 self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
             elif self.state == 'Back':
                 self.state = 'Captain_America'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
 
         elif self.game.UP_KEY :
             if self.state == 'Hulk':
                 self.state = 'Captain_America'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Ironman':
                 self.state = 'Hulk'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Spiderman':
                 self.state = 'Ironman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Thor':
                 self.state = 'Spiderman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Groot':
                 self.state = 'Thor'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Wolverine':
                 self.state = 'Groot'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Black_Panther':
                 self.state = 'Wolverine'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Starlord':
                 self.state = 'Black_Panther'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Yondu':
                 self.state = 'Starlord'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Torch':
                 self.state = 'Yondu'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Jane_Storm':
                 self.state = 'Torch'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Chose':
                 self.state = 'Jane_Storm'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Dr_Strange':
                 self.state = 'Chose'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Back':
                 self.state = 'Dr_Strange'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Captain_America':
                 self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
 
     def check_input(self):
@@ -1263,7 +1358,7 @@ class Choix_Personnage_Menu_3(Menu):
             if self.state == 'Captain_America':
                 self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
-                self.game_personnage = "Captain_America"
+                self.game_personnage = 'Captain_America'
                 self.game.playing = False
                 print(self.game_personnage)
                 self.run_display = False
@@ -1286,7 +1381,7 @@ class Choix_Personnage_Menu_3(Menu):
                 print(self.game_personnage)
                 self.run_display = False
                 self.game.curr_menu = self.game.Choix_Personnages_4
-            elif self.state == "Spiderman":
+            elif self.state == 'Spiderman':
                 self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
                 self.game_personnage = 'Spiderman'
@@ -1294,10 +1389,10 @@ class Choix_Personnage_Menu_3(Menu):
                 print(self.game_personnage)
                 self.run_display = False
                 self.game.curr_menu = self.game.Choix_Personnages_4
-            elif self.state == "Thor":
+            elif self.state == 'Thor':
                 self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
-                self.game_personnage = "Thor"
+                self.game_personnage = 'Thor'
                 self.game.playing = False
                 print(self.game_personnage)
                 self.run_display = False
@@ -1538,125 +1633,155 @@ class Choix_Personnage_Menu_4(Menu):
         if self.game.DOWN_KEY:
             if self.state == 'Captain_America':
                 self.state = 'Hulk'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Hulk':
                 self.state = 'Ironman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Ironman':
                 self.state = 'Spiderman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Spiderman':
                 self.state = 'Thor'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Thor':
                 self.state = 'Groot'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Groot':
                 self.state = 'Wolverine'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Wolverine':
                 self.state = 'Black_Panther'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Black_Panther':
                 self.state = 'Starlord'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Starlord':
                 self.state = 'Yondu'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Yondu':
                 self.state = 'Torch'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Torch':
                 self.state = 'Jane_Storm'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60+ 10)
             elif self.state == 'Jane_Storm':
                 self.state = 'Chose'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Chose':
                 self.state = 'Dr_Strange'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Dr_Strange':
                 self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
             elif self.state == 'Back':
                 self.state = 'Captain_America'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
 
         elif self.game.UP_KEY :
             if self.state == 'Hulk':
                 self.state = 'Captain_America'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Ironman':
                 self.state = 'Hulk'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Spiderman':
                 self.state = 'Ironman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Thor':
                 self.state = 'Spiderman'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Groot':
                 self.state = 'Thor'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.game.DISPLAY_W / 3 + self.offset - 140, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Wolverine':
                 self.state = 'Groot'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Black_Panther':
                 self.state = 'Wolverine'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Starlord':
                 self.state = 'Black_Panther'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Yondu':
                 self.state = 'Starlord'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Torch':
                 self.state = 'Yondu'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 240 + 10)
             elif self.state == 'Jane_Storm':
                 self.state = 'Torch'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 10)
             elif self.state == 'Chose':
                 self.state = 'Jane_Storm'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 60 + 10)
             elif self.state == 'Dr_Strange':
                 self.state = 'Chose'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 120 + 10)
             elif self.state == 'Back':
                 self.state = 'Dr_Strange'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (2*self.game.DISPLAY_W / 3 + self.offset + 100, self.game.DISPLAY_H / 3 + 180 + 10)
             elif self.state == 'Captain_America':
                 self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.mid_w + self.offset - 10, self.game.DISPLAY_H / 3 + 300 + 10)
 
     def check_input(self):
@@ -1674,13 +1799,16 @@ class Choix_Personnage_Menu_4(Menu):
                 self.game.playing = True
                 print(self.game_personnage)
                 self.run_display = False
+                #self.game.curr_menu = self.game.Choix_Personnages_2
+
             elif self.state == 'Hulk':
                 self.game.window.blit(hulk2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
                 self.game_personnage = 'Hulk'
                 self.game.playing = True
                 print(self.game_personnage)
-                self.run_display = False      
+                self.run_display = False
+                #self.game.curr_menu = self.game.Choix_Carte_Menu
             elif self.state == 'Ironman':
                 self.game.window.blit(ironman2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
@@ -1819,29 +1947,35 @@ class Choix_Carte_Menu(Menu):
         if self.game.DOWN_KEY:
             if self.state == 'Yes':
                 self.state = 'No'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 10)
             elif self.state == 'No':
                 self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 70)
             elif self.state == 'Back':
                 self.state = 'Yes'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.voly + 10)
             
         elif self.game.UP_KEY :
             if self.state == 'Yes':
                 self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 70)
             elif self.state == 'No':
                 self.state = 'Yes'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.voly + 10)
             elif self.state == 'Back':
                 self.state = 'No'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 10)
 
     def check_input(self):
@@ -1872,11 +2006,11 @@ class Volume(Menu):
             self.check_input()
             self.game.display.blit(fond, (0, 0))
             
-            self.game.draw_text_black('Options', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 229)
-            self.game.draw_text_black('Options', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 231)
-            self.game.draw_text_black('Options', 150, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 230)
-            self.game.draw_text_black('Options', 150, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 230)
-            self.game.draw_text_white('Options', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 230)
+            self.game.draw_text_black('Volume', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 229)
+            self.game.draw_text_black('Volume', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 231)
+            self.game.draw_text_black('Volume', 150, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 230)
+            self.game.draw_text_black('Volume', 150, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 230)
+            self.game.draw_text_white('Volume', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 230)
 
             self.game.draw_text_black("Yes", 50, self.volx, self.voly - 2)
             self.game.draw_text_black("Yes", 50, self.volx, self.voly + 2)
@@ -1910,7 +2044,7 @@ class Volume(Menu):
                 self.game.draw_text_black("OFF", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
                 self.game.draw_text_white("OFF", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
                 self.run_display = False
-                
+
             self.draw_cursor()
             self.blit_screen()
 
@@ -1918,29 +2052,35 @@ class Volume(Menu):
         if self.game.DOWN_KEY:
             if self.state == 'Yes':
                 self.state = 'No'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 10)
             elif self.state == 'No':
                 self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 70)
             elif self.state == 'Back':
                 self.state = 'Yes'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.voly + 10)
             
         elif self.game.UP_KEY :
             if self.state == 'Yes':
                 self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 70)
             elif self.state == 'No':
                 self.state = 'Yes'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.voly + 10)
             elif self.state == 'Back':
                 self.state = 'No'
-                self.game.sound_manager.bruit('Blop')
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 10)
 
     def check_input(self):
@@ -1950,6 +2090,112 @@ class Volume(Menu):
                 self.game.Musique = True         
             elif self.state == 'No':
                 self.game.Musique = False
+            elif self.state == 'Back':
+                self.game.curr_menu = self.game.options
+            self.run_display = False
+
+
+class Mode(Menu):
+    def __init__(self, game):
+        Menu.__init__(self, game)
+        self.state = '1_Joueur'
+        self.volx, self.voly = self.mid_w, self.mid_h
+        self.backx, self.backy = self.mid_w, self.mid_h + 60
+        self.cursor_rect.midtop = (self.backx + self.offset - 50, self.voly  + 10)
+
+    def display_menu(self):
+        self.run_display = True
+        while self.run_display:
+            self.game.check_events()
+            if self.game.START_KEY and (self.cursor_rect.midtop == (self.volx + self.offset, self.voly)):
+                self.game.curr_menu = self.game.main_menu
+            self.check_input()
+            self.game.display.blit(fond, (0, 0))
+            
+            self.game.draw_text_black('Mode', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 229)
+            self.game.draw_text_black('Mode', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 231)
+            self.game.draw_text_black('Mode', 150, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 230)
+            self.game.draw_text_black('Mode', 150, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 230)
+            self.game.draw_text_white('Mode', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 230)
+
+            self.game.draw_text_black("1 Joueur", 50, self.volx, self.voly - 2)
+            self.game.draw_text_black("1 Joueur", 50, self.volx, self.voly + 2)
+            self.game.draw_text_black("1 Joueur", 50, self.volx - 2, self.voly)
+            self.game.draw_text_black("1 Joueur", 50, self.volx + 2, self.voly)
+            self.game.draw_text_white("1 Joueur", 50, self.volx, self.voly)
+
+            self.game.draw_text_black("2 Joueurs", 50, self.backx, self.backy - 2)
+            self.game.draw_text_black("2 Joueurs", 50, self.backx, self.backy + 2)
+            self.game.draw_text_black("2 Joueurs", 50, self.backx - 2, self.backy)
+            self.game.draw_text_black("2 Joueurs", 50, self.backx + 2, self.backy)
+            self.game.draw_text_white("2 Joueurs", 50, self.backx, self.backy)
+
+            self.game.draw_text_black("Back", 50, self.backx, self.backy + 58)
+            self.game.draw_text_black("Back", 50, self.backx, self.backy + 62)
+            self.game.draw_text_black("Back", 50, self.backx - 2, self.backy + 60)
+            self.game.draw_text_black("Back", 50, self.backx + 2, self.backy + 60)
+            self.game.draw_text_white("Back", 50, self.backx, self.backy + 60)
+
+            if self.game.Mode_jeu :
+                self.game.draw_text_black("1", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("1", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("1", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("1", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("1", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
+                self.run_display = False
+            else :
+                self.game.draw_text_black("2", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("2", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("2", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("2", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("2", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
+                self.run_display = False
+
+            self.draw_cursor()
+            self.blit_screen()
+
+    def move_cursor(self):
+        if self.game.DOWN_KEY:
+            if self.state == '1_Joueur':
+                self.state = '2_Joueurs'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset - 50, self.backy + 10)
+            elif self.state == '2_Joueurs':
+                self.state = 'Back'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset- 50, self.backy + 70)
+            elif self.state == 'Back':
+                self.state = '1_Joueur'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset- 50, self.voly + 10)
+            
+        elif self.game.UP_KEY :
+            if self.state == '1_Joueur':
+                self.state = 'Back'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset- 50, self.backy + 70)
+            elif self.state == '2_Joueurs':
+                self.state = '1_Joueur'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset- 50, self.voly + 10)
+            elif self.state == 'Back':
+                self.state = '2_Joueurs'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset- 50, self.backy + 10)
+
+    def check_input(self):
+        self.move_cursor()
+        if self.game.START_KEY:
+            if self.state == '1_Joueur':
+                self.game.Mode_jeu = True         
+            elif self.state == '2_Joueurs':
+                self.game.Mode_jeu = False
             elif self.state == 'Back':
                 self.game.curr_menu = self.game.options
             self.run_display = False
@@ -1980,32 +2226,68 @@ class OptionsMenu(Menu):
             self.game.draw_text_black("Volume", 50, self.volx + 2, self.voly)
             self.game.draw_text_white("Volume", 50, self.volx, self.voly)
 
-            self.game.draw_text_black("Back", 50, self.backx, self.backy - 2)
-            self.game.draw_text_black("Back", 50, self.backx, self.backy + 2)
-            self.game.draw_text_black("Back", 50, self.backx - 2, self.backy)
-            self.game.draw_text_black("Back", 50, self.backx + 2, self.backy)
-            self.game.draw_text_white("Back", 50, self.backx, self.backy)
+            self.game.draw_text_black("Mode", 50, self.backx, self.backy - 2)
+            self.game.draw_text_black("Mode", 50, self.backx, self.backy + 2)
+            self.game.draw_text_black("Mode", 50, self.backx - 2, self.backy)
+            self.game.draw_text_black("Mode", 50, self.backx + 2, self.backy)
+            self.game.draw_text_white("Mode", 50, self.backx, self.backy)
+
+            self.game.draw_text_black("Back", 50, self.backx, self.backy + 58)
+            self.game.draw_text_black("Back", 50, self.backx, self.backy + 62)
+            self.game.draw_text_black("Back", 50, self.backx - 2, self.backy + 60)
+            self.game.draw_text_black("Back", 50, self.backx + 2, self.backy + 60)
+            self.game.draw_text_white("Back", 50, self.backx, self.backy + 60)
 
             self.draw_cursor()
             self.blit_screen()
 
-    def check_input(self):
-        if self.game.UP_KEY or self.game.DOWN_KEY:
+    def move_cursor(self):
+        if self.game.DOWN_KEY:
             if self.state == 'Volume':
-                self.state = 'Back'
-                self.game.sound_manager.bruit('Blop')
+                self.state = 'Mode'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 10)
+            elif self.state == 'Mode':
+                self.state = 'Back'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 70)
             elif self.state == 'Back':
                 self.state = 'Volume'
-                self.game.sound_manager.bruit('Blop')
-                self.cursor_rect.midtop = (self.volx + self.offset, self.voly + 10)
-        elif self.game.START_KEY and self.state == 'Volume':
-            self.game.curr_menu = self.game.Volume
-            self.run_display = False
-        elif self.game.START_KEY and self.state == 'Back':
-            self.game.curr_menu = self.game.main_menu
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.voly + 10)
+            
+        elif self.game.UP_KEY :
+            if self.state == 'Volume':
+                self.state = 'Back'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 70)
+            elif self.state == 'Mode':
+                self.state = 'Volume'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.voly + 10)
+            elif self.state == 'Back':
+                self.state = 'Mode'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 10)
+
+    def check_input(self):
+        self.move_cursor()
+        if self.game.START_KEY:
+            if self.state == 'Volume':
+                self.game.curr_menu = self.game.Volume         
+            elif self.state == 'Mode':
+                self.game.curr_menu = self.game.Mode
+            elif self.state == 'Back':
+                self.game.curr_menu = self.game.main_menu
             self.run_display = False
 
+    
 class CreditsMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
