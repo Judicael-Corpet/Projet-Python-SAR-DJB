@@ -678,7 +678,7 @@ class Game:
         
 
     def draw_attack_menu(self) :
-        """Dessine le menu des attaques."""
+        #Dessine le menu des attaques.
         #Fond noir dans le coin inférieur gauche
         pygame.draw.rect(self.screen, (0, 0, 0), (20, 340, 250, 150 ))
         pygame.draw.rect(self.screen, (255, 255, 255), (20, 340, 250, 150), 2)  # Bordure blanche
@@ -695,7 +695,7 @@ class Game:
             
 
     def handle_player_turn(self):
-        """Tour du joueur"""
+        #Tour du joueur
          
         
         for selected_unit in self.player_units:
@@ -877,7 +877,7 @@ class Game:
         
 
     def flip_display(self):
-        """Affiche la carte et les éléments du jeu."""
+        #Affiche la carte et les éléments du jeu.
         # Chargement des données de la carte
         tmx_data = pytmx.util_pygame.load_pygame('map/map.tmx')
         map_data = pyscroll.data.TiledMapData(tmx_data)
@@ -980,7 +980,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-"""
+
 
 
 
@@ -1007,7 +1007,7 @@ grid = [
 
 def a_star_with_memory(grid, start, goal):
     def heuristic(a, b):
-        """Distance de Manhattan pour estimer le coût restant."""
+        #Distance de Manhattan pour estimer le coût restant.
         return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
     rows, cols = len(grid), len(grid[0])
@@ -1107,3 +1107,104 @@ def handle_enemy_turn(self):
         self.flip_display()
         play = True
         return play
+
+
+"""
+
+
+import heapq
+
+def a_star(grid, start, goal):
+    """
+    Implémente l'algorithme A* pour trouver le chemin optimal.
+    :param grid: La grille où 1 représente un obstacle et 0 une case libre.
+    :param start: Coordonnées de départ (x, y).
+    :param goal: Coordonnées d'arrivée (x, y).
+    :return: Liste des étapes du chemin trouvé, ou [] si aucun chemin n'est possible.
+    """
+    def heuristic(a, b):
+        # Distance de Manhattan
+        return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+    def get_neighbors(node):
+        # Retourne les voisins valides (dans la grille et non-obstacles)
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # Haut, Droite, Bas, Gauche
+        neighbors = []
+        for dx, dy in directions:
+            nx, ny = node[0] + dx, node[1] + dy
+            if 0 <= ny < len(grid) and 0 <= nx < len(grid[0]) and grid[ny][nx] == 0:
+                neighbors.append((nx, ny))
+        return neighbors
+
+    open_set = []
+    heapq.heappush(open_set, (0, start))
+    came_from = {}
+    g_score = {start: 0}
+    f_score = {start: heuristic(start, goal)}
+
+    while open_set:
+        _, current = heapq.heappop(open_set)
+
+        if current == goal:
+            # Reconstruire le chemin
+            path = []
+            while current in came_from:
+                path.append(current)
+                current = came_from[current]
+            path.reverse()
+            return path
+
+        for neighbor in get_neighbors(current):
+            tentative_g_score = g_score[current] + 1
+            if neighbor not in g_score or tentative_g_score < g_score[neighbor]:
+                came_from[neighbor] = current
+                g_score[neighbor] = tentative_g_score
+                f_score[neighbor] = tentative_g_score + heuristic(neighbor, goal)
+                heapq.heappush(open_set, (f_score[neighbor], neighbor))
+
+    return []  # Aucun chemin trouvé
+
+
+def handle_enemy_turn(grid, enemy_start, goal):
+    """
+    Déplace l'ennemi en utilisant l'algorithme A* pour atteindre l'objectif.
+    :param grid: La grille où 1 représente un obstacle et 0 une case libre.
+    :param enemy_start: Position de départ de l'ennemi (x, y).
+    :param goal: Position cible (x, y).
+    :return: Nouvelle position de l'ennemi après un mouvement.
+    """
+    # Trouver le chemin avec A*
+    path = a_star(grid, enemy_start, goal)
+    print(f"Chemin trouvé : {path}")
+
+    # Si un chemin existe, effectuer un déplacement
+    if path and len(path) > 1:
+        next_step = path[0]  # Position actuelle
+        next_step = path[1]  # Prochain mouvement
+        print(f"L'ennemi se déplace de {enemy_start} à {next_step}")
+        return next_step
+    else:
+        print("Aucun chemin possible pour atteindre la cible.")
+        return enemy_start  # L'ennemi reste en place
+    
+
+
+grid = [
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+    [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+    [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+]
+
+enemy_start = (16, 9)
+goal = (0, 0)
