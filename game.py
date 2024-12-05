@@ -79,7 +79,94 @@ class Game:
             color = (0, 255, 0) if i == self.selected_attack_index else (255, 255, 255)  # Mettre en surbrillance l'attaque sélectionnée
             text = pygame.font.Font(None, 36).render(attaque, True, color)
             self.screen.blit(text, (30, 550 + i * 30))  # Positionnement des attaques
+    def cases_teleportation(self,screen):
+        self.cases_tp=[3,3]
+        cas_arrive=[15,10]
+        color=(255, 255, 100)
+        pygame.draw.rect(screen, color, (self.cases_tp[0]*CELL_SIZE, self.cases_tp[1]*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
+        # pygame
+        for player in self.player_units:
+            if player.x==self.cases_tp[0] and player.y== self.cases_tp[1]:
+                player.x,player.y=(cas_arrive[0],cas_arrive[1])
+                
+    def cases_soin(self, screen):
+        self.case_soin = [5, 3] 
+        color = WHITE
+        color1=(20,255,20)
+        x, y = self.case_soin  # Position de la case
+        half_size = CELL_SIZE // 2  # La moitié de la taille d'une cellule
+        line_width = 15  # Épaisseur des lignes de la croix
+        bonus_health=30
+        for player in self.player_units:
+            if player.x==self.case_soin[0] and player.y== self.case_soin[1]:
             
+                if player.health<=120:
+                    player.health+=bonus_health
+                    print("joueur a été soigné")
+                elif player.health>120:
+                    print("joueur a été soigné")
+                    player.health=150
+                
+
+        # dessine le fond:
+        pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
+
+        # Dessiner la ligne verticale
+        pygame.draw.line(
+            screen, 
+            color, 
+            (x * CELL_SIZE + half_size , y * CELL_SIZE+5),  # Début de la ligne
+            (x * CELL_SIZE + half_size , y * CELL_SIZE + CELL_SIZE-5),  # Fin de la ligne
+            line_width  # Épaisseur
+        )
+
+        # Dessiner la ligne horizontale
+        pygame.draw.line(
+            screen, 
+            color, 
+            (x * CELL_SIZE+5, y * CELL_SIZE + half_size ),  # Début de la ligne
+            (x * CELL_SIZE + CELL_SIZE-5, y * CELL_SIZE + half_size ),  # Fin de la ligne
+            line_width  # Épaisseur
+        )
+      
+    def cases_degat(self, screen):
+        self.case_degat = [1, 1]
+        color = BLACK
+        color1=(255,20,20)
+        x, y = self.case_degat  # Position de la case
+        half_size = CELL_SIZE // 2  # La moitié de la taille d'une cellule
+        line_width1 = 10  # Épaisseur des lignes de verticales
+        line_width2=5 # épaisseur horizontale 
+
+        degat=1600
+        
+        for player in self.player_units:
+            if player.x==self.case_degat[0] and player.y== self.case_degat[1]:
+                player.health-=degat
+                print(player.health)
+                print("joueur a été blaissé")
+                  
+                
+        # dessine le fond:
+        pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
+
+        # Dessiner la ligne verticale
+        pygame.draw.line(
+            screen, 
+            color, 
+            (x * CELL_SIZE + half_size , y * CELL_SIZE+5),  # Début de la ligne
+            (x * CELL_SIZE + half_size , y * CELL_SIZE + CELL_SIZE-5),  # Fin de la ligne
+            line_width1  # Épaisseur
+        )
+
+        # Dessiner la ligne horizontale
+        pygame.draw.line(
+            screen, 
+            color, 
+            (x * CELL_SIZE+10, y * CELL_SIZE + 35 ),  # Début de la ligne
+            (x * CELL_SIZE + CELL_SIZE-10, y * CELL_SIZE + 35),  # Fin de la ligne
+            line_width2  # Épaisseur
+        )       
 
     def handle_player_turn(self):
         """Tour du joueur"""
@@ -505,7 +592,7 @@ def main():
         if game.Mode_jeu :
             game.handle_enemy_turn()  
         else :
-             game.handle_player_2_turn()
+            game.handle_player_2_turn()
         iter += 1 
     return game.list_player_health, game.list_enemy_health     
 

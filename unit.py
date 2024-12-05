@@ -131,8 +131,6 @@ class Unit():
         self.red_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
         
         if attack == "Aucune Action":
-            if self.game.Musique :
-                self.game.sound_manager.bruit('Boule_feu')
             self.attaque_selectionne = Aucune_action()
 
         if attack == "Poings" :
@@ -389,6 +387,8 @@ class Unit():
 
     def attribuer_class_attaque(self, indice) :
         if self.list_attaques[indice] == "Aucune Action" :
+            #if self.game.Musique :
+            #    self.game.sound_manager.bruit('Boule_feu')
             attaque_selectionne = Aucune_action()
                                 
         elif self.list_attaques[indice] == "Poings" :
