@@ -124,7 +124,7 @@ class Unit():
             pygame.draw.rect(screen, color, (green_x*CELL_SIZE, green_y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 2)  # Dessine les bords
 
 
-    def update_red_case(self,attack): # méthode permettant de metre à jour les cases d'attaque
+    def update_red_case(self, attack): # méthode permettant de metre à jour les cases d'attaque
         self.red_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.red_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
         
@@ -208,12 +208,8 @@ class Unit():
         #print (f"Lattaque selectionnee pour la methode attack {self.attaque_selectionne.name}")
         for red_x, red_y in self.red_cases :
             if target.x == red_x and  target.y == red_y :
-                
-                print(f"la cible de mon attaque est  : {target.name}, elle a {target_health} points de vie, et une défense de {target.defense}, end = "" ")
-                print(f"l'attaque j'ai choisie est {type_attack} avec une puissance de {type_attack.attack_power}et une précision de {type_attack.precision}")
-                  
                 target_health = target_health - type_attack.attack_power*type_attack.precision*(1 - target.defense/100)/type_attack.distance_attack
-                print (f"IL NE TE RESTE PLUS QUE {target_health} POINT DE VIE AVANT DE MOURIRR !!!! HAHAHAHAHAHHAHAHAHAHAH")
+            
             else :
                 target_health = target_health
         return target_health
@@ -851,11 +847,14 @@ class Fleche_yaka(Unit) :
                 (-3,-2), (-3, 2), (3, -2), (3, 2),
                 (-3, -1), (-3, 1), (3, -1), (3, 1),
                 (-3, 0), (3, 0), (0, -3), (0, 3),
+                (-2, -3), (-2, 3), (2, -3), (2, 3),
                 (-2, -2), (-2, 2), (2, -2), (2, 2),
                 (-2, 1), (2, 1), (1, -2), (1, 2),
                 (-2, 0), (2, 0), (0, -2), (0, 2),
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-1, -1), (1, 1), (-1, 1), (1, -1),
+                (-1, -2), (-1, 2), (1, -2), (1, 2),
+                (-1, -3), (-1, 3), (1, -3), (1, 3)  # Diagonales proches
                 ]
         self.attack_power = 100
         self.quantite = 3
@@ -908,7 +907,8 @@ class Projectile(Unit) :
                 (-2, 0), (2, 0), (0, -2), (0, 2),
                 (-2, 1), (2, 1), (1, -2), (1, 2),
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1)  # Diagonales proches
+                (-1, -1), (1, 1), (-1, 1), (1, -1),
+                (-1, -2), (-1, 2), (1, -2), (1, 2)  # Diagonales proches
                 ]
         self.attack_power = 100
         self.quantite = 3
