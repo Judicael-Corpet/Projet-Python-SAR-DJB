@@ -445,8 +445,8 @@ class Unit():
 class perso_Captain_america(Unit):
     def __init__(self, x, y, size):
         super().__init__("Captain_America", x, y, size)
-        self.__health = 150
-        self.health_max = 150
+        self.__health = 100
+        self.health_max = 100
         self.nbre_move = 3
         self.defense = 75
         self.attack_power = 10
@@ -458,8 +458,8 @@ class perso_Captain_america(Unit):
 class perso_Hulk(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Hulk", x, y, size)
-        self.__health = 300
-        self.health_max = 300
+        self.__health = 150
+        self.health_max = 150
         self.nbre_move = 4
         self.defense = 90
         self.attack_power = 10
@@ -471,8 +471,8 @@ class perso_Hulk(Unit) :
 class perso_Ironman (Unit) :
     def __init__(self, x, y, size):
         super().__init__("Ironman", x, y, size)
-        self.__health = 150
-        self.health_max = 150
+        self.__health = 100
+        self.health_max = 100
         self.nbre_move = 8
         self.defense = 75
         self.attack_power = 10
@@ -484,8 +484,8 @@ class perso_Ironman (Unit) :
 class perso_Spiderman(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Spiderman", x, y, size)
-        self.__health = 150
-        self.health_max = 150
+        self.__health = 90
+        self.health_max = 90
         self.nbre_move = 6
         self.defense = 50
         self.attack_power = 10
@@ -497,8 +497,8 @@ class perso_Spiderman(Unit) :
 class perso_Thor(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Thor", x, y, size)
-        self.__health = 300
-        self.health_max = 300
+        self.__health = 150
+        self.health_max = 150
         self.nbre_move = 8
         self.defense = 75
         self.attack_power = 10
@@ -510,8 +510,8 @@ class perso_Thor(Unit) :
 class perso_Groot(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Groot", x, y, size)
-        self.__health = 300
-        self.health_max = 300
+        self.__health = 120
+        self.health_max = 120
         self.nbre_move = 3
         self.defense = 30
         self.attack_power = 10
@@ -523,8 +523,8 @@ class perso_Groot(Unit) :
 class perso_Wolverine(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Wolverine", x, y, size)   
-        self.__health = 300
-        self.health_max = 300
+        self.__health = 150
+        self.health_max = 150
         self.nbre_move = 3
         self.defense = 75
         self.attack_power = 10
@@ -536,8 +536,8 @@ class perso_Wolverine(Unit) :
 class perso_Black_panther(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Black_Panther", x, y, size)
-        self.__health = 250
-        self.health_max = 250
+        self.__health = 130
+        self.health_max = 130
         self.nbre_move = 4
         self.defense = 30
         self.attack_power = 10
@@ -549,8 +549,8 @@ class perso_Black_panther(Unit) :
 class perso_Starlord (Unit) :
     def __init__(self, x, y, size):
         super().__init__("Starlord", x, y, size)
-        self.__health = 150
-        self.health_max = 150
+        self.__health = 90
+        self.health_max = 90
         self.nbre_move = 6
         self.defense = 30
         self.attack_power = 10
@@ -562,8 +562,8 @@ class perso_Starlord (Unit) :
 class  perso_Yondu(Unit):
     def __init__(self, x, y, size):
         super().__init__("Yondu", x, y, size)
-        self.__health = 300
-        self.health_max = 300
+        self.__health = 130
+        self.health_max = 130
         self.nbre_move = 3
         self.defense = 50
         self.attack_power = 10
@@ -575,8 +575,8 @@ class  perso_Yondu(Unit):
 class perso_Torch(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Torch", x, y, size)
-        self.__health = 150
-        self.health_max = 150
+        self.__health = 100
+        self.health_max = 100
         self.nbre_move = 8
         self.defense = 40
         self.attack_power = 10
@@ -588,8 +588,8 @@ class perso_Torch(Unit) :
 class perso_Jane_storm(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Jane_Storm", x, y, size)
-        self.__health = 100
-        self.health_max = 100
+        self.__health = 70
+        self.health_max = 70
         self.nbre_move = 3
         self.defense = 30
         self.attack_power = 10
@@ -601,8 +601,8 @@ class perso_Jane_storm(Unit) :
 class perso_Chose(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Chose", x, y, size)
-        self.__health = 300
-        self.health_max = 300
+        self.__health = 140
+        self.health_max = 140
         self.nbre_move = 4
         self.defense = 80
         self.attack_power = 10
@@ -614,8 +614,8 @@ class perso_Chose(Unit) :
 class perso_Dr_strange(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Dr_Strange", x, y, size)
-        self.__health = 150
-        self.health_max = 150
+        self.__health = 80
+        self.health_max = 80
         self.nbre_move = 6
         self.defense = 80
         self.attack_power = 10
