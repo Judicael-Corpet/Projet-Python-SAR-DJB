@@ -36,6 +36,8 @@ class SoundManager :
             if name == 'Musique_lancement':
                 self.sounds[name].play(-1)
             else :
+                #self.sounds['Musique_lancement'].pause()
                 self.sounds[name].play()
+                #self.sounds['Musique_lancement'].unpause()
         else:
             print(f"Son {name} introuvable.")    
