@@ -13,7 +13,7 @@ fond = pygame.image.load('Fond_ecran.png')
 
 personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", 
                             "Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
-
+"""
 grid = [
     [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
@@ -30,10 +30,28 @@ grid = [
     [1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 1, 1, 1, 0, 2, 2, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1],
 ]
+"""
+
+grid = [
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+    [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+    [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+]
 
 #passer d'un côté si on est de ce coté de la colonne sinon de l'autre
 
-def a_star(grid, start, goal):
+def a_star_with_memory(grid, start, goal):
     def heuristic(a, b):
         """Distance de Manhattan pour estimer le coût restant."""
         return abs(a[0] - b[0]) + abs(a[1] - b[1])
@@ -44,11 +62,10 @@ def a_star(grid, start, goal):
     came_from = {}  # Garde une trace des déplacements
     g_score = {start: 0}  # Coût pour atteindre un nœud
     f_score = {start: heuristic(start, goal)}  # Score total estimé (g + h)
+    closed_set = set()  # Garde une trace des nœuds déjà explorés
 
     while open_set:
         _, current = heapq.heappop(open_set)  # Récupère le nœud avec le plus faible f_score
-
-        print(f"Exploring node: {current}")
 
         # Si on atteint l'objectif
         if current == goal:
@@ -60,17 +77,17 @@ def a_star(grid, start, goal):
             path.reverse()  # Retourne le chemin
             return path  # Retourne le chemin trouvé
 
+        closed_set.add(current)  # Marque comme exploré
+
         # Explore les voisins (haut, bas, gauche, droite)
         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             neighbor = (current[0] + dx, current[1] + dy)
 
             # Vérifie si le voisin est dans la grille et accessible
-            if 0 <= neighbor[0] < rows and 0 <= neighbor[1] < cols and grid[neighbor[0]][neighbor[1]] != 1:
-                cost = 1
-                if grid[neighbor[0]][neighbor[1]] == 2:
-                    cost = 0.1  # Coût réduit pour les chemins spéciaux
+            if (0 <= neighbor[0] < rows and 0 <= neighbor[1] < cols and 
+                grid[neighbor[0]][neighbor[1]] != 1 and neighbor not in closed_set):
 
-                tentative_g_score = g_score[current] + cost  # Coût d'un pas supplémentaire
+                tentative_g_score = g_score[current] + 1  # Coût d'un pas supplémentaire
 
                 # Si le coût pour atteindre ce voisin est meilleur, on met à jour
                 if tentative_g_score < g_score.get(neighbor, float('inf')):
@@ -81,7 +98,6 @@ def a_star(grid, start, goal):
                     # Ajouter à l'open_set si pas déjà présent
                     if neighbor not in [i[1] for i in open_set]:
                         heapq.heappush(open_set, (f_score[neighbor], neighbor))
-                        print(f"Adding neighbor: {neighbor} with f_score: {f_score[neighbor]}")
 
     return None  # Aucun chemin trouvé
 
@@ -202,12 +218,16 @@ class Game:
                         # Déplacement (touches fléchées)
                             dx, dy = 0, 0
                             if event.key == pygame.K_LEFT:
+                                #selected_unit.update_sprite("left")
                                 dx = -1
                             elif event.key == pygame.K_RIGHT:
+                                #selected_unit.update_sprite("right")
                                 dx = 1
                             elif event.key == pygame.K_UP and not self.menu_attaques:
+                                #selected_unit.update_sprite("up")
                                 dy = -1
                             elif event.key == pygame.K_DOWN and not self.menu_attaques:
+                                #selected_unit.update_sprite("down")
                                 dy = 1
                             selected_unit.move(dx, dy)
                             
@@ -261,7 +281,7 @@ class Game:
 
 
 
-
+    """ 
     def handle_enemy_turn(self):
         for enemy in self.enemy_units:
             enemy.is_selected = True
@@ -284,8 +304,16 @@ class Game:
             start = (enemy.x, enemy.y)
             goal = (target.x, target.y)
 
-            path = a_star(current_grid, start, goal)
-            #path = bfs(current_grid, start, goal)
+            path = a_star_with_memory(current_grid, start, goal)
+            print(f"Path found: {path}")
+            
+            if path and len(path) > 1:
+                next_step = path[1]  # Le prochain pas après la position actuelle
+                enemy.x, enemy.y = next_step
+                print(f"Enemy moved to {next_step}")
+            else:
+                print(f"No path found for enemy at {start}")
+            
             print(path)
             # Déplacer l'ennemi d'une étape sur le chemin
             if path and len(path) > 1:
@@ -306,6 +334,37 @@ class Game:
         self.flip_display()
         play = True
         return play
+    """
+
+    def handle_enemy_turn(self):
+        #IA très simple pour les ennemis.
+        for enemy in self.enemy_units:
+            target_x_1 = self.player_units[0].x
+            target_y_1 = self.player_units[0].y
+            target_vie_1 = self.player_units[0].health
+            target_x_2 = self.player_units[1].x
+            target_y_2 = self.player_units[1].y
+            target_vie_2 = self.player_units[1].health
+            # DEPLACEMENT
+            #if np.sqrt((target_x_1 - enemy.x)**2+(target_y_1 - enemy.y)**2) < np.sqrt((target_x_2 - enemy.x)**2+(target_y_2 - enemy.y)**2) :
+            #    target_x = self.player_units[0].x
+            #    target_y = self.player_units[0].y
+            #    dx = 1 if enemy.x < target_x else -1 if enemy.x > target_x else 0
+            #    dy = 1 if enemy.y < target_y else -1 if enemy.y > target_y else 0
+            #    enemy.move(dx, dy)
+
+                # ATTAQUE
+                #if np.sqrt((target_x_1 - enemy.x)**2+(target_y_1 - enemy.y)**2) == np.sqrt((target_x_2 - enemy.x)**2+(target_y_2 - enemy.y)**2) :
+                #    if target_vie_1 < target_vie_2 :
+                #
+                #         pass #attaquer le 1
+
+
+            #if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
+            #    enemy.attack(target)
+            #    if target.health <= 0:
+            #        self.player_units.remove(target)
+        
 
     def flip_display(self):
         """Affiche la carte et les éléments du jeu."""

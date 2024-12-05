@@ -187,26 +187,8 @@ class Unit(pygame.sprite.Sprite):
         personnage = self.name
         
         if personnage == "Captain_America" :
-            
             self.personnage = Captain_america()
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
-            #self.image = self.get_image(0,0) # get image in this coordinate
-            """
-            print('salut')
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if self.game.LEFT_KEY:
-                        print('bg')
-                        self.image = self.get_image(0,50) # get image in this coordinate
-                    elif self.game.RIGHT_KEY:
-                        self.image = self.get_image(0,100) # get image in this coordinate
-                    elif self.game.UP_KEY:
-                        self.image = self.get_image(0,150) # get image in this coordinate
-                    elif self.game.DOWN_KEY:
-                        self.image = self.get_image(0,0) # get image in this coordinate
-                    else :
-                        self.image = self.get_image(0,0) # get image in this coordinate
-            """
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
@@ -326,7 +308,18 @@ class Unit(pygame.sprite.Sprite):
             
         screen.blit(self.image, (self.x*CELL_SIZE, self.y*CELL_SIZE))
         self.draw_health_bar(screen)
-        
+    """
+    def update_sprite(self, direction):
+        #Change le sprite selon la direction.
+        if direction == "left":
+            self.image = self.get_image(0, 50)
+        elif direction == "right":
+            self.image = self.get_image(0, 100)
+        elif direction == "up":
+            self.image = self.get_image(0, 150)
+        elif direction == "down":
+            self.image = self.get_image(0, 0)
+    """
     def get_image(self,x,y): # get image  permet de decouper l'image png du morceau qu'on souhaite
         image=pygame.Surface([52,52])
         image.blit(self.sprite_sheet,(10,0),(x,y,42,52))
@@ -520,6 +513,10 @@ class Dr_strange(Unit) :
 
 class Poings(Unit) :
     def __init__(self) :
+
+        if self.game.Musique :
+            print('bg soin')
+            self.game.sound_manager.bruit('Boule_feu')
         self.power = 20
         self.quantite = 100
         self.distance_attack = 1
@@ -626,6 +623,7 @@ class Soigner (Unit):
 class Projectile(Unit) :
     def __init__(self):
         self.power = 60
+
         self.quantite = 3
         self.distance = 5
 
