@@ -2,6 +2,7 @@ import pygame
 import random
 import pytmx
 import pyscroll
+import numpy as np
 from unit import *
 from menu import *
 from sound import *
@@ -411,7 +412,13 @@ class Game:
             enemy.update_green_case(self.player_units,self.enemy_units)   
             print(enemy_selected.list_attaques)
                 # Déplacement aléatoire
-            target = random.choice(self.player_units)
+            # Déterminer la cible la plus proche
+            target_1 = self.player_units[0]
+            target_2 = self.player_units[1]
+            dist_1 = np.sqrt((target_1.x - enemy.x) ** 2 + (target_1.y - enemy.y) ** 2)
+            dist_2 = np.sqrt((target_2.x - enemy.x) ** 2 + (target_2.y - enemy.y) ** 2)
+            target = target_1 if dist_1 < dist_2 else target_2
+            
             print (target)
             dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
             dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
