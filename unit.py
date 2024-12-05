@@ -62,7 +62,7 @@ class Unit():
         self.green_cases=[]
  
 
-    def move(self, dx, dy):
+    def move(self, dx, dy): # méthode définissant les déplacements des joueurs
         """Déplace l'unité de dx, dy, uniquement si la case cible est valide."""
         # Calcul de la position cible
         target_x = self.x + dx
@@ -77,7 +77,7 @@ class Unit():
             print("Déplacement invalide : en dehors des cases autorisées.")
 
 
-    def update_green_case(self,player_units,enemy_units):
+    def update_green_case(self,player_units,enemy_units): # méthode permettant de mettre à jour les cases de déplacement
         self.green_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.green_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
         
@@ -120,13 +120,13 @@ class Unit():
                         self.green_cases.append((green_x, green_y))
                     
     
-    def draw_green_case(self, screen):
+    def draw_green_case(self, screen): # méthode permettant de dessiner les cases de déplacement
         color = GREEN
         for green_x,green_y in self.green_cases:
             pygame.draw.rect(screen, color, (green_x*CELL_SIZE, green_y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 2)  # Dessine les bords
 
 
-    def update_red_case(self,attack):
+    def update_red_case(self,attack): # méthode permettant de metre à jour les cases d'attaque
         self.red_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.red_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
         
@@ -198,13 +198,13 @@ class Unit():
                     self.red_cases.append((red_x, red_y))
                 
     
-    def draw_red_case(self, screen):
+    def draw_red_case(self, screen): # méthode pour dessiner les cases attaques en fonction de l'attaque 
         color = RED
         for red_x,red_y in self.red_cases:
             pygame.draw.rect(screen, color, (red_x*CELL_SIZE, red_y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 2)  # Dessine les bords
     
       
-    def attack(self, type_attack, target, target_health):
+    def attack(self, type_attack, target, target_health): # méthode utilisée pour les attaques
         """Attaque une unité cible."""
         #target_health = target.get_health()
         #print (f"Lattaque selectionnee pour la methode attack {self.attaque_selectionne.name}")
@@ -221,7 +221,7 @@ class Unit():
         return target_health
     
 
-    def draw(self, screen):
+    def draw(self, screen): # méthode permettant de mettre l'image correspondant au joueur sélectionné
         """Affiche l'unité sur l'écran."""
          
         #Pour générer l'image du joueur que l'on a choisi
@@ -321,17 +321,13 @@ class Unit():
         screen.blit(self.image, (self.x*CELL_SIZE, self.y*CELL_SIZE))
         
         
-    def get_image(self,x,y): # get image  permet de decouper l'image png du morceau qu'on souhaite
+    def get_image(self,x,y): # méthode permettant de decouper l'image png du morceau d'image qu'on souhaite
         image=pygame.Surface([52,52])
         image.blit(self.sprite_sheet,(10,0),(x,y,42,52))
         return image
-
-    # Affichage de la barre de vie
-    #def update_health_bar(self, screen, self) :
-        #new_health = self.health
-
+  
     
-    def draw_health_bar(self, screen, health):
+    def draw_health_bar(self, screen, health): # méthode permettant l'affichage de la barre de vie
         RED = (255, 0, 0)
         GREEN = (0, 255, 0)
         BLACK = (0, 0, 0)
@@ -351,7 +347,7 @@ class Unit():
         pygame.draw.rect(screen, RED, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, bar_length, bar_height))  # Barre vide
         pygame.draw.rect(screen, LIGHT_GREEN, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, fill, bar_height))     # Barre remplie
     
-    def attribuer_class_perso(self) :
+    def attribuer_class_perso(self) : # méthode permettant de créer des instances de personnage
         if self.name == "Captain_America" : 
             perso = perso_Captain_america(self.x,self.y,self.size)            
         elif self.name == "Hulk" :
@@ -385,7 +381,7 @@ class Unit():
         return perso
 #création de la classe de chaque personnage A CONFIRMER CAR PEUT-ETRE PAS NECESSAIRE
 
-    def attribuer_class_attaque(self, indice) :
+    def attribuer_class_attaque(self, indice) : # méthode permettant de créer des instance de compétences 
         if self.list_attaques[indice] == "Aucune Action" :
             attaque_selectionne = Aucune_action()
                                 
@@ -443,6 +439,9 @@ class Unit():
             raise ValueError(f"attaque non reconnu : {self.list_attaques[indice]}")
         return attaque_selectionne
 
+
+""" CLASSE DE PERSONNAGES """
+
 class perso_Captain_america(Unit):
     def __init__(self, x, y, size):
         super().__init__("Captain_America", x, y, size)
@@ -482,7 +481,6 @@ class perso_Ironman (Unit) :
     def get_health (self):
         return self.__health    
         
-
 class perso_Spiderman(Unit) :
     def __init__(self, x, y, size):
         super().__init__("Spiderman", x, y, size)
@@ -534,7 +532,6 @@ class perso_Wolverine(Unit) :
 
     def get_health (self):
         return self.__health    
-
 
 class perso_Black_panther(Unit) :
     def __init__(self, x, y, size):
@@ -627,7 +624,7 @@ class perso_Dr_strange(Unit) :
     def get_health (self):
         return self.__health
 
-
+""" CLASSES COMPETENCES """
 
 class Aucune_action(Unit) :
     def __init__(self) :
