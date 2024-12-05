@@ -1263,7 +1263,7 @@ class Choix_Personnage_Menu_3(Menu):
             if self.state == 'Captain_America':
                 self.game.window.blit(captain2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
-                self.game_personnage = 'Captain_America'
+                self.game_personnage = "Captain_America"
                 self.game.playing = False
                 print(self.game_personnage)
                 self.run_display = False
@@ -1286,7 +1286,7 @@ class Choix_Personnage_Menu_3(Menu):
                 print(self.game_personnage)
                 self.run_display = False
                 self.game.curr_menu = self.game.Choix_Personnages_4
-            elif self.state == 'Spiderman':
+            elif self.state == "Spiderman":
                 self.game.window.blit(Spiderman2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
                 self.game_personnage = 'Spiderman'
@@ -1294,10 +1294,10 @@ class Choix_Personnage_Menu_3(Menu):
                 print(self.game_personnage)
                 self.run_display = False
                 self.game.curr_menu = self.game.Choix_Personnages_4
-            elif self.state == 'Thor':
+            elif self.state == "Thor":
                 self.game.window.blit(Thor2, (2*self.game.DISPLAY_W / 3, 450))
                 self.game.START_KEY = False
-                self.game_personnage = 'Thor'
+                self.game_personnage = "Thor"
                 self.game.playing = False
                 print(self.game_personnage)
                 self.run_display = False
