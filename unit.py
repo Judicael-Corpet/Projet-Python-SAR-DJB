@@ -208,11 +208,15 @@ class Unit():
     
     def attack(self, type_attack, target):
         """Attaque une unité cible."""
-        
+
         #print (f"Lattaque selectionnee pour la methode attack {self.attaque_selectionne.name}")
         for red_x, red_y in self.red_cases :
             if target.x == red_x and  target.y == red_y :
-                target.health = target.health - type_attack.attack_power*type_attack.precision*(target.defense/100)
+                print(f"la cible de mon attaque est  : {target.name}, elle a {target.health} points de vie, et une défense de {target.defense}, end = "" ")
+                print(f"l'attaque j'ai choisie est {type_attack} avec une puissance de {type_attack.attack_power}et une précision de {type_attack.precision}")
+                  
+                target.health = target.health - type_attack.attack_power*type_attack.precision*(1 - target.defense/100)/type_attack.distance_attack
+                print (f"IL NE TE RESTE PLUS QUE {target.health} POINT DE VIE AVANT DE MOURIRR !!!! HAHAHAHAHAHHAHAHAHAHAH")
         return target.health
     
                 #target.healthlf.attaque_selectionne.attack_power*precision*(1-target.defense)          self.attaque_selectionne.distance_attack
