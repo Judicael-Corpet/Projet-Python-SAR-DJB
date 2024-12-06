@@ -633,6 +633,16 @@ def main():
             pygame.display.flip()
             pygame.time.wait(3000)  # Pause de 3 secondes avant de quitter
             break
+        elif all(health <= 0 for health in game.list_player_health):
+            print("Tous les ennemis ont été éliminés !")
+            game.draw_text_black('Defaite !', 70, game.DISPLAY_W / 2, game.DISPLAY_H / 2 - 119)
+            game.draw_text_black('Defaite !', 70, game.DISPLAY_W / 2, game.DISPLAY_H / 2 - 121)
+            game.draw_text_black('Defaite !', 70, game.DISPLAY_W / 2 + 3, game.DISPLAY_H / 2 - 120)
+            game.draw_text_black('Defaite !', 70, game.DISPLAY_W / 2 - 3, game.DISPLAY_H / 2 - 120)
+            game.draw_text_white('Defaite !', 70, game.DISPLAY_W / 2, game.DISPLAY_H / 2 - 120)
+            pygame.display.flip()
+            pygame.time.wait(3000)  # Pause de 3 secondes avant de quitter
+            break
     return game.list_player_health, game.list_enemy_health     
 
 if __name__ == "__main__":
