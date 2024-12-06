@@ -613,7 +613,26 @@ def main():
             game.handle_enemy_turn()  
         else :
             game.handle_player_2_turn()
-        iter += 1 
+        iter += 1
+        """
+        if team_0 :
+            #game.draw_text_black('Made by Baptiste', 70, game.DISPLAY_W / 2, game.DISPLAY_H / 2 - 119)
+            #game.draw_text_black('Made by Baptiste', 70, game.DISPLAY_W / 2, game.DISPLAY_H / 2 - 121)
+            #game.draw_text_black('Made by Baptiste', 70, game.DISPLAY_W / 2 + 3, game.DISPLAY_H / 2 - 120)
+            #game.draw_text_black('Made by Baptiste', 70, game.DISPLAY_W / 2 - 3, game.DISPLAY_H / 2 - 120)
+            #game.draw_text_white('Made by Baptiste', 70, game.DISPLAY_W / 2, game.DISPLAY_H / 2 - 120)
+            break
+        """
+        if all(health <= 0 for health in game.list_enemy_health):
+            print("Tous les ennemis ont été éliminés !")
+            game.draw_text_black('Victoire !', 70, game.DISPLAY_W / 2, game.DISPLAY_H / 2 - 119)
+            game.draw_text_black('Victoire !', 70, game.DISPLAY_W / 2, game.DISPLAY_H / 2 - 121)
+            game.draw_text_black('Victoire !', 70, game.DISPLAY_W / 2 + 3, game.DISPLAY_H / 2 - 120)
+            game.draw_text_black('Victoire !', 70, game.DISPLAY_W / 2 - 3, game.DISPLAY_H / 2 - 120)
+            game.draw_text_white('Victoire !', 70, game.DISPLAY_W / 2, game.DISPLAY_H / 2 - 120)
+            pygame.display.flip()
+            pygame.time.wait(3000)  # Pause de 3 secondes avant de quitter
+            break
     return game.list_player_health, game.list_enemy_health     
 
 if __name__ == "__main__":
