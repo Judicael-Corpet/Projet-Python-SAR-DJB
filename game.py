@@ -508,6 +508,24 @@ class Game:
         if self.menu_attaques:  
             self.draw_attack_menu()
    
+
+        if all(health <= 0 for health in self.list_enemy_health):
+            print("Tous les ennemis ont été éliminés !")
+            self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 119)
+            self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 121)
+            self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2 + 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2 - 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_white('Victoire !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 120)
+            pygame.display.flip()
+            pygame.time.wait(3000)  # Pause de 3 secondes avant de quitter
+            
+        elif all(health <= 0 for health in self.list_player_health):
+            print("Tous les ennemis ont été éliminés !")
+            self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 119)
+            self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 121)
+            self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2 + 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2 - 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_white('Defaite !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 120)
         pygame.display.flip()
 
 
@@ -622,7 +640,7 @@ def main():
             #game.draw_text_black('Made by Baptiste', 70, game.DISPLAY_W / 2 - 3, game.DISPLAY_H / 2 - 120)
             #game.draw_text_white('Made by Baptiste', 70, game.DISPLAY_W / 2, game.DISPLAY_H / 2 - 120)
             break
-        """
+        
         if all(health <= 0 for health in game.list_enemy_health):
             print("Tous les ennemis ont été éliminés !")
             game.draw_text_black('Victoire !', 70, game.DISPLAY_W / 2, game.DISPLAY_H / 2 - 119)
@@ -643,6 +661,8 @@ def main():
             pygame.display.flip()
             pygame.time.wait(3000)  # Pause de 3 secondes avant de quitter
             break
+        """
+        game.flip_display()
     return game.list_player_health, game.list_enemy_health     
 
 if __name__ == "__main__":
