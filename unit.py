@@ -4,11 +4,11 @@ import random
 
 # Constantes
 GRID_SIZE_x = 25
-GRID_SIZE_y = 15
+GRID_SIZE_y= 15
 CELL_SIZE = 50
 
-WIDTH = GRID_SIZE_x * CELL_SIZE
-HEIGHT = GRID_SIZE_y * CELL_SIZE
+WIDTH = GRID_SIZE_x * CELL_SIZE 
+HEIGHT = GRID_SIZE_y * CELL_SIZE 
 
 #GRID_SIZE = 21.3
 
@@ -123,23 +123,10 @@ class Unit():
         for green_x,green_y in self.green_cases:
             pygame.draw.rect(screen, color, (green_x*CELL_SIZE, green_y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 2)  # Dessine les bords
 
-<<<<<<< HEAD
-    def attack(self, target):
-        """Attaque une unité cible."""
-        if abs(self.x - target.x) <= self.distance_attack and abs(self.y - target.y) <= self.distance_attack :
-            target.health -= self.attack_power
-          
-    def draw(self, screen):
-        """Affiche l'unité sur l'écran."""
-        #personnage = random.choice(self.personnages) 
-        #Pour générer l'image du joueur que l'on a choisi
-        personnage = self.name
-=======
 
     def update_red_case(self, attack): # méthode permettant de metre à jour les cases d'attaque
         self.red_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.red_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
->>>>>>> Judi
         
         if attack == "Aucune Action":
             self.attaque_selectionne = Aucune_action()
