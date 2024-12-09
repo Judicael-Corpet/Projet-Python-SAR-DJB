@@ -1,3 +1,8 @@
+"""
+Ce module gère les sons du jeu en utilisant la bibliothèque pygame.
+Il contient la classe SoundManager qui permet de charger et de jouer des sons.
+"""
+
 import pygame
 
 
