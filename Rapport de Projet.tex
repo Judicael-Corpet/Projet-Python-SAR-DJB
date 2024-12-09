@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Rapport de projet Python \\
+Marvel Game}
+
+\topmargin = -50pt
+\textheight = 700pt
+\textwidth = 450pt
+\oddsidemargin = 13pt
+\author{Dan Calamia,
+Judicael Corpet,  
+Baptiste Rouquette}
+\date{December 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+L'objectif de ce rapport est de présenter les fonctionnalités implémentées dans le jeu réalisé, ainsi que les choix de conception qui ont conduit au diagramme de classes UML associé.
+
+\section{Fonctionnalités implémentées}
+\subsection{Menu}
+Un Menu a été créé afin de donner à l'utilisateur un accueil convivial, permettant de le plonger directement dans l'ambiance du jeu vidéo. Ce menu permet entre autre de sélectionner un mode avec ou sans son, puis de sélectionner les personnages qui feront partie de son équipe. Enfin, c'est le point de départ pour lancer le jeu.
+
+\subsection{Carte}
+La carte du jeu offre un gameplay simple mais répondant aux critères fixés par le projet, à baptiste 3 types de cases différentes. Ici nous avons choisi les types suivants : \textbf{une case qui bloque les déplacements du joueur, une case qui peut être détruite par certains personnages et une case qui retire des points de vie.}
+
+\subsection{Unités}
+L'objectif du jeu est de pouvoir adopter une réelle stratégie en fonction des personnages sélectionnés parmi une liste. Au total, 14 personnages différents ont été créés, autour de l'univers Marvel, offrant un large choix de composition d'équipes. chaque personnage est ainsi caractérisé par \textbf{un nom, un nombre de points de vie, une nombre de case maximum de déplacement, une défense, une liste de compétences et une puissance d'attaque}\textbf{.}
+
+\subsection{Compétences}
+Plusieurs types de compétences ont été implémentés, caractérisés par le \textbf{nom, la distance d'attaque, l'effet }(soigner, casser les murs, retirer des points de vie) \textbf{et une limite en nombre possibles d'utilisation pendant la partie}. Au total, chaque personnage est doté d'au moins 2 compétences, sur un total de 17 compétences différentes.
+
+\subsection{Calcul des dégâts}
+Les dégâts causés lors des attaques ont été calculés en fonction de plusieurs critères : \textbf{la puissance du personnage, la compétence utilisée et la capacité de défense du personnage ciblé.}
+
+\section{Choix de conception des diagramme de classes}
+Au total, \textbf{45 classes ont été créées.} Parmis elles, 3 classes principales sont identifiées. Une pour la partie jeu appelée "Game", une particulière détaillant les actions des unités appelée "Unit", et une pour la partie "Menu". Cette répartition était un choix afin de permettre à chaque membre de l'équipe de travailler sur une partie du code de manière indépendante dans un premier temps, avant de mettre en commun les travaux.
+\subsection{Classe "Game"}
+Cette classe représente la colonne vertébrale du jeu et son organisation. Elle permet notamment de définir l'ordre des actions et les liens nécessaires entre les classes. C'est dans cette classe que sont détaillées les tours des joueurs, les cases spécifiques et l'affichage des éléments du jeu.
+\subsection{Classe "Unit"}
+Cette classe définit les actions liées aux personnages (les mouvements, les attaques, les cases de déplacement et d'attaque, l'attribution des classes de personnage ou d'attaque...) de manière globale. Une classe par personnage et par attaque a été créée afin de leurs donner des attributs publics mais aussi privés, notamment pour la quantité de vie afin d'éviter que celle-ci ne soit modifiée à chaque début de nouvelle partie
+\subsection{Classe "Menu"}
+Cette classe est dédiée à l'interface du Menu, permettant au joueur sélectionner plusieurs options, comme le volume ou le mode de jeu solo. Il représente également la première phase du jeu avec la sélection des personnages.
+\end{document}
