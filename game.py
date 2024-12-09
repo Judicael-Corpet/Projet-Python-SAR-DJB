@@ -21,8 +21,8 @@ class Game:
         self.running, self.playing = True, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY = False, False, False, False
         self.DISPLAY_W, self.DISPLAY_H = 1220, 700
-        self.display = pygame.Surface((self.DISPLAY_W,self.DISPLAY_H))
-        self.window = pygame.display.set_mode(((self.DISPLAY_W,self.DISPLAY_H)))
+        self.display = pygame.Surface((self.DISPLAY_W ,self.DISPLAY_H))
+        self.window = pygame.display.set_mode(((self.DISPLAY_W ,self.DISPLAY_H)))
         self.font_name = '8-BIT WONDER.TTF'
         self.font_name = pygame.font.get_default_font()
         self.BLACK, self.WHITE = (0, 0, 0), (255, 255, 255)
@@ -495,6 +495,25 @@ class Game:
          # Si le menu des attaques est actif, dessiner le menu par-dessus
         if self.menu_attaques:  
             self.draw_attack_menu()
+
+        if all(health <= 0 for health in self.list_enemy_health):
+            print("Tous les ennemis ont été éliminés !")
+            self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 119)
+            self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 121)
+            self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2 + 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2 - 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_white('Victoire !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 120)
+            pygame.display.flip()
+            pygame.time.wait(3000)  # Pause de 3 secondes avant de quitter
+            
+        elif all(health <= 0 for health in self.list_player_health):
+            print("Tous les ennemis ont été éliminés !")
+            self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 119)
+            self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 121)
+            self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2 + 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2 - 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_white('Defaite !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 120)
+        
    
         pygame.display.flip()
         
@@ -540,7 +559,7 @@ def main():
     pygame.init()
     
     # Instanciation de la fenêtre
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    screen = pygame.display.set_mode((WIDTH , HEIGHT))
     pygame.display.set_caption("Marvel Game")
     
     # Instanciation du jeu
@@ -554,13 +573,13 @@ def main():
     
     #game.player_units = [Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55]),#,150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              #Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55])]#, 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
-    player1 = Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55])
+    player1 = Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55], game)
     hero1 = player1.attribuer_class_perso()
     if hero1 :
         hero_health1 = hero1.get_health()
     game.player_units.append(player1)
     game.list_player_health.append(hero_health1)
-    player2 = Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55])
+    player2 = Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55], game)
     hero2 = player2.attribuer_class_perso()
     hero_health2 = hero2.get_health() 
     game.player_units.append(player2)
@@ -573,12 +592,12 @@ def main():
     #game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 0, 9, [55,55]),#, 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              #Unit(game.Choix_Personnages_4.game_personnage, 1, 9, [55,55])]#, 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
 
-    player3 = Unit(game.Choix_Personnages_3.game_personnage, 0, 9, [55,55])
+    player3 = Unit(game.Choix_Personnages_3.game_personnage, 0, 9, [55,55], game)
     hero3 = player3.attribuer_class_perso()
     hero_health3 = hero3.get_health()
     game.enemy_units.append(player3)
     game.list_enemy_health.append(hero_health3)
-    player4 = Unit(game.Choix_Personnages_4.game_personnage, 1, 9, [55,55])
+    player4 = Unit(game.Choix_Personnages_4.game_personnage, 1, 9, [55,55], game)
     hero4 = player4.attribuer_class_perso()
     hero_health4 = hero4.get_health()
     game.enemy_units.append(player4)
