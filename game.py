@@ -81,14 +81,22 @@ class Game:
             self.screen.blit(text, (30, 550 + i * 30))  # Positionnement des attaques
 
     def cases_teleportation(self,screen):
-        self.cases_tp=[3,3]
-        cas_arrive=[15,10]
+    
+        self.cases_tp1=[(9,12),(9,11),(10,11),(10,12)]
+        self.cases_tp2=[(31,15),(32,15),(31,16),(32,16)]
+        case_arrive1=[32,6]
+        case_arrive2=[8,20]
         color=(255, 255, 100)
-        pygame.draw.rect(screen, color, (self.cases_tp[0]*CELL_SIZE, self.cases_tp[1]*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
+        # pygame.draw.rect(screen, color, (self.cases_tp[0]*CELL_SIZE, self.cases_tp[1]*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
         # pygame
-        for player in self.player_units:
-            if player.x==self.cases_tp[0] and player.y== self.cases_tp[1]:
-                player.x,player.y=(cas_arrive[0],cas_arrive[1])
+        
+        for player in self.player_units +self.enemy_units:
+            for i in range(0,4):
+                if (player.x, player.y) ==self.cases_tp1[i]:
+                    player.x,player.y=(case_arrive1[0],case_arrive1[1])
+                
+                elif (player.x,player.y)==self.cases_tp2[i]:
+                    player.x,player.y=(case_arrive2[0],case_arrive2[1])
                 
     def cases_soin(self, screen):
         self.case_soin = [5, 3] 
