@@ -28,7 +28,7 @@ YELLOW = (255, 255, 0)
 
 class Unit():
     
-    def __init__(self, name, x, y, size):#, health, nbre_move, defense, attacks):
+    def __init__(self, name, x, y, size,game):#, health, nbre_move, defense, attacks):
         super().__init__() #permet d'inialiser la classe sprite en appelant son constructeur avec super()
         self.name = name
         self.x = x # Position x du personnage
@@ -53,7 +53,7 @@ class Unit():
         
         self.attaque_selectionne_index = 0  # Indice de l'attaque sélectionnée
 
-        
+        self.game = game
         
         self.image = pygame.Surface(size)
 
@@ -342,33 +342,33 @@ class Unit():
     
     def attribuer_class_perso(self) : # méthode permettant de créer des instances de personnage
         if self.name == "Captain_America" : 
-            perso = perso_Captain_america(self.x,self.y,self.size)            
+            perso = perso_Captain_america(self.x,self.y,self.size,self.game)            
         elif self.name == "Hulk" :
-            perso = perso_Hulk(self.x,self.y,self.size)           
+            perso = perso_Hulk(self.x,self.y,self.size,self.game)           
         elif self.name == "Ironman" :
-            perso = perso_Ironman(self.x,self.y,self.size)           
+            perso = perso_Ironman(self.x,self.y,self.size,self.game)           
         elif self.name == "Spiderman" :
-            perso = perso_Spiderman(self.x,self.y,self.size)           
+            perso = perso_Spiderman(self.x,self.y,self.size,self.game)           
         elif self.name == "Thor" :
-            perso = perso_Thor(self.x,self.y,self.size)           
+            perso = perso_Thor(self.x,self.y,self.size,self.game)           
         elif self.name == "Groot" : 
-            perso = perso_Groot(self.x,self.y,self.size)            
+            perso = perso_Groot(self.x,self.y,self.size,self.game)            
         elif self.name == "Wolverine" :
-            perso = perso_Wolverine(self.x,self.y,self.size)            
+            perso = perso_Wolverine(self.x,self.y,self.size,self.game)            
         elif self.name == "Black_Panther" :
-            perso = perso_Black_panther(self.x,self.y,self.size)           
+            perso = perso_Black_panther(self.x,self.y,self.size,self.game)           
         elif self.name == "Starlord" :
-            perso = perso_Starlord(self.x,self.y,self.size)           
+            perso = perso_Starlord(self.x,self.y,self.size,self.game)           
         elif self.name == "Yondu" :
-            perso = perso_Yondu(self.x,self.y,self.size)           
+            perso = perso_Yondu(self.x,self.y,self.size,self.game)           
         elif self.name == "Torch" : 
-            perso = perso_Torch(self.x,self.y,self.size)           
+            perso = perso_Torch(self.x,self.y,self.size,self.game)           
         elif self.name == "Jane_Storm" :
-            perso = perso_Jane_storm(self.x,self.y,self.size)           
+            perso = perso_Jane_storm(self.x,self.y,self.size,self.game)           
         elif self.name == "Chose" :    
-            perso = perso_Chose(self.x,self.y,self.size)            
+            perso = perso_Chose(self.x,self.y,self.size,self.game)            
         elif self.name == "Dr_Strange" :
-            perso = perso_Dr_strange(self.x,self.y,self.size)
+            perso = perso_Dr_strange(self.x,self.y,self.size,self.game)
         else:
             raise ValueError(f"Personnage non reconnu : {self.name}")
         return perso
@@ -436,8 +436,8 @@ class Unit():
 """ CLASSE DE PERSONNAGES """
 
 class perso_Captain_america(Unit):
-    def __init__(self, x, y, size):
-        super().__init__("Captain_America", x, y, size)
+    def __init__(self, x, y, size,game):
+        super().__init__("Captain_America", x, y, size, game)
         self.__health = 100
         self.health_max = 100
         self.nbre_move = 3
@@ -449,8 +449,8 @@ class perso_Captain_america(Unit):
         return self.__health    
     
 class perso_Hulk(Unit) :
-    def __init__(self, x, y, size):
-        super().__init__("Hulk", x, y, size)
+    def __init__(self, x, y, size, game):
+        super().__init__("Hulk", x, y, size, game)
         self.__health = 150
         self.health_max = 150
         self.nbre_move = 4
@@ -462,8 +462,8 @@ class perso_Hulk(Unit) :
         return self.__health
 
 class perso_Ironman (Unit) :
-    def __init__(self, x, y, size):
-        super().__init__("Ironman", x, y, size)
+    def __init__(self, x, y, size, game):
+        super().__init__("Ironman", x, y, size, game)
         self.__health = 100
         self.health_max = 100
         self.nbre_move = 8
@@ -475,8 +475,8 @@ class perso_Ironman (Unit) :
         return self.__health    
         
 class perso_Spiderman(Unit) :
-    def __init__(self, x, y, size):
-        super().__init__("Spiderman", x, y, size)
+    def __init__(self, x, y, size, game):
+        super().__init__("Spiderman", x, y, size, game)
         self.__health = 90
         self.health_max = 90
         self.nbre_move = 6
@@ -488,8 +488,8 @@ class perso_Spiderman(Unit) :
         return self.__health    
     
 class perso_Thor(Unit) :
-    def __init__(self, x, y, size):
-        super().__init__("Thor", x, y, size)
+    def __init__(self, x, y, size, game):
+        super().__init__("Thor", x, y, size, game)
         self.__health = 150
         self.health_max = 150
         self.nbre_move = 8
@@ -501,8 +501,8 @@ class perso_Thor(Unit) :
         return self.__health
 
 class perso_Groot(Unit) :
-    def __init__(self, x, y, size):
-        super().__init__("Groot", x, y, size)
+    def __init__(self, x, y, size, game):
+        super().__init__("Groot", x, y, size, game)
         self.__health = 120
         self.health_max = 120
         self.nbre_move = 3
@@ -514,8 +514,8 @@ class perso_Groot(Unit) :
         return self.__health
         
 class perso_Wolverine(Unit) :
-    def __init__(self, x, y, size):
-        super().__init__("Wolverine", x, y, size)   
+    def __init__(self, x, y, size, game):
+        super().__init__("Wolverine", x, y, size, game)   
         self.__health = 150
         self.health_max = 150
         self.nbre_move = 3
@@ -527,8 +527,8 @@ class perso_Wolverine(Unit) :
         return self.__health    
 
 class perso_Black_panther(Unit) :
-    def __init__(self, x, y, size):
-        super().__init__("Black_Panther", x, y, size)
+    def __init__(self, x, y, size, game):
+        super().__init__("Black_Panther", x, y, size, game)
         self.__health = 130
         self.health_max = 130
         self.nbre_move = 4
@@ -540,8 +540,8 @@ class perso_Black_panther(Unit) :
         return self.__health    
     
 class perso_Starlord (Unit) :
-    def __init__(self, x, y, size):
-        super().__init__("Starlord", x, y, size)
+    def __init__(self, x, y, size, game):
+        super().__init__("Starlord", x, y, size, game)
         self.__health = 90
         self.health_max = 90
         self.nbre_move = 6
@@ -553,8 +553,8 @@ class perso_Starlord (Unit) :
         return self.__health    
         
 class  perso_Yondu(Unit):
-    def __init__(self, x, y, size):
-        super().__init__("Yondu", x, y, size)
+    def __init__(self, x, y, size, game):
+        super().__init__("Yondu", x, y, size, game)
         self.__health = 130
         self.health_max = 130
         self.nbre_move = 3
@@ -566,8 +566,8 @@ class  perso_Yondu(Unit):
         return self.__health    
         
 class perso_Torch(Unit) :
-    def __init__(self, x, y, size):
-        super().__init__("Torch", x, y, size)
+    def __init__(self, x, y, size, game):
+        super().__init__("Torch", x, y, size, game)
         self.__health = 100
         self.health_max = 100
         self.nbre_move = 8
@@ -579,8 +579,8 @@ class perso_Torch(Unit) :
         return self.__health        
 
 class perso_Jane_storm(Unit) :
-    def __init__(self, x, y, size):
-        super().__init__("Jane_Storm", x, y, size)
+    def __init__(self, x, y, size, game):
+        super().__init__("Jane_Storm", x, y, size, game)
         self.__health = 70
         self.health_max = 70
         self.nbre_move = 3
@@ -592,8 +592,8 @@ class perso_Jane_storm(Unit) :
         return self.__health    
         
 class perso_Chose(Unit) :
-    def __init__(self, x, y, size):
-        super().__init__("Chose", x, y, size)
+    def __init__(self, x, y, size, game):
+        super().__init__("Chose", x, y, size, game)
         self.__health = 140
         self.health_max = 140
         self.nbre_move = 4
@@ -605,8 +605,8 @@ class perso_Chose(Unit) :
         return self.__health    
 
 class perso_Dr_strange(Unit) :
-    def __init__(self, x, y, size):
-        super().__init__("Dr_Strange", x, y, size)
+    def __init__(self, x, y, size, game):
+        super().__init__("Dr_Strange", x, y, size, game)
         self.__health = 80
         self.health_max = 80
         self.nbre_move = 6
