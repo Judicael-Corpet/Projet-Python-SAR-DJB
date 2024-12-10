@@ -5,38 +5,37 @@ from game import *
 
 fond = pygame.image.load('Fond_ecran.png')
 
-captain = pygame.image.load('Personnages_menu/captain_america_menu.jpeg') #.convert()
+captain = pygame.image.load('Personnages_menu/captain_america_menu.png')
 captain2 = pygame.transform.scale(captain, (200, 200))
-#captain2.set_colorkey((0,0,0))
-hulk = pygame.image.load('Personnages_menu/hulk_menu.jpeg')
-hulk.set_colorkey((255,255,255))
+
+hulk = pygame.image.load('Personnages_menu/hulk_menu.png')
 hulk2 = pygame.transform.scale(hulk, (200, 200))
-#hulk2.set_colorkey((255,255,255))
-ironman = pygame.image.load('Personnages_menu/ironman_menu.jpeg')
+
+ironman = pygame.image.load('Personnages_menu/ironman_menu.png')
 ironman2 = pygame.transform.scale(ironman, (200, 200))
 
 Spiderman = pygame.image.load('Personnages_menu/spiderman_menu.png') #.convert_alpha()
 Spiderman2 = pygame.transform.scale(Spiderman, (200, 200))
 
-Thor = pygame.image.load('Personnages_menu/thor_menu.jpeg')
+Thor = pygame.image.load('Personnages_menu/thor_menu.png')
 Thor2 = pygame.transform.scale(Thor, (200, 200))
 
-Groot = pygame.image.load('Personnages_menu/groot_menu.jpeg')
+Groot = pygame.image.load('Personnages_menu/groot_menu.png')
 Groot2 = pygame.transform.scale(Groot, (200, 200))
 
-Wolverine = pygame.image.load('Personnages_menu/wolverine_menu.jpeg')
+Wolverine = pygame.image.load('Personnages_menu/wolverine_menu.png')
 Wolverine2 = pygame.transform.scale(Wolverine, (200, 200))
 
-Panther = pygame.image.load('Personnages_menu/black_panther_menu.jpeg')
+Panther = pygame.image.load('Personnages_menu/black_panther_menu.png')
 Panther2 = pygame.transform.scale(Panther, (200, 200))
 
-Starlord = pygame.image.load('Personnages_menu/starlord_menu.jpeg')
+Starlord = pygame.image.load('Personnages_menu/starlord_menu.png')
 Starlord2 = pygame.transform.scale(Starlord, (200, 200))
 
-Yondu = pygame.image.load('Personnages_menu/yondu_menu.jpeg')
+Yondu = pygame.image.load('Personnages_menu/yondu_menu.png')
 Yondu2 = pygame.transform.scale(Yondu, (200, 200))
 
-Torch = pygame.image.load('Personnages_menu/torch_menu.jpeg')
+Torch = pygame.image.load('Personnages_menu/torch_menu.png')
 Torch2 = pygame.transform.scale(Torch, (200, 200))
 
 Jane = pygame.image.load('Personnages_menu/jane_storm_menu.png') #.convert_alpha()
@@ -45,7 +44,7 @@ Jane2 = pygame.transform.scale(Jane, (200, 200))
 Chose = pygame.image.load('Personnages_menu/chose_menu.png') #.convert_alpha()
 Chose2 = pygame.transform.scale(Chose, (200, 200))
 
-Strange = pygame.image.load('Personnages_menu/docteur_strange_menu.jpeg')
+Strange = pygame.image.load('Personnages_menu/docteur_strange_menu.png')
 Strange2 = pygame.transform.scale(Strange, (200, 200))
 
 
@@ -603,8 +602,11 @@ class Choix_Personnage_Menu_1(Menu):
                 self.game.START_KEY = False
                 pygame.mixer.music.stop()
                 self.run_display = False
+            if self.game.Musique :
+                self.game.sound_manager.bruit("Au_Combat")
             return self.game_personnage
-        
+
+
 class Choix_Personnage_Menu_2(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
@@ -1040,8 +1042,10 @@ class Choix_Personnage_Menu_2(Menu):
                 self.game.START_KEY = False
                 pygame.mixer.music.stop()
                 self.run_display = False
+            if self.game.Musique :
+                self.game.sound_manager.bruit("En_avant")
             return self.game_personnage
-        
+            
 class Choix_Personnage_Menu_3(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
@@ -1475,8 +1479,10 @@ class Choix_Personnage_Menu_3(Menu):
                 self.game.START_KEY = False
                 pygame.mixer.music.stop()
                 self.run_display = False
+            if self.game.Musique :
+                self.game.sound_manager.bruit("Ecrasons_ennemi")
             return self.game_personnage
-        
+
 class Choix_Personnage_Menu_4(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
@@ -1901,7 +1907,99 @@ class Choix_Personnage_Menu_4(Menu):
                 self.game.START_KEY = False
                 pygame.mixer.music.stop()
                 self.run_display = False
+            if self.game.Musique :
+                self.game.sound_manager.bruit("A_vos_ordres")
             return self.game_personnage
+
+class Choix_Carte_Menu(Menu):
+    def __init__(self, game):
+        Menu.__init__(self, game)
+        self.state = 'Yes'
+        self.volx, self.voly = self.mid_w, self.mid_h
+        self.backx, self.backy = self.mid_w, self.mid_h + 60
+        self.cursor_rect.midtop = (self.volx + self.offset, self.voly  + 10)
+
+    def display_menu(self):
+        self.run_display = True
+        while self.run_display:
+            self.game.check_events()
+            if self.game.START_KEY and (self.cursor_rect.midtop == (self.volx + self.offset, self.voly)):
+                self.game.curr_menu = self.game.main_menu
+            self.check_input()
+            self.game.display.blit(fond, (0, 0))
+            self.game.draw_text_black('Choix carte', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 229)
+            self.game.draw_text_black('Choix carte', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 231)
+            self.game.draw_text_black('Choix carte', 100, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 230)
+            self.game.draw_text_black('Choix carte', 100, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 230)
+            self.game.draw_text_white('Choix carte', 100, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 230)
+
+            self.game.draw_text_black("Yes", 50, self.volx, self.voly - 2)
+            self.game.draw_text_black("Yes", 50, self.volx, self.voly + 2)
+            self.game.draw_text_black("Yes", 50, self.volx - 2, self.voly)
+            self.game.draw_text_black("Yes", 50, self.volx + 2, self.voly)
+            self.game.draw_text_white("Yes", 50, self.volx, self.voly)
+
+            self.game.draw_text_black("No", 50, self.backx, self.backy - 2)
+            self.game.draw_text_black("No", 50, self.backx, self.backy + 2)
+            self.game.draw_text_black("No", 50, self.backx - 2, self.backy)
+            self.game.draw_text_black("No", 50, self.backx + 2, self.backy)
+            self.game.draw_text_white("No", 50, self.backx, self.backy)
+
+            self.game.draw_text_black("Back", 50, self.backx, self.backy + 58)
+            self.game.draw_text_black("Back", 50, self.backx, self.backy + 62)
+            self.game.draw_text_black("Back", 50, self.backx - 2, self.backy + 60)
+            self.game.draw_text_black("Back", 50, self.backx + 2, self.backy + 60)
+            self.game.draw_text_white("Back", 50, self.backx, self.backy + 60)
+
+            self.draw_cursor()
+            self.blit_screen()
+
+    def move_cursor(self):
+        if self.game.DOWN_KEY:
+            if self.state == 'Yes':
+                self.state = 'No'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 10)
+            elif self.state == 'No':
+                self.state = 'Back'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 70)
+            elif self.state == 'Back':
+                self.state = 'Yes'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.voly + 10)
+            
+        elif self.game.UP_KEY :
+            if self.state == 'Yes':
+                self.state = 'Back'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 70)
+            elif self.state == 'No':
+                self.state = 'Yes'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.voly + 10)
+            elif self.state == 'Back':
+                self.state = 'No'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 10)
+
+    def check_input(self):
+        self.move_cursor()
+        if self.game.START_KEY:
+            if self.state == 'Start':
+                self.game.playing = True
+            elif self.state == 'No':
+                self.game.Musique = False
+            elif self.state == 'Back':
+                self.game.curr_menu = self.game.options
+            self.run_display = False
+
 class Volume(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
@@ -1919,11 +2017,11 @@ class Volume(Menu):
             self.check_input()
             self.game.display.blit(fond, (0, 0))
             
-            self.game.draw_text_black('Options', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 229)
-            self.game.draw_text_black('Options', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 231)
-            self.game.draw_text_black('Options', 150, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 230)
-            self.game.draw_text_black('Options', 150, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 230)
-            self.game.draw_text_white('Options', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 230)
+            self.game.draw_text_black('Volume', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 229)
+            self.game.draw_text_black('Volume', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 231)
+            self.game.draw_text_black('Volume', 150, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 230)
+            self.game.draw_text_black('Volume', 150, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 230)
+            self.game.draw_text_white('Volume', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 230)
 
             self.game.draw_text_black("Yes", 50, self.volx, self.voly - 2)
             self.game.draw_text_black("Yes", 50, self.volx, self.voly + 2)
@@ -2004,7 +2102,112 @@ class Volume(Menu):
             elif self.state == 'Back':
                 self.game.curr_menu = self.game.options
             self.run_display = False
+
+
+class Mode(Menu):
+    def __init__(self, game):
+        Menu.__init__(self, game)
+        self.state = '1_Joueur'
+        self.volx, self.voly = self.mid_w, self.mid_h
+        self.backx, self.backy = self.mid_w, self.mid_h + 60
+        self.cursor_rect.midtop = (self.backx + self.offset - 50, self.voly  + 10)
+
+    def display_menu(self):
+        self.run_display = True
+        while self.run_display:
+            self.game.check_events()
+            if self.game.START_KEY and (self.cursor_rect.midtop == (self.volx + self.offset, self.voly)):
+                self.game.curr_menu = self.game.main_menu
+            self.check_input()
+            self.game.display.blit(fond, (0, 0))
             
+            self.game.draw_text_black('Mode', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 229)
+            self.game.draw_text_black('Mode', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 231)
+            self.game.draw_text_black('Mode', 150, self.game.DISPLAY_W / 2 + 3, self.game.DISPLAY_H / 2 - 230)
+            self.game.draw_text_black('Mode', 150, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 230)
+            self.game.draw_text_white('Mode', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 230)
+
+            self.game.draw_text_black("1 Joueur", 50, self.volx, self.voly - 2)
+            self.game.draw_text_black("1 Joueur", 50, self.volx, self.voly + 2)
+            self.game.draw_text_black("1 Joueur", 50, self.volx - 2, self.voly)
+            self.game.draw_text_black("1 Joueur", 50, self.volx + 2, self.voly)
+            self.game.draw_text_white("1 Joueur", 50, self.volx, self.voly)
+
+            self.game.draw_text_black("2 Joueurs", 50, self.backx, self.backy - 2)
+            self.game.draw_text_black("2 Joueurs", 50, self.backx, self.backy + 2)
+            self.game.draw_text_black("2 Joueurs", 50, self.backx - 2, self.backy)
+            self.game.draw_text_black("2 Joueurs", 50, self.backx + 2, self.backy)
+            self.game.draw_text_white("2 Joueurs", 50, self.backx, self.backy)
+
+            self.game.draw_text_black("Back", 50, self.backx, self.backy + 58)
+            self.game.draw_text_black("Back", 50, self.backx, self.backy + 62)
+            self.game.draw_text_black("Back", 50, self.backx - 2, self.backy + 60)
+            self.game.draw_text_black("Back", 50, self.backx + 2, self.backy + 60)
+            self.game.draw_text_white("Back", 50, self.backx, self.backy + 60)
+
+            if self.game.Mode_jeu :
+                self.game.draw_text_black("1", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("1", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("1", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("1", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("1", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
+                self.run_display = False
+            else :
+                self.game.draw_text_black("2", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
+                self.game.draw_text_black("2", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
+                self.game.draw_text_black("2", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_black("2", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
+                self.game.draw_text_white("2", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
+                self.run_display = False
+
+            self.draw_cursor()
+            self.blit_screen()
+
+    def move_cursor(self):
+        if self.game.DOWN_KEY:
+            if self.state == '1_Joueur':
+                self.state = '2_Joueurs'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset - 50, self.backy + 10)
+            elif self.state == '2_Joueurs':
+                self.state = 'Back'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset- 50, self.backy + 70)
+            elif self.state == 'Back':
+                self.state = '1_Joueur'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset- 50, self.voly + 10)
+            
+        elif self.game.UP_KEY :
+            if self.state == '1_Joueur':
+                self.state = 'Back'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset- 50, self.backy + 70)
+            elif self.state == '2_Joueurs':
+                self.state = '1_Joueur'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset- 50, self.voly + 10)
+            elif self.state == 'Back':
+                self.state = '2_Joueurs'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset- 50, self.backy + 10)
+
+    def check_input(self):
+        self.move_cursor()
+        if self.game.START_KEY:
+            if self.state == '1_Joueur':
+                self.game.Mode_jeu = True         
+            elif self.state == '2_Joueurs':
+                self.game.Mode_jeu = False
+            elif self.state == 'Back':
+                self.game.curr_menu = self.game.options
+            self.run_display = False
 class OptionsMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
@@ -2032,34 +2235,68 @@ class OptionsMenu(Menu):
             self.game.draw_text_black("Volume", 50, self.volx + 2, self.voly)
             self.game.draw_text_white("Volume", 50, self.volx, self.voly)
 
-            self.game.draw_text_black("Back", 50, self.backx, self.backy - 2)
-            self.game.draw_text_black("Back", 50, self.backx, self.backy + 2)
-            self.game.draw_text_black("Back", 50, self.backx - 2, self.backy)
-            self.game.draw_text_black("Back", 50, self.backx + 2, self.backy)
-            self.game.draw_text_white("Back", 50, self.backx, self.backy)
+            self.game.draw_text_black("Mode", 50, self.backx, self.backy - 2)
+            self.game.draw_text_black("Mode", 50, self.backx, self.backy + 2)
+            self.game.draw_text_black("Mode", 50, self.backx - 2, self.backy)
+            self.game.draw_text_black("Mode", 50, self.backx + 2, self.backy)
+            self.game.draw_text_white("Mode", 50, self.backx, self.backy)
+
+            self.game.draw_text_black("Back", 50, self.backx, self.backy + 58)
+            self.game.draw_text_black("Back", 50, self.backx, self.backy + 62)
+            self.game.draw_text_black("Back", 50, self.backx - 2, self.backy + 60)
+            self.game.draw_text_black("Back", 50, self.backx + 2, self.backy + 60)
+            self.game.draw_text_white("Back", 50, self.backx, self.backy + 60)
 
             self.draw_cursor()
             self.blit_screen()
 
-    def check_input(self):
-        if self.game.UP_KEY or self.game.DOWN_KEY:
+    def move_cursor(self):
+        if self.game.DOWN_KEY:
             if self.state == 'Volume':
-                self.state = 'Back'
+                self.state = 'Mode'
                 if self.game.Musique :
                     self.game.sound_manager.bruit('Blop')
                 self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 10)
+            elif self.state == 'Mode':
+                self.state = 'Back'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 70)
             elif self.state == 'Back':
                 self.state = 'Volume'
                 if self.game.Musique :
                     self.game.sound_manager.bruit('Blop')
-                self.cursor_rect.midtop = (self.volx + self.offset, self.voly + 10)
-        elif self.game.START_KEY and self.state == 'Volume':
-            self.game.curr_menu = self.game.Volume
+                self.cursor_rect.midtop = (self.backx + self.offset, self.voly + 10)
+            
+        elif self.game.UP_KEY :
+            if self.state == 'Volume':
+                self.state = 'Back'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 70)
+            elif self.state == 'Mode':
+                self.state = 'Volume'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.voly + 10)
+            elif self.state == 'Back':
+                self.state = 'Mode'
+                if self.game.Musique :
+                    self.game.sound_manager.bruit('Blop')
+                self.cursor_rect.midtop = (self.backx + self.offset, self.backy + 10)
+
+    def check_input(self):
+        self.move_cursor()
+        if self.game.START_KEY:
+            if self.state == 'Volume':
+                self.game.curr_menu = self.game.Volume         
+            elif self.state == 'Mode':
+                self.game.curr_menu = self.game.Mode
+            elif self.state == 'Back':
+                self.game.curr_menu = self.game.main_menu
             self.run_display = False
-        elif self.game.START_KEY and self.state == 'Back':
-            self.game.curr_menu = self.game.main_menu
-            self.run_display = False
-        
+
+    
 class CreditsMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
