@@ -14,7 +14,7 @@ hulk2 = pygame.transform.scale(hulk, (200, 200))
 ironman = pygame.image.load('Personnages_menu/ironman_menu.png')
 ironman2 = pygame.transform.scale(ironman, (200, 200))
 
-Spiderman = pygame.image.load('Personnages_menu/spiderman_menu.png') #.convert_alpha()
+Spiderman = pygame.image.load('Personnages_menu/spiderman_menu.png')
 Spiderman2 = pygame.transform.scale(Spiderman, (200, 200))
 
 Thor = pygame.image.load('Personnages_menu/thor_menu.png')
@@ -38,15 +38,14 @@ Yondu2 = pygame.transform.scale(Yondu, (200, 200))
 Torch = pygame.image.load('Personnages_menu/torch_menu.png')
 Torch2 = pygame.transform.scale(Torch, (200, 200))
 
-Jane = pygame.image.load('Personnages_menu/jane_storm_menu.png') #.convert_alpha()
+Jane = pygame.image.load('Personnages_menu/jane_storm_menu.png')
 Jane2 = pygame.transform.scale(Jane, (200, 200))
 
-Chose = pygame.image.load('Personnages_menu/chose_menu.png') #.convert_alpha()
+Chose = pygame.image.load('Personnages_menu/chose_menu.png')
 Chose2 = pygame.transform.scale(Chose, (200, 200))
 
 Strange = pygame.image.load('Personnages_menu/docteur_strange_menu.png')
 Strange2 = pygame.transform.scale(Strange, (200, 200))
-
 
 class Menu():
     def __init__(self, game):
@@ -68,8 +67,7 @@ class Menu():
         self.game.window.blit(self.game.display, (0, 0)) 
         pygame.display.update()
         self.game.reset_keys()
-        
-    
+
 class MainMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
@@ -166,8 +164,7 @@ class MainMenu(Menu):
             elif self.state == 'Credits':
                 self.game.curr_menu = self.game.credits
             self.run_display = False
-            
-            
+
 class Choix_Personnage_Menu_1(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
@@ -268,11 +265,11 @@ class Choix_Personnage_Menu_1(Menu):
                 self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 120)
                 self.game.draw_text_white("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 120)
 
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
-                self.game.draw_text_white("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
 
                 self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 300)
                 self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 300)
@@ -707,11 +704,11 @@ class Choix_Personnage_Menu_2(Menu):
                 self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 120)
                 self.game.draw_text_white("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 120)
 
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
-                self.game.draw_text_white("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
 
                 self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 300)
                 self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 300)
@@ -1146,11 +1143,11 @@ class Choix_Personnage_Menu_3(Menu):
                 self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 120)
                 self.game.draw_text_white("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 120)
 
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
-                self.game.draw_text_white("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
 
                 self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 300)
                 self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 300)
@@ -1583,11 +1580,11 @@ class Choix_Personnage_Menu_4(Menu):
                 self.game.draw_text_black("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 120)
                 self.game.draw_text_white("Chose", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 120)
 
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
-                self.game.draw_text_black("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
-                self.game.draw_text_white("Dr Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset - 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_black("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3 + 180)
+                self.game.draw_text_white("Dr_Strange", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 180)
 
                 self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 + 2 + 300)
                 self.game.draw_text_black("Back", 30, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 3 - 2 + 300)
@@ -2040,6 +2037,7 @@ class Volume(Menu):
             self.game.draw_text_black("Back", 50, self.backx - 2, self.backy + 60)
             self.game.draw_text_black("Back", 50, self.backx + 2, self.backy + 60)
             self.game.draw_text_white("Back", 50, self.backx, self.backy + 60)
+
             if self.game.Musique :
                 self.game.draw_text_black("ON", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 - 2)
                 self.game.draw_text_black("ON", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3 + 2)
@@ -2054,6 +2052,7 @@ class Volume(Menu):
                 self.game.draw_text_black("OFF", 30, 2*self.game.DISPLAY_W / 3 - self.offset + 2, self.game.DISPLAY_H / 3)
                 self.game.draw_text_white("OFF", 30, 2*self.game.DISPLAY_W / 3 - self.offset, self.game.DISPLAY_H / 3)
                 self.run_display = False
+
             self.draw_cursor()
             self.blit_screen()
 
@@ -2096,7 +2095,7 @@ class Volume(Menu):
         self.move_cursor()
         if self.game.START_KEY:
             if self.state == 'Yes':
-                self.game.Musique = True        
+                self.game.Musique = True         
             elif self.state == 'No':
                 self.game.Musique = False
             elif self.state == 'Back':
