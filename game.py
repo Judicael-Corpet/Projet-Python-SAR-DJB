@@ -99,7 +99,7 @@ class Game:
                     player.x,player.y=(case_arrive2[0],case_arrive2[1])
                 
     def cases_soin(self, screen):
-        self.case_soin = [5, 3] 
+        self.case_soin = [5, 10]
         color = WHITE
         color1=(20,255,20)
         x, y = self.case_soin  # Position de la case
@@ -123,8 +123,8 @@ class Game:
         pygame.draw.line(
             screen, 
             color, 
-            (x * CELL_SIZE + half_size , y * CELL_SIZE+5),  # Début de la ligne
-            (x * CELL_SIZE + half_size , y * CELL_SIZE + CELL_SIZE-5),  # Fin de la ligne
+            (x * CELL_SIZE + half_size , y * CELL_SIZE+2),  # Début de la ligne
+            (x * CELL_SIZE + half_size , y * CELL_SIZE + CELL_SIZE-2),  # Fin de la ligne
             line_width  # Épaisseur
         )
 
@@ -132,8 +132,8 @@ class Game:
         pygame.draw.line(
             screen, 
             color, 
-            (x * CELL_SIZE+5, y * CELL_SIZE + half_size ),  # Début de la ligne
-            (x * CELL_SIZE + CELL_SIZE-5, y * CELL_SIZE + half_size ),  # Fin de la ligne
+            (x * CELL_SIZE+2, y * CELL_SIZE + half_size ),  # Début de la ligne
+            (x * CELL_SIZE + CELL_SIZE-2, y * CELL_SIZE + half_size ),  # Fin de la ligne
             line_width  # Épaisseur
         )
 
@@ -495,7 +495,8 @@ class Game:
             perso1_selected.draw_health_bar(self.screen, health_perso1)
             
             if perso1.is_selected :
-                perso1.draw_green_case(self.screen)
+                if self.menu_attaques == False :
+                    perso1.draw_green_case(self.screen)
                 if self.menu_attaques:
                     perso1.draw_red_case(self.screen, )
 
