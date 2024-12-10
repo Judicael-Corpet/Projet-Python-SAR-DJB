@@ -604,7 +604,8 @@ class Game:
             perso1_selected.draw_health_bar(self.screen, health_perso1)
             
             if perso1.is_selected :
-                perso1.draw_green_case(self.screen)
+                if self.menu_attaques == False :
+                    perso1.draw_green_case(self.screen)
                 if self.menu_attaques:
                     perso1.draw_red_case(self.screen, )
 
