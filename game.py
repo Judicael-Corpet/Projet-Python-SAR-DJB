@@ -579,13 +579,13 @@ def main():
     
     #game.player_units = [Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55]),#,150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              #Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55])]#, 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
-    player1 = Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [32,32], game)
+    player1 = Unit(game.Choix_Personnages_1.game_personnage, 15, 10, [32,32], game)
     hero1 = player1.attribuer_class_perso()
     if hero1 :
         hero_health1 = hero1.get_health()
     game.player_units.append(player1)
     game.list_player_health.append(hero_health1)
-    player2 = Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [32,32], game)
+    player2 = Unit(game.Choix_Personnages_2.game_personnage, 15, 12, [32,32], game)
     hero2 = player2.attribuer_class_perso()
     hero_health2 = hero2.get_health() 
     game.player_units.append(player2)
@@ -598,12 +598,12 @@ def main():
     #game.enemy_units = [Unit(game.Choix_Personnages_3.game_personnage, 0, 9, [55,55]),#, 150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
                              #Unit(game.Choix_Personnages_4.game_personnage, 1, 9, [55,55])]#, 150, 3, 75, ["Poings", "Lancer_bouclier"] )]
 
-    player3 = Unit(game.Choix_Personnages_3.game_personnage, 0, 9, [32,32], game)
+    player3 = Unit(game.Choix_Personnages_3.game_personnage, 22, 19, [32,32], game)
     hero3 = player3.attribuer_class_perso()
     hero_health3 = hero3.get_health()
     game.enemy_units.append(player3)
     game.list_enemy_health.append(hero_health3)
-    player4 = Unit(game.Choix_Personnages_4.game_personnage, 1, 9, [32,32], game)
+    player4 = Unit(game.Choix_Personnages_4.game_personnage, 23, 19, [32,32], game)
     hero4 = player4.attribuer_class_perso()
     hero_health4 = hero4.get_health()
     game.enemy_units.append(player4)

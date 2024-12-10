@@ -360,7 +360,7 @@ class Unit():
     def draw_health_bar(self, screen, health): # méthode permettant l'affichage de la barre de vie
         RED = (255, 0, 0)
         BLACK = (0, 0, 0)
-        bar_length = GRID_SIZE_x * 2 # Longueur de la barre
+        bar_length = GRID_SIZE_x  # Longueur de la barre
         bar_height = 3   # Hauteur de la barre
 
         # Calcul de la largeur en fonction des PV
