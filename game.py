@@ -140,12 +140,7 @@ class Game:
 
         degat=1600
         
-        for player in self.player_units:
-            if player.x==self.case_degat[0] and player.y== self.case_degat[1]:
-                player.health-=degat
-                print(player.health)
-                print("joueur a été blaissé")
-                  
+        
                 
         # dessine le fond:
         pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
@@ -166,7 +161,17 @@ class Game:
             (x * CELL_SIZE+10, y * CELL_SIZE + 35 ),  # Début de la ligne
             (x * CELL_SIZE + CELL_SIZE-10, y * CELL_SIZE + 35),  # Fin de la ligne
             line_width2  # Épaisseur
-        )                       
+        )   
+        for i, player in enumerate(self.player_units):
+            player_health = self.list_player_health[i]
+            if player.x==self.case_degat[0] and player.y== self.case_degat[1]:
+                player_health -= degat
+                print(player.health)
+                print("joueur a été blaissé")
+            else :
+                player_health = player_health
+                  
+            return player_health                    
 
     def handle_player_turn(self):
         """Tour du joueur"""

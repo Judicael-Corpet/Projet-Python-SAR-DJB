@@ -10,7 +10,6 @@ CELL_SIZE = 50
 WIDTH = GRID_SIZE_x * CELL_SIZE 
 HEIGHT = GRID_SIZE_y * CELL_SIZE 
 
-
 #GRID_SIZE = 21.3
 
 #WIDTH = GRID_SIZE * CELL_SIZE
@@ -29,7 +28,7 @@ YELLOW = (255, 255, 0)
 
 class Unit():
     
-    def __init__(self, name, x, y, size, game):#, health, nbre_move, defense, attacks):
+    def __init__(self, name, x, y, size):#, health, nbre_move, defense, attacks):
         super().__init__() #permet d'inialiser la classe sprite en appelant son constructeur avec super()
         self.name = name
         self.x = x # Position x du personnage
@@ -53,7 +52,7 @@ class Unit():
                          #"Boule_De_Feu", "Soigner", "Projectile" ]
         
         self.attaque_selectionne_index = 0  # Indice de l'attaque sélectionnée
-        self.game = game
+
         
         
         self.image = pygame.Surface(size)
@@ -207,27 +206,12 @@ class Unit():
         """Attaque une unité cible."""
         #target_health = target.get_health()
         #print (f"Lattaque selectionnee pour la methode attack {self.attaque_selectionne.name}")
-        if type_attack == "Soigner" :
-            for target in self.player_units :
-                for red_x, red_y in self.red_cases :
-                    if target.x == red_x and  target.y == red_y :
-                        target_health = target.health_max
-                    else :
-                        target_health = target_health
-        
-        elif type_attack == "Casser_les_murs" :
-            for red_x, red_y in self.red_cases :
-                    if target.x == red_x and  target.y == red_y :
-                        target.defense = 0
-
-        else :
-            for red_x, red_y in self.red_cases :
-                if target.x == red_x and  target.y == red_y :
-                    target_health = target_health - type_attack.attack_power*type_attack.precision*(1 - target.defense/100)/type_attack.distance_attack
-                
-                else :
-                    target_health = target_health
-
+        for red_x, red_y in self.red_cases :
+            if target.x == red_x and  target.y == red_y :
+                target_health = target_health - type_attack.attack_power*type_attack.precision*(1 - target.defense/100)/type_attack.distance_attack
+            
+            else :
+                target_health = target_health
         return target_health
     
 
@@ -358,33 +342,33 @@ class Unit():
     
     def attribuer_class_perso(self) : # méthode permettant de créer des instances de personnage
         if self.name == "Captain_America" : 
-            perso = perso_Captain_america(self.x,self.y,self.size, self.game)            
+            perso = perso_Captain_america(self.x,self.y,self.size)            
         elif self.name == "Hulk" :
-            perso = perso_Hulk(self.x,self.y,self.size, self.game)           
+            perso = perso_Hulk(self.x,self.y,self.size)           
         elif self.name == "Ironman" :
-            perso = perso_Ironman(self.x,self.y,self.size, self.game)           
+            perso = perso_Ironman(self.x,self.y,self.size)           
         elif self.name == "Spiderman" :
-            perso = perso_Spiderman(self.x,self.y,self.size, self.game)           
+            perso = perso_Spiderman(self.x,self.y,self.size)           
         elif self.name == "Thor" :
-            perso = perso_Thor(self.x,self.y,self.size, self.game)           
+            perso = perso_Thor(self.x,self.y,self.size)           
         elif self.name == "Groot" : 
-            perso = perso_Groot(self.x,self.y,self.size, self.game)            
+            perso = perso_Groot(self.x,self.y,self.size)            
         elif self.name == "Wolverine" :
-            perso = perso_Wolverine(self.x,self.y,self.size, self.game)            
+            perso = perso_Wolverine(self.x,self.y,self.size)            
         elif self.name == "Black_Panther" :
-            perso = perso_Black_panther(self.x,self.y,self.size, self.game)           
+            perso = perso_Black_panther(self.x,self.y,self.size)           
         elif self.name == "Starlord" :
-            perso = perso_Starlord(self.x,self.y,self.size, self.game)           
+            perso = perso_Starlord(self.x,self.y,self.size)           
         elif self.name == "Yondu" :
-            perso = perso_Yondu(self.x,self.y,self.size, self.game)           
+            perso = perso_Yondu(self.x,self.y,self.size)           
         elif self.name == "Torch" : 
-            perso = perso_Torch(self.x,self.y,self.size, self.game)           
+            perso = perso_Torch(self.x,self.y,self.size)           
         elif self.name == "Jane_Storm" :
-            perso = perso_Jane_storm(self.x,self.y,self.size, self.game)           
+            perso = perso_Jane_storm(self.x,self.y,self.size)           
         elif self.name == "Chose" :    
-            perso = perso_Chose(self.x,self.y,self.size, self.game)            
+            perso = perso_Chose(self.x,self.y,self.size)            
         elif self.name == "Dr_Strange" :
-            perso = perso_Dr_strange(self.x,self.y,self.size, self.game)
+            perso = perso_Dr_strange(self.x,self.y,self.size)
         else:
             raise ValueError(f"Personnage non reconnu : {self.name}")
         return perso
@@ -393,94 +377,57 @@ class Unit():
     def attribuer_class_attaque(self, indice) : # méthode permettant de créer des instance de compétences 
         if self.list_attaques[indice] == "Aucune Action" :
             attaque_selectionne = Aucune_action()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Attendre")
                                 
         elif self.list_attaques[indice] == "Poings" :
             attaque_selectionne = Poings()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Combat")
         
         elif self.list_attaques[indice] == "Griffes" :
             attaque_selectionne = Griffes()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Griffes")
-
 
         elif self.list_attaques[indice] == "Lancer_bouclier" :
             attaque_selectionne = Lancer_bouclier()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Boomerang")
 
         elif self.list_attaques[indice] == "Casser_les_murs" :
             attaque_selectionne = Casser_les_murs()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Casser_mur")
         
         elif self.list_attaques[indice] == "Laser" :
             attaque_selectionne = Laser()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Laser")
         
         elif self.list_attaques[indice] == "Missile":
             attaque_selectionne = Missile()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Explosion")
         
         elif self.list_attaques[indice] == "Bloquer_adversaire":
             attaque_selectionne = Bloquer_adversaire()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Combat_v3")
 
         elif self.list_attaques[indice] == "Attaque_toile":
             attaque_selectionne = Attaque_toile()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Pistolet_silencieux")
         
         elif self.list_attaques[indice] == "Marteau":
             attaque_selectionne = Marteau()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Coup_marteau")
         
         elif self.list_attaques[indice] == "Foudre":
             attaque_selectionne = Foudre()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Foudre_v2")
         
         elif self.list_attaques[indice] == "Attaque_branche":
             attaque_selectionne = Attaque_branche()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Combat_v4")
         
         elif self.list_attaques[indice] == "Protection":
             attaque_selectionne = Protection()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Protection")
         
         elif self.list_attaques[indice] == "Pistolets":
             attaque_selectionne = Pistolets()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Tir_rafale_v2")
         
         elif self.list_attaques[indice] == "Fleche_Yaka":
             attaque_selectionne = Fleche_yaka()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Fleche")
 
         elif self.list_attaques[indice] == "Boule_de_feu":
             attaque_selectionne = Boule_de_feu()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Boule_feu")
 
         elif self.list_attaques[indice] == "Soigner":
             attaque_selectionne = Soigner()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Soin")
 
         elif self.list_attaques[indice] == "Projectile":
             attaque_selectionne = Projectile()
-            if self.game.Musique :
-                self.game.sound_manager.bruit("Projectile")
         else:
             raise ValueError(f"attaque non reconnu : {self.list_attaques[indice]}")
         return attaque_selectionne
@@ -489,8 +436,8 @@ class Unit():
 """ CLASSE DE PERSONNAGES """
 
 class perso_Captain_america(Unit):
-    def __init__(self, x, y, size, game):
-        super().__init__("Captain_America", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Captain_America", x, y, size)
         self.__health = 100
         self.health_max = 100
         self.nbre_move = 3
@@ -502,8 +449,8 @@ class perso_Captain_america(Unit):
         return self.__health    
     
 class perso_Hulk(Unit) :
-    def __init__(self, x, y, size, game):
-        super().__init__("Hulk", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Hulk", x, y, size)
         self.__health = 150
         self.health_max = 150
         self.nbre_move = 4
@@ -515,8 +462,8 @@ class perso_Hulk(Unit) :
         return self.__health
 
 class perso_Ironman (Unit) :
-    def __init__(self, x, y, size, game):
-        super().__init__("Ironman", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Ironman", x, y, size)
         self.__health = 100
         self.health_max = 100
         self.nbre_move = 8
@@ -528,8 +475,8 @@ class perso_Ironman (Unit) :
         return self.__health    
         
 class perso_Spiderman(Unit) :
-    def __init__(self, x, y, size, game):
-        super().__init__("Spiderman", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Spiderman", x, y, size)
         self.__health = 90
         self.health_max = 90
         self.nbre_move = 6
@@ -541,8 +488,8 @@ class perso_Spiderman(Unit) :
         return self.__health    
     
 class perso_Thor(Unit) :
-    def __init__(self, x, y, size, game):
-        super().__init__("Thor", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Thor", x, y, size)
         self.__health = 150
         self.health_max = 150
         self.nbre_move = 8
@@ -554,8 +501,8 @@ class perso_Thor(Unit) :
         return self.__health
 
 class perso_Groot(Unit) :
-    def __init__(self, x, y, size, game):
-        super().__init__("Groot", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Groot", x, y, size)
         self.__health = 120
         self.health_max = 120
         self.nbre_move = 3
@@ -567,8 +514,8 @@ class perso_Groot(Unit) :
         return self.__health
         
 class perso_Wolverine(Unit) :
-    def __init__(self, x, y, size, game):
-        super().__init__("Wolverine", x, y, size, game)   
+    def __init__(self, x, y, size):
+        super().__init__("Wolverine", x, y, size)   
         self.__health = 150
         self.health_max = 150
         self.nbre_move = 3
@@ -580,8 +527,8 @@ class perso_Wolverine(Unit) :
         return self.__health    
 
 class perso_Black_panther(Unit) :
-    def __init__(self, x, y, size, game):
-        super().__init__("Black_Panther", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Black_Panther", x, y, size)
         self.__health = 130
         self.health_max = 130
         self.nbre_move = 4
@@ -593,8 +540,8 @@ class perso_Black_panther(Unit) :
         return self.__health    
     
 class perso_Starlord (Unit) :
-    def __init__(self, x, y, size, game):
-        super().__init__("Starlord", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Starlord", x, y, size)
         self.__health = 90
         self.health_max = 90
         self.nbre_move = 6
@@ -606,8 +553,8 @@ class perso_Starlord (Unit) :
         return self.__health    
         
 class  perso_Yondu(Unit):
-    def __init__(self, x, y, size, game):
-        super().__init__("Yondu", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Yondu", x, y, size)
         self.__health = 130
         self.health_max = 130
         self.nbre_move = 3
@@ -619,8 +566,8 @@ class  perso_Yondu(Unit):
         return self.__health    
         
 class perso_Torch(Unit) :
-    def __init__(self, x, y, size, game):
-        super().__init__("Torch", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Torch", x, y, size)
         self.__health = 100
         self.health_max = 100
         self.nbre_move = 8
@@ -632,8 +579,8 @@ class perso_Torch(Unit) :
         return self.__health        
 
 class perso_Jane_storm(Unit) :
-    def __init__(self, x, y, size, game):
-        super().__init__("Jane_Storm", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Jane_Storm", x, y, size)
         self.__health = 70
         self.health_max = 70
         self.nbre_move = 3
@@ -645,8 +592,8 @@ class perso_Jane_storm(Unit) :
         return self.__health    
         
 class perso_Chose(Unit) :
-    def __init__(self, x, y, size, game):
-        super().__init__("Chose", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Chose", x, y, size)
         self.__health = 140
         self.health_max = 140
         self.nbre_move = 4
@@ -658,8 +605,8 @@ class perso_Chose(Unit) :
         return self.__health    
 
 class perso_Dr_strange(Unit) :
-    def __init__(self, x, y, size, game):
-        super().__init__("Dr_Strange", x, y, size, game)
+    def __init__(self, x, y, size):
+        super().__init__("Dr_Strange", x, y, size)
         self.__health = 80
         self.health_max = 80
         self.nbre_move = 6
