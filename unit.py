@@ -81,12 +81,32 @@ class Unit():
         self.green_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
         
          # cases obstacles
-        # rivière 9-10
-        for i in range(9,10+1):
-            for j in range(0,9):
-                self.cases.append((i,j)) 
         
- 
+        for y in range(0,6):
+            for x in range(0, 16):
+                self.cases.append((x, y))
+        for y in range(0,3):
+            for x in range(15, 41):
+                self.cases.append((x, y))
+      
+        for x in range(0, 27):
+            self.cases.append((x, 22))
+
+        for y in range(18,26):
+            for x in range(25, 41):
+                self.cases.append((x, y))
+
+        
+        for y in range(0, 25):
+            self.cases.append((0, y))
+
+        for x in range(37,41):
+            for y in range(0, 25):
+                self.cases.append((x, y))     
+    
+        for x in range(0,13):
+            for y in range(14,17):
+                self.cases.append((x,y)) 
         
         if self.is_selected:
             # Définir les déplacements possibles : orthogonaux + diagonales proches
