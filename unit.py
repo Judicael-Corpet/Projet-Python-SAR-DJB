@@ -142,7 +142,7 @@ class Unit():
     def draw_green_case(self, screen): # méthode permettant de dessiner les cases de déplacement
         color = GREEN
         for green_x,green_y in self.green_cases:
-            pygame.draw.rect(screen, color, (green_x*CELL_SIZE, green_y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 2)  # Dessine les bords
+            pygame.draw.rect(screen, color, (green_x*CELL_SIZE, green_y*CELL_SIZE, CELL_SIZE, CELL_SIZE), 1)  # Dessine les bords
 
 
     def update_red_case(self, attack): # méthode permettant de metre à jour les cases d'attaque
@@ -360,7 +360,7 @@ class Unit():
     def draw_health_bar(self, screen, health): # méthode permettant l'affichage de la barre de vie
         RED = (255, 0, 0)
         BLACK = (0, 0, 0)
-        bar_length = GRID_SIZE_x  # Longueur de la barre
+        bar_length = CELL_SIZE  # Longueur de la barre
         bar_height = 3   # Hauteur de la barre
 
         # Calcul de la largeur en fonction des PV
@@ -374,7 +374,7 @@ class Unit():
         pygame.draw.rect(screen, BLACK, (bar_x*CELL_SIZE , bar_y*CELL_SIZE , bar_length + 2, bar_height + 2))
         # Dessin de la barre de vie actuelle
         pygame.draw.rect(screen, RED, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, bar_length, bar_height))  # Barre vide
-        pygame.draw.rect(screen, LIGHT_GREEN, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, fill, bar_height))     # Barre remplie
+        pygame.draw.rect(screen, BLUE, (bar_x*CELL_SIZE, bar_y*CELL_SIZE, fill, bar_height))     # Barre remplie
     
     def attribuer_class_perso(self) : # méthode permettant de créer des instances de personnage
         if self.name == "Captain_America" : 
