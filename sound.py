@@ -5,7 +5,6 @@ Il contient la classe SoundManager qui permet de charger et de jouer des sons.
 
 import pygame
 
-
 class SoundManager :
     def __init__(self):
         pygame.init()
@@ -49,14 +48,8 @@ class SoundManager :
         if name in self.sounds:
             if name == 'Musique_lancement':
                 self.sounds[name].play(-1)
-            else :
-                #self.sounds['Musique_lancement'].pause()
-                #pygame.mixer.music.pause()
+            else:
                 self.sounds[name].play()
-                #self.sounds['Musique_lancement'].unpause()
-                #pygame.mixer.music.unpause()
         else:
             print(f"Son {name} introuvable.")    
-
-
 

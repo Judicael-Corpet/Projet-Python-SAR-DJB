@@ -158,7 +158,6 @@ class MainMenu(Menu):
                 self.game.curr_menu = self.game.Choix_Personnages_1
                 if self.game.Musique :
                     self.game.sound_manager.bruit('Musique_lancement')
-                    #pygame.mixer.music.play(-1)  # Lecture en boucle infinie (-1)
             elif self.state == 'Options':
                 self.game.curr_menu = self.game.options
             elif self.state == 'Credits':

@@ -517,7 +517,7 @@ class Game:
         fond_fin = pygame.image.load('Fond_ecran.png')
         self.display.blit(fond_fin, (0, 0))
 
-        if (len(self.enemy_units) == 0) :
+        if (len(self.enemy_units) == 0) and self.Mode_jeu :
             print("Tous les ennemis ont été éliminés !")
             self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 119)
             self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 121)
@@ -525,13 +525,29 @@ class Game:
             self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2 - 3, self.DISPLAY_H / 2 - 120)
             self.draw_text_white('Victoire !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 120)
             
-        elif (len(self.player_units) == 0):
-            print("Tous les ennemis ont été éliminés !")
+        elif (len(self.player_units) == 0) and self.Mode_jeu :
+            print("Tous les players ont été éliminés !")
             self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 119)
             self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 121)
             self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2 + 3, self.DISPLAY_H / 2 - 120)
             self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2 - 3, self.DISPLAY_H / 2 - 120)
             self.draw_text_white('Defaite !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 120)
+
+        elif (len(self.enemy_units) == 0) and not(self.Mode_jeu) :
+            print("Tous les players du joueur 2 ont été éliminés !")
+            self.draw_text_black('Victoire J1 !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 119)
+            self.draw_text_black('Victoire J1 !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 121)
+            self.draw_text_black('Victoire J1 !', 70, self.DISPLAY_W / 2 + 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_black('Victoire J1 !', 70, self.DISPLAY_W / 2 - 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_white('Victoire J1 !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 120)
+            
+        elif (len(self.player_units) == 0) and not(self.Mode_jeu) :
+            print("Tous les players du joueur 1 ont été éliminés !")
+            self.draw_text_black('Victoire J2 !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 119)
+            self.draw_text_black('Victoire J2 !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 121)
+            self.draw_text_black('Victoire J2 !', 70, self.DISPLAY_W / 2 + 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_black('Victoire J2 !', 70, self.DISPLAY_W / 2 - 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_white('Victoire J2 !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 120)
         self.window.blit(self.display, (0, 0)) 
         pygame.display.update()
         #pygame.display.flip()
