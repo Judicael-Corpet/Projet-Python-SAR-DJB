@@ -1,4 +1,3 @@
-
 import pygame 
 import random
 import pytmx
@@ -141,7 +140,12 @@ class Game:
 
         degat=1600
         
-        
+        for player in self.player_units:
+            if player.x==self.case_degat[0] and player.y== self.case_degat[1]:
+                player.health-=degat
+                print(player.health)
+                print("joueur a été blaissé")
+                  
                 
         # dessine le fond:
         pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
@@ -162,17 +166,7 @@ class Game:
             (x * CELL_SIZE+10, y * CELL_SIZE + 35 ),  # Début de la ligne
             (x * CELL_SIZE + CELL_SIZE-10, y * CELL_SIZE + 35),  # Fin de la ligne
             line_width2  # Épaisseur
-        )   
-        for i, player in enumerate(self.player_units):
-            player_health = self.list_player_health[i]
-            if player.x==self.case_degat[0] and player.y== self.case_degat[1]:
-                player_health -= degat
-                print(player.health)
-                print("joueur a été blaissé")
-            else :
-                player_health = player_health
-                  
-            return player_health                    
+        )                       
 
     def handle_player_turn(self):
         """Tour du joueur"""
@@ -278,8 +272,8 @@ class Game:
 
                             #print(f"Attaque choisie : {attack['name']}")
                             #for enemy in self.enemy_units:
-                            #    if abs(player.x - enemy.x) <= 1 and abs(player.y - enemy.y) <= 1:
-                            #        player.attack(enemy)
+                            #    if abs(selected_unit.x - enemy.x) <= 1 and abs(selected_unit.y - enemy.y) <= 1:
+                            #        selected_unit.attack(enemy)
                             #        if enemy.health <= 0:
                             #            self.enemy_units.remove(enemy)
         return self.list_enemy_health
@@ -493,8 +487,7 @@ class Game:
             perso1_selected.draw_health_bar(self.screen, health_perso1)
             
             if perso1.is_selected :
-                if self.menu_attaques == False :
-                    perso1.draw_green_case(self.screen)
+                perso1.draw_green_case(self.screen)
                 if self.menu_attaques:
                     perso1.draw_red_case(self.screen, )
 
