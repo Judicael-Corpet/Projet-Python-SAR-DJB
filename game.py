@@ -449,7 +449,7 @@ class Game:
     def flip_display(self):
         """Affiche la carte et les éléments du jeu."""
         # Chargement des données de la carte
-        tmx_data = pytmx.util_pygame.load_pygame('map/map.tmx')
+        tmx_data = pytmx.util_pygame.load_pygame('map_cyber.tmx')
         map_data = pyscroll.data.TiledMapData(tmx_data)
         
         # Rendu de la carte
