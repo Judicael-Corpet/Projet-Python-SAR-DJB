@@ -399,6 +399,7 @@ class Game:
         print ("DEBUT DU TOUR DE L'ENNEMI")
         
         for enemy in self.enemy_units:
+            pygame.time.wait(1000)
             enemy_selected = enemy.attribuer_class_perso()
             enemy_health = enemy_selected.get_health()
             nbre_move = enemy_selected.nbre_move
@@ -439,8 +440,11 @@ class Game:
                 if player_health <= 0:
                     print(f"{player.name} est mort")
                     self.player_units.remove(player)
+                
+                self.flip_display()
+
             enemy.is_selected = False
-        #self.flip_display() 
+         
         play = True
         return play, self.list_player_health
 
@@ -479,6 +483,12 @@ class Game:
             health_perso = self.list_enemy_health[i]
             perso.draw(self.screen)
             perso_selected.draw_health_bar(self.screen, health_perso)
+
+            if perso.is_selected :
+                perso.draw_green_case(self.screen)
+                if self.menu_attaques:
+                    perso.draw_red_case(self.screen, )
+
             
         for i, perso1 in enumerate(self.player_units):
             perso1_selected = perso1.attribuer_class_perso()
