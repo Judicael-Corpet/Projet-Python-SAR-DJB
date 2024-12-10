@@ -173,11 +173,6 @@ class Game:
         print ("DEBUT DU TOUR DU JOUEUR")
         print(self.list_enemy_health)
         for selected_unit in self.player_units:
-<<<<<<< HEAD
-            # Tant que l'unité n'a pas terminé son tour
-            has_acted = False
-=======
->>>>>>> Judi
             selected_unit.is_selected = True
             has_acted = False
             #
@@ -197,12 +192,7 @@ class Game:
             self.flip_display()
             
             while not has_acted:
-<<<<<<< HEAD
-
-
-=======
                 
->>>>>>> Judi
                 # Important: cette boucle permet de gérer les événements Pygame
                 for event in pygame.event.get():
 
@@ -634,9 +624,4 @@ def main():
         iter += 1    
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     main()
-
-=======
-    main()
->>>>>>> Judi
