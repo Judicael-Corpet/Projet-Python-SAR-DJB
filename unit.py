@@ -685,7 +685,7 @@ class Poings(Unit) :
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1)   # Diagonales proches
                 ]
-        self.attack_power = 300 #30
+        self.attack_power = 500 #30
         self.quantite = 100
         self.distance_attack = 1
         self.precision = random.uniform(0.5, 1)

@@ -51,7 +51,12 @@ class SoundManager :
                 self.sounds[name].play(-1)
             else :
                 #self.sounds['Musique_lancement'].pause()
+                #pygame.mixer.music.pause()
                 self.sounds[name].play()
                 #self.sounds['Musique_lancement'].unpause()
+                #pygame.mixer.music.unpause()
         else:
             print(f"Son {name} introuvable.")    
+
+
+
