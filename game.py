@@ -505,26 +505,48 @@ class Game:
         if self.menu_attaques:  
             self.draw_attack_menu()
 
-        if all(health <= 0 for health in self.list_enemy_health):
+        pygame.display.flip()
+
+
+    def flip_display_ecran_final(self):
+        """Affiche la carte et les éléments du jeu."""
+        fond_fin = pygame.image.load('Fond_ecran.png')
+        self.display.blit(fond_fin, (0, 0))
+
+        if (len(self.enemy_units) == 0) and self.Mode_jeu :
             print("Tous les ennemis ont été éliminés !")
             self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 119)
             self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 121)
             self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2 + 3, self.DISPLAY_H / 2 - 120)
             self.draw_text_black('Victoire !', 70, self.DISPLAY_W / 2 - 3, self.DISPLAY_H / 2 - 120)
             self.draw_text_white('Victoire !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 120)
-            pygame.display.flip()
-            pygame.time.wait(3000)  # Pause de 3 secondes avant de quitter
             
-        elif all(health <= 0 for health in self.list_player_health):
-            print("Tous les ennemis ont été éliminés !")
+        elif (len(self.player_units) == 0) and self.Mode_jeu :
+            print("Tous les players ont été éliminés !")
             self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 119)
             self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 121)
             self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2 + 3, self.DISPLAY_H / 2 - 120)
             self.draw_text_black('Defaite !', 70, self.DISPLAY_W / 2 - 3, self.DISPLAY_H / 2 - 120)
             self.draw_text_white('Defaite !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 120)
-        
-   
-        pygame.display.flip()
+
+        elif (len(self.enemy_units) == 0) and not(self.Mode_jeu) :
+            print("Tous les players du joueur 2 ont été éliminés !")
+            self.draw_text_black('Victoire J1 !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 119)
+            self.draw_text_black('Victoire J1 !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 121)
+            self.draw_text_black('Victoire J1 !', 70, self.DISPLAY_W / 2 + 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_black('Victoire J1 !', 70, self.DISPLAY_W / 2 - 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_white('Victoire J1 !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 120)
+            
+        elif (len(self.player_units) == 0) and not(self.Mode_jeu) :
+            print("Tous les players du joueur 1 ont été éliminés !")
+            self.draw_text_black('Victoire J2 !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 119)
+            self.draw_text_black('Victoire J2 !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 121)
+            self.draw_text_black('Victoire J2 !', 70, self.DISPLAY_W / 2 + 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_black('Victoire J2 !', 70, self.DISPLAY_W / 2 - 3, self.DISPLAY_H / 2 - 120)
+            self.draw_text_white('Victoire J2 !', 70, self.DISPLAY_W / 2, self.DISPLAY_H / 2 - 120)
+        self.window.blit(self.display, (0, 0)) 
+        pygame.display.update()
+
 
     def check_events(self):
         for event in pygame.event.get():
@@ -623,11 +645,27 @@ def main():
     # Boucle principale du jeu
     while play and iter<100 :
         game.handle_player_turn()
+        if (len(game.enemy_units) == 0) :
+            game.flip_display_ecran_final()
+            pygame.time.wait(5000)
+            play = False
         if game.Mode_jeu :
             game.handle_enemy_turn()  
+            if (len(game.player_units) == 0) :
+                game.flip_display_ecran_final()
+                pygame.time.wait(5000)
+                play = False
         else :
             game.handle_player_2_turn()
-        iter += 1    
+            if (len(game.player_units) == 0) :
+                game.flip_display_ecran_final()
+                pygame.time.wait(5000)
+                play = False
+        iter += 1
+        if (len(game.player_units) != 0) and (len(game.enemy_units) != 0) :
+            game.flip_display()
+    return game.list_player_health, game.list_enemy_health 
+
 
 if __name__ == "__main__":
     main()
