@@ -3,9 +3,9 @@ import random
 
 
 # Constantes
-GRID_SIZE_x = 25
-GRID_SIZE_y= 15
-CELL_SIZE = 50
+GRID_SIZE_x = 40
+GRID_SIZE_y= 25
+CELL_SIZE = 32
 
 WIDTH = GRID_SIZE_x * CELL_SIZE 
 HEIGHT = GRID_SIZE_y * CELL_SIZE 
