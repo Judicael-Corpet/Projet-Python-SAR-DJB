@@ -617,9 +617,11 @@ def main():
     # Boucle principale du jeu
     while play and iter<100 :
         game.handle_player_turn()
-        game.handle_enemy_turn()   
-        iter += 1 
-    return game.list_player_health, game.list_enemy_health     
+        if game.Mode_jeu :
+            game.handle_enemy_turn()  
+        else :
+            game.handle_player_2_turn()
+        iter += 1    
 
 if __name__ == "__main__":
 <<<<<<< HEAD
