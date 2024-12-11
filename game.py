@@ -137,7 +137,7 @@ class Game:
         # )
 
     def cases_degat(self, screen):
-        self.case_degat = [[13,15],[14,15],[15,15],[16,15],[17,15],[18,15],[19,13],[20,13],[21,13],[22,13],[23,13],[24,13]]
+        self.case_degat = [[13,15],[14,15]]#,[15,15],[16,15],[17,15],[18,15],[19,13],[20,13],[21,13],[22,13],[23,13],[24,13]]
         # color = BLACK
         # color1=(255,20,20)
         # x, y = self.case_degat  # Position de la case
@@ -362,7 +362,7 @@ class Game:
         print ("DEBUT DU TOUR DE L'ENNEMI")
         
         for enemy in self.enemy_units:
-            pygame.time.wait(1000)
+            
             enemy_selected = enemy.attribuer_class_perso()
             #enemy_health = enemy_selected.get_health()
             enemy.is_selected  = True 
@@ -373,7 +373,7 @@ class Game:
             dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
             dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
             enemy.move(dx, dy)
-            
+          
             
             # Attaque si possible
             for i, player in enumerate(self.player_units) :
@@ -400,7 +400,7 @@ class Game:
                 self.flip_display()
 
             enemy.is_selected = False
-         
+            pygame.time.wait(1000)
         play = True
         return play, self.list_player_health
 
