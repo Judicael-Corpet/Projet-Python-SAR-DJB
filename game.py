@@ -105,18 +105,15 @@ class Game:
         color1=(20,255,20)
         half_size = CELL_SIZE // 2  # La moitié de la taille d'une cellule
         line_width = 15  # Épaisseur des lignes de la croix
-        bonus_health=30
-        for player in self.player_units:
-            for i in range(0,len(self.case_soin)):
-                
-                if player.x==self.case_soin[i][0] and player.y== self.case_soin[i][1]:
-                
-                    if player.health<=120:
-                        player.health+=bonus_health
-                        print("joueur a été soigné")
-                    elif player.health>120:
-                        print("joueur a été soigné")
-                        player.health=150
+        #bonus_health=30
+        for i, player in enumerate(self.player_units):
+            for j in range(0,len(self.case_soin)):
+                if player.x==self.case_soin[j][0] and player.y== self.case_soin[j][1]:
+                    hero_selected = player.attribuer_class_perso()
+                    self.list_player_health[i] = hero_selected.health_max
+                    print (f"{hero_selected.name} a été soigné")
+        return self.list_player_health
+                    
 
         # # dessine le fond:
         # pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
@@ -148,14 +145,27 @@ class Game:
         # line_width1 = 10  # Épaisseur des lignes de verticales
         # line_width2=5 # épaisseur horizontale 
 
-        degat=1600
+        degat = 40
         
-        for player in self.player_units:
-            for i in range(0,len(self.case_degat)):
-                if player.x==self.case_degat[i][0] and player.y== self.case_degat[i][1]:
-                    player.health-=degat
-                    print(player.health)
-                    print("joueur a été blaissé")
+        for i, player in enumerate(self.player_units) :
+            for j in range(0,len(self.case_degat)):
+                if player.x==self.case_degat[j][0] and player.y== self.case_degat[j][1]:
+                    player_health = self.list_player_health[i]
+                    player_health -= degat
+                    print(player_health)
+                    print("joueur a été blaissé sur le champ de mines")
+                    self.list_player_health[i] = player_health
+        
+        for i, enemy in enumerate(self.enemy_units) :
+            for j in range(0,len(self.case_degat)):
+                if enemy.x==self.case_degat[j][0] and enemy.y== self.case_degat[j][1]:
+                    enemy_health = self.list_enemy_health[i]
+                    enemy_health -= degat
+                    print(enemy_health)
+                    print("l'enemi a été blaissé sur le champ de mines")
+                    self.list_enemy_health[i] = enemy_health
+        
+        return self.list_enemy_health
                   
                 
         # # dessine le fond:
@@ -182,20 +192,14 @@ class Game:
     def handle_player_turn(self):
         """Tour du joueur"""
         print ("DEBUT DU TOUR DU JOUEUR")
-        print(self.list_enemy_health)
+
         for selected_unit in self.player_units:
             selected_unit.is_selected = True
-            has_acted = False
-            #
-            # selected_unit.draw_green_case(self.screen)
-            
+            has_acted = False            
             selected_unit.update_green_case(self.player_units, self.enemy_units)
-            print(selected_unit.green_cases)
             hero_selected = selected_unit.attribuer_class_perso()
             health = hero_selected.get_health()
-        
             self.selected_attack_index = 0
-            
             nbre_move = hero_selected.nbre_move
             defense = hero_selected.defense
             print (f"l'unité est : {selected_unit.name}")
@@ -235,6 +239,7 @@ class Game:
                             if event.key == pygame.K_SPACE:
                                 self.attaques = hero_selected.list_attaques
                                 self.menu_attaques = True #active le menu des attaques
+
                             # Navigation dans le menu des attaques
                         if self.menu_attaques :
                             selected_unit.update_red_case(self.attaques[self.selected_attack_index])
@@ -242,34 +247,20 @@ class Game:
                             if event.key == pygame.K_DOWN:
                                 self.selected_attack_index = (self.selected_attack_index + 1) % len(self.attaques) # Navigation dans le menu des attaques vers le haut
                                 selected_unit.update_red_case(self.attaques[self.selected_attack_index])
+
                             elif event.key == pygame.K_UP:
                                 self.selected_attack_index = (self.selected_attack_index - 1) % len(self.attaques) # Navigation dans le menu des attaques vers le bas
                                 selected_unit.update_red_case(self.attaques[self.selected_attack_index])
+
                             elif event.key == pygame.K_RETURN :
-                                print("MMMMMMMMMMMMM")
-                                print (f"index : {self.attaques[self.selected_attack_index]}") # attaque validée
                                 self.selected_attack = True
-                                
                                 self.menu_attaques = False
-                                #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
-                                
                                 attaque_selectionne = hero_selected.attribuer_class_attaque(self.selected_attack_index)
-                                print(attaque_selectionne.attack_power)
-                                print(attaque_selectionne.precision)
-                                print(attaque_selectionne.distance_attack)
-                                
 
-                                
                                 for i, enemy in enumerate (self.enemy_units) :
-                                    enemy_selected = enemy.attribuer_class_perso()
-                                    print(enemy_selected.x, enemy_selected.y, enemy_selected.defense)  
-                                    enemy_health = self.list_enemy_health[i]
-                                    print (f"POUR L'INSTANT : {enemy_health}")
-                                    print(attaque_selectionne.attack_power*attaque_selectionne.precision*(1 - enemy_selected.defense/100)/attaque_selectionne.distance_attack)                             
+                                    enemy_selected = enemy.attribuer_class_perso() 
+                                    enemy_health = self.list_enemy_health[i]                           
                                     new_enemy_health = selected_unit.attack(attaque_selectionne, enemy_selected, enemy_health)
-                                                                        
-
-                                    print (f"AILLLEE T'AS PRIS CHER!!!! IL TE RESTE {new_enemy_health} POINTS DE VIE !!!")
                                     self.list_enemy_health[i] = new_enemy_health
 
                                     if enemy_health <= 0 :
@@ -281,36 +272,19 @@ class Game:
                 
                     self.flip_display()   
 
-                            #print(f"Attaque choisie : {attack['name']}")
-                            #for enemy in self.enemy_units:
-                            #    if abs(selected_unit.x - enemy.x) <= 1 and abs(selected_unit.y - enemy.y) <= 1:
-                            #        selected_unit.attack(enemy)
-                            #        if enemy.health <= 0:
-                            #            self.enemy_units.remove(enemy)
         return self.list_enemy_health
                             
                 
     def handle_player_2_turn(self):
         """Tour du joueur"""
         print ("DEBUT DU TOUR DU JOUEUR")
-        print(self.list_player_health)
         for selected_unit in self.enemy_units:
             selected_unit.is_selected = True
             has_acted = False
-            #
-            # selected_unit.draw_green_case(self.screen)
-            
             selected_unit.update_green_case(self.enemy_units, self.player_units)
-            print(selected_unit.green_cases)
             hero_selected = selected_unit.attribuer_class_perso()
-            health = hero_selected.get_health()
-        
+            #health = hero_selected.get_health()
             self.selected_attack_index = 0
-            
-            nbre_move = hero_selected.nbre_move
-            defense = hero_selected.defense
-            print (f"l'unité est : {selected_unit.name}")
-            print(f"Points de vie :{health}, nbre_move = {nbre_move}, defense = {defense}")
             self.flip_display()
             
             while not has_acted:
@@ -347,41 +321,29 @@ class Game:
                             if event.key == pygame.K_SPACE:
                                 self.attaques = hero_selected.list_attaques
                                 self.menu_attaques = True #active le menu des attaques
+
                             # Navigation dans le menu des attaques
+
                         if self.menu_attaques :
                             selected_unit.update_red_case(self.attaques[self.selected_attack_index])
 
                             if event.key == pygame.K_DOWN:
                                 self.selected_attack_index = (self.selected_attack_index + 1) % len(self.attaques) # Navigation dans le menu des attaques vers le haut
                                 selected_unit.update_red_case(self.attaques[self.selected_attack_index])
+
                             elif event.key == pygame.K_UP:
                                 self.selected_attack_index = (self.selected_attack_index - 1) % len(self.attaques) # Navigation dans le menu des attaques vers le bas
                                 selected_unit.update_red_case(self.attaques[self.selected_attack_index])
+
                             elif event.key == pygame.K_RETURN :
-                                print("MMMMMMMMMMMMM")
-                                print (f"index : {self.attaques[self.selected_attack_index]}") # attaque validée
                                 self.selected_attack = True
-
                                 self.menu_attaques = False
-                                #screen.fill((0, 0, 128))  # Efface l'écran (fond bleu foncé)
-                                
                                 attaque_selectionne = hero_selected.attribuer_class_attaque(self.selected_attack_index)
-                                print(attaque_selectionne.attack_power)
-                                print(attaque_selectionne.precision)
-                                print(attaque_selectionne.distance_attack)
-                                
-
                                 
                                 for i, player in enumerate (self.player_units) :
-                                    player_selected = player.attribuer_class_perso()
-                                    print(player_selected.x, player_selected.y, player_selected.defense)  
-                                    player_health = self.list_player_health[i]
-                                    print (f"POUR L'INSTANT : {player_health}")
-                                    print(attaque_selectionne.attack_power*attaque_selectionne.precision*(1 - player_selected.defense/100)/attaque_selectionne.distance_attack)                             
+                                    player_selected = player.attribuer_class_perso()  
+                                    player_health = self.list_player_health[i]    
                                     new_player_health = selected_unit.attack(attaque_selectionne, player_selected, player_health)
-                                                                        
-
-                                    print (f"AILLLEE T'AS PRIS CHER!!!! IL TE RESTE {new_player_health} POINTS DE VIE !!!")
                                     self.list_player_health[i] = new_player_health
 
                                     if player_health <= 0 :
@@ -402,41 +364,34 @@ class Game:
         for enemy in self.enemy_units:
             pygame.time.wait(1000)
             enemy_selected = enemy.attribuer_class_perso()
-            enemy_health = enemy_selected.get_health()
-            nbre_move = enemy_selected.nbre_move
-            defense = enemy_selected.defense
-            print (f"l'unité est : {enemy.name}, {enemy_selected.defense}")
-            print(f"Points de vie :{enemy_health}, nbre_move = {nbre_move}, defense = {defense}")
-            
+            #enemy_health = enemy_selected.get_health()
             enemy.is_selected  = True 
-             
             enemy.update_green_case(self.player_units,self.enemy_units)   
-            print(enemy_selected.list_attaques)
-                # Déplacement aléatoire
-            target = random.choice(self.player_units)
-            print (target)
+            #Choix d'une cible au hasard    
+            target = random.choice(self.player_units) 
+            # Déplacement vers la cible
             dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
             dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
             enemy.move(dx, dy)
-
-            enemy_attack = random.choice(enemy_selected.list_attaques)
-            print(enemy_attack)
-
-            indice = enemy_selected.list_attaques.index(enemy_attack)
-            print(indice)
-            enemy_attack_selected = enemy_selected.attribuer_class_attaque(indice)
-
+            
+            
             # Attaque si possible
             for i, player in enumerate(self.player_units) :
-                player_selected = player.attribuer_class_perso()  
-                player_health = self.list_player_health[i]
-                print (f"POUR L'INSTANT : {player_health}")
-                                                
-                new_player_health = enemy_selected.attack(enemy_attack_selected, player_selected, player_health)
-                                                    
+                player_selected = player.attribuer_class_perso() 
+                #choix d'une attaque
+                if abs(enemy.x - player_selected.x) <= enemy.distance_maxi_attack and abs(enemy.y - player_selected.y) <= enemy.distance_maxi_attack :
+                    enemy_attack = random.choice(enemy_selected.list_attaques[1:])
+                    indice = enemy_selected.list_attaques.index(enemy_attack)
+                    enemy_attack_selected = enemy_selected.attribuer_class_attaque(indice) 
+                    player_health = self.list_player_health[i]
+                    new_player_health = enemy_selected.attack(enemy_attack_selected, player_selected, player_health)
+                    self.list_player_health[i] = new_player_health
+                else :
+                    enemy_attack_selected = Aucune_action()
 
-                print (f"AILLLEE T'AS PRIS CHER!!!! IL TE RESTE {new_player_health} POINTS DE VIE !!!")
-                self.list_player_health[i] = new_player_health
+                    player_health = self.list_player_health[i]
+                    new_player_health = enemy_selected.attack(enemy_attack_selected, player_selected, player_health)
+                    self.list_player_health[i] = new_player_health
 
                 if player_health <= 0:
                     print(f"{player.name} est mort")

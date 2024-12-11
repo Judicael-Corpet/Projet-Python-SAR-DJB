@@ -42,22 +42,14 @@ class Unit():
         self.distance_attack = 0
         self.attack_power = 0
         self.red_cases = []
-        #self.attaque_selectionne = Aucune_action()
         self.offsets = []
         self.attaque_selectionne = "Aucune Action"
         self.is_selected = False # variable servant dans la méthode draw() pour afficher le personnage
         self.cases=[]
-        # Liste des attaques
-        #self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", 
-                         #"Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", 
-                         #"Boule_De_Feu", "Soigner", "Projectile" ]
-        
+        self.distance_maxi_attack = 1
         self.attaque_selectionne_index = 0  # Indice de l'attaque sélectionnée
         self.game = game
-        
-        
         self.image = pygame.Surface(size)
-
         self.green_cases=[]
  
 
@@ -68,7 +60,6 @@ class Unit():
         target_y = self.y + dy
 
         # Vérifie si la position cible est dans les cases vertes
-        print(self.green_cases)
         if (target_x, target_y) in self.green_cases:
             self.x = target_x
             self.y = target_y
@@ -522,6 +513,7 @@ class perso_Captain_america(Unit):
         super().__init__("Captain_America", x, y, size, game)
         self.__health = 100
         self.health_max = 100
+        self.distance_maxi_attack = 2
         self.nbre_move = 3
         self.defense = 75
         self.attack_power = 10
@@ -535,6 +527,7 @@ class perso_Hulk(Unit) :
         super().__init__("Hulk", x, y, size, game)
         self.__health = 150
         self.health_max = 150
+        self.distance_maxi_attack = 2
         self.nbre_move = 4
         self.defense = 90
         self.attack_power = 10
@@ -548,6 +541,7 @@ class perso_Ironman (Unit) :
         super().__init__("Ironman", x, y, size, game)
         self.__health = 100
         self.health_max = 100
+        self.distance_maxi_attack = 3
         self.nbre_move = 8
         self.defense = 75
         self.attack_power = 10
@@ -561,6 +555,7 @@ class perso_Spiderman(Unit) :
         super().__init__("Spiderman", x, y, size, game)
         self.__health = 90
         self.health_max = 90
+        self.distance_maxi_attack = 2
         self.nbre_move = 6
         self.defense = 50
         self.attack_power = 10
@@ -574,6 +569,7 @@ class perso_Thor(Unit) :
         super().__init__("Thor", x, y, size, game)
         self.__health = 150
         self.health_max = 150
+        self.distance_maxi_attack = 3
         self.nbre_move = 8
         self.defense = 75
         self.attack_power = 10
@@ -587,6 +583,7 @@ class perso_Groot(Unit) :
         super().__init__("Groot", x, y, size, game)
         self.__health = 120
         self.health_max = 120
+        self.distance_maxi_attack = 2
         self.nbre_move = 3
         self.defense = 30
         self.attack_power = 10
@@ -600,6 +597,7 @@ class perso_Wolverine(Unit) :
         super().__init__("Wolverine", x, y, size, game)   
         self.__health = 150
         self.health_max = 150
+        self.distance_maxi_attack = 2
         self.nbre_move = 3
         self.defense = 75
         self.attack_power = 10
@@ -613,6 +611,7 @@ class perso_Black_panther(Unit) :
         super().__init__("Black_Panther", x, y, size, game)
         self.__health = 130
         self.health_max = 130
+        self.distance_maxi_attack = 2
         self.nbre_move = 4
         self.defense = 30
         self.attack_power = 10
@@ -626,6 +625,7 @@ class perso_Starlord (Unit) :
         super().__init__("Starlord", x, y, size, game)
         self.__health = 90
         self.health_max = 90
+        self.distance_maxi_attack = 3
         self.nbre_move = 6
         self.defense = 30
         self.attack_power = 10
@@ -639,6 +639,7 @@ class  perso_Yondu(Unit):
         super().__init__("Yondu", x, y, size, game)
         self.__health = 130
         self.health_max = 130
+        self.distance_maxi_attack = 3
         self.nbre_move = 3
         self.defense = 50
         self.attack_power = 10
@@ -652,6 +653,7 @@ class perso_Torch(Unit) :
         super().__init__("Torch", x, y, size, game)
         self.__health = 100
         self.health_max = 100
+        self.distance_maxi_attack = 3
         self.nbre_move = 8
         self.defense = 40
         self.attack_power = 10
@@ -665,6 +667,7 @@ class perso_Jane_storm(Unit) :
         super().__init__("Jane_Storm", x, y, size, game)
         self.__health = 70
         self.health_max = 70
+        self.distance_maxi_attack = 1
         self.nbre_move = 3
         self.defense = 30
         self.attack_power = 10
@@ -678,6 +681,7 @@ class perso_Chose(Unit) :
         super().__init__("Chose", x, y, size, game)
         self.__health = 140
         self.health_max = 140
+        self.distance_maxi_attack = 1
         self.nbre_move = 4
         self.defense = 80
         self.attack_power = 10
@@ -691,6 +695,7 @@ class perso_Dr_strange(Unit) :
         super().__init__("Dr_Strange", x, y, size, game)
         self.__health = 80
         self.health_max = 80
+        self.distance_maxi_attack = 2
         self.nbre_move = 6
         self.defense = 80
         self.attack_power = 10
