@@ -104,9 +104,18 @@ class Unit():
             for y in range(0, 25):
                 self.cases.append((x, y))     
     
-        for x in range(0,13):
+        for x in range(5,13):
             for y in range(14,17):
                 self.cases.append((x,y)) 
+        
+        for x in range(0,5):
+            for y in range(14,16):
+                self.cases.append((x,y)) 
+                
+                
+        for x in range(25,40):
+            for y in range(9,11):
+                self.cases.append((x,y))
         
         if self.is_selected:
             # Définir les déplacements possibles : orthogonaux + diagonales proches

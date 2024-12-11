@@ -80,26 +80,30 @@ class Game:
             text = pygame.font.Font(None, 36).render(attaque, True, color)
             self.screen.blit(text, (30, 550 + i * 30))  # Positionnement des attaques
 
-    def cases_teleportation(self,screen):
-    
-        self.cases_tp1=[(9,12),(9,11),(10,11),(10,12)]
-        self.cases_tp2=[(31,15),(32,15),(31,16),(32,16)]
-        case_arrive1=[32,6]
-        case_arrive2=[8,20]
-        color=(255, 255, 100)
-        # pygame.draw.rect(screen, color, (self.cases_tp[0]*CELL_SIZE, self.cases_tp[1]*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
-        # pygame
-        
-        for player in self.player_units +self.enemy_units:
-            for i in range(0,4):
-                if (player.x, player.y) ==self.cases_tp1[i]:
-                    player.x,player.y=(case_arrive1[0],case_arrive1[1])
+    def cases_teleportation(self, screen):
+        self.cases_tp = [(15, 9), (3, 15), (27, 10)]  # Liste des cases de téléportation
+
+        for player in self.player_units + self.enemy_units:  # Parcours des joueurs et ennemis
+            for i in range(0, len(self.cases_tp)):  # On parcourt les indices valides de la liste des cases de téléportation
+                if (player.x, player.y) == self.cases_tp[i]:
+                    # Sélectionner une case d'arrivée différente de la case actuelle
+                    available_cases = [0, 1, 2]  # Indices des cases de téléportation
+                    available_cases.remove(i)  # Enlever l'indice de la case actuelle
+
+                    # Choisir une case d'arrivée parmi les indices restants
+                    r = random.choice(available_cases)
+                    (self.arrivex,self.arrivey) = self.cases_tp[r]  # Sélection de la case d'arrivée
+                    player.x, player.y = (self.arrivex+1,self.arrivey+1)  # Mise à jour des coordonnées du joueur
+                    break  # On quitte la boucle dès qu'une téléportation est effectuée
+                    
                 
-                elif (player.x,player.y)==self.cases_tp2[i]:
-                    player.x,player.y=(case_arrive2[0],case_arrive2[1])
                 
     def cases_soin(self, screen):
-        self.case_soin = [5, 10]
+     
+        self.case_soin=[[23,10],[24,10],[24,9],[23,9],[7,17],[8,17],[7,18],[8,18]]
+        
+
+        
         color = WHITE
         color1=(20,255,20)
         x, y = self.case_soin  # Position de la case
@@ -107,14 +111,15 @@ class Game:
         line_width = 15  # Épaisseur des lignes de la croix
         bonus_health=30
         for player in self.player_units:
-            if player.x==self.case_soin[0] and player.y== self.case_soin[1]:
-            
-                if player.health<=120:
-                    player.health+=bonus_health
-                    print("joueur a été soigné")
-                elif player.health>120:
-                    print("joueur a été soigné")
-                    player.health=150
+            for i in range(0,len(self.case_soin)):
+                if player.x==self.case_soin[i][0] and player.y== self.case_soin[i][1]:
+                
+                    if player.health<=120:
+                        player.health+=bonus_health
+                        print("joueur a été soigné")
+                    elif player.health>120:
+                        print("joueur a été soigné")
+                        player.health=150
 
         # dessine le fond:
         pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
@@ -138,7 +143,7 @@ class Game:
         )
 
     def cases_degat(self, screen):
-        self.case_degat = [1, 1]
+        self.case_degat = [[13,15],[14,15],[15,15],[16,15],[17,15],[18,15],[19,13],[20,13],[21,13],[22,13],[23,13],[24,13]]
         color = BLACK
         color1=(255,20,20)
         x, y = self.case_degat  # Position de la case
@@ -149,10 +154,11 @@ class Game:
         degat=1600
         
         for player in self.player_units:
-            if player.x==self.case_degat[0] and player.y== self.case_degat[1]:
-                player.health-=degat
-                print(player.health)
-                print("joueur a été blaissé")
+            for i in range(0,len(self.case_degat)):
+                if player.x==self.case_degat[i][0] and player.y== self.case_degat[i][1]:
+                    player.health-=degat
+                    print(player.health)
+                    print("joueur a été blaissé")
                   
                 
         # dessine le fond:
@@ -462,6 +468,12 @@ class Game:
         # Dessinez la carte
         self.group.update()
         self.group.draw(self.screen)
+        
+        #dessine logo
+        logo_marvel=pygame.image.load('Marvel_Logo.svg.png')
+        logo_marvel=pygame.transform.scale(logo_marvel,(32*9,32*3))
+        self.screen.blit(logo_marvel,(32*4,12))
+        
         # Dessine cases de téléportations
         self.cases_teleportation(self.screen)
         # Dessine cases soins
