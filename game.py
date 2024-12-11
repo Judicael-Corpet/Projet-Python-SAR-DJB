@@ -70,9 +70,6 @@ class Game:
         pygame.draw.rect(self.screen, (0, 0, 0), (20, 530, 250, 150 ))
         pygame.draw.rect(self.screen, (255, 255, 255), (20, 530, 250, 150), 2)  # Bordure blanche
 
-        #if selected_unit == "Captain_America" :
-        #self.attaques = []
-        #self.attaques = ["Aucune_action", "Poings", "Lancer_bouclier"]
         list_attacks = self.attaques
         # Dessiner chaque attaque dans le rectangle
         for i, attaque in enumerate(list_attacks):
@@ -81,7 +78,7 @@ class Game:
             self.screen.blit(text, (30, 550 + i * 30))  # Positionnement des attaques
 
     def cases_teleportation(self, screen):
-        self.cases_tp = [(15, 9), (3, 15), (27, 10)]  # Liste des cases de téléportation
+        self.cases_tp = [(4, 6), (3, 16), (27, 11)]  # Liste des cases de téléportation
 
         for player in self.player_units + self.enemy_units:  # Parcours des joueurs et ennemis
             for i in range(0, len(self.cases_tp)):  # On parcourt les indices valides de la liste des cases de téléportation
@@ -106,12 +103,12 @@ class Game:
         
         color = WHITE
         color1=(20,255,20)
-        x, y = self.case_soin  # Position de la case
         half_size = CELL_SIZE // 2  # La moitié de la taille d'une cellule
         line_width = 15  # Épaisseur des lignes de la croix
         bonus_health=30
         for player in self.player_units:
             for i in range(0,len(self.case_soin)):
+                
                 if player.x==self.case_soin[i][0] and player.y== self.case_soin[i][1]:
                 
                     if player.health<=120:
@@ -121,35 +118,35 @@ class Game:
                         print("joueur a été soigné")
                         player.health=150
 
-        # dessine le fond:
-        pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
+        # # dessine le fond:
+        # pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
 
-        # Dessiner la ligne verticale
-        pygame.draw.line(
-            screen, 
-            color, 
-            (x * CELL_SIZE + half_size , y * CELL_SIZE+2),  # Début de la ligne
-            (x * CELL_SIZE + half_size , y * CELL_SIZE + CELL_SIZE-2),  # Fin de la ligne
-            line_width  # Épaisseur
-        )
+        # # Dessiner la ligne verticale
+        # pygame.draw.line(
+        #     screen, 
+        #     color, 
+        #     (x * CELL_SIZE + half_size , y * CELL_SIZE+2),  # Début de la ligne
+        #     (x * CELL_SIZE + half_size , y * CELL_SIZE + CELL_SIZE-2),  # Fin de la ligne
+        #     line_width  # Épaisseur
+        # )
 
-        # Dessiner la ligne horizontale
-        pygame.draw.line(
-            screen, 
-            color, 
-            (x * CELL_SIZE+2, y * CELL_SIZE + half_size ),  # Début de la ligne
-            (x * CELL_SIZE + CELL_SIZE-2, y * CELL_SIZE + half_size ),  # Fin de la ligne
-            line_width  # Épaisseur
-        )
+        # # Dessiner la ligne horizontale
+        # pygame.draw.line(
+        #     screen, 
+        #     color, 
+        #     (x * CELL_SIZE+2, y * CELL_SIZE + half_size ),  # Début de la ligne
+        #     (x * CELL_SIZE + CELL_SIZE-2, y * CELL_SIZE + half_size ),  # Fin de la ligne
+        #     line_width  # Épaisseur
+        # )
 
     def cases_degat(self, screen):
         self.case_degat = [[13,15],[14,15],[15,15],[16,15],[17,15],[18,15],[19,13],[20,13],[21,13],[22,13],[23,13],[24,13]]
-        color = BLACK
-        color1=(255,20,20)
-        x, y = self.case_degat  # Position de la case
-        half_size = CELL_SIZE // 2  # La moitié de la taille d'une cellule
-        line_width1 = 10  # Épaisseur des lignes de verticales
-        line_width2=5 # épaisseur horizontale 
+        # color = BLACK
+        # color1=(255,20,20)
+        # x, y = self.case_degat  # Position de la case
+        # half_size = CELL_SIZE // 2  # La moitié de la taille d'une cellule
+        # line_width1 = 10  # Épaisseur des lignes de verticales
+        # line_width2=5 # épaisseur horizontale 
 
         degat=1600
         
@@ -161,26 +158,26 @@ class Game:
                     print("joueur a été blaissé")
                   
                 
-        # dessine le fond:
-        pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
+        # # dessine le fond:
+        # pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
 
-        # Dessiner la ligne verticale
-        pygame.draw.line(
-            screen, 
-            color, 
-            (x * CELL_SIZE + half_size , y * CELL_SIZE+5),  # Début de la ligne
-            (x * CELL_SIZE + half_size , y * CELL_SIZE + CELL_SIZE-5),  # Fin de la ligne
-            line_width1  # Épaisseur
-        )
+        # # Dessiner la ligne verticale
+        # pygame.draw.line(
+        #     screen, 
+        #     color, 
+        #     (x * CELL_SIZE + half_size , y * CELL_SIZE+5),  # Début de la ligne
+        #     (x * CELL_SIZE + half_size , y * CELL_SIZE + CELL_SIZE-5),  # Fin de la ligne
+        #     line_width1  # Épaisseur
+        # )
 
-        # Dessiner la ligne horizontale
-        pygame.draw.line(
-            screen, 
-            color, 
-            (x * CELL_SIZE+10, y * CELL_SIZE + 35 ),  # Début de la ligne
-            (x * CELL_SIZE + CELL_SIZE-10, y * CELL_SIZE + 35),  # Fin de la ligne
-            line_width2  # Épaisseur
-        )                       
+        # # Dessiner la ligne horizontale
+        # pygame.draw.line(
+        #     screen, 
+        #     color, 
+        #     (x * CELL_SIZE+10, y * CELL_SIZE + 35 ),  # Début de la ligne
+        #     (x * CELL_SIZE + CELL_SIZE-10, y * CELL_SIZE + 35),  # Fin de la ligne
+        #     line_width2  # Épaisseur
+        # )                       
 
     def handle_player_turn(self):
         """Tour du joueur"""
