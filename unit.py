@@ -158,8 +158,8 @@ class Unit():
 
             for dx, dy in perso.offsets:
                 # Calcul des coordonnées de la case
-                green_x = self.x + dx # pas encore implementer dans la liste qui dessine les cases
-                green_y = self.y + dy
+                green_x = self.x + dx 
+                green_y = self.y + dy 
 
                 # PREMIERE VERIFICATION: Vérifier que la case est dans les limites de la grille
                 if 0 <= green_x < GRID_SIZE_x and 0 <= green_y < GRID_SIZE_y:
