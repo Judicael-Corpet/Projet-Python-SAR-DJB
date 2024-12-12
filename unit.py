@@ -68,6 +68,47 @@ class Unit():
 
 
     def update_green_case(self,player_units,enemy_units): # méthode permettant de mettre à jour les cases de déplacement
+        
+        if self.name == "Captain_America" : 
+            perso = perso_Captain_america(self.x,self.y,self.size, self.game)            
+        elif self.name == "Hulk" :
+            perso = perso_Hulk(self.x,self.y,self.size, self.game)           
+        elif self.name == "Ironman" :
+            perso = perso_Ironman(self.x,self.y,self.size, self.game)           
+        elif self.name == "Spiderman" :
+            perso = perso_Spiderman(self.x,self.y,self.size, self.game)           
+        elif self.name == "Thor" :
+            perso = perso_Thor(self.x,self.y,self.size, self.game)           
+        elif self.name == "Groot" : 
+            perso = perso_Groot(self.x,self.y,self.size, self.game)            
+        elif self.name == "Wolverine" :
+            perso = perso_Wolverine(self.x,self.y,self.size, self.game)            
+        elif self.name == "Black_Panther" :
+            perso = perso_Black_panther(self.x,self.y,self.size, self.game)           
+        elif self.name == "Starlord" :
+            perso = perso_Starlord(self.x,self.y,self.size, self.game)           
+        elif self.name == "Yondu" :
+            perso = perso_Yondu(self.x,self.y,self.size, self.game)           
+        elif self.name == "Torch" : 
+            perso = perso_Torch(self.x,self.y,self.size, self.game)           
+        elif self.name == "Jane_Storm" :
+            perso = perso_Jane_storm(self.x,self.y,self.size, self.game)           
+        elif self.name == "Chose" :    
+            perso = perso_Chose(self.x,self.y,self.size, self.game)            
+        elif self.name == "Dr_Strange" :
+            perso = perso_Dr_strange(self.x,self.y,self.size, self.game)
+        else:
+            raise ValueError(f"Personnage non reconnu : {self.name}")
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         self.green_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.green_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
         
@@ -110,12 +151,12 @@ class Unit():
         
         if self.is_selected:
             # Définir les déplacements possibles : orthogonaux + diagonales proches
-            offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
-                (0, 0)] #la case ou se trouve déjà le personnage, au cas où il ne souhaite pas se déplacer
+            # offsets = [
+            #     (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+            #     (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+            #     (0, 0)] #la case ou se trouve déjà le personnage, au cas où il ne souhaite pas se déplacer
 
-            for dx, dy in offsets:
+            for dx, dy in perso.offsets:
                 # Calcul des coordonnées de la case
                 green_x = self.x + dx # pas encore implementer dans la liste qui dessine les cases
                 green_y = self.y + dy
@@ -542,6 +583,11 @@ class perso_Captain_america(Unit):
         self.defense = 75
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings","Lancer_bouclier" ]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),(-3, 0), (3, 0), (0, -3), (0, 3),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
 
     def get_health (self):
         return self.__health    
@@ -556,6 +602,12 @@ class perso_Hulk(Unit) :
         self.defense = 90
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings", "Casser_les_murs"]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
+        
 
     def get_health (self):
         return self.__health
@@ -570,6 +622,11 @@ class perso_Ironman (Unit) :
         self.defense = 75
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings","Laser", "Missile"]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
 
     def get_health (self):
         return self.__health    
@@ -584,6 +641,11 @@ class perso_Spiderman(Unit) :
         self.defense = 50
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings","Bloquer_adversaire", "Attaque_toile"]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
 
     def get_health (self):
         return self.__health    
@@ -598,6 +660,11 @@ class perso_Thor(Unit) :
         self.defense = 75
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings","Marteau", "Foudre"]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
     
     def get_health (self):
         return self.__health
@@ -612,6 +679,11 @@ class perso_Groot(Unit) :
         self.defense = 30
         self.attack_power = 10
         self.list_attaques = ["Aucune Action","Attaque_branche", "Protection"]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
     
     def get_health (self):
         return self.__health
@@ -626,6 +698,11 @@ class perso_Wolverine(Unit) :
         self.defense = 75
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings","Griffes"]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
 
     def get_health (self):
         return self.__health    
@@ -640,6 +717,11 @@ class perso_Black_panther(Unit) :
         self.defense = 30
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings","Griffes"]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
 
     def get_health (self):
         return self.__health    
@@ -654,6 +736,11 @@ class perso_Starlord (Unit) :
         self.defense = 30
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings","Pistolets"]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
 
     def get_health (self):
         return self.__health    
@@ -668,6 +755,11 @@ class  perso_Yondu(Unit):
         self.defense = 50
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings","Fleche_Yaka"]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
 
     def get_health (self):
         return self.__health    
@@ -682,6 +774,11 @@ class perso_Torch(Unit) :
         self.defense = 40
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings","Boule_de_feu"]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
 
     def get_health (self):
         return self.__health        
@@ -696,6 +793,11 @@ class perso_Jane_storm(Unit) :
         self.defense = 30
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings","Soigner"]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
 
     def get_health (self):
         return self.__health    
@@ -710,6 +812,11 @@ class perso_Chose(Unit) :
         self.defense = 80
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings","Casser_les_murs"]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
 
     def get_health (self):
         return self.__health    
@@ -724,6 +831,11 @@ class perso_Dr_strange(Unit) :
         self.defense = 80
         self.attack_power = 10
         self.list_attaques = ["Aucune Action", "Poings","Bloquer_adversaire","Projectile" ]
+        
+        self.offsets = [
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (0, 0)]
 
     def get_health (self):
         return self.__health

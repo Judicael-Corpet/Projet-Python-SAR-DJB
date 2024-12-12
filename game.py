@@ -98,9 +98,6 @@ class Game:
     def cases_soin(self, screen):
      
         self.case_soin=[[23,10],[24,10],[24,9],[23,9],[7,17],[8,17],[7,18],[8,18]]
-        
-
-        
         color = WHITE
         color1=(20,255,20)
         half_size = CELL_SIZE // 2  # La moitié de la taille d'une cellule
