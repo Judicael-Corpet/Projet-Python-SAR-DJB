@@ -150,11 +150,6 @@ class Unit():
                 self.cases.append((x,y))
         
         if self.is_selected:
-            # Définir les déplacements possibles : orthogonaux + diagonales proches
-            # offsets = [
-            #     (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-            #     (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
-            #     (0, 0)] #la case ou se trouve déjà le personnage, au cas où il ne souhaite pas se déplacer
 
             for dx, dy in perso.offsets:
                 # Calcul des coordonnées de la case
