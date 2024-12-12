@@ -364,11 +364,14 @@ class Game:
         for enemy in self.enemy_units:
             
             enemy_selected = enemy.attribuer_class_perso()
-            #enemy_health = enemy_selected.get_health()
+            print(f"LENNEMI CHOISI EST {enemy_selected.name}")
+            
             enemy.is_selected  = True 
             enemy.update_green_case(self.player_units,self.enemy_units)   
             #Choix d'une cible au hasard    
-            target = random.choice(self.player_units) 
+            target = random.choice(self.player_units)
+            i = self.player_units.index(target) 
+            print (f"indice pour le choix du joueur ciblé est i = {i}")
             # Déplacement vers la cible
             dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
             dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
@@ -376,28 +379,31 @@ class Game:
           
             
             # Attaque si possible
-            for i, player in enumerate(self.player_units) :
-                player_selected = player.attribuer_class_perso() 
-                #choix d'une attaque
-                if abs(enemy.x - player_selected.x) <= enemy.distance_maxi_attack and abs(enemy.y - player_selected.y) <= enemy.distance_maxi_attack :
-                    enemy_attack = random.choice(enemy_selected.list_attaques[1:])
-                    indice = enemy_selected.list_attaques.index(enemy_attack)
-                    enemy_attack_selected = enemy_selected.attribuer_class_attaque(indice) 
-                    player_health = self.list_player_health[i]
-                    new_player_health = enemy_selected.attack(enemy_attack_selected, player_selected, player_health)
-                    self.list_player_health[i] = new_player_health
-                else :
-                    enemy_attack_selected = Aucune_action()
+            
+            player_selected = target.attribuer_class_perso() 
+            #choix d'une attaque
+            if abs(enemy.x - player_selected.x) <= enemy.distance_maxi_attack and abs(enemy.y - player_selected.y) <= enemy.distance_maxi_attack :
+                enemy_attack = random.choice(enemy_selected.list_attaques[1:])
+                indice = enemy_selected.list_attaques.index(enemy_attack)
+                print (f"indice pour l'attaque enemy est {indice}" )
+                enemy_attack_selected = enemy_selected.attribuer_class_attaque(indice) 
+                print (f"l'attaque enemy est {enemy_attack_selected.name}")
+                player_health = self.list_player_health[i]
+                print (f"MA VIE NE TIENT QU'A {player_health}")
+                new_player_health = enemy_selected.eni_attack(enemy_attack_selected, player_selected, player_health)
+                self.list_player_health[i] = new_player_health
+                print (f"QUE TREPAS SI JE FAIS BLI {new_player_health}")
+            else :
+                enemy_attack_selected = Aucune_action()
+                print("J'ai choisi de ne pas attaquer")
 
-                    player_health = self.list_player_health[i]
-                    new_player_health = enemy_selected.attack(enemy_attack_selected, player_selected, player_health)
-                    self.list_player_health[i] = new_player_health
+                player_health = self.list_player_health[i]
 
-                if player_health <= 0:
-                    print(f"{player.name} est mort")
-                    self.player_units.remove(player)
-                
-                self.flip_display()
+            if player_health <= 0:
+                print(f"{target.name} est mort")
+                self.player_units.remove(target)
+            
+            self.flip_display()
 
             enemy.is_selected = False
             pygame.time.wait(1000)
@@ -567,8 +573,7 @@ def main():
                              #Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55])]#, 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
     player1 = Unit(game.Choix_Personnages_1.game_personnage, 15, 10, [32,32], game)
     hero1 = player1.attribuer_class_perso()
-    if hero1 :
-        hero_health1 = hero1.get_health()
+    hero_health1 = hero1.get_health()
     game.player_units.append(player1)
     game.list_player_health.append(hero_health1)
     player2 = Unit(game.Choix_Personnages_2.game_personnage, 15, 12, [32,32], game)

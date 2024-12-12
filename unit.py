@@ -225,17 +225,17 @@ class Unit():
       
     def attack(self, type_attack, target, target_health): # méthode utilisée pour les attaques
         """Attaque une unité cible."""
-        #target_health = target.get_health()
-        #print (f"Lattaque selectionnee pour la methode attack {self.attaque_selectionne.name}")
-        if type_attack == "Soigner" :
+        
+        if type_attack.name == "Soigner" :
             for target in self.player_units :
                 for red_x, red_y in self.red_cases :
                     if target.x == red_x and  target.y == red_y :
                         target_health = target.health_max
                     else :
                         target_health = target_health
+           
         
-        elif type_attack == "Casser_les_murs" :
+        elif type_attack.name == "Casser_les_murs" :
             for red_x, red_y in self.red_cases :
                     if target.x == red_x and  target.y == red_y :
                         target.defense = 0
@@ -247,6 +247,30 @@ class Unit():
                 
                 else :
                     target_health = target_health
+
+        return target_health
+    
+
+    def eni_attack(self, type_attack, target, target_health): # méthode utilisée pour les attaques
+        """Attaque une unité cible."""
+        
+        if type_attack.name == "Soigner" :
+            for target in self.enemy_units :
+                if abs(target.x - self.x) == 1 and  abs(target.y-self.x) == 1 :
+                    target_health = target.health_max
+                else :
+                    target_health = target_health           
+        
+        elif type_attack.name == "Casser_les_murs" :
+            if abs(target.x - self.x) == 1 and  abs(target.y-self.x) == 1 :
+                target.defense = 0
+
+        else :
+            if abs(target.x - self.x) <= 2 and  abs(target.y-self.y) <= 2 :
+                target_health = target_health - type_attack.attack_power*type_attack.precision*(1 - target.defense/100)/type_attack.distance_attack
+                
+            else :
+                target_health = target_health
 
         return target_health
     
