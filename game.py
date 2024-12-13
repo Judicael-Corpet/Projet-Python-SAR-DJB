@@ -428,7 +428,29 @@ class Game:
         logo_marvel=pygame.image.load('Marvel_Logo.svg.png')
         logo_marvel=pygame.transform.scale(logo_marvel,(32*9,32*3))
         self.screen.blit(logo_marvel,(32*4,12))
-        
+
+        # Dessine le texte
+        porte=pygame.image.load('porte.png')
+        porte=pygame.transform.scale(porte,(32,32))
+        self.screen.blit(porte,(32*25 + 10,32*18 + 10))
+        teleport=pygame.image.load('texte_case_teleportation.png')
+        teleport=pygame.transform.scale(teleport,(32*6,32))
+        self.screen.blit(teleport,(32*26 + 10,32*18 + 10))
+
+        soin=pygame.image.load('Soin.png')
+        soin=pygame.transform.scale(soin,(32,32))
+        self.screen.blit(soin,(32*25 + 10,32*19 + 10))
+        soin_texte=pygame.image.load('texte_case_soin.png')
+        soin_texte=pygame.transform.scale(soin_texte,(32*3,32))
+        self.screen.blit(soin_texte,(32*26 + 10,32*19 + 10))
+
+        degat=pygame.image.load('degat.png')
+        degat=pygame.transform.scale(degat,(32,32))
+        self.screen.blit(degat,(32*25 + 10, 32*20 + 10))
+        degat_texte=pygame.image.load('texte_case_degat.png')
+        degat_texte=pygame.transform.scale(degat_texte,(32*4 - 15,32))
+        self.screen.blit(degat_texte,(32*26 + 10,32*20 + 10))
+
         # Dessine cases de téléportations
         self.cases_teleportation(self.screen)
         # Dessine cases soins
