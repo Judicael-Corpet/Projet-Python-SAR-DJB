@@ -21,6 +21,11 @@ Dans la section Credits :
   - Utilisation des flèches pour vous déplacer et choisir les compétences à utiliser.
   - Utilisation de la barre d'espace pour valider un déplacement.
   - Utilisation de la touche Entrée pour valider une compétence.
+  
+  La carte contient des informations sur les cases spéciales (Téléportation, Soin, Dégât).
+  Les cases vertes montrent les déplacements possibles et les cases rouges les attaques.
+  Les barres de vie bleues deviennent rouge au fur et à mesure que les personnages perdent des points de vie.
+  
 
   Nous vous souhaitons de passer un très bon moment !
   
