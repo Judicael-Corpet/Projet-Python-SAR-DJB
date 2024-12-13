@@ -2109,7 +2109,7 @@ class Mode(Menu):
         self.state = '1_Joueur'
         self.volx, self.voly = self.mid_w, self.mid_h
         self.backx, self.backy = self.mid_w, self.mid_h + 60
-        self.cursor_rect.midtop = (self.backx + self.offset - 50, self.voly  + 10)
+        self.cursor_rect.midtop = (self.backx + self.offset - 100, self.voly  + 10)
 
     def display_menu(self):
         self.run_display = True
@@ -2126,11 +2126,11 @@ class Mode(Menu):
             self.game.draw_text_black('Mode', 150, self.game.DISPLAY_W / 2 - 3, self.game.DISPLAY_H / 2 - 230)
             self.game.draw_text_white('Mode', 150, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 230)
 
-            self.game.draw_text_black("1 Joueur", 50, self.volx, self.voly - 2)
-            self.game.draw_text_black("1 Joueur", 50, self.volx, self.voly + 2)
-            self.game.draw_text_black("1 Joueur", 50, self.volx - 2, self.voly)
-            self.game.draw_text_black("1 Joueur", 50, self.volx + 2, self.voly)
-            self.game.draw_text_white("1 Joueur", 50, self.volx, self.voly)
+            self.game.draw_text_black("1 Joueur VS IA", 50, self.volx, self.voly - 2)
+            self.game.draw_text_black("1 Joueur VS IA", 50, self.volx, self.voly + 2)
+            self.game.draw_text_black("1 Joueur VS IA", 50, self.volx - 2, self.voly)
+            self.game.draw_text_black("1 Joueur VS IA", 50, self.volx + 2, self.voly)
+            self.game.draw_text_white("1 Joueur VS IA", 50, self.volx, self.voly)
 
             self.game.draw_text_black("2 Joueurs", 50, self.backx, self.backy - 2)
             self.game.draw_text_black("2 Joueurs", 50, self.backx, self.backy + 2)
@@ -2178,7 +2178,7 @@ class Mode(Menu):
                 self.state = '1_Joueur'
                 if self.game.Musique :
                     self.game.sound_manager.bruit('Blop')
-                self.cursor_rect.midtop = (self.backx + self.offset- 50, self.voly + 10)
+                self.cursor_rect.midtop = (self.backx + self.offset- 100, self.voly + 10)
             
         elif self.game.UP_KEY :
             if self.state == '1_Joueur':
@@ -2190,7 +2190,7 @@ class Mode(Menu):
                 self.state = '1_Joueur'
                 if self.game.Musique :
                     self.game.sound_manager.bruit('Blop')
-                self.cursor_rect.midtop = (self.backx + self.offset- 50, self.voly + 10)
+                self.cursor_rect.midtop = (self.backx + self.offset- 100, self.voly + 10)
             elif self.state == 'Back':
                 self.state = '2_Joueurs'
                 if self.game.Musique :
