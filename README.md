@@ -9,11 +9,11 @@ Dans la section Start Game :
 - Il y aura un choix de 14 personnages avec des compétences et des designs différents. A vous de composer la meilleure équipe pour gagner à tous les coups. Les deux premiers choix seront pour le premier joueur, les deux suivants pour l'IA ou le deuxième joueur.
 - Il y a la possibilité de prendre 4 fois le même personnage ou de revenir à l'écran d'accueil pour changer des options de jeu.
 - Utilisation de la touche Entrée pour valider le choix d'un personnage.
-- 
+  
 Dans la section Options :
 - Il est possible via le menu de choisir d'utiliser le son (ce qui permet une expérience plus immersive du jeu) ou de l'enlever.
 - Il est aussi possible de choisir le mode de jeu : un joueur contre une IA ou un joueur contre un autre joueur.
-- 
+  
 Dans la section Credits :
 - Nous avons le nom de tous les contributeurs à la conception et réalisation du jeu.
 
