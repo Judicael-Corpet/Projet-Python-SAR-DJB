@@ -142,7 +142,7 @@ class Game:
         # line_width1 = 10  # Épaisseur des lignes de verticales
         # line_width2=5 # épaisseur horizontale 
 
-        degat = 40
+        degat = 5
         
         for i, player in enumerate(self.player_units) :
             for j in range(0,len(self.case_degat)):
