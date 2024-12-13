@@ -141,6 +141,7 @@ class Unit():
                 self.cases.append((x,y)) 
         
         for x in range(0,5):
+            
             for y in range(14,16):
                 self.cases.append((x,y)) 
                 

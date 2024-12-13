@@ -2,9 +2,15 @@ import pygame
 import random
 import pytmx
 import pyscroll
+import pygame
+from moviepy import VideoFileClip
+
 from unit import *
 from menu import *
 from sound import *
+
+
+
 
 fond = pygame.image.load('Fond_ecran.png')
 
@@ -97,12 +103,12 @@ class Game:
                 
     def cases_soin(self, screen):
      
-        self.case_soin=[[23,10],[24,10],[24,9],[23,9],[7,17],[8,17],[7,18],[8,18]]
+        self.case_soin=[[23,10],[24,10],[24,11],[23,11],[7,17],[8,17],[7,18],[8,18]]
         color = WHITE
         color1=(20,255,20)
         half_size = CELL_SIZE // 2  # La moitié de la taille d'une cellule
         line_width = 15  # Épaisseur des lignes de la croix
-        #bonus_health=30
+      
         for i, player in enumerate(self.player_units):
             for j in range(0,len(self.case_soin)):
                 if player.x==self.case_soin[j][0] and player.y== self.case_soin[j][1]:
@@ -278,6 +284,8 @@ class Game:
         for selected_unit in self.enemy_units:
             selected_unit.is_selected = True
             has_acted = False
+            
+    
             selected_unit.update_green_case(self.enemy_units, self.player_units)
             hero_selected = selected_unit.attribuer_class_perso()
             #health = hero_selected.get_health()
@@ -547,9 +555,24 @@ class Game:
         text_rect.center = (x,y)
         self.display.blit(text_surface,text_rect)
     
+    # Fonction pour afficher la vidéo
+    def play_video(self,clip):
+        clock = pygame.time.Clock()
+        for frame in clip.iter_frames(fps=30, dtype="uint8"):
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return
+            
+            # Convertir l'image pour Pygame et l'afficher
+            pygame_frame = pygame.surfarray.make_surface(frame.swapaxes(0, 1))
+            self.screen.blit(pygame_frame, (0, 0))
+            pygame.display.update()
+            clock.tick(30)
 
 def main():
 
+    
+    
     # Initialisation de Pygame
     pygame.init()
     
@@ -559,7 +582,10 @@ def main():
     
     # Instanciation du jeu
     game = Game(screen)
-
+    
+    clip = VideoFileClip("intro_video.mp4")
+    game.play_video(clip)
+    
     while game.running:
         game.curr_menu.display_menu()
         if (game.playing):
