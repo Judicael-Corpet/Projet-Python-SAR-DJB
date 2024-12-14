@@ -1,4 +1,3 @@
-
 import pygame
 import random
 
@@ -142,6 +141,7 @@ class Unit():
                 self.cases.append((x,y)) 
         
         for x in range(0,5):
+            
             for y in range(14,16):
                 self.cases.append((x,y)) 
                 
@@ -1133,6 +1133,5 @@ class Projectile(Unit) :
         self.quantite = 3
         self.distance_attack = 3
         self.precision = random.uniform(0.5, 1)
-
 
 
