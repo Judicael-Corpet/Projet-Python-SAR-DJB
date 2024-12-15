@@ -271,7 +271,7 @@ class Unit():
             for red_x, red_y in self.red_cases :
                     if target.x == red_x and  target.y == red_y :
                         target.defense = 0
-                        target_health = target_health - type_attack.attack_power*type_attack.precision*(1 - target.defense/100)/type_attack.distance_attack
+                        target_health = target_health - type_attack.attack_power*type_attacf.chance*(1 - target.defense/100)/type_attack.distance_attack
 
         elif type_attack.name == "Protection" :
             for red_x, red_y in self.red_cases :
@@ -281,7 +281,7 @@ class Unit():
         else :
             for red_x, red_y in self.red_cases :
                 if target.x == red_x and  target.y == red_y :
-                    target_health = target_health - type_attack.attack_power*type_attack.precision*(1 - target.defense/100)/type_attack.distance_attack
+                    target_health = target_health - type_attack.attack_power*type_attacf.chance*(1 - target.defense/100)/type_attack.distance_attack
                 
                 else :
                     target_health = target_health
@@ -305,7 +305,7 @@ class Unit():
 
         else :
             if abs(target.x - self.x) <= 2 and  abs(target.y-self.y) <= 2 :
-                target_health = target_health - type_attack.attack_power*type_attack.precision*(1 - target.defense/100)/type_attack.distance_attack
+                target_health = target_health - type_attack.attack_power*type_attacf.chance*(1 - target.defense/100)/type_attack.distance_attack
                 
             else :
                 target_health = target_health
@@ -881,7 +881,7 @@ class Aucune_action(Unit) :
         self.attack_power = 0
         self.quantite = 100
         self.distance_attack = 1
-        self.precision = 0
+        self.chance = 0
 
 class Poings(Unit) :
     def __init__(self) :
@@ -893,7 +893,7 @@ class Poings(Unit) :
         self.attack_power = 30
         self.quantite = 100
         self.distance_attack = 1
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 
 class Griffes(Unit) :
     def __init__(self):
@@ -905,7 +905,7 @@ class Griffes(Unit) :
         self.attack_power = 60
         self.quantite = 2
         self.distance_attack = 2
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 
 class Lancer_bouclier(Unit) :
     def __init__(self):
@@ -918,7 +918,7 @@ class Lancer_bouclier(Unit) :
         self.attack_power = 50
         self.quantite = 3
         self.distance_attack = 3
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 
 class Briser_les_defenses(Unit) :
     def __init__(self):
@@ -930,7 +930,7 @@ class Briser_les_defenses(Unit) :
         self.attack_power = 100
         self.quantite = 1
         self.distance_attack = 1
-        self.precision = random.uniform(0.5, 1)     
+        self.chance = random.uniform(0.5, 1)     
 class Laser(Unit) :
     def __init__(self):
         self.name = "Laser"
@@ -946,7 +946,7 @@ class Laser(Unit) :
         self.attack_power = 100
         self. quantite = 1
         self.distance_attack = 5
-        self.precision = random.uniform(0.5, 1)       
+        self.chance = random.uniform(0.5, 1)       
 class Missile (Unit):
     def __init__(self):
         self.name = "Missile"
@@ -962,7 +962,7 @@ class Missile (Unit):
         self.attack_power = 110
         self.quantite = 1
         self.distance_attack = 5
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 class Bloquer_adversaire (Unit):
     def __init__(self):
         self.name = "Bloquer_adversaire"
@@ -978,7 +978,7 @@ class Bloquer_adversaire (Unit):
         self.attack_power = 40
         self.quantite = 1
         self.distance_attack = 4
-        self.precision = random.uniform(0.5, 1)        
+        self.chance = random.uniform(0.5, 1)        
 
 class Attaque_toile (Unit):
     def __init__(self):
@@ -993,7 +993,7 @@ class Attaque_toile (Unit):
         self.attack_power = 50
         self.quantite = 3
         self.distance_attack = 3
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 class Marteau (Unit):
     def __init__(self):
         self.name = "Marteau"
@@ -1009,7 +1009,7 @@ class Marteau (Unit):
         self.attack_power = 130
         self.quantite = 1
         self.distance_attack = 5
-        self.precision = random.uniform(0.5, 1)        
+        self.chance = random.uniform(0.5, 1)        
 class Foudre (Unit):
     def __init__(self):
         self.name = "Foudre"
@@ -1025,7 +1025,7 @@ class Foudre (Unit):
         self.attack_power = 150
         self.quantite = 1
         self.distance_attack = 6
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 class Attaque_branche(Unit) :
     def __init__(self):
         self.name = "Attaque_branche"
@@ -1038,7 +1038,7 @@ class Attaque_branche(Unit) :
         self.attack_power = 40
         self.quantite = 100
         self.distance_attack = 3
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 
 class Protection (Unit):
     def __init__(self):
@@ -1052,7 +1052,7 @@ class Protection (Unit):
         self.attack_power = 150
         self.temps = 1
         self.distance_attack = 1
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
         
 class Pistolets(Unit) :
     def __init__(self):
@@ -1069,7 +1069,7 @@ class Pistolets(Unit) :
         self.attack_power = 120
         self.quantite = 10
         self.distance_attack = 4
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 
 class Fleche_yaka(Unit) :
     def __init__(self):
@@ -1091,7 +1091,7 @@ class Fleche_yaka(Unit) :
         self.attack_power = 100
         self.quantite = 1
         self.distance_attack = 1
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 
 class Boule_de_feu (Unit):
     def __init__(self):
@@ -1108,7 +1108,7 @@ class Boule_de_feu (Unit):
         self.attack_power = 150
         self.quantite = 1
         self.distance_attack = 5
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
       
 class Soigner (Unit):
     def __init__(self):
@@ -1120,7 +1120,7 @@ class Soigner (Unit):
         self.attack_power = 150
         self.quantite = 2
         self.distance_attack = 1
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 class Projectile(Unit) :
     def __init__(self):
         self.name = "Projectile"
@@ -1136,7 +1136,7 @@ class Projectile(Unit) :
         self.attack_power = 100
         self.quantite = 3
         self.distance_attack = 3
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 
 
 
