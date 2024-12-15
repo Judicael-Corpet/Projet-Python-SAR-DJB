@@ -271,7 +271,7 @@ class Unit():
             for red_x, red_y in self.red_cases :
                     if target.x == red_x and  target.y == red_y :
                         target.defense = 0
-                        target_health = target_health - type_attack.attack_power*type_attacf.chance*(1 - target.defense/100)/type_attack.distance_attack
+                        target_health = target_health - type_attack.attack_power*type_attack.chance*(1 - target.defense/100)/type_attack.distance_attack
 
         elif type_attack.name == "Protection" :
             for red_x, red_y in self.red_cases :
@@ -281,7 +281,7 @@ class Unit():
         else :
             for red_x, red_y in self.red_cases :
                 if target.x == red_x and  target.y == red_y :
-                    target_health = target_health - type_attack.attack_power*type_attacf.chance*(1 - target.defense/100)/type_attack.distance_attack
+                    target_health = target_health - type_attack.attack_power*type_attack.chance*(1 - target.defense/100)/type_attack.distance_attack
                 
                 else :
                     target_health = target_health
@@ -305,7 +305,7 @@ class Unit():
 
         else :
             if abs(target.x - self.x) <= 2 and  abs(target.y-self.y) <= 2 :
-                target_health = target_health - type_attack.attack_power*type_attacf.chance*(1 - target.defense/100)/type_attack.distance_attack
+                target_health = target_health - type_attack.attack_power*type_attack.chance*(1 - target.defense/100)/type_attack.distance_attack
                 
             else :
                 target_health = target_health
