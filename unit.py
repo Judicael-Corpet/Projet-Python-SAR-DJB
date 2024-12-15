@@ -69,45 +69,8 @@ class Unit():
 
     def update_green_case(self,player_units,enemy_units): # méthode permettant de mettre à jour les cases de déplacement
         
-        if self.name == "Captain_America" : 
-            perso = perso_Captain_america(self.x,self.y,self.size, self.game)            
-        elif self.name == "Hulk" :
-            perso = perso_Hulk(self.x,self.y,self.size, self.game)           
-        elif self.name == "Ironman" :
-            perso = perso_Ironman(self.x,self.y,self.size, self.game)           
-        elif self.name == "Spiderman" :
-            perso = perso_Spiderman(self.x,self.y,self.size, self.game)           
-        elif self.name == "Thor" :
-            perso = perso_Thor(self.x,self.y,self.size, self.game)           
-        elif self.name == "Groot" : 
-            perso = perso_Groot(self.x,self.y,self.size, self.game)            
-        elif self.name == "Wolverine" :
-            perso = perso_Wolverine(self.x,self.y,self.size, self.game)            
-        elif self.name == "Black_Panther" :
-            perso = perso_Black_panther(self.x,self.y,self.size, self.game)           
-        elif self.name == "Starlord" :
-            perso = perso_Starlord(self.x,self.y,self.size, self.game)           
-        elif self.name == "Yondu" :
-            perso = perso_Yondu(self.x,self.y,self.size, self.game)           
-        elif self.name == "Torch" : 
-            perso = perso_Torch(self.x,self.y,self.size, self.game)           
-        elif self.name == "Jane_Storm" :
-            perso = perso_Jane_storm(self.x,self.y,self.size, self.game)           
-        elif self.name == "Chose" :    
-            perso = perso_Chose(self.x,self.y,self.size, self.game)            
-        elif self.name == "Dr_Strange" :
-            perso = perso_Dr_strange(self.x,self.y,self.size, self.game)
-        else:
-            raise ValueError(f"Personnage non reconnu : {self.name}")
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        for player in player_units :
+            perso = player.attribuer_class_perso()
         
         self.green_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.green_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
