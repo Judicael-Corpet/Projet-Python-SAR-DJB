@@ -1110,7 +1110,7 @@ class Boule_de_feu (Unit):
         self.distance_attack = 5
         self.precision = random.uniform(0.5, 1)
       
-class Soigner (Comptences):
+class Soigner (Unit):
     def __init__(self):
         self.name = "Soigner"
         self.offsets = [
