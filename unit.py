@@ -267,6 +267,11 @@ class Unit():
                     if target.x == red_x and  target.y == red_y :
                         target.defense = 0
 
+        elif type_attack.name == "Protection" :
+            for red_x, red_y in self.red_cases :
+                    if target.x == red_x and  target.y == red_y :
+                        target.defense = 0
+
         else :
             for red_x, red_y in self.red_cases :
                 if target.x == red_x and  target.y == red_y :
@@ -891,7 +896,7 @@ class Griffes(Unit) :
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 (-2, 0), (2, 0), (0, -2), (0, 2) ]
         self.attack_power = 60
-        self.quantite = 3
+        self.quantite = 2
         self.distance_attack = 2
         self.precision = random.uniform(0.5, 1)
 
@@ -907,7 +912,7 @@ class Lancer_bouclier(Unit) :
         self.quantite = 3
         self.distance_attack = 3
         self.precision = random.uniform(0.5, 1)
- _
+
 class Briser_les_defenses(Unit) :
     def __init__(self):
         self.name = "Briser_les_defenses"
@@ -975,7 +980,7 @@ class Bloquer_adversaire (Unit):
                 ]
         self.temps = 3
         self.attack_power = 40
-        self.quantite = 2
+        self.quantite = 1
         self.distance_attack = 4
         self.precision = random.uniform(0.5, 1)        
 
@@ -1007,7 +1012,7 @@ class Marteau (Unit):
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
         self.attack_power = 130
-        self.quantite = 2
+        self.quantite = 1
         self.distance_attack = 5
         self.precision = random.uniform(0.5, 1)
         
@@ -1099,7 +1104,7 @@ class Fleche_yaka(Unit) :
                 (-1, -3), (-1, 3), (1, -3), (1, 3)  # Diagonales proches
                 ]
         self.attack_power = 100
-        self.quantite = 3
+        self.quantite = 1
         self.distance_attack = 1
         self.precision = random.uniform(0.5, 1)
 
@@ -1116,7 +1121,7 @@ class Boule_de_feu (Unit):
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
         self.attack_power = 150
-        self.quantite = 3
+        self.quantite = 1
         self.distance_attack = 5
         self.precision = random.uniform(0.5, 1)
 
@@ -1132,7 +1137,7 @@ class Soigner (Unit):
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
         self.attack_power = 150
-        self.quantite = 3
+        self.quantite = 2
         self.distance_attack = 1
         self.precision = random.uniform(0.5, 1)
 

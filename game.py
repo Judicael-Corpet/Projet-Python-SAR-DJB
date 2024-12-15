@@ -66,6 +66,8 @@ class Game:
         pygame.draw.rect(self.screen, (0, 0, 0), (20, 530, 250, 150 ))
         pygame.draw.rect(self.screen, (255, 255, 255), (20, 530, 250, 150), 2)  # Bordure blanche
 
+    
+
         list_attacks = self.attaques
         # Dessiner chaque attaque dans le rectangle
         for i, attaque in enumerate(list_attacks):
