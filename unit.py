@@ -69,8 +69,36 @@ class Unit():
 
     def update_green_case(self,player_units,enemy_units): # méthode permettant de mettre à jour les cases de déplacement
         
-        for player in player_units :
-            perso = player.attribuer_class_perso()
+        if self.name == "Captain_America" : 
+            perso = perso_Captain_america(self.x,self.y,self.size, self.game)            
+        elif self.name == "Hulk" :
+            perso = perso_Hulk(self.x,self.y,self.size, self.game)           
+        elif self.name == "Ironman" :
+            perso = perso_Ironman(self.x,self.y,self.size, self.game)           
+        elif self.name == "Spiderman" :
+            perso = perso_Spiderman(self.x,self.y,self.size, self.game)           
+        elif self.name == "Thor" :
+            perso = perso_Thor(self.x,self.y,self.size, self.game)           
+        elif self.name == "Groot" : 
+            perso = perso_Groot(self.x,self.y,self.size, self.game)            
+        elif self.name == "Wolverine" :
+            perso = perso_Wolverine(self.x,self.y,self.size, self.game)            
+        elif self.name == "Black_Panther" :
+            perso = perso_Black_panther(self.x,self.y,self.size, self.game)           
+        elif self.name == "Starlord" :
+            perso = perso_Starlord(self.x,self.y,self.size, self.game)           
+        elif self.name == "Yondu" :
+            perso = perso_Yondu(self.x,self.y,self.size, self.game)           
+        elif self.name == "Torch" : 
+            perso = perso_Torch(self.x,self.y,self.size, self.game)           
+        elif self.name == "Jane_Storm" :
+            perso = perso_Jane_storm(self.x,self.y,self.size, self.game)           
+        elif self.name == "Chose" :    
+            perso = perso_Chose(self.x,self.y,self.size, self.game)            
+        elif self.name == "Dr_Strange" :
+            perso = perso_Dr_strange(self.x,self.y,self.size, self.game)
+        else:
+            raise ValueError(f"Personnage non reconnu : {self.name}")
         
         self.green_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.green_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
@@ -161,8 +189,8 @@ class Unit():
         elif attack == "Lancer_bouclier" :
             self.attaque_selectionne = Lancer_bouclier()
 
-        elif attack == "Casser_les_murs" :
-            self.attaque_selectionne = Casser_les_murs()
+        elif attack == "Briser_les_defenses" :
+            self.attaque_selectionne = Briser_les_defenses()
         
         elif attack == "Laser" :
             self.attaque_selectionne = Laser()
@@ -202,10 +230,9 @@ class Unit():
 
         elif attack == "Projectile":
             self.attaque_selectionne = Projectile()
+          
 
         if self.is_selected:
-            # Définir les déplacements possibles : orthogonaux + diagonales proches
-            #la case ou se trouve déjà le personnage, au cas où il ne souhaite pas se déplacer
 
             for dx, dy in self.attaque_selectionne.offsets:
                 # Calcul des coordonnées de la case
@@ -235,7 +262,7 @@ class Unit():
                         target_health = target_health
            
         
-        elif type_attack.name == "Casser_les_murs" :
+        elif type_attack.name == "Briser_les_defenses" :
             for red_x, red_y in self.red_cases :
                     if target.x == red_x and  target.y == red_y :
                         target.defense = 0
@@ -261,7 +288,7 @@ class Unit():
                 else :
                     target_health = target_health           
         
-        elif type_attack.name == "Casser_les_murs" :
+        elif type_attack.name == "Briser_les_defenses" :
             if abs(target.x - self.x) == 1 and  abs(target.y-self.x) == 1 :
                 target.defense = 0
 
@@ -279,94 +306,89 @@ class Unit():
         """Affiche l'unité sur l'écran."""
          
         #Pour générer l'image du joueur que l'on a choisi
-        
-        
         if self.name == "Captain_America" :   
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
 
-            
-        
         elif self.name == "Hulk" :           
             self.sprite_sheet = pygame.image.load('personnages/avengers2.jpg.png')
-            self.image = self.get_image(52,0) # get image in this coordinate
+            self.image = self.get_image(52,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Ironman" :
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
-            self.image = self.get_image(150,0) # get image in this coordinate
+            self.image = self.get_image(150,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Spiderman" :
             self.sprite_sheet = pygame.image.load('personnages/avengers3.png')
-            self.image = self.get_image(150,0) # get image in this coordinate
+            self.image = self.get_image(150,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Thor" :
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
-            self.image = self.get_image(295,0) # get image in this coordinate
+            self.image = self.get_image(295,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0])
             
         elif self.name == "Groot" :       
             self.sprite_sheet = pygame.image.load('personnages/galaxy2.png')
-            self.image = self.get_image(150,0) # get image in this coordinate
+            self.image = self.get_image(150,0)
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Wolverine" :
             self.sprite_sheet = pygame.image.load('personnages/x_men.png')
-            self.image = self.get_image(0,192) # get image in this coordinate
+            self.image = self.get_image(0,192) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Black_Panther" :           
             self.sprite_sheet = pygame.image.load('personnages/avengers3.png')
-            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = self.get_image(0,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0])
             
         elif self.name == "Starlord" :
             self.sprite_sheet = pygame.image.load('personnages/galaxy.png')
-            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = self.get_image(0,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Yondu" :
             self.sprite_sheet = pygame.image.load('personnages/galaxy.png')
-            self.image = self.get_image(295,0) # get image in this coordinate
+            self.image = self.get_image(295,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Torch" :
-        
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
-            self.image = self.get_image(295, 193) # get image in this coordinate
+            self.image = self.get_image(295, 193) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Jane_Storm" :
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
-            self.image = self.get_image(150,0) # get image in this coordinate
+            self.image = self.get_image(150,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Chose" :
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
-            self.image = self.get_image(0,193) # get image in this coordinate
+            self.image = self.get_image(0,193) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Dr_Strange" :
             self.sprite_sheet = pygame.image.load('personnages/doctor_strange.png')
-            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = self.get_image(0,0)
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
 
         if self.is_selected:
             pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
@@ -456,8 +478,8 @@ class Unit():
             if self.game.Musique :
                 self.game.sound_manager.bruit("Boomerang")
 
-        elif self.list_attaques[indice] == "Casser_les_murs" :
-            attaque_selectionne = Casser_les_murs()
+        elif self.list_attaques[indice] == "Briser_les_defenses" :
+            attaque_selectionne = Briser_les_defenses()
             if self.game.Musique :
                 self.game.sound_manager.bruit("Casser_mur")
         
@@ -560,12 +582,12 @@ class perso_Hulk(Unit) :
         self.nbre_move = 4
         self.defense = 90
         self.attack_power = 10
-        self.list_attaques = ["Aucune Action", "Poings", "Casser_les_murs"]
+        self.list_attaques = ["Aucune Action", "Poings", "Briser_les_defenses"]
         
         self.offsets = [
                 (-3, 0), (3, 0), (0, -3), (0, 3), 
                 (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
-                (-2, -2), (-2, 2), (2, -2), (2, 2),  
+                (-2, -2), (-2, 2), (2, -2), (2, 2), (1, -2), (1, 2), (-1, -2), (-1, 2), 
                 (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1), 
                 (0, 0)]
         
@@ -588,7 +610,7 @@ class perso_Ironman (Unit) :
                 (-6, 0), (6, 0), (0, -6), (0, 6),
                 (-5, 0), (5, 0), (0, -5), (0, 5),
                 (-4, 0), (4, 0), (0, -4), (0, 4),
-                (-1, -3), (-1, 3), (-2, -3), (-2, 3),
+                (-1, -3), (-1, 3), (-2, -3), (-2, 3), (1, -3), (1, 3), (2, -3), (2, 3),
                 (-3, 0), (3, 0), (0, -3), (0, 3), (-3, -1), (-3, 1), (3, -1), (3, 1),
                 (-3, -2), (-3, 2), (3, -2), (3, 2), (-3, -3), (-3, 3), (3, -3), (3, 3), 
                 (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
@@ -614,7 +636,7 @@ class perso_Spiderman(Unit) :
                 (-4, 0), (4, 0), (0, -4), (0, 4),
                 (-3, 0), (3, 0), (0, -3), (0, 3), 
                 (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
-                (-2, -2), (-2, 2), (2, -2), (2, 2), 
+                (-2, -2), (-2, 2), (2, -2), (2, 2), (1, -2), (1, 2), (-1, -2), (-1, 2),
                 (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1), 
                 (0, 0)]
 
@@ -636,7 +658,7 @@ class perso_Thor(Unit) :
                 (-6, 0), (6, 0), (0, -6), (0, 6),
                 (-5, 0), (5, 0), (0, -5), (0, 5),
                 (-4, 0), (4, 0), (0, -4), (0, 4),
-                (-1, -3), (-1, 3), (-2, -3), (-2, 3),
+                (-1, -3), (-1, 3), (-2, -3), (-2, 3), (1, -3), (1, 3), (2, -3), (2, 3),
                 (-3, 0), (3, 0), (0, -3), (0, 3), (-3, -1), (-3, 1), (3, -1), (3, 1),
                 (-3, -2), (-3, 2), (3, -2), (3, 2), (-3, -3), (-3, 3), (3, -3), (3, 3), 
                 (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
@@ -716,11 +738,11 @@ class perso_Starlord (Unit) :
         self.list_attaques = ["Aucune Action", "Poings","Pistolets"]
         
         self.offsets = [
-                (-1, -3), (-1, 3), (-2, -3), (-2, 3),
+                (-1, -3), (-1, 3), (1,-3), (1, 3), (-2, -3), (-2, 3), (2, -3), (2, 3),
                 (-3, 0), (3, 0), (0, -3), (0, 3), (-3, -1), (-3, 1), (3, -1), (3, 1),
                 (-3, -2), (-3, 2), (3, -2), (3, 2), (-3, -3), (-3, 3), (3, -3), (3, 3), 
                 (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
-                (-2, -2), (-2, 2), (2, -2), (2, 2),  
+                (-2, -2), (-2, 2), (2, -2), (2, 2), (1, -2), (1, 2), (-1, -2), (-1, 2), 
                 (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1),  
                 (0, 0)]
 
@@ -761,11 +783,11 @@ class perso_Torch(Unit) :
                 (-6, 0), (6, 0), (0, -6), (0, 6),
                 (-5, 0), (5, 0), (0, -5), (0, 5),
                 (-4, 0), (4, 0), (0, -4), (0, 4),
-                (-1, -3), (-1, 3), (-2, -3), (-2, 3),
+                (-1, -3), (-1, 3), (1,-3), (1, 3), (-2, -3), (-2, 3), (2, -3), (2, 3),
                 (-3, 0), (3, 0), (0, -3), (0, 3), (-3, -1), (-3, 1), (3, -1), (3, 1),
                 (-3, -2), (-3, 2), (3, -2), (3, 2), (-3, -3), (-3, 3), (3, -3), (3, 3), 
                 (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
-                (-2, -2), (-2, 2), (2, -2), (2, 2), 
+                (-2, -2), (-2, 2), (2, -2), (2, 2), (1, -2), (1, 2), (-1, -2), (-1, 2),
                 (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1),  
                 (0, 0)]
 
@@ -800,12 +822,12 @@ class perso_Chose(Unit) :
         self.nbre_move = 4
         self.defense = 80
         self.attack_power = 10
-        self.list_attaques = ["Aucune Action", "Poings","Casser_les_murs"]
+        self.list_attaques = ["Aucune Action", "Poings","Briser_les_defenses"]
         
         self.offsets = [
                 (-3, 0), (3, 0), (0, -3), (0, 3), 
                 (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
-                (-2, -2), (-2, 2), (2, -2), (2, 2),  
+                (-2, -2), (-2, 2), (2, -2), (2, 2), (1, -2), (1, 2), (-1, -2), (-1, 2),
                 (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1),  
                 (0, 0)]
 
@@ -825,11 +847,11 @@ class perso_Dr_strange(Unit) :
         
         self.offsets = [
                 (-4, 0), (4, 0), (0, -4), (0, 4),
-                (-1, -3), (-1, 3), (-2, -3), (-2, 3),
+                (-1, -3), (-1, 3), (-2, -3), (-2, 3),(1, -3), (1, 3), (2, -3), (2, 3),
                 (-3, 0), (3, 0), (0, -3), (0, 3), (-3, -1), (-3, 1), (3, -1), (3, 1),
                 (-3, -2), (-3, 2), (3, -2), (3, 2), (-3, -3), (-3, 3), (3, -3), (3, 3), 
                 (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
-                (-2, -2), (-2, 2), (2, -2), (2, 2),  
+                (-2, -2), (-2, 2), (2, -2), (2, 2), (1, -2), (1, 2), (-1, -2), (-1, 2), 
                 (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1),  
                 (0, 0)]
 
@@ -885,10 +907,10 @@ class Lancer_bouclier(Unit) :
         self.quantite = 3
         self.distance_attack = 3
         self.precision = random.uniform(0.5, 1)
- 
-class Casser_les_murs(Unit) :
+ _
+class Briser_les_defenses(Unit) :
     def __init__(self):
-        self.name = "Casser_les_murs"
+        self.name = "Briser_les_defenses"
         self.offsets = [
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1)   # Diagonales proches
@@ -1050,6 +1072,7 @@ class Pistolets(Unit) :
                 (-2, -2), (-2, 2), (2, -2), (2, 2),
                 (-2, 0), (2, 0), (0, -2), (0, 2),
                 (-2, 1), (2, 1), (1, -2), (1, 2),
+                (-1, -2), (-1, 2), (-2, -1), (2, -1)
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1)  # Diagonales proches
                 ]
