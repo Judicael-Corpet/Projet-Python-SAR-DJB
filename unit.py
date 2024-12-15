@@ -266,12 +266,13 @@ class Unit():
             for red_x, red_y in self.red_cases :
                     if target.x == red_x and  target.y == red_y :
                         target.defense = 0
+                        target_health = target_health - type_attack.attack_power*type_attack.precision*(1 - target.defense/100)/type_attack.distance_attack
 
         elif type_attack.name == "Protection" :
             for red_x, red_y in self.red_cases :
                     if target.x == red_x and  target.y == red_y :
-                        target.defense = 0
-
+                        target.attack_power = 0
+                        
         else :
             for red_x, red_y in self.red_cases :
                 if target.x == red_x and  target.y == red_y :
