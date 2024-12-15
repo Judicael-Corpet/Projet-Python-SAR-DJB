@@ -1,3 +1,4 @@
+
 import pygame
 import random
 
@@ -100,15 +101,6 @@ class Unit():
         else:
             raise ValueError(f"Personnage non reconnu : {self.name}")
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
         self.green_cases=[] # réinitialisation des cases vertes pour ne pas avoir les anciennes
         self.green_cases.append((self.x, self.y)) # ajout de la case initial où le joueur se trouve
         
@@ -166,10 +158,15 @@ class Unit():
                             case_occupée = True
                             break
                     # TRoisieme verif cases obstacles
-                    for x,y in self.cases:
-                        if x==green_x and y==green_y:
-                            case_occupée = True
-                            break
+                    if self.name != "Ironman" and self.name != "Thor" and self.name != "Torch" :
+                        for x,y in self.cases:
+                            if x==green_x and y==green_y:
+                                case_occupée = True
+                                break
+                    else :
+                        for x,y in self.cases:
+                            if x==green_x and y==green_y:
+                                case_occupée = False
                     
                     # Si la case n'est pas occupée, ajoutez-la à la liste des cases vertes
                     if not case_occupée:
@@ -198,8 +195,8 @@ class Unit():
         elif attack == "Lancer_bouclier" :
             self.attaque_selectionne = Lancer_bouclier()
 
-        elif attack == "Casser_les_murs" :
-            self.attaque_selectionne = Casser_les_murs()
+        elif attack == "Briser_les_defenses" :
+            self.attaque_selectionne = Briser_les_defenses()
         
         elif attack == "Laser" :
             self.attaque_selectionne = Laser()
@@ -239,10 +236,9 @@ class Unit():
 
         elif attack == "Projectile":
             self.attaque_selectionne = Projectile()
+          
 
         if self.is_selected:
-            # Définir les déplacements possibles : orthogonaux + diagonales proches
-            #la case ou se trouve déjà le personnage, au cas où il ne souhaite pas se déplacer
 
             for dx, dy in self.attaque_selectionne.offsets:
                 # Calcul des coordonnées de la case
@@ -272,15 +268,21 @@ class Unit():
                         target_health = target_health
            
         
-        elif type_attack.name == "Casser_les_murs" :
+        elif type_attack.name == "Briser_les_defenses" :
             for red_x, red_y in self.red_cases :
                     if target.x == red_x and  target.y == red_y :
                         target.defense = 0
+                        target_health = target_health - type_attack.attack_power*type_attack.chance*(1 - target.defense/100)/type_attack.distance_attack
 
+        elif type_attack.name == "Protection" :
+            for red_x, red_y in self.red_cases :
+                    if target.x == red_x and  target.y == red_y :
+                        target.attack_power = 0
+                        
         else :
             for red_x, red_y in self.red_cases :
                 if target.x == red_x and  target.y == red_y :
-                    target_health = target_health - type_attack.attack_power*type_attack.precision*(1 - target.defense/100)/type_attack.distance_attack
+                    target_health = target_health - type_attack.attack_power*type_attack.chance*(1 - target.defense/100)/type_attack.distance_attack
                 
                 else :
                     target_health = target_health
@@ -298,13 +300,13 @@ class Unit():
                 else :
                     target_health = target_health           
         
-        elif type_attack.name == "Casser_les_murs" :
+        elif type_attack.name == "Briser_les_defenses" :
             if abs(target.x - self.x) == 1 and  abs(target.y-self.x) == 1 :
                 target.defense = 0
 
         else :
             if abs(target.x - self.x) <= 2 and  abs(target.y-self.y) <= 2 :
-                target_health = target_health - type_attack.attack_power*type_attack.precision*(1 - target.defense/100)/type_attack.distance_attack
+                target_health = target_health - type_attack.attack_power*type_attack.chance*(1 - target.defense/100)/type_attack.distance_attack
                 
             else :
                 target_health = target_health
@@ -316,94 +318,89 @@ class Unit():
         """Affiche l'unité sur l'écran."""
          
         #Pour générer l'image du joueur que l'on a choisi
-        
-        
         if self.name == "Captain_America" :   
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
             self.image = self.get_image(0,0) # get image in this coordinate
             self.image = pygame.transform.scale(self.image,self.size)
             self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
 
-            
-        
         elif self.name == "Hulk" :           
             self.sprite_sheet = pygame.image.load('personnages/avengers2.jpg.png')
-            self.image = self.get_image(52,0) # get image in this coordinate
+            self.image = self.get_image(52,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Ironman" :
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
-            self.image = self.get_image(150,0) # get image in this coordinate
+            self.image = self.get_image(150,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Spiderman" :
             self.sprite_sheet = pygame.image.load('personnages/avengers3.png')
-            self.image = self.get_image(150,0) # get image in this coordinate
+            self.image = self.get_image(150,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Thor" :
             self.sprite_sheet = pygame.image.load('personnages/avengers.png')
-            self.image = self.get_image(295,0) # get image in this coordinate
+            self.image = self.get_image(295,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0])
             
         elif self.name == "Groot" :       
             self.sprite_sheet = pygame.image.load('personnages/galaxy2.png')
-            self.image = self.get_image(150,0) # get image in this coordinate
+            self.image = self.get_image(150,0)
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Wolverine" :
             self.sprite_sheet = pygame.image.load('personnages/x_men.png')
-            self.image = self.get_image(0,192) # get image in this coordinate
+            self.image = self.get_image(0,192) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Black_Panther" :           
             self.sprite_sheet = pygame.image.load('personnages/avengers3.png')
-            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = self.get_image(0,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0])
             
         elif self.name == "Starlord" :
             self.sprite_sheet = pygame.image.load('personnages/galaxy.png')
-            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = self.get_image(0,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Yondu" :
             self.sprite_sheet = pygame.image.load('personnages/galaxy.png')
-            self.image = self.get_image(295,0) # get image in this coordinate
+            self.image = self.get_image(295,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Torch" :
-        
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
-            self.image = self.get_image(295, 193) # get image in this coordinate
+            self.image = self.get_image(295, 193) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Jane_Storm" :
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
-            self.image = self.get_image(150,0) # get image in this coordinate
+            self.image = self.get_image(150,0) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Chose" :
             self.sprite_sheet = pygame.image.load('personnages/4_fantastic.png')
-            self.image = self.get_image(0,193) # get image in this coordinate
+            self.image = self.get_image(0,193) 
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
             
         elif self.name == "Dr_Strange" :
             self.sprite_sheet = pygame.image.load('personnages/doctor_strange.png')
-            self.image = self.get_image(0,0) # get image in this coordinate
+            self.image = self.get_image(0,0)
             self.image = pygame.transform.scale(self.image,self.size)
-            self.image.set_colorkey([0,0,0]) # to remove the withe color of the background
+            self.image.set_colorkey([0,0,0]) 
 
         if self.is_selected:
             pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
@@ -493,8 +490,8 @@ class Unit():
             if self.game.Musique :
                 self.game.sound_manager.bruit("Boomerang")
 
-        elif self.list_attaques[indice] == "Casser_les_murs" :
-            attaque_selectionne = Casser_les_murs()
+        elif self.list_attaques[indice] == "Briser_les_defenses" :
+            attaque_selectionne = Briser_les_defenses()
             if self.game.Musique :
                 self.game.sound_manager.bruit("Casser_mur")
         
@@ -581,8 +578,8 @@ class perso_Captain_america(Unit):
         self.list_attaques = ["Aucune Action", "Poings","Lancer_bouclier" ]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),(-3, 0), (3, 0), (0, -3), (0, 3),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-2, 0), (2, 0), (0, -2), (0, 2),  
+                (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1) , 
                 (0, 0)]
 
     def get_health (self):
@@ -597,11 +594,13 @@ class perso_Hulk(Unit) :
         self.nbre_move = 4
         self.defense = 90
         self.attack_power = 10
-        self.list_attaques = ["Aucune Action", "Poings", "Casser_les_murs"]
+        self.list_attaques = ["Aucune Action", "Poings", "Briser_les_defenses"]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-3, 0), (3, 0), (0, -3), (0, 3), 
+                (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
+                (-2, -2), (-2, 2), (2, -2), (2, 2), (1, -2), (1, 2), (-1, -2), (-1, 2), 
+                (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1), 
                 (0, 0)]
         
 
@@ -620,8 +619,15 @@ class perso_Ironman (Unit) :
         self.list_attaques = ["Aucune Action", "Poings","Laser", "Missile"]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-6, 0), (6, 0), (0, -6), (0, 6),
+                (-5, 0), (5, 0), (0, -5), (0, 5),
+                (-4, 0), (4, 0), (0, -4), (0, 4),
+                (-1, -3), (-1, 3), (-2, -3), (-2, 3), (1, -3), (1, 3), (2, -3), (2, 3),
+                (-3, 0), (3, 0), (0, -3), (0, 3), (-3, -1), (-3, 1), (3, -1), (3, 1),
+                (-3, -2), (-3, 2), (3, -2), (3, 2), (-3, -3), (-3, 3), (3, -3), (3, 3), 
+                (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
+                (-2, -2), (-2, 2), (2, -2), (2, 2), 
+                (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1),  
                 (0, 0)]
 
     def get_health (self):
@@ -639,8 +645,11 @@ class perso_Spiderman(Unit) :
         self.list_attaques = ["Aucune Action", "Poings","Bloquer_adversaire", "Attaque_toile"]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-4, 0), (4, 0), (0, -4), (0, 4),
+                (-3, 0), (3, 0), (0, -3), (0, 3), 
+                (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
+                (-2, -2), (-2, 2), (2, -2), (2, 2), (1, -2), (1, 2), (-1, -2), (-1, 2),
+                (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1), 
                 (0, 0)]
 
     def get_health (self):
@@ -658,8 +667,15 @@ class perso_Thor(Unit) :
         self.list_attaques = ["Aucune Action", "Poings","Marteau", "Foudre"]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-6, 0), (6, 0), (0, -6), (0, 6),
+                (-5, 0), (5, 0), (0, -5), (0, 5),
+                (-4, 0), (4, 0), (0, -4), (0, 4),
+                (-1, -3), (-1, 3), (-2, -3), (-2, 3), (1, -3), (1, 3), (2, -3), (2, 3),
+                (-3, 0), (3, 0), (0, -3), (0, 3), (-3, -1), (-3, 1), (3, -1), (3, 1),
+                (-3, -2), (-3, 2), (3, -2), (3, 2), (-3, -3), (-3, 3), (3, -3), (3, 3), 
+                (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
+                (-2, -2), (-2, 2), (2, -2), (2, 2), 
+                (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1),  
                 (0, 0)]
     
     def get_health (self):
@@ -677,8 +693,8 @@ class perso_Groot(Unit) :
         self.list_attaques = ["Aucune Action","Attaque_branche", "Protection"]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  
+                (-1, -1), (1, 1), (-1, 1), (1, -1) , 
                 (0, 0)]
     
     def get_health (self):
@@ -696,8 +712,8 @@ class perso_Wolverine(Unit) :
         self.list_attaques = ["Aucune Action", "Poings","Griffes"]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  
                 (0, 0)]
 
     def get_health (self):
@@ -715,8 +731,8 @@ class perso_Black_panther(Unit) :
         self.list_attaques = ["Aucune Action", "Poings","Griffes"]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  
                 (0, 0)]
 
     def get_health (self):
@@ -734,8 +750,12 @@ class perso_Starlord (Unit) :
         self.list_attaques = ["Aucune Action", "Poings","Pistolets"]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-1, -3), (-1, 3), (1,-3), (1, 3), (-2, -3), (-2, 3), (2, -3), (2, 3),
+                (-3, 0), (3, 0), (0, -3), (0, 3), (-3, -1), (-3, 1), (3, -1), (3, 1),
+                (-3, -2), (-3, 2), (3, -2), (3, 2), (-3, -3), (-3, 3), (3, -3), (3, 3), 
+                (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
+                (-2, -2), (-2, 2), (2, -2), (2, 2), (1, -2), (1, 2), (-1, -2), (-1, 2), 
+                (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1),  
                 (0, 0)]
 
     def get_health (self):
@@ -753,8 +773,8 @@ class  perso_Yondu(Unit):
         self.list_attaques = ["Aucune Action", "Poings","Fleche_Yaka"]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1), 
+                (-1, -1), (1, 1), (-1, 1), (1, -1) , 
                 (0, 0)]
 
     def get_health (self):
@@ -772,8 +792,15 @@ class perso_Torch(Unit) :
         self.list_attaques = ["Aucune Action", "Poings","Boule_de_feu"]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-6, 0), (6, 0), (0, -6), (0, 6),
+                (-5, 0), (5, 0), (0, -5), (0, 5),
+                (-4, 0), (4, 0), (0, -4), (0, 4),
+                (-1, -3), (-1, 3), (1,-3), (1, 3), (-2, -3), (-2, 3), (2, -3), (2, 3),
+                (-3, 0), (3, 0), (0, -3), (0, 3), (-3, -1), (-3, 1), (3, -1), (3, 1),
+                (-3, -2), (-3, 2), (3, -2), (3, 2), (-3, -3), (-3, 3), (3, -3), (3, 3), 
+                (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
+                (-2, -2), (-2, 2), (2, -2), (2, 2), (1, -2), (1, 2), (-1, -2), (-1, 2),
+                (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1),  
                 (0, 0)]
 
     def get_health (self):
@@ -791,8 +818,8 @@ class perso_Jane_storm(Unit) :
         self.list_attaques = ["Aucune Action", "Poings","Soigner"]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  
+                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  
                 (0, 0)]
 
     def get_health (self):
@@ -807,11 +834,13 @@ class perso_Chose(Unit) :
         self.nbre_move = 4
         self.defense = 80
         self.attack_power = 10
-        self.list_attaques = ["Aucune Action", "Poings","Casser_les_murs"]
+        self.list_attaques = ["Aucune Action", "Poings","Briser_les_defenses"]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-3, 0), (3, 0), (0, -3), (0, 3), 
+                (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
+                (-2, -2), (-2, 2), (2, -2), (2, 2), (1, -2), (1, 2), (-1, -2), (-1, 2),
+                (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1),  
                 (0, 0)]
 
     def get_health (self):
@@ -829,14 +858,20 @@ class perso_Dr_strange(Unit) :
         self.list_attaques = ["Aucune Action", "Poings","Bloquer_adversaire","Projectile" ]
         
         self.offsets = [
-                (-2, 0), (2, 0), (0, -2), (0, 2),(-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
-                (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
+                (-4, 0), (4, 0), (0, -4), (0, 4),
+                (-1, -3), (-1, 3), (-2, -3), (-2, 3),(1, -3), (1, 3), (2, -3), (2, 3),
+                (-3, 0), (3, 0), (0, -3), (0, 3), (-3, -1), (-3, 1), (3, -1), (3, 1),
+                (-3, -2), (-3, 2), (3, -2), (3, 2), (-3, -3), (-3, 3), (3, -3), (3, 3), 
+                (-2, 0), (2, 0), (0, -2), (0, 2), (-2, -1), (-2, 1), (2, -1), (2, 1),
+                (-2, -2), (-2, 2), (2, -2), (2, 2), (1, -2), (1, 2), (-1, -2), (-1, 2), 
+                (-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1),  
                 (0, 0)]
 
     def get_health (self):
         return self.__health
 
 """ CLASSES COMPETENCES """
+
 
 class Aucune_action(Unit) :
     def __init__(self) :
@@ -847,7 +882,7 @@ class Aucune_action(Unit) :
         self.attack_power = 0
         self.quantite = 100
         self.distance_attack = 1
-        self.precision = 0
+        self.chance = 0
 
 class Poings(Unit) :
     def __init__(self) :
@@ -859,7 +894,7 @@ class Poings(Unit) :
         self.attack_power = 30
         self.quantite = 100
         self.distance_attack = 1
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 
 class Griffes(Unit) :
     def __init__(self):
@@ -869,9 +904,9 @@ class Griffes(Unit) :
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 (-2, 0), (2, 0), (0, -2), (0, 2) ]
         self.attack_power = 60
-        self.quantite = 3
+        self.quantite = 2
         self.distance_attack = 2
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 
 class Lancer_bouclier(Unit) :
     def __init__(self):
@@ -884,11 +919,11 @@ class Lancer_bouclier(Unit) :
         self.attack_power = 50
         self.quantite = 3
         self.distance_attack = 3
-        self.precision = random.uniform(0.5, 1)
- 
-class Casser_les_murs(Unit) :
+        self.chance = random.uniform(0.5, 1)
+
+class Briser_les_defenses(Unit) :
     def __init__(self):
-        self.name = "Casser_les_murs"
+        self.name = "Briser_les_defenses"
         self.offsets = [
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1)   # Diagonales proches
@@ -896,12 +931,7 @@ class Casser_les_murs(Unit) :
         self.attack_power = 100
         self.quantite = 1
         self.distance_attack = 1
-        self.precision = random.uniform(0.5, 1)
-
-    def utiliser (self, cible) :
-        cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
-        
+        self.chance = random.uniform(0.5, 1)     
 class Laser(Unit) :
     def __init__(self):
         self.name = "Laser"
@@ -917,8 +947,7 @@ class Laser(Unit) :
         self.attack_power = 100
         self. quantite = 1
         self.distance_attack = 5
-        self.precision = random.uniform(0.5, 1)
-        
+        self.chance = random.uniform(0.5, 1)       
 class Missile (Unit):
     def __init__(self):
         self.name = "Missile"
@@ -934,12 +963,7 @@ class Missile (Unit):
         self.attack_power = 110
         self.quantite = 1
         self.distance_attack = 5
-        self.precision = random.uniform(0.5, 1)
-
-    def utiliser (self, cible) :
-        cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
-
+        self.chance = random.uniform(0.5, 1)
 class Bloquer_adversaire (Unit):
     def __init__(self):
         self.name = "Bloquer_adversaire"
@@ -953,9 +977,9 @@ class Bloquer_adversaire (Unit):
                 ]
         self.temps = 3
         self.attack_power = 40
-        self.quantite = 2
+        self.quantite = 1
         self.distance_attack = 4
-        self.precision = random.uniform(0.5, 1)        
+        self.chance = random.uniform(0.5, 1)        
 
 class Attaque_toile (Unit):
     def __init__(self):
@@ -970,8 +994,7 @@ class Attaque_toile (Unit):
         self.attack_power = 50
         self.quantite = 3
         self.distance_attack = 3
-        self.precision = random.uniform(0.5, 1)
-
+        self.chance = random.uniform(0.5, 1)
 class Marteau (Unit):
     def __init__(self):
         self.name = "Marteau"
@@ -985,10 +1008,9 @@ class Marteau (Unit):
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
         self.attack_power = 130
-        self.quantite = 2
+        self.quantite = 1
         self.distance_attack = 5
-        self.precision = random.uniform(0.5, 1)
-        
+        self.chance = random.uniform(0.5, 1)        
 class Foudre (Unit):
     def __init__(self):
         self.name = "Foudre"
@@ -1004,12 +1026,7 @@ class Foudre (Unit):
         self.attack_power = 150
         self.quantite = 1
         self.distance_attack = 6
-        self.precision = random.uniform(0.5, 1)
-
-    def utiliser (self, cible) :
-        cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
-        
+        self.chance = random.uniform(0.5, 1)
 class Attaque_branche(Unit) :
     def __init__(self):
         self.name = "Attaque_branche"
@@ -1022,7 +1039,7 @@ class Attaque_branche(Unit) :
         self.attack_power = 40
         self.quantite = 100
         self.distance_attack = 3
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 
 class Protection (Unit):
     def __init__(self):
@@ -1036,11 +1053,7 @@ class Protection (Unit):
         self.attack_power = 150
         self.temps = 1
         self.distance_attack = 1
-        self.precision = random.uniform(0.5, 1)
-
-    def utiliser (self, cible) :
-        cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
+        self.chance = random.uniform(0.5, 1)
         
 class Pistolets(Unit) :
     def __init__(self):
@@ -1050,13 +1063,14 @@ class Pistolets(Unit) :
                 (-2, -2), (-2, 2), (2, -2), (2, 2),
                 (-2, 0), (2, 0), (0, -2), (0, 2),
                 (-2, 1), (2, 1), (1, -2), (1, 2),
+                (-1, -2), (-1, 2), (-2, -1), (2, -1)
                 (-1, 0), (1, 0), (0, -1), (0, 1),  # Orthogonaux : gauche, droite, haut, bas
                 (-1, -1), (1, 1), (-1, 1), (1, -1)  # Diagonales proches
                 ]
         self.attack_power = 120
         self.quantite = 10
         self.distance_attack = 4
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 
 class Fleche_yaka(Unit) :
     def __init__(self):
@@ -1076,9 +1090,9 @@ class Fleche_yaka(Unit) :
                 (-1, -3), (-1, 3), (1, -3), (1, 3)  # Diagonales proches
                 ]
         self.attack_power = 100
-        self.quantite = 3
+        self.quantite = 1
         self.distance_attack = 1
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
 
 class Boule_de_feu (Unit):
     def __init__(self):
@@ -1093,14 +1107,10 @@ class Boule_de_feu (Unit):
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
         self.attack_power = 150
-        self.quantite = 3
+        self.quantite = 1
         self.distance_attack = 5
-        self.precision = random.uniform(0.5, 1)
-
-    def utiliser (self, cible) :
-        cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
-        
+        self.chance = random.uniform(0.5, 1)
+      
 class Soigner (Unit):
     def __init__(self):
         self.name = "Soigner"
@@ -1109,14 +1119,9 @@ class Soigner (Unit):
                 (-1, -1), (1, 1), (-1, 1), (1, -1) ,  # Diagonales proches
                 ]
         self.attack_power = 150
-        self.quantite = 3
+        self.quantite = 2
         self.distance_attack = 1
-        self.precision = random.uniform(0.5, 1)
-
-    def utiliser (self, cible) :
-        cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
-
+        self.chance = random.uniform(0.5, 1)
 class Projectile(Unit) :
     def __init__(self):
         self.name = "Projectile"
@@ -1132,6 +1137,7 @@ class Projectile(Unit) :
         self.attack_power = 100
         self.quantite = 3
         self.distance_attack = 3
-        self.precision = random.uniform(0.5, 1)
+        self.chance = random.uniform(0.5, 1)
+
 
 

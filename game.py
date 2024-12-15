@@ -11,13 +11,7 @@ from menu import *
 from sound import *
 
 
-
 fond = pygame.image.load('Fond_ecran.png')
-
-#personnages = ["Captain_America", "Hulk", "Ironman", "Spiderman", "Thor", "Groot", "Wolverine", "Black_Panther", 
-                            #"Starlord", "Yondu", "Torch", "Jane_Storm", "Chose", "Dr_Strange"]
-
-
 
 class Game:
     
@@ -58,7 +52,6 @@ class Game:
         self.attaque_selectionne = Aucune_action()
         self.screen = screen
         self.selected_attack_index = 0  # Indice de l'attaque sélectionnée
-        #self.attaques = ["Poings", "Griffes", "Lancer_bouclier", "Casser_les_murs", "Laser", "Missile", "Bloquer_adversaire", "Attaque_toile", "Marteau", "Foudre", "Attaque_Branche", "Protection", "Pistolets", "Fleche_Yaka", "Boule_De_Feu", "Soigner", "Projectile" ]
         self.menu_attaques = False
         self.selected_attack = False
         self.list_enemy_health = []
@@ -66,8 +59,6 @@ class Game:
         self.player_units = []
         self.enemy_units = []
         self.is_selected = False
-        #p1 = Unit("Captain_America", 0, 0, [55,55], 150, 3, 75, ["Poings", "Lancer_bouclier"])
-        #print (p1.name)
         
     
     def draw_attack_menu(self) :
@@ -75,6 +66,8 @@ class Game:
         #Fond noir dans le coin inférieur gauche
         pygame.draw.rect(self.screen, (0, 0, 0), (20, 530, 250, 150 ))
         pygame.draw.rect(self.screen, (255, 255, 255), (20, 530, 250, 150), 2)  # Bordure blanche
+
+    
 
         list_attacks = self.attaques
         # Dessiner chaque attaque dans le rectangle
@@ -116,38 +109,11 @@ class Game:
                     self.list_player_health[i] = hero_selected.health_max
                     print (f"{hero_selected.name} a été soigné")
         return self.list_player_health
-                    
 
-        # # dessine le fond:
-        # pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
-
-        # # Dessiner la ligne verticale
-        # pygame.draw.line(
-        #     screen, 
-        #     color, 
-        #     (x * CELL_SIZE + half_size , y * CELL_SIZE+2),  # Début de la ligne
-        #     (x * CELL_SIZE + half_size , y * CELL_SIZE + CELL_SIZE-2),  # Fin de la ligne
-        #     line_width  # Épaisseur
-        # )
-
-        # # Dessiner la ligne horizontale
-        # pygame.draw.line(
-        #     screen, 
-        #     color, 
-        #     (x * CELL_SIZE+2, y * CELL_SIZE + half_size ),  # Début de la ligne
-        #     (x * CELL_SIZE + CELL_SIZE-2, y * CELL_SIZE + half_size ),  # Fin de la ligne
-        #     line_width  # Épaisseur
-        # )
 
     def cases_degat(self, screen):
         self.case_degat = [[13,15],[14,15],[15,15],[16,15],[17,15],[18,15],[19,13],[20,13],[21,13],[22,13],[23,13],[24,13]]
-        # color = BLACK
-        # color1=(255,20,20)
-        # x, y = self.case_degat  # Position de la case
-        # half_size = CELL_SIZE // 2  # La moitié de la taille d'une cellule
-        # line_width1 = 10  # Épaisseur des lignes de verticales
-        # line_width2=5 # épaisseur horizontale 
-
+       
         degat = 5
         
         for i, player in enumerate(self.player_units) :
@@ -170,27 +136,6 @@ class Game:
         
         return self.list_enemy_health
                   
-                
-        # # dessine le fond:
-        # pygame.draw.rect(screen, color1, (x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE))  # Dessine les bords
-
-        # # Dessiner la ligne verticale
-        # pygame.draw.line(
-        #     screen, 
-        #     color, 
-        #     (x * CELL_SIZE + half_size , y * CELL_SIZE+5),  # Début de la ligne
-        #     (x * CELL_SIZE + half_size , y * CELL_SIZE + CELL_SIZE-5),  # Fin de la ligne
-        #     line_width1  # Épaisseur
-        # )
-
-        # # Dessiner la ligne horizontale
-        # pygame.draw.line(
-        #     screen, 
-        #     color, 
-        #     (x * CELL_SIZE+10, y * CELL_SIZE + 35 ),  # Début de la ligne
-        #     (x * CELL_SIZE + CELL_SIZE-10, y * CELL_SIZE + 35),  # Fin de la ligne
-        #     line_width2  # Épaisseur
-        # )                       
 
     def handle_player_turn(self):
         """Tour du joueur"""
@@ -627,17 +572,14 @@ def main():
     # Instanciation du jeu
     game = Game(screen)
     
-    #clip = VideoFileClip("intro_video.mp4")
-    #game.play_video(clip)
+    clip = VideoFileClip("intro_video.mp4")
+    game.play_video(clip)
     
     while game.running:
         game.curr_menu.display_menu()
         if (game.playing):
             break
-    
-    
-    #game.player_units = [Unit(game.Choix_Personnages_1.game_personnage, 0, 0, [55,55]),#,150, 3, 75, ["Poings", "Lancer_bouclier"] ), 
-                             #Unit(game.Choix_Personnages_2.game_personnage, 0, 1, [55,55])]#, 150 , 3, 75, ["Poings", "Lancer_bouclier"] )]                  
+                     
     player1 = Unit(game.Choix_Personnages_1.game_personnage, 15, 10, [32,32], game)
     hero1 = player1.attribuer_class_perso()
     hero_health1 = hero1.get_health()
