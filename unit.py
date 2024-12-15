@@ -157,10 +157,15 @@ class Unit():
                             case_occupée = True
                             break
                     # TRoisieme verif cases obstacles
-                    for x,y in self.cases:
-                        if x==green_x and y==green_y:
-                            case_occupée = True
-                            break
+                    if self.name != "Ironman" and self.name != "Thor" and self.name != "Torch" :
+                        for x,y in self.cases:
+                            if x==green_x and y==green_y:
+                                case_occupée = True
+                                break
+                    else :
+                        for x,y in self.cases:
+                            if x==green_x and y==green_y:
+                                case_occupée = False
                     
                     # Si la case n'est pas occupée, ajoutez-la à la liste des cases vertes
                     if not case_occupée:
