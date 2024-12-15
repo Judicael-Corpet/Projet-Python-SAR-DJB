@@ -3,6 +3,7 @@ import sys
 from sound import SoundManager
 from game import *
 
+
 fond = pygame.image.load('Fond_ecran.png')
 
 captain = pygame.image.load('Personnages_menu/captain_america_menu.png')

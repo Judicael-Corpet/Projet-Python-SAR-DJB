@@ -871,6 +871,7 @@ class perso_Dr_strange(Unit) :
 
 """ CLASSES COMPETENCES """
 
+
 class Aucune_action(Unit) :
     def __init__(self) :
         self.name = "Aucune Action"
@@ -929,12 +930,7 @@ class Briser_les_defenses(Unit) :
         self.attack_power = 100
         self.quantite = 1
         self.distance_attack = 1
-        self.precision = random.uniform(0.5, 1)
-
-    def utiliser (self, cible) :
-        cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
-        
+        self.precision = random.uniform(0.5, 1)     
 class Laser(Unit) :
     def __init__(self):
         self.name = "Laser"
@@ -950,8 +946,7 @@ class Laser(Unit) :
         self.attack_power = 100
         self. quantite = 1
         self.distance_attack = 5
-        self.precision = random.uniform(0.5, 1)
-        
+        self.precision = random.uniform(0.5, 1)       
 class Missile (Unit):
     def __init__(self):
         self.name = "Missile"
@@ -968,11 +963,6 @@ class Missile (Unit):
         self.quantite = 1
         self.distance_attack = 5
         self.precision = random.uniform(0.5, 1)
-
-    def utiliser (self, cible) :
-        cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
-
 class Bloquer_adversaire (Unit):
     def __init__(self):
         self.name = "Bloquer_adversaire"
@@ -1004,7 +994,6 @@ class Attaque_toile (Unit):
         self.quantite = 3
         self.distance_attack = 3
         self.precision = random.uniform(0.5, 1)
-
 class Marteau (Unit):
     def __init__(self):
         self.name = "Marteau"
@@ -1020,8 +1009,7 @@ class Marteau (Unit):
         self.attack_power = 130
         self.quantite = 1
         self.distance_attack = 5
-        self.precision = random.uniform(0.5, 1)
-        
+        self.precision = random.uniform(0.5, 1)        
 class Foudre (Unit):
     def __init__(self):
         self.name = "Foudre"
@@ -1038,11 +1026,6 @@ class Foudre (Unit):
         self.quantite = 1
         self.distance_attack = 6
         self.precision = random.uniform(0.5, 1)
-
-    def utiliser (self, cible) :
-        cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
-        
 class Attaque_branche(Unit) :
     def __init__(self):
         self.name = "Attaque_branche"
@@ -1070,10 +1053,6 @@ class Protection (Unit):
         self.temps = 1
         self.distance_attack = 1
         self.precision = random.uniform(0.5, 1)
-
-    def utiliser (self, cible) :
-        cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
         
 class Pistolets(Unit) :
     def __init__(self):
@@ -1130,12 +1109,8 @@ class Boule_de_feu (Unit):
         self.quantite = 1
         self.distance_attack = 5
         self.precision = random.uniform(0.5, 1)
-
-    def utiliser (self, cible) :
-        cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
-        
-class Soigner (Unit):
+      
+class Soigner (Comptences):
     def __init__(self):
         self.name = "Soigner"
         self.offsets = [
@@ -1146,11 +1121,6 @@ class Soigner (Unit):
         self.quantite = 2
         self.distance_attack = 1
         self.precision = random.uniform(0.5, 1)
-
-    def utiliser (self, cible) :
-        cible.health -= self.attack_power*self.precision*(cible.defense/100)*1/self.distance_attack
-        return cible.health
-
 class Projectile(Unit) :
     def __init__(self):
         self.name = "Projectile"
