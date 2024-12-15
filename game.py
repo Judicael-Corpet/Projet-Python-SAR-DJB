@@ -3,12 +3,12 @@ import random
 import pytmx
 import pyscroll
 import pygame
+import numpy as np
 from moviepy import VideoFileClip
 
 from unit import *
 from menu import *
 from sound import *
-
 
 
 
@@ -362,6 +362,12 @@ class Game:
 
         return self.list_player_health
 
+    def find_closest_green_case(self, green_cases, target_x, target_y):
+        """Trouve la case verte la plus proche de la cible."""
+        return min(green_cases, key=lambda case: abs(case[0] - target_x) + abs(case[1] - target_y))
+
+
+    
     def handle_enemy_turn(self):
         """IA très simple pour les ennemis."""
         print ("DEBUT DU TOUR DE L'ENNEMI")
@@ -370,19 +376,35 @@ class Game:
             
             enemy_selected = enemy.attribuer_class_perso()
             print(f"LENNEMI CHOISI EST {enemy_selected.name}")
+              
+            #Choix de la cible la plus proche
+            enemy.is_selected = True
+            enemy.update_green_case(self.player_units, self.enemy_units)
             
-            enemy.is_selected  = True 
-            enemy.update_green_case(self.player_units,self.enemy_units)   
-            #Choix d'une cible au hasard    
-            target = random.choice(self.player_units)
+            # Déterminer la cible la plus proche
+            target_1 = self.player_units[0]
+            target_2 = self.player_units[1]
+            dist_1 = np.sqrt((target_1.x - enemy.x) ** 2 + (target_1.y - enemy.y) ** 2)
+            dist_2 = np.sqrt((target_2.x - enemy.x) ** 2 + (target_2.y - enemy.y) ** 2)
+            target = target_1 if dist_1 < dist_2 else target_2
+
             i = self.player_units.index(target) 
             print (f"indice pour le choix du joueur ciblé est i = {i}")
-            # Déplacement vers la cible
-            dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
-            dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
-            enemy.move(dx, dy)
-          
             
+            # Déplacement vers la cible
+            best_green_case = self.find_closest_green_case(enemy.green_cases, target.x, target.y)
+            for step in range(10, 0, -1):  # On commence par essayer le déplacement maximal (10)
+                dx = step if enemy.x < best_green_case[0] else -step if enemy.x > best_green_case[0] else 0
+                dy = step if enemy.y < best_green_case[1] else -step if enemy.y > best_green_case[1] else 0
+
+                # Tenter de se déplacer
+                previous_x, previous_y = enemy.x, enemy.y  # Sauvegarder la position actuelle
+                enemy.move(dx, dy)
+            
+                # Vérifier si le déplacement a été effectué
+                if (enemy.x, enemy.y) != (previous_x, previous_y):  # Si la position a changé
+                    break  # On arrête la boucle dès qu'un déplacement est effectué
+
             # Attaque si possible
             
             player_selected = target.attribuer_class_perso() 
@@ -605,8 +627,8 @@ def main():
     # Instanciation du jeu
     game = Game(screen)
     
-    clip = VideoFileClip("intro_video.mp4")
-    game.play_video(clip)
+    #clip = VideoFileClip("intro_video.mp4")
+    #game.play_video(clip)
     
     while game.running:
         game.curr_menu.display_menu()

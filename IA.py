@@ -162,3 +162,80 @@ def handle_enemy_turn(self):
             pygame.time.wait(1000)
         play = True
         return play, self.list_player_health
+
+
+
+
+
+
+
+import heapq  # Pour la gestion de la file de priorité
+
+def heuristic(pos1, pos2):
+    """Heuristique de Manhattan pour A* (distance en cases)."""
+    return abs(pos1[0] - pos2[0]) + abs(pos1[1] - pos2[1])
+
+def get_neighbors(position, green_cases):
+    """Retourne les voisins accessibles depuis une position donnée."""
+    x, y = position
+    potential_neighbors = [
+        (x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)  # Cases adjacentes
+    ]
+    return [case for case in potential_neighbors if case in green_cases]
+def find_best_path(start, goal, green_cases):
+    """Trouve le chemin le plus court vers la cible (goal) en respectant les cases vertes."""
+    # Utilisation d'A* (A-star)
+    open_set = []  # Cases à explorer (file de priorité)
+    heapq.heappush(open_set, (0, start))  # (coût estimé, position)
+
+    came_from = {}  # Pour suivre le chemin
+    g_score = {start: 0}  # Coût réel pour atteindre une case
+    f_score = {start: heuristic(start, goal)}  # Coût total estimé
+
+    while open_set:
+            # Case avec le coût estimé le plus bas
+        _, current = heapq.heappop(open_set)
+
+            # Si on atteint la cible, reconstruire le chemin
+        if current == goal:
+            return reconstruct_path(came_from, current)
+
+        # Explorer les voisins accessibles
+        neighbors = get_neighbors(current, green_cases)
+        for neighbor in neighbors:
+            tentative_g_score = g_score[current] + 1  # Coût d'un pas
+
+            if neighbor not in g_score or tentative_g_score < g_score[neighbor]:
+                # Mieux vaut passer par ce chemin
+                came_from[neighbor] = current
+                g_score[neighbor] = tentative_g_score
+                f_score[neighbor] = tentative_g_score + heuristic(neighbor, goal)
+                heapq.heappush(open_set, (f_score[neighbor], neighbor))
+
+        # Si aucun chemin n'est trouvé, retourner la position de départ
+    return [start]
+
+
+def reconstruct_path(came_from, current):
+    """Reconstruction du chemin à partir des cases explorées."""
+    path = [current]
+    while current in came_from:
+        current = came_from[current]
+        path.append(current)
+    path.reverse()
+    return path
+
+
+
+
+
+green_cases = enemy.update_green_case(self.player_units, self.enemy_units)
+            start = (enemy.x, enemy.y)  # Position de départ
+            goal = (target.x, target.y)  # Position de la cible
+            path = find_best_path(start, goal, green_cases)
+
+
+if len(path) > 1:  # Si un mouvement est possible
+                next_step = path[1]  # Prochaine case sur le chemin
+                dx, dy = next_step[0] - enemy.x, next_step[1] - enemy.y
+                enemy.move(dx, dy)
